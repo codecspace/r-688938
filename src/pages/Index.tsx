@@ -10,7 +10,7 @@ import Team from "@/components/Team";
 import FeaturedProperties from "@/components/FeaturedProperties";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,7 +26,9 @@ const Index = () => {
 
   return (
     <>
-      <LoadingScreen />
+      <AnimatePresence>
+        {isLoading && <LoadingScreen />}
+      </AnimatePresence>
       
       <motion.div 
         className="min-h-screen bg-white"
