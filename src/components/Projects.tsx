@@ -39,33 +39,43 @@ const Projects = () => {
   return (
     <section id="projects" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="text-center mb-16">
+        <motion.div 
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-50px" }}
+        >
           <h2 className="text-sm uppercase tracking-wider text-lion-gold mb-2">Developers</h2>
           <h3 className="text-4xl font-display text-lion-black">Our Projects</h3>
-        </div>
+        </motion.div>
 
         {projectData.map((project, index) => (
           <motion.div
             key={project.id}
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
+            transition={{ duration: 0.8, delay: index * 0.1 }}
             viewport={{ once: true, margin: "-100px" }}
             className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 mb-20 items-center`}
           >
-            <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg shadow-md group h-[400px]">
+            <div className="w-full md:w-1/2 relative overflow-hidden rounded-xl shadow-xl group h-[400px]">
               <div className="absolute inset-0 bg-lion-black/30 z-10 group-hover:bg-lion-black/40 transition-all duration-500"></div>
               <motion.img 
                 src={project.image} 
                 alt={project.title}
-                className="w-full h-full object-cover absolute inset-0 transition-transform duration-700 ease-in-out group-hover:scale-105"
+                className="w-full h-full object-cover absolute inset-0 transition-transform duration-700 ease-in-out"
                 whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: 0.8 }}
               />
               <div className="absolute top-4 right-4 z-20">
-                <span className="bg-lion-gold text-black text-xs font-bold px-3 py-1 rounded-full tracking-wider uppercase">
+                <motion.span 
+                  className="bg-lion-gold text-black text-xs font-bold px-3 py-1 rounded-full tracking-wider uppercase"
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ duration: 0.3 }}
+                >
                   Featured
-                </span>
+                </motion.span>
               </div>
             </div>
             
@@ -74,7 +84,7 @@ const Projects = () => {
                 className="text-2xl font-semibold mb-4 text-lion-black relative inline-block"
                 initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
+                transition={{ duration: 0.7, delay: 0.2 }}
                 viewport={{ once: true }}
               >
                 {project.title}
@@ -82,7 +92,7 @@ const Projects = () => {
                   className="absolute bottom-0 left-0 h-0.5 bg-lion-gold" 
                   initial={{ width: 0 }}
                   whileInView={{ width: '100%' }}
-                  transition={{ duration: 0.5, delay: 0.5 }}
+                  transition={{ duration: 0.7, delay: 0.5 }}
                   viewport={{ once: true }}
                 />
               </motion.h4>
@@ -91,7 +101,7 @@ const Projects = () => {
                 className="text-gray-600 mb-6 leading-relaxed"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
+                transition={{ duration: 0.7, delay: 0.3 }}
                 viewport={{ once: true }}
               >
                 {project.description}
@@ -102,7 +112,7 @@ const Projects = () => {
                 className="inline-flex items-center text-lion-gold hover:text-lion-darkgold font-medium transition-colors group"
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
+                transition={{ duration: 0.7, delay: 0.4 }}
                 viewport={{ once: true }}
                 whileHover={{ x: 5 }}
               >
@@ -114,10 +124,10 @@ const Projects = () => {
         ))}
 
         <motion.div 
-          className="text-center mt-12 bg-white p-8 rounded-lg shadow-sm border border-gray-100"
-          initial={{ opacity: 0, y: 20 }}
+          className="text-center mt-12 bg-white p-8 rounded-xl shadow-md border border-gray-100"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
           <p className="text-gray-600 italic">

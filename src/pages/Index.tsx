@@ -25,7 +25,7 @@ const Index = () => {
   }, []);
 
   return (
-    <>
+    <div className="min-h-screen bg-lion-black">
       <AnimatePresence mode="wait">
         {isLoading && <LoadingScreen />}
       </AnimatePresence>
@@ -46,7 +46,7 @@ const Index = () => {
         <Contact />
         <Footer />
       </motion.div>
-    </>
+    </div>
   );
 };
 
