@@ -39,7 +39,7 @@ const Hero = () => {
               className="border-2 border-white text-white hover:bg-white/10 hover:border-lion-gold hover:text-lion-gold transition-all px-8 py-6 rounded-md shadow-md"
               size="lg"
             >
-              Contact Us
+              <span className="text-white hover:text-lion-gold transition-colors">Contact Us</span>
             </Button>
           </div>
         </motion.div>

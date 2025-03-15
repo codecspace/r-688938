@@ -1,7 +1,6 @@
 
 import { motion } from "framer-motion";
-import { Card, CardContent } from "./ui/card";
-import { Badge } from "./ui/badge";
+import { ArrowRight } from "lucide-react";
 
 const projectData = [
   {
@@ -45,48 +44,86 @@ const Projects = () => {
           <h3 className="text-4xl font-display text-lion-black">Our Projects</h3>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectData.map((project, index) => (
-            <motion.div
-              key={project.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              viewport={{ once: true }}
-            >
-              <Card className="overflow-hidden h-full border-none shadow-lg hover:shadow-xl transition-shadow duration-300">
-                <div className="relative h-64">
-                  <Badge className="absolute top-3 right-3 bg-lion-gold text-black border-none z-10">
-                    Featured
-                  </Badge>
-                  <img 
-                    src={project.image} 
-                    alt={project.title} 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-                <CardContent className="p-6">
-                  <h4 className="text-xl font-semibold mb-3 text-lion-black">{project.title}</h4>
-                  <p className="text-gray-600 line-clamp-4">{project.description}</p>
-                  <div className="mt-4">
-                    <a href="#" className="text-lion-gold hover:text-lion-darkgold font-medium inline-flex items-center">
-                      View Details
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                      </svg>
-                    </a>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+        {projectData.map((project, index) => (
+          <motion.div
+            key={project.id}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: index * 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+            className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 mb-20 items-center`}
+          >
+            <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg group">
+              <div className="absolute inset-0 bg-lion-black/30 z-10 group-hover:bg-lion-black/40 transition-all duration-500"></div>
+              <motion.img 
+                src={project.image} 
+                alt={project.title}
+                className="w-full h-[400px] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.5 }}
+              />
+              <div className="absolute top-4 right-4 z-20">
+                <span className="bg-lion-gold text-black text-xs font-bold px-3 py-1 rounded-full tracking-wider uppercase">
+                  Featured
+                </span>
+              </div>
+            </div>
+            
+            <div className="w-full md:w-1/2 p-4">
+              <motion.h4 
+                className="text-2xl font-semibold mb-4 text-lion-black relative inline-block"
+                initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+              >
+                {project.title}
+                <motion.span 
+                  className="absolute bottom-0 left-0 h-0.5 bg-lion-gold" 
+                  initial={{ width: 0 }}
+                  whileInView={{ width: '100%' }}
+                  transition={{ duration: 0.5, delay: 0.5 }}
+                  viewport={{ once: true }}
+                />
+              </motion.h4>
+              
+              <motion.p 
+                className="text-gray-600 mb-6 leading-relaxed"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true }}
+              >
+                {project.description}
+              </motion.p>
+              
+              <motion.a
+                href="#"
+                className="inline-flex items-center text-lion-gold hover:text-lion-darkgold font-medium transition-colors group"
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                viewport={{ once: true }}
+                whileHover={{ x: 5 }}
+              >
+                View Details
+                <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+              </motion.a>
+            </div>
+          </motion.div>
+        ))}
 
-        <div className="text-center mt-12">
-          <p className="text-gray-600 italic mb-8">
+        <motion.div 
+          className="text-center mt-8 bg-white p-8 rounded-lg shadow-sm border border-gray-100"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          viewport={{ once: true }}
+        >
+          <p className="text-gray-600 italic">
             Lionvest Realty Private. Ltd., we bring you the best living and commercial places, which ensure extraordinary quality, dominant place and high-value investments. Let us help you find the right property that matches your aspirations.
           </p>
-        </div>
+        </motion.div>
       </div>
     </section>
   );

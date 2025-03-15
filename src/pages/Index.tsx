@@ -16,17 +16,17 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Simulate loading time
+    // Extend loading time to 5 seconds
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 3000);
+    }, 5000);
     
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
-      <AnimatePresence>
+      <AnimatePresence mode="wait">
         {isLoading && <LoadingScreen />}
       </AnimatePresence>
       
@@ -34,7 +34,7 @@ const Index = () => {
         className="min-h-screen bg-white"
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 0.5, delay: 0.3 }}
+        transition={{ duration: 1.2, ease: "easeInOut" }}
       >
         <Navbar />
         <Hero />
