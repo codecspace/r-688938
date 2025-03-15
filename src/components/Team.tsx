@@ -1,21 +1,20 @@
-
 import { motion } from "framer-motion";
 
 const teamData = [
   {
     name: "Prem Mohan Singh",
     role: "Director",
-    image: "https://imgur.com/a/xJ8lEdp"
+    image: "https://i.imgur.com/8U3fS8k.jpeg"
   },
   {
     name: "Vaibhav Gupta",
     role: "Director",
-    image: "https://imgur.com/2rVC1DK"
+    image: "https://i.imgur.com/2rVC1DK.jpeg"
   },
   {
     name: "Jazbi Fatema",
     role: "Marketing Head",
-    image: "https://imgur.com/UcLqNp5"
+    image: "https://i.imgur.com/UcLqNp5.jpeg"
   }
 ];
 
