@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -52,16 +53,14 @@ export default {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        estate: {
-          100: "#F7F7F7",
-          200: "#E5E5E5",
-          300: "#D4D4D4",
-          400: "#A3A3A3",
-          500: "#737373",
-          600: "#525252",
-          700: "#404040",
-          800: "#262626",
-          900: "#171717",
+        lion: {
+          gold: "#D4AF37",
+          lightgold: "#F5D76E",
+          darkgold: "#996515",
+          black: "#1A1A1A",
+          darkgray: "#333333",
+          gray: "#555555",
+          lightgray: "#CCCCCC",
         }
       },
       fontFamily: {
@@ -86,11 +85,21 @@ export default {
           "0%": { opacity: "0", transform: "translateY(10px)" },
           "100%": { opacity: "1", transform: "translateY(0)" },
         },
+        fadeOut: {
+          "0%": { opacity: "1" },
+          "100%": { opacity: "0" },
+        },
+        scaleIn: {
+          "0%": { transform: "scale(0.95)", opacity: "0" },
+          "100%": { transform: "scale(1)", opacity: "1" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         fadeIn: "fadeIn 0.5s ease-out forwards",
+        fadeOut: "fadeOut 0.5s ease-out forwards",
+        scaleIn: "scaleIn 0.5s ease-out forwards",
       },
     },
   },

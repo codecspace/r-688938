@@ -1,29 +1,50 @@
-import Hero from "@/components/Hero";
-import PropertyGrid from "@/components/PropertyGrid";
-import AboutUs from "@/components/AboutUs";
-import OurVision from "@/components/OurVision";
-import Testimonials from "@/components/Testimonials";
-import Footer from "@/components/Footer";
+
+import { useEffect, useState } from "react";
+import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
+import Hero from "@/components/Hero";
+import AboutUs from "@/components/AboutUs";
+import VisionMission from "@/components/VisionMission";
+import Projects from "@/components/Projects";
+import Team from "@/components/Team";
+import FeaturedProperties from "@/components/FeaturedProperties";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import { motion } from "framer-motion";
 
 const Index = () => {
-  return (
-    <div className="min-h-screen bg-white">
-      <Navbar />
-      <Hero />
-      
-      <section className="py-32">
-        <div className="container mx-auto px-4 max-w-6xl text-center">
-          <h2 className="text-5xl font-display text-estate-800 mb-16">Discover</h2>
-          <PropertyGrid />
-        </div>
-      </section>
+  const [isLoading, setIsLoading] = useState(true);
 
-      <AboutUs />
-      <OurVision />
-      <Testimonials />
-      <Footer />
-    </div>
+  useEffect(() => {
+    // Simulate loading time
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
+    
+    return () => clearTimeout(timer);
+  }, []);
+
+  return (
+    <>
+      <LoadingScreen />
+      
+      <motion.div 
+        className="min-h-screen bg-white"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: isLoading ? 0 : 1 }}
+        transition={{ duration: 0.5, delay: 0.3 }}
+      >
+        <Navbar />
+        <Hero />
+        <AboutUs />
+        <VisionMission />
+        <Projects />
+        <Team />
+        <FeaturedProperties />
+        <Contact />
+        <Footer />
+      </motion.div>
+    </>
   );
 };
 

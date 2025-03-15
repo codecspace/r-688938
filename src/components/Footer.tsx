@@ -1,46 +1,100 @@
-import { Facebook, Instagram, Linkedin, Twitter } from "lucide-react";
+
+import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="bg-estate-800 text-white py-16">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8 text-center md:text-left">
+    <footer className="bg-lion-black text-white">
+      <div className="container mx-auto px-4 max-w-6xl py-16">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-display text-xl mb-4">Elite Real Estate</h3>
-            <p className="text-estate-300">
-              Elevating the standard of luxury real estate services.
+            <h3 className="font-display text-xl mb-6">About Us</h3>
+            <p className="text-gray-400 mb-6">
+              Company formed with a vision to provide seamless support to all real estate queries related to buying of residence and commercial properties in and around Delhi noida gurgaon regions.
             </p>
+            <img 
+              src="https://imgur.com/a/7ljVewQ.jpg" 
+              alt="Lionvest Realty" 
+              className="h-12"
+            />
           </div>
+          
           <div>
-            <h4 className="font-semibold mb-4">Quick Links</h4>
-            <ul className="space-y-2 text-estate-300">
-              <li><a href="#" className="hover:text-white transition-colors">Properties</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">About Us</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Services</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Contact</a></li>
+            <h3 className="font-display text-xl mb-6">Contact Us</h3>
+            <ul className="space-y-4 text-gray-400">
+              <li className="flex">
+                <MapPin className="text-lion-gold mr-3 h-5 w-5 flex-shrink-0" />
+                <span>Gurugram</span>
+              </li>
+              <li className="flex">
+                <Phone className="text-lion-gold mr-3 h-5 w-5 flex-shrink-0" />
+                <span>9773552334</span>
+              </li>
+              <li className="flex">
+                <Phone className="text-lion-gold mr-3 h-5 w-5 flex-shrink-0" />
+                <span>9773552334</span>
+              </li>
+              <li className="flex">
+                <Mail className="text-lion-gold mr-3 h-5 w-5 flex-shrink-0" />
+                <span>Lionvestrealty@gmail.com</span>
+              </li>
             </ul>
           </div>
+          
           <div>
-            <h4 className="font-semibold mb-4">Contact Info</h4>
-            <ul className="space-y-2 text-estate-300">
-              <li>123 Luxury Avenue</li>
-              <li>Beverly Hills, CA 90210</li>
-              <li>+1 (555) 123-4567</li>
-              <li>info@eliterealestate.com</li>
+            <h3 className="font-display text-xl mb-6">Important Links</h3>
+            <ul className="space-y-3 text-gray-400">
+              <li>
+                <a href="#home" className="hover:text-lion-gold transition-colors">Home</a>
+              </li>
+              <li>
+                <a href="#about" className="hover:text-lion-gold transition-colors">About Company</a>
+              </li>
+              <li>
+                <a href="#projects" className="hover:text-lion-gold transition-colors">Projects</a>
+              </li>
+              <li>
+                <a href="#contact" className="hover:text-lion-gold transition-colors">Contact Us</a>
+              </li>
             </ul>
           </div>
+          
           <div>
-            <h4 className="font-semibold mb-4">Follow Us</h4>
-            <div className="flex space-x-4 justify-center md:justify-start">
-              <a href="#" className="hover:text-estate-300 transition-colors"><Facebook className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-estate-300 transition-colors"><Instagram className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-estate-300 transition-colors"><Twitter className="w-5 h-5" /></a>
-              <a href="#" className="hover:text-estate-300 transition-colors"><Linkedin className="w-5 h-5" /></a>
+            <h3 className="font-display text-xl mb-6">Follow Us</h3>
+            <div className="flex space-x-4">
+              <a href="#" className="w-10 h-10 bg-lion-darkgray rounded-full flex items-center justify-center hover:bg-lion-gold transition-colors">
+                <Facebook className="h-5 w-5" />
+              </a>
+              <a href="#" className="w-10 h-10 bg-lion-darkgray rounded-full flex items-center justify-center hover:bg-lion-gold transition-colors">
+                <Instagram className="h-5 w-5" />
+              </a>
+              <a href="#" className="w-10 h-10 bg-lion-darkgray rounded-full flex items-center justify-center hover:bg-lion-gold transition-colors">
+                <Twitter className="h-5 w-5" />
+              </a>
+              <a href="#" className="w-10 h-10 bg-lion-darkgray rounded-full flex items-center justify-center hover:bg-lion-gold transition-colors">
+                <Linkedin className="h-5 w-5" />
+              </a>
+            </div>
+            <div className="mt-6">
+              <h4 className="text-sm font-semibold mb-4 text-gray-300">Subscribe to our newsletter</h4>
+              <div className="flex">
+                <input 
+                  type="email" 
+                  placeholder="Your email" 
+                  className="px-4 py-2 bg-lion-darkgray border-none outline-none rounded-l flex-1 text-white"
+                />
+                <button className="bg-lion-gold text-black px-4 py-2 rounded-r hover:bg-lion-darkgold transition-colors">
+                  Subscribe
+                </button>
+              </div>
             </div>
           </div>
         </div>
-        <div className="mt-12 pt-8 border-t border-estate-700 text-center text-estate-300">
-          <p>&copy; {new Date().getFullYear()} Elite Real Estate. All rights reserved.</p>
+        
+        <div className="border-t border-lion-darkgray mt-12 pt-8 text-center text-gray-500 text-sm">
+          <p>Copyright © {new Date().getFullYear()} Lionvest Realty Pvt Ltd. All Rights Reserved.</p>
+          <p className="mt-2">
+            <a href="#" className="hover:text-lion-gold transition-colors">Privacy Policy</a>
+          </p>
         </div>
       </div>
     </footer>
