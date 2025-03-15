@@ -5,17 +5,17 @@ const teamData = [
   {
     name: "Prem Mohan Singh",
     role: "Director",
-    image: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d"
+    image: "https://imgur.com/a/xJ8lEdp"
   },
   {
     name: "Vaibhav Gupta",
     role: "Director",
-    image: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e"
+    image: "https://imgur.com/2rVC1DK"
   },
   {
     name: "Jazbi Fatema",
     role: "Marketing Head",
-    image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2"
+    image: "https://imgur.com/UcLqNp5"
   }
 ];
 
