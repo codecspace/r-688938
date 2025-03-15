@@ -16,7 +16,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Extend loading time to 5 seconds
+    // Loading time of 5 seconds as requested
     const timer = setTimeout(() => {
       setIsLoading(false);
     }, 5000);
@@ -34,7 +34,7 @@ const Index = () => {
         className="min-h-screen bg-white"
         initial={{ opacity: 0 }}
         animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 1.2, ease: "easeInOut" }}
+        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
       >
         <Navbar />
         <Hero />

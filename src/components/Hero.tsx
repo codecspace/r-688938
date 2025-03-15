@@ -36,10 +36,10 @@ const Hero = () => {
             </Button>
             <Button 
               variant="outline" 
-              className="border-2 border-white text-white hover:bg-white/10 hover:border-lion-gold hover:text-lion-gold transition-all px-8 py-6 rounded-md shadow-md"
+              className="border-2 border-white bg-transparent text-white hover:bg-white/10 hover:border-lion-gold hover:text-lion-gold transition-all px-8 py-6 rounded-md shadow-md"
               size="lg"
             >
-              <span className="text-white hover:text-lion-gold transition-colors">Contact Us</span>
+              Contact Us
             </Button>
           </div>
         </motion.div>

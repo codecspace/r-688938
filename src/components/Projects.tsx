@@ -53,12 +53,12 @@ const Projects = () => {
             viewport={{ once: true, margin: "-100px" }}
             className={`flex flex-col ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'} gap-8 mb-20 items-center`}
           >
-            <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg group">
+            <div className="w-full md:w-1/2 relative overflow-hidden rounded-lg shadow-md group h-[400px]">
               <div className="absolute inset-0 bg-lion-black/30 z-10 group-hover:bg-lion-black/40 transition-all duration-500"></div>
               <motion.img 
                 src={project.image} 
                 alt={project.title}
-                className="w-full h-[400px] object-cover transition-transform duration-700 ease-in-out group-hover:scale-105"
+                className="w-full h-full object-cover absolute inset-0 transition-transform duration-700 ease-in-out group-hover:scale-105"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.5 }}
               />
@@ -114,7 +114,7 @@ const Projects = () => {
         ))}
 
         <motion.div 
-          className="text-center mt-8 bg-white p-8 rounded-lg shadow-sm border border-gray-100"
+          className="text-center mt-12 bg-white p-8 rounded-lg shadow-sm border border-gray-100"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
