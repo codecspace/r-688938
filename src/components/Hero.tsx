@@ -29,14 +29,14 @@ const Hero = () => {
           </p>
           <div className="flex flex-col sm:flex-row gap-4">
             <Button 
-              className="bg-lion-gold hover:bg-lion-darkgold text-black font-medium px-8 py-6"
+              className="bg-lion-gold hover:bg-lion-darkgold text-black shadow-md hover:shadow-lg transition-all font-medium px-8 py-6 rounded-md"
               size="lg"
             >
               Explore Properties
             </Button>
             <Button 
               variant="outline" 
-              className="border-white text-white hover:bg-white/10 px-8 py-6"
+              className="border-2 border-white text-white hover:bg-white/10 hover:border-lion-gold hover:text-lion-gold transition-all px-8 py-6 rounded-md shadow-md"
               size="lg"
             >
               Contact Us

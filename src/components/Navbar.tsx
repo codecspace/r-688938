@@ -14,7 +14,7 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-24">
           <a href="/" className="flex items-center">
             <img 
-              src="https://imgur.com/a/7ljVewQ.jpg" 
+              src="https://imgur.com/ku5rlCk.jpg" 
               alt="Lionvest Realty" 
               className="h-12 mr-3"
             />
@@ -40,7 +40,7 @@ const Navbar = () => {
             </a>
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-white">
+                <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
