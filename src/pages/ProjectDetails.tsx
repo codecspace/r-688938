@@ -2,14 +2,14 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Calendar, CheckCircle, ExternalLink, ArrowLeft } from "lucide-react";
+import { MapPin, Phone, Mail, Calendar, CheckCircle, ArrowLeft } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import { Badge } from "@/components/ui/badge";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { projectsData } from "@/data/projectsData";
+import { toast } from "@/components/ui/use-toast";
 
 const ProjectDetails = () => {
   const { id } = useParams();
@@ -33,6 +33,13 @@ const ProjectDetails = () => {
     // Scroll to top when the component mounts
     window.scrollTo(0, 0);
   }, [id]);
+
+  const handleScheduleVisit = () => {
+    toast({
+      title: "Visit Scheduled",
+      description: "Our agent will contact you shortly to confirm the details.",
+    });
+  };
 
   if (loading) {
     return (
@@ -229,7 +236,7 @@ const ProjectDetails = () => {
           <div className="lg:col-span-1">
             {/* Contact Card - Fixed position */}
             <motion.div 
-              className="bg-white rounded-xl shadow-md overflow-hidden"
+              className="bg-lion-gold text-black rounded-xl shadow-md overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -240,12 +247,12 @@ const ProjectDetails = () => {
                 zIndex: 10
               }}
             >
-              <div className="bg-lion-gold p-6">
-                <h3 className="text-xl font-semibold text-black">Interested in this property?</h3>
+              <div className="p-6">
+                <h3 className="text-xl font-semibold">Interested in this property?</h3>
                 <p className="text-black/80 mt-1">Contact our agent for more information</p>
               </div>
               
-              <div className="p-6 space-y-5">
+              <div className="bg-white p-6 space-y-5">
                 <div className="flex items-start gap-3">
                   <Phone className="w-5 h-5 text-lion-gold flex-shrink-0 mt-0.5" />
                   <div>
@@ -271,7 +278,10 @@ const ProjectDetails = () => {
                 </div>
                 
                 <div className="pt-4">
-                  <Button className="w-full bg-lion-gold hover:bg-lion-darkgold text-black font-medium">
+                  <Button 
+                    className="w-full bg-lion-gold hover:bg-lion-darkgold text-black font-medium"
+                    onClick={handleScheduleVisit}
+                  >
                     Schedule a Visit
                   </Button>
                 </div>
@@ -321,64 +331,6 @@ const ProjectDetails = () => {
                   </div>
                 </div>
               </div>
-            </motion.div>
-            
-            {/* Similar Listings */}
-            <motion.div 
-              className="bg-white rounded-xl shadow-md p-6 mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              <h3 className="text-xl font-semibold mb-5 text-lion-black">Similar Listings</h3>
-              
-              <ScrollArea className="h-80">
-                <div className="space-y-4 pr-4">
-                  {projectsData
-                    .filter(p => p.id !== id)
-                    .slice(0, 4)
-                    .map(similarProject => (
-                      <Link 
-                        key={similarProject.id} 
-                        to={`/project/${similarProject.id}`}
-                        className="block"
-                      >
-                        <motion.div 
-                          className="flex gap-3 overflow-hidden group"
-                          whileHover={{ y: -5 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                            <img 
-                              src={similarProject.image || similarProject.images?.[0]} 
-                              alt={similarProject.title} 
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                            />
-                          </div>
-                          <div>
-                            <h4 className="font-medium text-lion-black line-clamp-1 group-hover:text-lion-gold transition-colors">
-                              {similarProject.title}
-                            </h4>
-                            <p className="text-sm text-gray-500 line-clamp-1">{similarProject.location}</p>
-                            <div className="flex items-center gap-1 mt-1">
-                              {similarProject.isNew && (
-                                <Badge variant="outline" className="text-[10px] h-4 bg-lion-gold/10 text-lion-gold border-lion-gold/20">
-                                  New
-                                </Badge>
-                              )}
-                              {similarProject.isFeatured && (
-                                <Badge variant="outline" className="text-[10px] h-4 bg-black/5 text-gray-700 border-gray-200">
-                                  Featured
-                                </Badge>
-                              )}
-                            </div>
-                          </div>
-                        </motion.div>
-                      </Link>
-                    ))}
-                </div>
-              </ScrollArea>
             </motion.div>
           </div>
         </div>

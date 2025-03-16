@@ -5,8 +5,51 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Clock, Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { useState } from "react";
+import { toast } from "./ui/use-toast";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    consent: false
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id]: value }));
+  };
+
+  const handleCheckboxChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFormData(prev => ({ ...prev, consent: e.target.checked }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulate form submission
+    setTimeout(() => {
+      setIsSubmitting(false);
+      toast({
+        title: "Message Sent",
+        description: "We'll get back to you as soon as possible!",
+      });
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+        consent: false
+      });
+    }, 1500);
+  };
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -158,20 +201,39 @@ const Contact = () => {
                     </p>
                   </div>
                   
-                  <form className="space-y-5">
+                  <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="space-y-2">
                       <Label htmlFor="name">Your Name</Label>
-                      <Input id="name" placeholder="John Doe" />
+                      <Input 
+                        id="name" 
+                        placeholder="John Doe" 
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
                     
                     <div className="space-y-2">
                       <Label htmlFor="email">Your Email</Label>
-                      <Input id="email" type="email" placeholder="john@example.com" />
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        placeholder="john@example.com"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
                     
                     <div className="space-y-2">
                       <Label htmlFor="phone">Your Phone</Label>
-                      <Input id="phone" placeholder="+91 98765 43210" />
+                      <Input 
+                        id="phone" 
+                        placeholder="+91 98765 43210"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                      />
                     </div>
                     
                     <div className="space-y-2">
@@ -180,16 +242,30 @@ const Contact = () => {
                         id="message" 
                         placeholder="I'm interested in..." 
                         className="h-24"
+                        value={formData.message}
+                        onChange={handleChange}
+                        required
                       />
                     </div>
                     
                     <div className="flex items-center space-x-2">
-                      <input type="checkbox" id="consent" className="rounded border-gray-300" />
+                      <input 
+                        type="checkbox" 
+                        id="consent" 
+                        className="rounded border-gray-300"
+                        checked={formData.consent}
+                        onChange={handleCheckboxChange}
+                        required
+                      />
                       <label htmlFor="consent" className="text-sm text-gray-700">I consent to the GDPR Terms</label>
                     </div>
                     
-                    <Button className="w-full bg-lion-gold hover:bg-lion-darkgold text-black">
-                      Send Message
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-lion-gold hover:bg-lion-darkgold text-black"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 </div>
