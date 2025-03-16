@@ -10,7 +10,7 @@ interface PropertyCardProps {
   price?: string;
 }
 
-const PropertyCard = ({ image, title, location }: PropertyCardProps) => {
+const PropertyCard = ({ image, title, location, price }: PropertyCardProps) => {
   return (
     <motion.div
       whileHover={{ y: -10 }}
@@ -32,6 +32,11 @@ const PropertyCard = ({ image, title, location }: PropertyCardProps) => {
               <MapPin className="w-4 h-4 mr-1" />
               <span className="text-sm">{location}</span>
             </div>
+            {price && (
+              <div className="mt-2 text-lion-gold font-medium">
+                {price}
+              </div>
+            )}
           </div>
         </CardContent>
       </Card>

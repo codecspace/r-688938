@@ -229,11 +229,16 @@ const ProjectDetails = () => {
           <div className="lg:col-span-1">
             {/* Contact Card - Fixed position */}
             <motion.div 
-              className="bg-white rounded-xl shadow-md overflow-hidden sticky top-24"
+              className="bg-white rounded-xl shadow-md overflow-hidden"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
+              style={{
+                position: 'sticky',
+                top: '2rem',
+                zIndex: 10
+              }}
             >
               <div className="bg-lion-gold p-6">
                 <h3 className="text-xl font-semibold text-black">Interested in this property?</h3>
