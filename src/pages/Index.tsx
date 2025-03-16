@@ -16,6 +16,25 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    // Pre-load main content to prevent white flash
+    const preloadImages = () => {
+      const images = [
+        "https://imgur.com/ku5rlCk.jpg",
+        "https://i.imgur.com/YQSL3gr.jpg",
+        "https://i.imgur.com/VIVNtTM.jpg",
+        "https://i.imgur.com/Tm5t9pp.jpg",
+        "https://i.imgur.com/1qjWa6d.jpg",
+        "https://i.imgur.com/V3ZYKie.jpg"
+      ];
+      
+      images.forEach(src => {
+        const img = new Image();
+        img.src = src;
+      });
+    };
+    
+    preloadImages();
+    
     // Loading time of 5 seconds as requested
     const timer = setTimeout(() => {
       setIsLoading(false);
@@ -25,14 +44,14 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-lion-black">
+    <>
       <AnimatePresence mode="wait">
         {isLoading ? (
           <LoadingScreen key="loading" />
         ) : (
           <motion.div 
             key="content"
-            className="min-h-screen bg-white"
+            className="min-h-screen w-full overflow-hidden bg-white"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -50,7 +69,7 @@ const Index = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </>
   );
 };
 

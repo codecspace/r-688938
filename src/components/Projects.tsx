@@ -1,45 +1,13 @@
+
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-
-const projectData = [
-  {
-    id: 1,
-    title: "TARC Ishva",
-    image: "https://i.imgur.com/YQSL3gr.jpg", // Updated to direct image URL
-    description:
-      "TARC Ishva provides 3 and 4 BHK residences starting from 2850 square feet. These houses mix contemporary elegance with a huge layout, making them an ideal choice for those who appreciate the sophisticated life.",
-  },
-  {
-    id: 2,
-    title: "Birla Arika",
-    image: "https://i.imgur.com/VIVNtTM.jpg", // Updated to direct image URL
-    description:
-      "Birla Arika Super-Paljari 4 bhk + staff residences are designed for those who desire grandeur. With 4200 – 4900 square feet to extended size, these houses offer a unique lifestyle of specificity and elegance set within a reputed and cool enclave.",
-  },
-  {
-    id: 3,
-    title: "Godrej Aristocrat",
-    image: "https://i.imgur.com/Tm5t9pp.jpg", // Updated to direct image URL
-    description:
-      "Located in Sector 49, the Golf Course presents an artistic and huge 3 and 4 BHK apartments with the extension roads, Gurugram, Godrej Aristocrat Utility areas. This work of craftsmanship has a triple-hit entrance lobby, an 18-hole golf course, landscaped terrace, a swimming pool, a luxury clubhouse, and more-which reduces the lifestyle of sophistication and indulgence.",
-  },
-  {
-    id: 4,
-    title: "HERO HOMES Sector 104",
-    image: "https://i.imgur.com/1qjWa6d.jpg", // Updated to direct image URL
-    description:
-      "Sector 104, settled in Sector 104, is a premium residential project by Gurgaon, Hero Realty, extending with five high-growing towers in 11 acres. While offering 3 and 4 BHK apartments, this development is designed for modern urban families and professionals, which basically combines luxury and convenience in a rich place.",
-  },
-  {
-    id: 5,
-    title: "AIPL Joy Square & District",
-    image: "https://i.imgur.com/V3ZYKie.jpg", // Updated to direct image URL
-    description:
-      "AIPL Joy Square (Sector 62A) and AIPL Joy District (Sector 88) redefine commercial excellence with double-hit faces for branding, expander basements, dedicated escalators and lifts and lifts and a reputed ski garden at LID B level. These projects provide a perfect environment for retail, F&B and corporate development, making them a major investment site.",
-  },
-];
+import { Link } from "react-router-dom";
+import { projectsData } from "@/data/projectsData";
 
 const Projects = () => {
+  // Take the first 5 projects for display
+  const displayProjects = projectsData.slice(0, 5);
+
   return (
     <section id="projects" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -58,7 +26,7 @@ const Projects = () => {
           </h3>
         </motion.div>
 
-        {projectData.map((project, index) => (
+        {displayProjects.map((project, index) => (
           <motion.div
             key={project.id}
             initial={{ opacity: 0, y: 50 }}
@@ -74,7 +42,7 @@ const Projects = () => {
               <motion.img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-[400px] object-cover transition-transform duration-700 ease-in-out" // Fixed height, object-cover
+                className="w-full h-[400px] object-cover transition-transform duration-700 ease-in-out"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.8 }}
               />
@@ -117,18 +85,25 @@ const Projects = () => {
                 {project.description}
               </motion.p>
 
-              <motion.a
-                href="#"
-                className="inline-flex items-center text-lion-gold hover:text-lion-darkgold font-medium transition-colors group"
+              <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.7, delay: 0.4 }}
                 viewport={{ once: true }}
-                whileHover={{ x: 5 }}
               >
-                View Details
-                <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
-              </motion.a>
+                <Link
+                  to={`/project/${project.id}`}
+                  className="inline-flex items-center text-lion-gold hover:text-lion-darkgold font-medium transition-colors group"
+                >
+                  <motion.span
+                    whileHover={{ x: 5 }}
+                    className="flex items-center"
+                  >
+                    View Details
+                    <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
+                  </motion.span>
+                </Link>
+              </motion.div>
             </div>
           </motion.div>
         ))}
