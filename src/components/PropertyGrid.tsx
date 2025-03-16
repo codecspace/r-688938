@@ -8,7 +8,7 @@ const PropertyGrid = () => {
     image: project.heroImage || project.images?.[0] || project.image,
     title: project.title,
     location: project.location,
-    price: project.price || "Contact for price",
+    price: project.specifications?.price || "Contact for price", // Using optional chaining to safely access specifications.price
   }));
 
   return (
