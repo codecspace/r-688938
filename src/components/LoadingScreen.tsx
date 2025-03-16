@@ -17,9 +17,9 @@ const LoadingScreen = () => {
 
   return (
     <motion.div 
-      className="fixed inset-0 bg-lion-black z-50 flex items-center justify-center"
-      initial={{ opacity: 1 }}
-      animate={{ opacity: loading ? 1 : 0 }}
+      className="fixed inset-0 bg-lion-black z-50 flex flex-col items-center justify-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 1.2 }}
     >
@@ -51,6 +51,32 @@ const LoadingScreen = () => {
             }
           }}
         />
+        
+        <motion.h1 
+          className="text-center text-lion-gold font-display text-3xl mt-8 tracking-wider"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8, duration: 0.8 }}
+        >
+          <motion.span
+            className="inline-block"
+            animate={{
+              textShadow: [
+                "0 0 5px rgba(212, 175, 55, 0.3)",
+                "0 0 15px rgba(212, 175, 55, 0.8)",
+                "0 0 5px rgba(212, 175, 55, 0.3)"
+              ]
+            }}
+            transition={{
+              duration: 2,
+              repeat: Infinity,
+              repeatType: "reverse"
+            }}
+          >
+            Lionvest Realty
+          </motion.span>
+        </motion.h1>
+        
         <motion.div 
           className="absolute bottom-0 left-0 right-0 h-1 bg-lion-gold origin-left"
           initial={{ scaleX: 0 }}

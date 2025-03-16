@@ -27,25 +27,29 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-lion-black">
       <AnimatePresence mode="wait">
-        {isLoading && <LoadingScreen />}
+        {isLoading ? (
+          <LoadingScreen key="loading" />
+        ) : (
+          <motion.div 
+            key="content"
+            className="min-h-screen bg-white"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          >
+            <Navbar />
+            <Hero />
+            <AboutUs />
+            <VisionMission />
+            <Projects />
+            <Team />
+            <FeaturedProperties />
+            <Contact />
+            <Footer />
+          </motion.div>
+        )}
       </AnimatePresence>
-      
-      <motion.div 
-        className="min-h-screen bg-white"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: isLoading ? 0 : 1 }}
-        transition={{ duration: 1.5, ease: "easeInOut", delay: 0.2 }}
-      >
-        <Navbar />
-        <Hero />
-        <AboutUs />
-        <VisionMission />
-        <Projects />
-        <Team />
-        <FeaturedProperties />
-        <Contact />
-        <Footer />
-      </motion.div>
     </div>
   );
 };
