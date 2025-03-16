@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -323,63 +322,7 @@ const ProjectDetails = () => {
               </div>
             </motion.div>
             
-            {/* Similar Listings */}
-            <motion.div 
-              className="bg-white rounded-xl shadow-md p-6 mt-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.2 }}
-            >
-              <h3 className="text-xl font-semibold mb-5 text-lion-black">Similar Listings</h3>
-              
-              <ScrollArea className="h-80">
-                <div className="space-y-4 pr-4">
-                  {projectsData
-                    .filter(p => p.id !== id)
-                    .slice(0, 4)
-                    .map(similarProject => (
-                      <Link 
-                        key={similarProject.id} 
-                        to={`/project/${similarProject.id}`}
-                        className="block"
-                      >
-                        <motion.div 
-                          className="flex gap-3 overflow-hidden group"
-                          whileHover={{ y: -5 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <div className="w-20 h-20 rounded-lg overflow-hidden flex-shrink-0">
-                            <img 
-                              src={similarProject.image || similarProject.images?.[0]} 
-                              alt={similarProject.title} 
-                              className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
-                            />
-                          </div>
-                          <div>
-                            <h4 className="font-medium text-lion-black line-clamp-1 group-hover:text-lion-gold transition-colors">
-                              {similarProject.title}
-                            </h4>
-                            <p className="text-sm text-gray-500 line-clamp-1">{similarProject.location}</p>
-                            <div className="flex items-center gap-1 mt-1">
-                              {similarProject.isNew && (
-                                <Badge variant="outline" className="text-[10px] h-4 bg-lion-gold/10 text-lion-gold border-lion-gold/20">
-                                  New
-                                </Badge>
-                              )}
-                              {similarProject.isFeatured && (
-                                <Badge variant="outline" className="text-[10px] h-4 bg-black/5 text-gray-700 border-gray-200">
-                                  Featured
-                                </Badge>
-                              )}
-                            </div>
-                          </div>
-                        </motion.div>
-                      </Link>
-                    ))}
-                </div>
-              </ScrollArea>
-            </motion.div>
+            {/* Removed Similar Listings section */}
           </div>
         </div>
       </div>
