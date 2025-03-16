@@ -1,8 +1,16 @@
 
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const Hero = () => {
+  const scrollToSection = (sectionId: string) => {
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
   return (
     <div className="relative h-screen min-h-[600px] flex items-center justify-center" id="home">
       <div
@@ -31,6 +39,7 @@ const Hero = () => {
             <Button 
               className="bg-lion-gold hover:bg-lion-darkgold text-black shadow-md hover:shadow-lg transition-all font-medium px-8 py-6 rounded-md"
               size="lg"
+              onClick={() => scrollToSection('properties')}
             >
               Explore Properties
             </Button>
@@ -38,6 +47,7 @@ const Hero = () => {
               variant="outline" 
               className="border-2 border-white bg-transparent text-white hover:bg-white/10 hover:border-lion-gold hover:text-lion-gold transition-all px-8 py-6 rounded-md shadow-md"
               size="lg"
+              onClick={() => scrollToSection('contact')}
             >
               Contact Us
             </Button>

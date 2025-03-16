@@ -80,7 +80,7 @@ const ProjectDetails = () => {
         />
         
         <motion.img 
-          src={project.heroImage || project.images[0]} 
+          src={project.heroImage || project.images?.[0]} 
           alt={project.title} 
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.1 }}
@@ -226,8 +226,8 @@ const ProjectDetails = () => {
           </div>
           
           {/* Right Side - Sidebar */}
-          <div className="lg:col-span-1 space-y-8">
-            {/* Contact Card */}
+          <div className="lg:col-span-1">
+            {/* Contact Card - Fixed position */}
             <motion.div 
               className="bg-white rounded-xl shadow-md overflow-hidden sticky top-24"
               initial={{ opacity: 0, y: 20 }}
@@ -275,7 +275,7 @@ const ProjectDetails = () => {
             
             {/* Features */}
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-6"
+              className="bg-white rounded-xl shadow-md p-6 mt-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -320,7 +320,7 @@ const ProjectDetails = () => {
             
             {/* Similar Listings */}
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-6"
+              className="bg-white rounded-xl shadow-md p-6 mt-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}

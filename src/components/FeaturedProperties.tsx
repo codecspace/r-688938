@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { Badge } from "./ui/badge";
 import { Link } from "react-router-dom";
 import { projectsData } from "@/data/projectsData";
+import { MapPin } from "lucide-react";
 
 const FeaturedProperties = () => {
   const containerVariants = {
@@ -62,19 +63,19 @@ const FeaturedProperties = () => {
                 <div className="relative overflow-hidden rounded-xl shadow-xl h-[280px]">
                   <div className="absolute top-3 left-3 z-20 flex gap-2">
                     {property.isNew && (
-                      <Badge className="bg-lion-gold text-black border-none">
-                        new offer
+                      <Badge className="bg-purple-600 hover:bg-purple-700 text-white border-none py-1">
+                        New Offer
                       </Badge>
                     )}
                     {property.isFeatured && (
-                      <Badge className="bg-white text-lion-black border-none">
+                      <Badge className="bg-green-500 hover:bg-green-600 text-white border-none py-1">
                         Featured
                       </Badge>
                     )}
                   </div>
                   <div className="bg-gradient-to-t from-lion-black to-transparent absolute inset-0 z-10 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                   <motion.img 
-                    src={property.image} 
+                    src={property.heroImage || property.images?.[0] || property.image} 
                     alt={property.title} 
                     className="w-full h-full object-cover object-center"
                     whileHover={{ scale: 1.05 }}
@@ -82,7 +83,10 @@ const FeaturedProperties = () => {
                   />
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white">
                     <h4 className="text-xl font-semibold mb-1 group-hover:text-lion-gold transition-colors duration-300">{property.title}</h4>
-                    <p className="text-gray-300 text-sm">{property.location}</p>
+                    <div className="flex items-center mt-1 text-gray-200">
+                      <MapPin className="w-4 h-4 mr-1" />
+                      <span className="text-sm">{property.location}</span>
+                    </div>
                   </div>
                 </div>
               </Link>
