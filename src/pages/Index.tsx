@@ -1,5 +1,6 @@
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import AboutUs from "@/components/AboutUs";
@@ -9,38 +10,13 @@ import Team from "@/components/Team";
 import FeaturedProperties from "@/components/FeaturedProperties";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-interface IndexProps {
-  showLoadingScreen?: boolean;
-}
+const Index = () => {
+  const [isLoading, setIsLoading] = useState(true);
 
-const Index = ({ showLoadingScreen = false }: IndexProps) => {
   useEffect(() => {
-    // Handle smooth scrolling for anchor links
-    const handleAnchorClick = (e: MouseEvent) => {
-      const target = e.target as HTMLElement;
-      const anchor = target.closest('a[href^="#"]');
-      
-      if (anchor) {
-        e.preventDefault();
-        const targetId = anchor.getAttribute('href')?.substring(1);
-        
-        if (targetId) {
-          const targetElement = document.getElementById(targetId);
-          if (targetElement) {
-            window.scrollTo({
-              top: targetElement.offsetTop - 80, // Offset for navbar
-              behavior: 'smooth'
-            });
-          }
-        }
-      }
-    };
-    
-    document.body.addEventListener('click', handleAnchorClick);
-    
-    // Preload images for better performance
+    // Pre-load main content to prevent white flash
     const preloadImages = () => {
       const images = [
         "https://imgur.com/ku5rlCk.jpg",
@@ -68,30 +44,48 @@ const Index = ({ showLoadingScreen = false }: IndexProps) => {
     
     preloadImages();
     
-    return () => {
-      document.body.removeEventListener('click', handleAnchorClick);
-    };
+    // Set document background to black during transition to prevent white flash
+    document.body.style.backgroundColor = '#000';
+    
+    // Loading time of 5 seconds as requested
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      // Reset background color after content is loaded
+      setTimeout(() => {
+        document.body.style.backgroundColor = '';
+      }, 500);
+    }, 5000);
+    
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <motion.div 
-      key="content"
-      className="min-h-screen w-full overflow-hidden bg-white"
-      initial={{ opacity: showLoadingScreen ? 0 : 1 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 1.5, ease: "easeInOut" }}
-    >
-      <Navbar />
-      <Hero />
-      <AboutUs />
-      <VisionMission />
-      <Projects />
-      <Team />
-      <FeaturedProperties />
-      <Contact />
-      <Footer />
-    </motion.div>
+    <>
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <LoadingScreen key="loading" />
+        ) : (
+          <motion.div 
+            key="content"
+            className="min-h-screen w-full overflow-hidden bg-white"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeInOut" }}
+          >
+            <Navbar />
+            <Hero />
+            <AboutUs />
+            <VisionMission />
+            <Projects />
+            <Team />
+            <FeaturedProperties />
+            <Contact />
+            <Footer />
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
 
