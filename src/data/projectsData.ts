@@ -1,4 +1,3 @@
-
 export interface ProjectDataType {
   id: string;
   title: string;
@@ -29,9 +28,7 @@ export const projectsData: ProjectDataType[] = [
     isFeatured: true,
     images: [
       "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
-      "https://i.imgur.com/VIVNtTM.jpg",
-      "https://images.unsplash.com/photo-1582407947304-fd86f028f716",
-      "https://images.unsplash.com/photo-1560448204-e02f11c3d0e2"
+      "https://i.imgur.com/VIVNtTM.jpg"
     ],
     specifications: {
       overview: [
@@ -70,8 +67,7 @@ export const projectsData: ProjectDataType[] = [
     images: [
       "https://i.postimg.cc/vBpHhk8h/image.png",
       "https://i.postimg.cc/XqdNzLpb/image.png",
-      "https://i.imgur.com/Tm5t9pp.jpg",
-      "https://images.unsplash.com/photo-1560185893-a55cbc8c57e8"
+      "https://i.imgur.com/Tm5t9pp.jpg"
     ],
     specifications: {
       overview: [
@@ -128,9 +124,7 @@ export const projectsData: ProjectDataType[] = [
     isFeatured: true,
     images: [
       "https://i.postimg.cc/dVmnGZmN/image.png",
-      "https://i.imgur.com/1qjWa6d.jpg",
-      "https://images.unsplash.com/photo-1613490493576-7fde63acd811",
-      "https://images.unsplash.com/photo-1486304873000-235643847519"
+      "https://i.imgur.com/1qjWa6d.jpg"
     ],
     amenities: [
       "Swimming Pool", "Gym", "Clubhouse", "Kids Play Area", 
@@ -152,9 +146,7 @@ export const projectsData: ProjectDataType[] = [
     isFeatured: true,
     images: [
       "https://i.postimg.cc/MHQmHnpD/image.png",
-      "https://i.imgur.com/V3ZYKie.jpg",
-      "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab",
-      "https://images.unsplash.com/photo-1486325212027-8081e485255e"
+      "https://i.imgur.com/V3ZYKie.jpg"
     ],
     specifications: {
       overview: [
@@ -177,16 +169,13 @@ export const projectsData: ProjectDataType[] = [
     title: "Birla Arika Sector 31, Gurgaon",
     location: "Sector 31, Gurgaon",
     image: "https://i.imgur.com/YQSL3gr.jpg",
-    heroImage: "https://images.unsplash.com/photo-1560185127-6ed189bf02f4",
+    heroImage: "https://i.imgur.com/YQSL3gr.jpg",
     fullAddress: "Sector 31, Gurugram, Haryana 122001, India",
     description: "Birla Estates Private Limited, a 100 per cent wholly owned subsidiary of Century Textiles and Industries Limited.",
     longDescription: "Birla Estates Private Limited, a 100 per cent wholly owned subsidiary of Century Textiles and Industries Limited, the over Rs. 8000 crore flagship Company of the B. K. Birla Group of Companies with presence in cement, textiles, rayon yarn, pulp & paper, salt, chemicals and more. Birla Estates will be developing many land parcels held by the group as well as look at joint development/strategic tie-ups across top cities. We will transform the perception of Indian Real Estate sector by delivering an exceptional experience and creating value, at every level, for every stakeholder. Birla Estates works towards maintaining the highest standards of environmental care and ensures that the standards of health and environment are maintained in spite of increasing level of operations. Being well aware of our responsibility towards a better and cleaner environment, our efforts in environment management go well beyond mere compliance with statutory requirements.",
     isFeatured: true,
     images: [
-      "https://i.imgur.com/YQSL3gr.jpg",
-      "https://images.unsplash.com/photo-1560185127-6ed189bf02f4",
-      "https://images.unsplash.com/photo-1561144257-e32e55a242b7",
-      "https://images.unsplash.com/photo-1536693308398-af77afc30a70"
+      "https://i.imgur.com/YQSL3gr.jpg"
     ],
     amenities: [
       "Swimming Pool", "Gym", "Clubhouse", "Kids Play Area", 
@@ -208,8 +197,7 @@ export const projectsData: ProjectDataType[] = [
       "https://i.postimg.cc/rF59LRby/image.png",
       "https://i.postimg.cc/nhkYXbp6/image.png",
       "https://i.postimg.cc/d0VRdH0D/image.png",
-      "https://i.postimg.cc/vB1W24fs/image.png",
-      "https://i.imgur.com/YQSL3gr.jpg"
+      "https://i.postimg.cc/vB1W24fs/image.png"
     ],
     amenities: [
       "Jogging Track", "Children's Play Area", "Gymnasium", 
