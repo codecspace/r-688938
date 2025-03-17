@@ -10,10 +10,11 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { projectsData } from "@/data/projectsData";
 import { toast } from "@/hooks/use-toast";
+import { ProjectDataType } from "@/data/projectsData";
 
 const ProjectDetails = () => {
   const { id } = useParams();
-  const [project, setProject] = useState(null);
+  const [project, setProject] = useState<ProjectDataType | null>(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -35,7 +36,7 @@ const ProjectDetails = () => {
   }, [id]);
 
   // Function to handle direct contact actions
-  const handleContact = (type, value) => {
+  const handleContact = (type: string, value: string) => {
     if (type === "phone") {
       window.location.href = `tel:${value}`;
       toast({
@@ -209,11 +210,11 @@ const ProjectDetails = () => {
                         {Array.isArray(value) ? (
                           <ul className="list-disc pl-5 space-y-1">
                             {value.map((item, index) => (
-                              <li key={index}>{item}</li>
+                              <li key={index}>{String(item)}</li>
                             ))}
                           </ul>
                         ) : (
-                          <p>{value}</p>
+                          <p>{String(value)}</p>
                         )}
                       </div>
                     </div>
@@ -344,8 +345,6 @@ const ProjectDetails = () => {
                 </div>
               </div>
             </motion.div>
-            
-            {/* Similar Listings section removed as requested */}
           </div>
         </div>
       </div>
