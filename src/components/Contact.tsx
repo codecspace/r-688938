@@ -5,8 +5,99 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Clock, Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { useState } from "react";
+import { toast } from "@/hooks/use-toast";
 
 const Contact = () => {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    message: "",
+    consent: false
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const handleChange = (e) => {
+    const { id, value, type, checked } = e.target;
+    setFormData({
+      ...formData,
+      [id]: type === "checkbox" ? checked : value
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Validate form
+    if (!formData.name || !formData.email || !formData.phone || !formData.message) {
+      toast({
+        title: "Please fill all fields",
+        description: "All fields are required to submit the form",
+        variant: "destructive"
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    if (!formData.consent) {
+      toast({
+        title: "Consent required",
+        description: "Please agree to the GDPR terms to proceed",
+        variant: "destructive"
+      });
+      setIsSubmitting(false);
+      return;
+    }
+
+    // In a real application, you'd send this data to a server or API
+    // For this example, we'll simulate a successful submission and show how it would work
+    // with the client's phone number
+    
+    // Format data for sending via SMS (hypothetical)
+    const messageText = `New Inquiry from Website\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage: ${formData.message}`;
+    
+    // Simulating form submission success
+    setTimeout(() => {
+      // In a real implementation, you would use an SMS gateway API or other service here
+      console.log("Message would be sent to +91 9773552334:", messageText);
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "We have received your inquiry and will contact you soon.",
+      });
+      
+      // Reset form
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+        consent: false
+      });
+      
+      setIsSubmitting(false);
+    }, 1500);
+  };
+
+  // Function to handle direct calls/emails
+  const handleDirectContact = (type, value) => {
+    if (type === "phone") {
+      window.location.href = `tel:${value}`;
+      toast({
+        title: "Calling...",
+        description: `Dialing ${value}`,
+      });
+    } else if (type === "email") {
+      window.location.href = `mailto:${value}`;
+      toast({
+        title: "Opening email client",
+        description: `Composing email to ${value}`,
+      });
+    }
+  };
+
   return (
     <section id="contact" className="py-20 bg-white">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -44,7 +135,7 @@ const Contact = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center">
+                <div className="flex items-center cursor-pointer" onClick={() => handleDirectContact("phone", "+91 9773552334")}>
                   <Phone className="text-lion-gold mr-4 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-lion-black">Phone</h4>
@@ -52,7 +143,7 @@ const Contact = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center">
+                <div className="flex items-center cursor-pointer" onClick={() => handleDirectContact("phone", "+91 9773552334")}>
                   <Phone className="text-lion-gold mr-4 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-lion-black">Mobile</h4>
@@ -60,7 +151,7 @@ const Contact = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center">
+                <div className="flex items-center cursor-pointer" onClick={() => handleDirectContact("email", "Lionvestrealty@gmail.com")}>
                   <Mail className="text-lion-gold mr-4 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-lion-black">Email</h4>
@@ -158,20 +249,36 @@ const Contact = () => {
                     </p>
                   </div>
                   
-                  <form className="space-y-5">
+                  <form className="space-y-5" onSubmit={handleSubmit}>
                     <div className="space-y-2">
                       <Label htmlFor="name">Your Name</Label>
-                      <Input id="name" placeholder="John Doe" />
+                      <Input 
+                        id="name" 
+                        placeholder="John Doe" 
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
                     </div>
                     
                     <div className="space-y-2">
                       <Label htmlFor="email">Your Email</Label>
-                      <Input id="email" type="email" placeholder="john@example.com" />
+                      <Input 
+                        id="email" 
+                        type="email" 
+                        placeholder="john@example.com" 
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
                     </div>
                     
                     <div className="space-y-2">
                       <Label htmlFor="phone">Your Phone</Label>
-                      <Input id="phone" placeholder="+91 98765 43210" />
+                      <Input 
+                        id="phone" 
+                        placeholder="+91 98765 43210" 
+                        value={formData.phone}
+                        onChange={handleChange}
+                      />
                     </div>
                     
                     <div className="space-y-2">
@@ -180,16 +287,28 @@ const Contact = () => {
                         id="message" 
                         placeholder="I'm interested in..." 
                         className="h-24"
+                        value={formData.message}
+                        onChange={handleChange}
                       />
                     </div>
                     
                     <div className="flex items-center space-x-2">
-                      <input type="checkbox" id="consent" className="rounded border-gray-300" />
+                      <input 
+                        type="checkbox" 
+                        id="consent" 
+                        className="rounded border-gray-300"
+                        checked={formData.consent}
+                        onChange={handleChange}
+                      />
                       <label htmlFor="consent" className="text-sm text-gray-700">I consent to the GDPR Terms</label>
                     </div>
                     
-                    <Button className="w-full bg-lion-gold hover:bg-lion-darkgold text-black">
-                      Send Message
+                    <Button 
+                      type="submit" 
+                      className="w-full bg-lion-gold hover:bg-lion-darkgold text-black"
+                      disabled={isSubmitting}
+                    >
+                      {isSubmitting ? "Sending..." : "Send Message"}
                     </Button>
                   </form>
                 </div>

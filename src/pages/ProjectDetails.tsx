@@ -1,18 +1,19 @@
+
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, Calendar, CheckCircle, ExternalLink, ArrowLeft } from "lucide-react";
+import { MapPin, Phone, Mail, CheckCircle, ArrowLeft } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-import { Badge } from "@/components/ui/badge";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { projectsData } from "@/data/projectsData";
+import { toast } from "@/hooks/use-toast";
 
 const ProjectDetails = () => {
   const { id } = useParams();
-  const [project, setProject] = useState<any>(null);
+  const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -32,6 +33,28 @@ const ProjectDetails = () => {
     // Scroll to top when the component mounts
     window.scrollTo(0, 0);
   }, [id]);
+
+  // Function to handle direct contact actions
+  const handleContact = (type, value) => {
+    if (type === "phone") {
+      window.location.href = `tel:${value}`;
+      toast({
+        title: "Calling...",
+        description: `Dialing ${value}`,
+      });
+    } else if (type === "email") {
+      window.location.href = `mailto:${value}`;
+      toast({
+        title: "Opening email client",
+        description: `Composing email to ${value}`,
+      });
+    } else if (type === "schedule") {
+      toast({
+        title: "Schedule Request Sent",
+        description: "We will contact you soon to schedule a visit.",
+      });
+    }
+  };
 
   if (loading) {
     return (
@@ -79,7 +102,7 @@ const ProjectDetails = () => {
         />
         
         <motion.img 
-          src={project.heroImage || project.images?.[0]} 
+          src={project.heroImage || project.images?.[0] || project.image} 
           alt={project.title} 
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.1 }}
@@ -132,39 +155,41 @@ const ProjectDetails = () => {
               </div>
             </motion.div>
             
-            {/* Image Gallery */}
-            <motion.div 
-              className="mb-8"
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7, delay: 0.1 }}
-            >
-              <h2 className="text-2xl font-semibold mb-6 text-lion-black">Gallery</h2>
-              <Carousel className="w-full">
-                <CarouselContent>
-                  {project.images && project.images.map((image: string, index: number) => (
-                    <CarouselItem key={index}>
-                      <div className="p-1">
-                        <motion.div 
-                          className="aspect-video overflow-hidden rounded-xl"
-                          whileHover={{ scale: 1.02 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <img 
-                            src={image} 
-                            alt={`${project.title} - Image ${index + 1}`} 
-                            className="w-full h-full object-cover"
-                          />
-                        </motion.div>
-                      </div>
-                    </CarouselItem>
-                  ))}
-                </CarouselContent>
-                <CarouselPrevious className="left-2" />
-                <CarouselNext className="right-2" />
-              </Carousel>
-            </motion.div>
+            {/* Image Gallery - Only show when multiple images exist */}
+            {project.images && project.images.length > 0 && (
+              <motion.div 
+                className="mb-8"
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.7, delay: 0.1 }}
+              >
+                <h2 className="text-2xl font-semibold mb-6 text-lion-black">Gallery</h2>
+                <Carousel className="w-full">
+                  <CarouselContent>
+                    {project.images.map((image, index) => (
+                      <CarouselItem key={index}>
+                        <div className="p-1">
+                          <motion.div 
+                            className="aspect-video overflow-hidden rounded-xl"
+                            whileHover={{ scale: 1.02 }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <img 
+                              src={image} 
+                              alt={`${project.title} - Image ${index + 1}`} 
+                              className="w-full h-full object-cover object-center"
+                            />
+                          </motion.div>
+                        </div>
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
+                  <CarouselPrevious className="left-2" />
+                  <CarouselNext className="right-2" />
+                </Carousel>
+              </motion.div>
+            )}
             
             {/* Specifications */}
             {project.specifications && (
@@ -177,7 +202,7 @@ const ProjectDetails = () => {
               >
                 <h2 className="text-2xl font-semibold mb-6 text-lion-black">Specifications</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {Object.entries(project.specifications).map(([key, value]: [string, any]) => (
+                  {Object.entries(project.specifications).map(([key, value]) => (
                     <div key={key} className="flex flex-col">
                       <h3 className="text-lg font-medium text-lion-gold mb-3 capitalize">{key}</h3>
                       <div className="text-gray-700">
@@ -208,7 +233,7 @@ const ProjectDetails = () => {
               >
                 <h2 className="text-2xl font-semibold mb-6 text-lion-black">Amenities</h2>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                  {project.amenities.map((amenity: string, index: number) => (
+                  {project.amenities.map((amenity, index) => (
                     <motion.div
                       key={index}
                       className="flex items-center gap-2 p-3 rounded-lg bg-gray-50"
@@ -228,16 +253,11 @@ const ProjectDetails = () => {
           <div className="lg:col-span-1">
             {/* Contact Card - Fixed position */}
             <motion.div 
-              className="bg-white rounded-xl shadow-md overflow-hidden"
+              className="bg-white rounded-xl shadow-md overflow-hidden sticky top-8 z-10"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
-              style={{
-                position: 'sticky',
-                top: '2rem',
-                zIndex: 10
-              }}
             >
               <div className="bg-lion-gold p-6">
                 <h3 className="text-xl font-semibold text-black">Interested in this property?</h3>
@@ -245,7 +265,7 @@ const ProjectDetails = () => {
               </div>
               
               <div className="p-6 space-y-5">
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 cursor-pointer" onClick={() => handleContact("phone", "+91 9773552334")}>
                   <Phone className="w-5 h-5 text-lion-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-500">Phone</p>
@@ -253,7 +273,7 @@ const ProjectDetails = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 cursor-pointer" onClick={() => handleContact("email", "Lionvestrealty@gmail.com")}>
                   <Mail className="w-5 h-5 text-lion-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-500">Email</p>
@@ -270,7 +290,10 @@ const ProjectDetails = () => {
                 </div>
                 
                 <div className="pt-4">
-                  <Button className="w-full bg-lion-gold hover:bg-lion-darkgold text-black font-medium">
+                  <Button 
+                    className="w-full bg-lion-gold hover:bg-lion-darkgold text-black font-medium"
+                    onClick={() => handleContact("schedule", "")}
+                  >
                     Schedule a Visit
                   </Button>
                 </div>
@@ -322,7 +345,7 @@ const ProjectDetails = () => {
               </div>
             </motion.div>
             
-            {/* Removed Similar Listings section */}
+            {/* Similar Listings section removed as requested */}
           </div>
         </div>
       </div>

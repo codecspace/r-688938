@@ -5,10 +5,11 @@ import { projectsData } from "@/data/projectsData";
 const PropertyGrid = () => {
   // Take the first 4 projects for display
   const properties = projectsData.slice(0, 4).map(project => ({
-    image: project.heroImage || project.images?.[0] || project.image,
+    id: project.id,  // Add ID for linking
+    image: project.heroImage || project.image,  // Use heroImage as primary image
     title: project.title,
     location: project.location,
-    price: project.specifications?.price || "Contact for price", // Using optional chaining to safely access specifications.price
+    price: project.specifications?.price || "Contact for price",
   }));
 
   return (
