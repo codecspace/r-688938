@@ -1,3 +1,4 @@
+
 export interface ProjectDataType {
   id: string;
   title: string;
@@ -168,14 +169,15 @@ export const projectsData: ProjectDataType[] = [
     id: "birla-arika",
     title: "Birla Arika Sector 31, Gurgaon",
     location: "Sector 31, Gurgaon",
-    image: "https://i.imgur.com/YQSL3gr.jpg",
-    heroImage: "https://i.imgur.com/YQSL3gr.jpg",
+    image: "https://i.postimg.cc/NFWpPcFN/image.png",
+    heroImage: "https://i.postimg.cc/NFWpPcFN/image.png",
     fullAddress: "Sector 31, Gurugram, Haryana 122001, India",
     description: "Birla Estates Private Limited, a 100 per cent wholly owned subsidiary of Century Textiles and Industries Limited.",
     longDescription: "Birla Estates Private Limited, a 100 per cent wholly owned subsidiary of Century Textiles and Industries Limited, the over Rs. 8000 crore flagship Company of the B. K. Birla Group of Companies with presence in cement, textiles, rayon yarn, pulp & paper, salt, chemicals and more. Birla Estates will be developing many land parcels held by the group as well as look at joint development/strategic tie-ups across top cities. We will transform the perception of Indian Real Estate sector by delivering an exceptional experience and creating value, at every level, for every stakeholder. Birla Estates works towards maintaining the highest standards of environmental care and ensures that the standards of health and environment are maintained in spite of increasing level of operations. Being well aware of our responsibility towards a better and cleaner environment, our efforts in environment management go well beyond mere compliance with statutory requirements.",
     isFeatured: true,
     images: [
-      "https://i.imgur.com/YQSL3gr.jpg"
+      "https://i.postimg.cc/NFWpPcFN/image.png",
+      "https://i.postimg.cc/0y1VYPLj/image.png"
     ],
     amenities: [
       "Swimming Pool", "Gym", "Clubhouse", "Kids Play Area", 

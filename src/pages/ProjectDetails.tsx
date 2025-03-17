@@ -1,20 +1,29 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, CheckCircle, ArrowLeft } from "lucide-react";
+import { MapPin, Phone, Mail, CheckCircle, ArrowLeft, Calendar, Clock } from "lucide-react";
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
-import { ScrollArea } from "@/components/ui/scroll-area";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { projectsData } from "@/data/projectsData";
 import { toast } from "@/hooks/use-toast";
 import { ProjectDataType } from "@/data/projectsData";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 
 const ProjectDetails = () => {
   const { id } = useParams();
   const [project, setProject] = useState<ProjectDataType | null>(null);
   const [loading, setLoading] = useState(true);
+  const [cooldown, setCooldown] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   useEffect(() => {
     // Find the project based on the ID parameter
@@ -42,18 +51,29 @@ const ProjectDetails = () => {
         title: "Calling...",
         description: `Dialing ${value}`,
       });
+      setDialogOpen(false);
     } else if (type === "email") {
       window.location.href = `mailto:${value}`;
       toast({
         title: "Opening email client",
         description: `Composing email to ${value}`,
       });
+      setDialogOpen(false);
     } else if (type === "schedule") {
-      toast({
-        title: "Schedule Request Sent",
-        description: "We will contact you soon to schedule a visit.",
-      });
+      setDialogOpen(true);
     }
+  };
+
+  const handleScheduleVisit = () => {
+    if (cooldown) return;
+    
+    setCooldown(true);
+    setDialogOpen(true);
+    
+    // Set cooldown for 5 seconds
+    setTimeout(() => {
+      setCooldown(false);
+    }, 5000);
   };
 
   if (loading) {
@@ -305,10 +325,21 @@ const ProjectDetails = () => {
                 
                 <div className="pt-4">
                   <Button 
-                    className="w-full bg-lion-gold hover:bg-lion-darkgold text-black font-medium"
-                    onClick={() => handleContact("schedule", "")}
+                    className={`w-full ${cooldown ? 'bg-gray-400 cursor-not-allowed' : 'bg-lion-gold hover:bg-lion-darkgold'} text-black font-medium transition-all duration-300`}
+                    onClick={handleScheduleVisit}
+                    disabled={cooldown}
                   >
-                    Schedule a Visit
+                    {cooldown ? (
+                      <div className="flex items-center gap-2">
+                        <Clock className="h-4 w-4" />
+                        <span>Please wait...</span>
+                      </div>
+                    ) : (
+                      <div className="flex items-center gap-2">
+                        <Calendar className="h-4 w-4" />
+                        <span>Schedule a Visit</span>
+                      </div>
+                    )}
                   </Button>
                 </div>
               </div>
@@ -361,6 +392,34 @@ const ProjectDetails = () => {
           </div>
         </div>
       </div>
+      
+      {/* Contact Dialog */}
+      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle>Schedule a Visit</DialogTitle>
+            <DialogDescription>
+              Choose how you would like to be contacted for scheduling a visit to {project.title}
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid grid-cols-2 gap-4 py-4">
+            <Button
+              onClick={() => handleContact("phone", "+91 9773552334")}
+              className="flex items-center justify-center gap-2 bg-lion-gold hover:bg-lion-darkgold text-black"
+            >
+              <Phone className="h-4 w-4" />
+              Call Now
+            </Button>
+            <Button
+              onClick={() => handleContact("email", "Lionvestrealty@gmail.com")}
+              className="flex items-center justify-center gap-2 bg-lion-gold hover:bg-lion-darkgold text-black"
+            >
+              <Mail className="h-4 w-4" />
+              Email Us
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
       
       <Footer />
     </div>
