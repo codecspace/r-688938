@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -84,6 +83,20 @@ const ProjectDetails = () => {
     );
   }
 
+  // Filter project images to only include those that are part of the original project data
+  // If no images array exists, use the heroImage and standard image
+  const projectImages = project?.images || [];
+  
+  // If projectImages is empty, add heroImage and regular image if they exist
+  if (projectImages.length === 0) {
+    if (project?.heroImage) {
+      projectImages.push(project.heroImage);
+    }
+    if (project?.image && project.image !== project?.heroImage) {
+      projectImages.push(project.image);
+    }
+  }
+
   return (
     <div className="bg-white min-h-screen">
       <Navbar />
@@ -103,8 +116,8 @@ const ProjectDetails = () => {
         />
         
         <motion.img 
-          src={project.heroImage || project.images?.[0] || project.image} 
-          alt={project.title} 
+          src={project?.heroImage || project?.image} 
+          alt={project?.title} 
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -124,10 +137,10 @@ const ProjectDetails = () => {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Home
             </Link>
-            <h1 className="text-4xl md:text-5xl font-display text-white mb-4">{project.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-display text-white mb-4">{project?.title}</h1>
             <div className="flex items-center text-white/90">
               <MapPin className="w-5 h-5 mr-2 text-lion-gold" />
-              <p>{project.location}</p>
+              <p>{project?.location}</p>
             </div>
           </motion.div>
         </div>
@@ -148,16 +161,16 @@ const ProjectDetails = () => {
             >
               <h2 className="text-2xl font-semibold mb-6 text-lion-black">Description</h2>
               <div className="prose max-w-none text-gray-700">
-                {project.longDescription ? (
+                {project?.longDescription ? (
                   <p>{project.longDescription}</p>
                 ) : (
-                  <p>{project.description}</p>
+                  <p>{project?.description}</p>
                 )}
               </div>
             </motion.div>
             
-            {/* Image Gallery - Only show when multiple images exist */}
-            {project.images && project.images.length > 0 && (
+            {/* Image Gallery - Only show when project has images */}
+            {projectImages.length > 0 && (
               <motion.div 
                 className="mb-8"
                 initial={{ opacity: 0, y: 20 }}
@@ -168,7 +181,7 @@ const ProjectDetails = () => {
                 <h2 className="text-2xl font-semibold mb-6 text-lion-black">Gallery</h2>
                 <Carousel className="w-full">
                   <CarouselContent>
-                    {project.images.map((image, index) => (
+                    {projectImages.map((image, index) => (
                       <CarouselItem key={index}>
                         <div className="p-1">
                           <motion.div 
@@ -178,7 +191,7 @@ const ProjectDetails = () => {
                           >
                             <img 
                               src={image} 
-                              alt={`${project.title} - Image ${index + 1}`} 
+                              alt={`${project?.title} - Image ${index + 1}`} 
                               className="w-full h-full object-cover object-center"
                             />
                           </motion.div>
@@ -193,7 +206,7 @@ const ProjectDetails = () => {
             )}
             
             {/* Specifications */}
-            {project.specifications && (
+            {project?.specifications && (
               <motion.div 
                 className="bg-white rounded-xl shadow-md p-8 mb-8"
                 initial={{ opacity: 0, y: 20 }}
@@ -224,7 +237,7 @@ const ProjectDetails = () => {
             )}
             
             {/* Amenities */}
-            {project.amenities && (
+            {project?.amenities && (
               <motion.div 
                 className="bg-white rounded-xl shadow-md p-8 mb-8"
                 initial={{ opacity: 0, y: 20 }}
@@ -286,7 +299,7 @@ const ProjectDetails = () => {
                   <MapPin className="w-5 h-5 text-lion-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-500">Address</p>
-                    <p className="font-medium">{project.fullAddress || project.location}</p>
+                    <p className="font-medium">{project?.fullAddress || project?.location}</p>
                   </div>
                 </div>
                 
