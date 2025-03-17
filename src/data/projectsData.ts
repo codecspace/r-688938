@@ -1,4 +1,3 @@
-
 export interface ProjectDataType {
   id: string;
   title: string;

@@ -55,12 +55,10 @@ const FeaturedProperties = () => {
             <motion.div
               key={property.id}
               variants={itemVariants}
-              className="group cursor-pointer"
-              whileHover={{ y: -10 }}
-              transition={{ duration: 0.4 }}
+              className="group"
             >
               <Link to={`/project/${property.id}`}>
-                <div className="relative overflow-hidden rounded-xl shadow-xl h-[280px]">
+                <div className="relative overflow-hidden rounded-xl shadow-lg h-[300px]">
                   <div className="absolute top-3 left-3 z-20 flex gap-2">
                     {property.isNew && (
                       <Badge className="bg-purple-600 hover:bg-purple-700 text-white border-none py-1">
@@ -73,14 +71,12 @@ const FeaturedProperties = () => {
                       </Badge>
                     )}
                   </div>
-                  <div className="bg-gradient-to-t from-lion-black to-transparent absolute inset-0 z-10 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                   <motion.img 
-                    src={property.heroImage || property.images?.[0] || property.image} 
+                    src={property.heroImage || property.image} 
                     alt={property.title} 
-                    className="w-full h-full object-cover object-center"
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.8 }}
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                   />
+                  <div className="bg-gradient-to-t from-lion-black to-transparent absolute inset-0 z-10 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white">
                     <h4 className="text-xl font-semibold mb-1 group-hover:text-lion-gold transition-colors duration-300">{property.title}</h4>
                     <div className="flex items-center mt-1 text-gray-200">
@@ -101,14 +97,14 @@ const FeaturedProperties = () => {
           transition={{ duration: 0.7, delay: 0.3 }}
           viewport={{ once: true }}
         >
-          <Link to="/project/aipl-joy-district">
+          <Link to="/projects">
             <motion.button 
               className="px-8 py-3 bg-lion-gold hover:bg-lion-darkgold text-black font-medium rounded transition-colors shadow-md"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3 }}
             >
-              Load More Listings
+              View All Properties
             </motion.button>
           </Link>
         </motion.div>
