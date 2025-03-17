@@ -1,7 +1,7 @@
 
 import { Menu, Phone } from "lucide-react";
 import { Button } from "./ui/button";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {
   Sheet,
   SheetContent,
@@ -9,14 +9,12 @@ import {
 } from "./ui/sheet";
 
 const Navbar = () => {
-  const location = useLocation();
-
   // Function to scroll to a section or navigate to home page section
   const scrollToSection = (sectionId: string, event: React.MouseEvent) => {
     event.preventDefault();
     
     // If we're on the home page, scroll to the section
-    if (location.pathname === "/") {
+    if (window.location.pathname === "/") {
       const section = document.getElementById(sectionId);
       if (section) {
         section.scrollIntoView({ behavior: "smooth" });
@@ -28,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="absolute w-full z-40 bg-black/30 backdrop-blur-sm">
+    <nav className="absolute w-full z-40">
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="flex items-center justify-between h-24">
           <Link to="/" className="flex items-center">
@@ -46,10 +44,10 @@ const Navbar = () => {
             <a href="#about" onClick={(e) => scrollToSection("about", e)} className="text-white hover:text-lion-gold transition-colors">About Company</a>
             <a href="#projects" onClick={(e) => scrollToSection("projects", e)} className="text-white hover:text-lion-gold transition-colors">Projects</a>
             <a href="#contact" onClick={(e) => scrollToSection("contact", e)} className="text-white hover:text-lion-gold transition-colors">Contact Us</a>
-            <a href="tel:9773552334" className="flex items-center text-lion-gold hover:text-lion-lightgold transition-colors">
+            <div className="flex items-center text-lion-gold">
               <Phone className="w-4 h-4 mr-2" />
               <span>9773552334</span>
-            </a>
+            </div>
           </div>
 
           {/* Mobile Navigation */}
