@@ -1,14 +1,13 @@
-
 import { motion } from "framer-motion";
 import { projectsData } from "@/data/projectsData";
 
 const Projects = () => {
-  // Take the first 5 projects for display
   const displayProjects = projectsData.slice(0, 5);
 
   return (
-    <section id="projects" className="py-24 bg-gradient-to-b from-gray-50 to-white">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section id="projects" className="py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white/80 backdrop-blur-sm"></div>
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <motion.div
           className="text-center mb-16"
           initial={{ opacity: 0, y: 30 }}
@@ -16,11 +15,9 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-50px" }}
         >
-          {/* This is where you can edit the "Developers" text */}
-          <h2 className="text-sm uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-lion-gold to-lion-darkgold mb-2">
+          <h2 className="text-sm uppercase tracking-wider bg-clip-text text-transparent bg-gradient-to-r from-lion-gold to-lion-darkgold mb-2">
             Developers
           </h2>
-          {/* This is where you can edit the "Our Projects" text */}
           <h3 className="text-4xl font-display text-lion-black">
             Our Projects
           </h3>
@@ -33,21 +30,20 @@ const Projects = () => {
           />
         </motion.div>
 
-        {/* First Project: Birla Arika */}
         <motion.div
           key="project-1"
           initial={{ opacity: 0, y: 50 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0 }}
+          transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-100px" }}
-          className="flex flex-col md:flex-row gap-12 mb-28 items-center"
+          className="flex flex-col md:flex-row gap-12 mb-28 items-center group"
         >
-          <div className="w-full md:w-3/5 relative overflow-hidden rounded-xl shadow-xl group">
-            <div className="absolute inset-0 bg-gradient-to-t from-lion-black/50 to-transparent z-10 group-hover:from-lion-black/70 transition-all duration-500"></div>
+          <div className="w-full md:w-3/5 relative overflow-hidden rounded-2xl shadow-2xl group-hover:shadow-3xl transition-all duration-500">
+            <div className="absolute inset-0 bg-gradient-to-t from-lion-black/60 to-transparent z-10 group-hover:from-lion-black/80 transition-all duration-500"></div>
             <motion.img
               src={displayProjects[0].image}
               alt="Birla Arika"
-              className="w-full h-[450px] object-cover transition-transform duration-700"
+              className="w-full h-[550px] object-cover transition-transform duration-700 scale-100 group-hover:scale-110"
               whileHover={{ scale: 1.05 }}
               transition={{ duration: 0.8 }}
             />
@@ -62,7 +58,7 @@ const Projects = () => {
             </motion.div>
           </div>
 
-          <div className="w-full md:w-2/5 p-6 backdrop-blur-sm bg-white/50 rounded-xl shadow-sm">
+          <div className="w-full md:w-2/5 p-8 backdrop-blur-md bg-white/90 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-500">
             <motion.h4
               className="text-2xl font-display font-semibold mb-4 text-lion-black relative inline-block"
               initial={{ opacity: 0, x: 20 }}
@@ -92,7 +88,6 @@ const Projects = () => {
           </div>
         </motion.div>
 
-        {/* Second Project: The Palatial */}
         <motion.div
           key="project-2"
           initial={{ opacity: 0, y: 50 }}
@@ -151,7 +146,6 @@ const Projects = () => {
           </div>
         </motion.div>
 
-        {/* Third Project: The Palatial Sector 49 */}
         <motion.div
           key="project-3"
           initial={{ opacity: 0, y: 50 }}
@@ -210,7 +204,6 @@ const Projects = () => {
           </div>
         </motion.div>
 
-        {/* Fourth Project: AIPL Joy District */}
         <motion.div
           key="project-4"
           initial={{ opacity: 0, y: 50 }}
@@ -270,13 +263,13 @@ const Projects = () => {
         </motion.div>
 
         <motion.div
-          className="text-center mt-16 bg-white p-10 rounded-2xl shadow-md border border-gray-100 backdrop-blur-sm bg-white/80"
+          className="text-center mt-16 bg-white/80 p-10 rounded-2xl shadow-lg backdrop-blur-md border border-gray-100/50"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-600 italic max-w-3xl mx-auto font-light text-lg">
+          <p className="text-gray-600 italic max-w-3xl mx-auto font-light text-lg leading-relaxed">
             "Lionvest Realty Private. Ltd., we bring you the best living and
             commercial places, which ensure extraordinary quality, dominant place
             and high-value investments. Let us help you find the right property
