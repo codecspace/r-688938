@@ -23,7 +23,7 @@ export const projectsData: ProjectDataType[] = [
     image: "https://jagatestate.com/storage/projects/projects-photo/aipl-joy-district/ajd0.jpg",
     heroImage: "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
     fullAddress: "Sector 88, Gurugram, Haryana 122101, India",
-    description: "AIPL Joy District Sector 88 Gurgaon is a newly launched landmark commercial development project located strategically at Sector 88 of Gurgaon city.",
+    description: "Birla Arika Super-Paljari 4 bhk + staff residences are designed for those who desire grandeur. With 4200 – 4900 square feet to extended size, these houses offer a unique lifestyle of specificity and elegance set within a reputed and cool enclave.",
     longDescription: "AIPL Joy District Sector 88 Gurgaon is a newly launched landmark commercial development project located strategically at the prime area Sector 88 of Gurgaon city. The one-of-a-kind commercial project AIPL at Sector 88 Gurugram is known for its innovation and excellence in the commercial domain. The project offers retail shops and office spaces to the businesses, start-ups and offices to enable them to carry out their daily operations without any hassle.",
     isNew: true,
     isFeatured: true,
