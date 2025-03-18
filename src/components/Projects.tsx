@@ -1,7 +1,5 @@
 
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Link } from "react-router-dom";
 import { projectsData } from "@/data/projectsData";
 
 const Projects = () => {
@@ -35,89 +33,241 @@ const Projects = () => {
           />
         </motion.div>
 
-        {displayProjects.map((project, index) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: index * 0.1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            className={`flex flex-col ${
-              index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-            } gap-12 mb-28 items-center`}
-          >
-            <div className="w-full md:w-3/5 relative overflow-hidden rounded-xl shadow-xl group">
-              <div className="absolute inset-0 bg-gradient-to-t from-lion-black/50 to-transparent z-10 group-hover:from-lion-black/70 transition-all duration-500"></div>
-              {/* This is where you can edit the project images */}
-              <motion.img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-[450px] object-cover transition-transform duration-700"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.8 }}
+        {/* First Project: Birla Arika */}
+        <motion.div
+          key="project-1"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="flex flex-col md:flex-row gap-12 mb-28 items-center"
+        >
+          <div className="w-full md:w-3/5 relative overflow-hidden rounded-xl shadow-xl group">
+            <div className="absolute inset-0 bg-gradient-to-t from-lion-black/50 to-transparent z-10 group-hover:from-lion-black/70 transition-all duration-500"></div>
+            <motion.img
+              src={displayProjects[0].image}
+              alt="Birla Arika"
+              className="w-full h-[450px] object-cover transition-transform duration-700"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.8 }}
+            />
+            <motion.div 
+              className="absolute top-6 right-6 z-20"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <span className="bg-gradient-to-r from-lion-gold to-lion-darkgold text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase shadow-lg">
+                Featured
+              </span>
+            </motion.div>
+          </div>
+
+          <div className="w-full md:w-2/5 p-6 backdrop-blur-sm bg-white/50 rounded-xl shadow-sm">
+            <motion.h4
+              className="text-2xl font-display font-semibold mb-4 text-lion-black relative inline-block"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              Birla Arika
+              <motion.span
+                className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-lion-gold to-lion-darkgold"
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                transition={{ duration: 0.7, delay: 0.5 }}
+                viewport={{ once: true }}
               />
-              <motion.div 
-                className="absolute top-6 right-6 z-20"
-                whileHover={{ scale: 1.05 }}
-                transition={{ duration: 0.3 }}
-              >
-                <span className="bg-gradient-to-r from-lion-gold to-lion-darkgold text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase shadow-lg">
-                  Featured
-                </span>
-              </motion.div>
-            </div>
+            </motion.h4>
 
-            <div className="w-full md:w-2/5 p-6 backdrop-blur-sm bg-white/50 rounded-xl shadow-sm">
-              <motion.h4
-                className="text-2xl font-display font-semibold mb-4 text-lion-black relative inline-block"
-                initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.7, delay: 0.2 }}
-                viewport={{ once: true }}
-              >
-                {project.title}
-                <motion.span
-                  className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-lion-gold to-lion-darkgold"
-                  initial={{ width: 0 }}
-                  whileInView={{ width: "100%" }}
-                  transition={{ duration: 0.7, delay: 0.5 }}
-                  viewport={{ once: true }}
-                />
-              </motion.h4>
+            <motion.p
+              className="text-gray-600 mb-6 leading-relaxed"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              Birla Arika Super-Paljari 4 bhk + staff residences are designed for those who desire grandeur. With 4200 – 4900 square feet to extended size, these houses offer a unique lifestyle of specificity and elegance set within a reputed and cool enclave.
+            </motion.p>
+          </div>
+        </motion.div>
 
-              <motion.p
-                className="text-gray-600 mb-6 leading-relaxed"
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.3 }}
-                viewport={{ once: true }}
-              >
-                {project.description}
-              </motion.p>
+        {/* Second Project: The Palatial */}
+        <motion.div
+          key="project-2"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="flex flex-col md:flex-row-reverse gap-12 mb-28 items-center"
+        >
+          <div className="w-full md:w-3/5 relative overflow-hidden rounded-xl shadow-xl group">
+            <div className="absolute inset-0 bg-gradient-to-t from-lion-black/50 to-transparent z-10 group-hover:from-lion-black/70 transition-all duration-500"></div>
+            <motion.img
+              src={displayProjects[1].image}
+              alt="The Palatial"
+              className="w-full h-[450px] object-cover transition-transform duration-700"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.8 }}
+            />
+            <motion.div 
+              className="absolute top-6 right-6 z-20"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <span className="bg-gradient-to-r from-lion-gold to-lion-darkgold text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase shadow-lg">
+                Featured
+              </span>
+            </motion.div>
+          </div>
 
-              <motion.div
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: 1 }}
-                transition={{ duration: 0.7, delay: 0.4 }}
+          <div className="w-full md:w-2/5 p-6 backdrop-blur-sm bg-white/50 rounded-xl shadow-sm">
+            <motion.h4
+              className="text-2xl font-display font-semibold mb-4 text-lion-black relative inline-block"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              The Palatial
+              <motion.span
+                className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-lion-gold to-lion-darkgold"
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                transition={{ duration: 0.7, delay: 0.5 }}
                 viewport={{ once: true }}
-                className="mt-4"
-              >
-                <Link
-                  to={`/project/${project.id}`}
-                  className="inline-flex items-center bg-gradient-to-r from-lion-gold to-lion-darkgold hover:from-lion-darkgold hover:to-lion-gold text-black px-6 py-3 rounded-md font-medium transition-colors group shadow-md"
-                >
-                  <motion.span
-                    whileHover={{ x: 5 }}
-                    className="flex items-center"
-                  >
-                    View Details
-                    <ArrowRight className="h-4 w-4 ml-2 transition-transform group-hover:translate-x-1" />
-                  </motion.span>
-                </Link>
-              </motion.div>
-            </div>
-          </motion.div>
-        ))}
+              />
+            </motion.h4>
+
+            <motion.p
+              className="text-gray-600 mb-6 leading-relaxed"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              Located in Sector 49, the Golf Course presents an artistic and huge 3 and 4 BHK apartments with the extension roads, Gurugram, Godrej Aristocrat Utility areas. This work of craftsmanship has a triple-hit entrance lobby, an 18-hole golf course, landscaped terrace, a swimming pool, a luxury clubhouse, and more-which reduces the lifestyle of sophistication and indulgence.
+            </motion.p>
+          </div>
+        </motion.div>
+
+        {/* Third Project: The Palatial Sector 49 */}
+        <motion.div
+          key="project-3"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="flex flex-col md:flex-row gap-12 mb-28 items-center"
+        >
+          <div className="w-full md:w-3/5 relative overflow-hidden rounded-xl shadow-xl group">
+            <div className="absolute inset-0 bg-gradient-to-t from-lion-black/50 to-transparent z-10 group-hover:from-lion-black/70 transition-all duration-500"></div>
+            <motion.img
+              src={displayProjects[2].image}
+              alt="The Palatial Sector 49"
+              className="w-full h-[450px] object-cover transition-transform duration-700"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.8 }}
+            />
+            <motion.div 
+              className="absolute top-6 right-6 z-20"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <span className="bg-gradient-to-r from-lion-gold to-lion-darkgold text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase shadow-lg">
+                Featured
+              </span>
+            </motion.div>
+          </div>
+
+          <div className="w-full md:w-2/5 p-6 backdrop-blur-sm bg-white/50 rounded-xl shadow-sm">
+            <motion.h4
+              className="text-2xl font-display font-semibold mb-4 text-lion-black relative inline-block"
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              The Palatial Sector 49
+              <motion.span
+                className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-lion-gold to-lion-darkgold"
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                transition={{ duration: 0.7, delay: 0.5 }}
+                viewport={{ once: true }}
+              />
+            </motion.h4>
+
+            <motion.p
+              className="text-gray-600 mb-6 leading-relaxed"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              Located in Sector 49, the Golf Course presents an artistic and huge 3 and 4 BHK apartments with the extension roads, Gurugram, Godrej Aristocrat Utility areas. This work of craftsmanship has a triple-hit entrance lobby, an 18-hole golf course, landscaped terrace, a swimming pool, a luxury clubhouse, and more-which reduces the lifestyle of sophistication and indulgence.
+            </motion.p>
+          </div>
+        </motion.div>
+
+        {/* Fourth Project: AIPL Joy District */}
+        <motion.div
+          key="project-4"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.3 }}
+          viewport={{ once: true, margin: "-100px" }}
+          className="flex flex-col md:flex-row-reverse gap-12 mb-28 items-center"
+        >
+          <div className="w-full md:w-3/5 relative overflow-hidden rounded-xl shadow-xl group">
+            <div className="absolute inset-0 bg-gradient-to-t from-lion-black/50 to-transparent z-10 group-hover:from-lion-black/70 transition-all duration-500"></div>
+            <motion.img
+              src={displayProjects[3].image}
+              alt="AIPL Joy District"
+              className="w-full h-[450px] object-cover transition-transform duration-700"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.8 }}
+            />
+            <motion.div 
+              className="absolute top-6 right-6 z-20"
+              whileHover={{ scale: 1.05 }}
+              transition={{ duration: 0.3 }}
+            >
+              <span className="bg-gradient-to-r from-lion-gold to-lion-darkgold text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase shadow-lg">
+                Featured
+              </span>
+            </motion.div>
+          </div>
+
+          <div className="w-full md:w-2/5 p-6 backdrop-blur-sm bg-white/50 rounded-xl shadow-sm">
+            <motion.h4
+              className="text-2xl font-display font-semibold mb-4 text-lion-black relative inline-block"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              viewport={{ once: true }}
+            >
+              AIPL Joy District
+              <motion.span
+                className="absolute bottom-0 left-0 h-0.5 bg-gradient-to-r from-lion-gold to-lion-darkgold"
+                initial={{ width: 0 }}
+                whileInView={{ width: "100%" }}
+                transition={{ duration: 0.7, delay: 0.5 }}
+                viewport={{ once: true }}
+              />
+            </motion.h4>
+
+            <motion.p
+              className="text-gray-600 mb-6 leading-relaxed"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              viewport={{ once: true }}
+            >
+              AIPL Joy Square (Sector 62A) and AIPL Joy District (Sector 88) redefine commercial excellence with double-hit faces for branding, expander basements, dedicated escalators and lifts and lifts and a reputed ski garden at LID B level. These projects provide a perfect environment for retail, F&B and corporate development, making them a major investment site.
+            </motion.p>
+          </div>
+        </motion.div>
 
         <motion.div
           className="text-center mt-16 bg-white p-10 rounded-2xl shadow-md border border-gray-100 backdrop-blur-sm bg-white/80"
