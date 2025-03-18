@@ -135,8 +135,11 @@ export const projectsData: ProjectDataType[] = [
     ]
   },
   {
-    id: "aipl-joy-square",
-    title: "AIPL Joy District, Gurgaon",
+   
+
+
+ id: "aipl-joy-square",
+    title: "TEST2",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/V3ZYKie.jpg",
     heroImage: "https://i.postimg.cc/MHQmHnpD/image.png",
@@ -170,7 +173,7 @@ export const projectsData: ProjectDataType[] = [
     
     
     id: "birla-arika",
-    title: "TEST",
+    title: "Birla Arika Sector 31, Gurgaon",
     location: "Sector 31, Gurgaon",
     image: "https://i.postimg.cc/NFWpPcFN/image.png",
     heroImage: "https://i.postimg.cc/NFWpPcFN/image.png",
