@@ -16,7 +16,7 @@ const PropertyCard = ({ id, image, title, location, price }: PropertyCardProps) 
     <motion.div
       whileHover={{ y: -8 }}
       transition={{ duration: 0.4, ease: "easeOut" }}
-      className="group overflow-hidden rounded-xl shadow-xl h-full"
+      className="group overflow-hidden rounded-xl shadow-xl h-full backdrop-blur-sm"
     >
       <Link to={id ? `/project/${id}` : "#"} className="block h-full">
         <div className="relative aspect-[3/4] h-full overflow-hidden">
@@ -25,16 +25,17 @@ const PropertyCard = ({ id, image, title, location, price }: PropertyCardProps) 
             alt={title}
             className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-70 group-hover:opacity-80 transition-all duration-500"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-70 group-hover:opacity-90 transition-all duration-500"></div>
           
-          <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
+          {/* Modern glass effect panel at bottom */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 text-white backdrop-blur-sm bg-black/20">
             <h3 className="text-xl font-medium mb-2 group-hover:text-lion-gold transition-colors duration-300">{title}</h3>
             <div className="flex items-center mt-2 text-gray-200">
               <MapPin className="w-4 h-4 mr-2" />
               <span className="text-sm">{location}</span>
             </div>
             {price && (
-              <div className="mt-3 bg-lion-gold/90 text-black font-medium px-4 py-1.5 rounded-full inline-block text-sm">
+              <div className="mt-3 bg-gradient-to-r from-lion-gold to-lion-darkgold text-black font-medium px-4 py-1.5 rounded-full inline-block text-sm shadow-lg">
                 {price}
               </div>
             )}
