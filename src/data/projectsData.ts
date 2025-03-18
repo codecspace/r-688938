@@ -170,7 +170,7 @@ export const projectsData: ProjectDataType[] = [
     
     
     id: "birla-arika",
-    title: "AIPL Joy District Sector 88 Gurgaon",
+    title: "TEST",
     location: "Sector 31, Gurgaon",
     image: "https://i.postimg.cc/NFWpPcFN/image.png",
     heroImage: "https://i.postimg.cc/NFWpPcFN/image.png",
