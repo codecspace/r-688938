@@ -9,7 +9,7 @@ const Projects = () => {
   const displayProjects = projectsData.slice(0, 5);
 
   return (
-    <section id="projects" className="py-20 bg-gray-50">
+    <section id="projects" className="py-24 bg-gray-50">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div
           className="text-center mb-16"
@@ -18,9 +18,11 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-50px" }}
         >
+          {/* This is where you can edit the "Developers" text */}
           <h2 className="text-sm uppercase tracking-wider text-lion-gold mb-2">
             Developers
           </h2>
+          {/* This is where you can edit the "Our Projects" text */}
           <h3 className="text-4xl font-display text-lion-black">
             Our Projects
           </h3>
@@ -35,20 +37,21 @@ const Projects = () => {
             viewport={{ once: true, margin: "-100px" }}
             className={`flex flex-col ${
               index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-            } gap-8 mb-20 items-center`}
+            } gap-12 mb-28 items-center`}
           >
-            <div className="w-full md:w-1/2 relative overflow-hidden rounded-xl shadow-xl group">
-              <div className="absolute inset-0 bg-lion-black/30 z-10 group-hover:bg-lion-black/40 transition-all duration-500"></div>
+            <div className="w-full md:w-3/5 relative overflow-hidden rounded-xl shadow-xl group">
+              <div className="absolute inset-0 bg-lion-black/20 z-10 group-hover:bg-lion-black/30 transition-all duration-500"></div>
+              {/* This is where you can edit the project images */}
               <motion.img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-[400px] object-cover transition-transform duration-700 ease-in-out"
+                className="w-full h-[450px] object-cover transition-transform duration-700"
                 whileHover={{ scale: 1.05 }}
                 transition={{ duration: 0.8 }}
               />
-              <div className="absolute top-4 right-4 z-20">
+              <div className="absolute top-6 right-6 z-20">
                 <motion.span
-                  className="bg-lion-gold text-black text-xs font-bold px-3 py-1 rounded-full tracking-wider uppercase"
+                  className="bg-lion-gold/90 text-black text-xs font-bold px-4 py-1.5 rounded-full tracking-wider uppercase"
                   whileHover={{ scale: 1.05 }}
                   transition={{ duration: 0.3 }}
                 >
@@ -57,9 +60,9 @@ const Projects = () => {
               </div>
             </div>
 
-            <div className="w-full md:w-1/2 p-4">
+            <div className="w-full md:w-2/5 p-6">
               <motion.h4
-                className="text-2xl font-semibold mb-4 text-lion-black relative inline-block"
+                className="text-2xl font-display font-semibold mb-4 text-lion-black relative inline-block"
                 initial={{ opacity: 0, x: index % 2 === 0 ? 20 : -20 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.7, delay: 0.2 }}
@@ -90,10 +93,11 @@ const Projects = () => {
                 whileInView={{ opacity: 1 }}
                 transition={{ duration: 0.7, delay: 0.4 }}
                 viewport={{ once: true }}
+                className="mt-4"
               >
                 <Link
                   to={`/project/${project.id}`}
-                  className="inline-flex items-center text-lion-gold hover:text-lion-darkgold font-medium transition-colors group"
+                  className="inline-flex items-center bg-lion-gold hover:bg-lion-darkgold text-black px-6 py-3 rounded-md font-medium transition-colors group"
                 >
                   <motion.span
                     whileHover={{ x: 5 }}
@@ -109,17 +113,17 @@ const Projects = () => {
         ))}
 
         <motion.div
-          className="text-center mt-12 bg-white p-8 rounded-xl shadow-md border border-gray-100"
+          className="text-center mt-16 bg-white p-10 rounded-2xl shadow-md border border-gray-100"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          <p className="text-gray-600 italic">
-            Lionvest Realty Private. Ltd., we bring you the best living and
+          <p className="text-gray-600 italic max-w-3xl mx-auto font-light text-lg">
+            "Lionvest Realty Private. Ltd., we bring you the best living and
             commercial places, which ensure extraordinary quality, dominant place
             and high-value investments. Let us help you find the right property
-            that matches your aspirations.
+            that matches your aspirations."
           </p>
         </motion.div>
       </div>
