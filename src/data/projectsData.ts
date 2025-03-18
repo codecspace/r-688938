@@ -30,7 +30,7 @@ export const projectsData: ProjectDataType[] = [
     isFeatured: true,
     images: [
       "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
-      "https://i.imgur.com/Fy6UufV.png"
+      "https://i.imgur.com/qPI8uVd.png"
     ],
     specifications: {
       overview: [
