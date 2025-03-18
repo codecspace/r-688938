@@ -1,4 +1,4 @@
-
+// TypeScript interface for ProjectDataType
 export interface ProjectDataType {
   id: string;
   title: string;
@@ -15,7 +15,13 @@ export interface ProjectDataType {
   specifications?: Record<string, any>;
 }
 
-export const projectsData: ProjectDataType[] = [
+// Function to deep clone an object
+function deepClone(obj: any): any {
+  return JSON.parse(JSON.stringify(obj));
+}
+
+// Original projectsData array
+const projectsData: ProjectDataType[] = [
   {
     id: "aipl-joy-district",
     title: "Birla Arika",
@@ -208,3 +214,6 @@ export const projectsData: ProjectDataType[] = [
     ]
   }
 ];
+
+// Export the independent version of projectsData
+export const projectsDataIndependent: ProjectDataType[] = projectsData.map(project => deepClone(project));
