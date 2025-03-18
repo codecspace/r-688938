@@ -18,9 +18,9 @@ export interface ProjectDataType {
 export const projectsData: ProjectDataType[] = [
   {
     id: "aipl-joy-district",
-    title: "AIPL Joy District Sector 88 Gurgaon",
+    title: "Birla Arika",
     location: "Sector - 88, Gurugram",
-    image: "https://jagatestate.com/storage/projects/projects-photo/aipl-joy-district/ajd0.jpg",
+    image: "https://i.imgur.com/VIVNtTM.png",
     heroImage: "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
     fullAddress: "Sector 88, Gurugram, Haryana 122101, India",
     description: "Birla Arika Super-Paljari 4 bhk + staff residences are designed for those who desire grandeur. With 4200 – 4900 square feet to extended size, these houses offer a unique lifestyle of specificity and elegance set within a reputed and cool enclave.",
@@ -29,7 +29,7 @@ export const projectsData: ProjectDataType[] = [
     isFeatured: true,
     images: [
       "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
-      "https://i.imgur.com/VIVNtTM.jpg"
+      "https://i.imgur.com/qPI8uVd.png"
     ],
     specifications: {
       overview: [
@@ -56,12 +56,12 @@ export const projectsData: ProjectDataType[] = [
   },
   {
     id: "godrej-aristocrat",
-    title: "Godrej Aristocrat Gurgaon",
+    title: "The Palatial Sector 49 Gurugram",
     location: "Sector - 49, Gurugram",
     image: "https://i.imgur.com/Tm5t9pp.jpg",
     heroImage: "https://i.postimg.cc/vBpHhk8h/image.png",
     fullAddress: "Sector 49, Gurugram, Haryana 122018, India",
-    description: "Soon to be launched Godrej Aristocrat Gurgaon development has generated quite a stir.",
+    description: "Located in Sector 49, the Golf Course presents an artistic and huge 3 and 4 BHK apartments with the extension roads, Gurugram, Godrej Aristocrat Utility areas. This work of craftsmanship has a triple-hit entrance lobby, an 18-hole golf course, landscaped terrace, a swimming pool, a luxury clubhouse, and more-which reduces the lifestyle of sophistication and indulgence.",
     longDescription: "Soon to be launched Godrej Aristocrat Gurgaon development has generated quite a stir. There are several reasons to choose Godrej Aristocrat Gurgaon that go into making this fabulous project so well liked. Set in sector 49 Gurgaon, the project offers close proximity to a variety of important destinations like school, college, bus stand, hospital, metro station and more which makes living here truly enjoyable.",
     isNew: true,
     isFeatured: true,
@@ -114,12 +114,12 @@ export const projectsData: ProjectDataType[] = [
   },
   {
     id: "hero-homes",
-    title: "HERO HOMES Sector – 104, Gurugram",
+    title: "The Palatial Sector 104 Gurugram",
     location: "Sector - 104, Gurugram",
     image: "https://i.imgur.com/1qjWa6d.jpg",
     heroImage: "https://i.postimg.cc/dVmnGZmN/image.png",
     fullAddress: "Sector 104, Gurugram, Haryana 122001, India",
-    description: "Hero Homes Gurgaon Sector 104 is a residential project which is coming up with 4 BHK apartments in Gurgaon.",
+    description: "Sector 104, settled in Sector 104, is a premium residential project by Gurgaon, Hero Realty, extending with five high-growing towers in 11 acres. While offering 3 and 4 BHK apartments, this development is designed for modern urban families and professionals, which basically combines luxury and convenience in a rich place.",
     longDescription: "Hero Homes Gurgaon Sector 104 is a residential project which is coming up with 4 BHK apartments in Gurgaon. This residential building will be developed at Hero Realty Group at Gurgaon Sector 104. Hero Homes new tower will have 4 BHK apartments for sale in Gurgaon. If you see, there are so many upcoming real estate projects in Gurgaon. And if you truly wish to live in a beautiful home that perfectly suits your style and provides a luxury living experience, then buy Hero Homes Gurgaon that will be the right choice and a dream home for you. There are several reasons on why Hero Homes 4 BHK in Gurgaon apartments are the best new pre launch project in Gurgaon. This project the most discussed properties in the real estate market in Gurgaon. And the reason is Hero Realty has achieved expertise in the real estate sector by constantly providing the homebuyers a house that they would love to have.",
     isNew: true,
     isFeatured: true,
@@ -141,7 +141,7 @@ export const projectsData: ProjectDataType[] = [
     image: "https://i.imgur.com/V3ZYKie.jpg",
     heroImage: "https://i.postimg.cc/MHQmHnpD/image.png",
     fullAddress: "Sector 63A, Gurugram, Haryana 122001, India",
-    description: "Experience the epitome of integrated retail and commercial development at AIPL Joy Square, Gurugram, India.",
+    description: "AIPL Joy Square (Sector 62A) and AIPL Joy District (Sector 88) redefine commercial excellence with double-hit faces for branding, expander basements, dedicated escalators and lifts and lifts and a reputed ski garden at LID B level. These projects provide a perfect environment for retail, F&B and corporate development, making them a major investment site.Lionvest Realty Private. Ltd., we bring you the best living and commercial places, which ensure extraordinary quality, dominant place and high-value investments. Let us help you find the right property that matches your aspirations.",
     longDescription: "Experience the epitome of integrated retail and commercial development at AIPL Joy Square, Gurugram, India. Crafted by DP Architects, this visionary project embodies the essence of a bustling high street marketplace, offering a vibrant environment with shopping outlets, supermarkets, diverse dining options, and serviced apartments in Gurugram. Strategically located on Golf Course extn. road in sector 63A, this project boasts seamless connectivity to the rest of the city, making it a top choice among upcoming commercial projects in Gurugram. Spanning 2.84 acres and featuring 10 floors (G+9) with ample basement and surface parking, AIPL Joy Square promises a dynamic experience. This project redefines high-street retail in Gurugram, setting new standards under AIPL's expertise.",
     isNew: true,
     isFeatured: true,
