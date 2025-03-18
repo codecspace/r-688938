@@ -1,5 +1,6 @@
-// TypeScript interface for ProjectDataType (id removed)
+
 export interface ProjectDataType {
+  id: string;
   title: string;
   location: string;
   image: string;
@@ -14,14 +15,9 @@ export interface ProjectDataType {
   specifications?: Record<string, any>;
 }
 
-// Function to deep clone an object
-function deepClone(obj: any): any {
-  return JSON.parse(JSON.stringify(obj));
-}
-
-// Original projectsData array without ids
-const projectsData: ProjectDataType[] = [
+export const projectsData: ProjectDataType[] = [
   {
+    id: "aipl-joy-district",
     title: "Birla Arika",
     location: "Sector - 88, Gurugram",
     image: "https://i.imgur.com/VIVNtTM.png",
@@ -59,6 +55,7 @@ const projectsData: ProjectDataType[] = [
     ]
   },
   {
+    id: "godrej-aristocrat",
     title: "The Palatial Sector 49 Gurugram",
     location: "Sector - 49, Gurugram",
     image: "https://i.imgur.com/Tm5t9pp.jpg",
@@ -116,6 +113,7 @@ const projectsData: ProjectDataType[] = [
     ]
   },
   {
+    id: "hero-homes",
     title: "The Palatial Sector 104 Gurugram",
     location: "Sector - 104, Gurugram",
     image: "https://i.imgur.com/1qjWa6d.jpg",
@@ -137,12 +135,13 @@ const projectsData: ProjectDataType[] = [
     ]
   },
   {
+    id: "aipl-joy-square",
     title: "AIPL Joy District, Gurgaon",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/V3ZYKie.jpg",
     heroImage: "https://i.postimg.cc/MHQmHnpD/image.png",
     fullAddress: "Sector 63A, Gurugram, Haryana 122001, India",
-    description: "AIPL Joy Square (Sector 62A) and AIPL Joy District (Sector 88) redefine commercial excellence with double-hit faces for branding, expander basements, dedicated escalators and lifts and a reputed ski garden at LID B level. These projects provide a perfect environment for retail, F&B and corporate development, making them a major investment site. Lionvest Realty Private. Ltd., we bring you the best living and commercial places, which ensure extraordinary quality, dominant place and high-value investments. Let us help you find the right property that matches your aspirations.",
+    description: "AIPL Joy Square (Sector 62A) and AIPL Joy District (Sector 88) redefine commercial excellence with double-hit faces for branding, expander basements, dedicated escalators and lifts and lifts and a reputed ski garden at LID B level. These projects provide a perfect environment for retail, F&B and corporate development, making them a major investment site.Lionvest Realty Private. Ltd., we bring you the best living and commercial places, which ensure extraordinary quality, dominant place and high-value investments. Let us help you find the right property that matches your aspirations.",
     longDescription: "Experience the epitome of integrated retail and commercial development at AIPL Joy Square, Gurugram, India. Crafted by DP Architects, this visionary project embodies the essence of a bustling high street marketplace, offering a vibrant environment with shopping outlets, supermarkets, diverse dining options, and serviced apartments in Gurugram. Strategically located on Golf Course extn. road in sector 63A, this project boasts seamless connectivity to the rest of the city, making it a top choice among upcoming commercial projects in Gurugram. Spanning 2.84 acres and featuring 10 floors (G+9) with ample basement and surface parking, AIPL Joy Square promises a dynamic experience. This project redefines high-street retail in Gurugram, setting new standards under AIPL's expertise.",
     isNew: true,
     isFeatured: true,
@@ -167,6 +166,7 @@ const projectsData: ProjectDataType[] = [
     ]
   },
   {
+    id: "birla-arika",
     title: "Birla Arika Sector 31, Gurgaon",
     location: "Sector 31, Gurgaon",
     image: "https://i.postimg.cc/NFWpPcFN/image.png",
@@ -186,6 +186,7 @@ const projectsData: ProjectDataType[] = [
     ]
   },
   {
+    id: "tarc-ishva",
     title: "Tarc Ishva – Sector – 63A, Gurugram",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/YQSL3gr.jpg",
@@ -207,6 +208,3 @@ const projectsData: ProjectDataType[] = [
     ]
   }
 ];
-
-// Export the independent version of projectsData
-export const projectsDataIndependent: ProjectDataType[] = projectsData.map(project => deepClone(project));
