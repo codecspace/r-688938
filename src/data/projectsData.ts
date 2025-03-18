@@ -20,7 +20,7 @@ export const projectsData: ProjectDataType[] = [
     id: "aipl-joy-district",
     title: "AIPL Joy District Sector 88 Gurgaon",
     location: "Sector - 88, Gurugram",
-    image: "https://i.imgur.com/VIVNtTM.jpg",
+    image: "https://jagatestate.com/storage/projects/projects-photo/aipl-joy-district/ajd0.jpg",
     heroImage: "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
     fullAddress: "Sector 88, Gurugram, Haryana 122101, India",
     description: "AIPL Joy District Sector 88 Gurgaon is a newly launched landmark commercial development project located strategically at Sector 88 of Gurgaon city.",
