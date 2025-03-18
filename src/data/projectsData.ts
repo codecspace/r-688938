@@ -1,7 +1,7 @@
-
 export interface ProjectDataType {
   id: string;
-  title: string;
+  propertyName: string;  // Changed from 'title'
+  developerName: string; // New field
   location: string;
   image: string;
   description: string;
@@ -18,7 +18,8 @@ export interface ProjectDataType {
 export const projectsData: ProjectDataType[] = [
   {
     id: "aipl-joy-district",
-    title: "Birla Arika",
+    propertyName: "AIPL Joy District Sector 88 Gurgaon",
+    developerName: "AIPL",
     location: "Sector - 88, Gurugram",
     image: "https://i.imgur.com/VIVNtTM.png",
     heroImage: "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
@@ -29,7 +30,7 @@ export const projectsData: ProjectDataType[] = [
     isFeatured: true,
     images: [
       "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
-      "https://i.imgur.com/qPI8uVd.png"
+      "https://i.imgur.com/Fy6UufV.png"
     ],
     specifications: {
       overview: [
@@ -56,7 +57,8 @@ export const projectsData: ProjectDataType[] = [
   },
   {
     id: "godrej-aristocrat",
-    title: "The Palatial Sector 49 Gurugram",
+    propertyName: "Godrej Aristocrat Gurgaon",
+    developerName: "Godrej",
     location: "Sector - 49, Gurugram",
     image: "https://i.imgur.com/Tm5t9pp.jpg",
     heroImage: "https://i.postimg.cc/vBpHhk8h/image.png",
@@ -114,7 +116,8 @@ export const projectsData: ProjectDataType[] = [
   },
   {
     id: "hero-homes",
-    title: "The Palatial Sector 104 Gurugram",
+    propertyName: "HERO HOMES Sector 104 Gurugram",
+    developerName: "Hero Realty",
     location: "Sector - 104, Gurugram",
     image: "https://i.imgur.com/1qjWa6d.jpg",
     heroImage: "https://i.postimg.cc/dVmnGZmN/image.png",
@@ -135,11 +138,9 @@ export const projectsData: ProjectDataType[] = [
     ]
   },
   {
-   
-
-
- id: "aipl-joy-square",
-    title: "TEST2",
+    id: "aipl-joy-square",
+    propertyName: "AIPL Joy Square Sector 63A Gurgaon",
+    developerName: "AIPL",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/V3ZYKie.jpg",
     heroImage: "https://i.postimg.cc/MHQmHnpD/image.png",
@@ -169,11 +170,9 @@ export const projectsData: ProjectDataType[] = [
     ]
   },
   {
-   
-    
-    
     id: "birla-arika",
-    title: "Birla Arika Sector 31, Gurgaon",
+    propertyName: "Birla Arika Sector 31 Gurgaon",
+    developerName: "Birla Estates",
     location: "Sector 31, Gurgaon",
     image: "https://i.postimg.cc/NFWpPcFN/image.png",
     heroImage: "https://i.postimg.cc/NFWpPcFN/image.png",
@@ -193,7 +192,8 @@ export const projectsData: ProjectDataType[] = [
   },
   {
     id: "tarc-ishva",
-    title: "Tarc Ishva – Sector – 63A, Gurugram",
+    propertyName: "Tarc Ishva Sector 63A Gurugram",
+    developerName: "TARC",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/YQSL3gr.jpg",
     heroImage: "https://i.postimg.cc/rF59LRby/image.png",
