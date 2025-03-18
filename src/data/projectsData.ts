@@ -136,7 +136,7 @@ export const projectsData: ProjectDataType[] = [
   },
   {
     id: "aipl-joy-square",
-    title: "AIPL Joy Square Sector 63A, Gurgaon",
+    title: "AIPL Joy District, Gurgaon",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/V3ZYKie.jpg",
     heroImage: "https://i.postimg.cc/MHQmHnpD/image.png",
