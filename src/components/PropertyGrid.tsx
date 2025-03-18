@@ -5,6 +5,7 @@ import { projectsData } from "@/data/projectsData";
 import PropertyCard from "./PropertyCard";
 
 const PropertyGrid = () => {
+  // Take the first 4 projects for display
   const properties = projectsData.slice(0, 4).map(project => ({
     id: project.id,
     image: project.heroImage || project.image,
@@ -14,8 +15,8 @@ const PropertyGrid = () => {
   }));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 relative">
+    <div className="max-w-6xl mx-auto px-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
         {properties.map((property, index) => (
           <motion.div
             key={index}
@@ -23,7 +24,6 @@ const PropertyGrid = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: index * 0.1 }}
-            className="group relative overflow-hidden rounded-2xl shadow-xl hover:shadow-2xl transition-all duration-500"
           >
             <PropertyCard {...property} />
           </motion.div>
