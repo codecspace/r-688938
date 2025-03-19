@@ -97,13 +97,13 @@ const FeaturedProperties = () => {
                   <div className="bg-gradient-to-t from-lion-black to-transparent absolute inset-0 z-10 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                   <motion.img 
                     src={property.heroImage || property.images?.[0] || property.image} 
-                    alt={property.title} 
+                    alt={property.propertyName} 
                     className="w-full h-full object-cover object-center"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.8 }}
                   />
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white backdrop-blur-sm bg-black/20">
-                    <h4 className="text-xl font-semibold mb-1 group-hover:text-lion-gold transition-colors duration-300">{property.title}</h4>
+                    <h4 className="text-xl font-semibold mb-1 group-hover:text-lion-gold transition-colors duration-300">{property.propertyName}</h4>
                     <div className="flex items-center mt-1 text-gray-200">
                       <MapPin className="w-4 h-4 mr-1" />
                       <span className="text-sm">{property.location}</span>

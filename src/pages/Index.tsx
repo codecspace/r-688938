@@ -47,14 +47,14 @@ const Index = () => {
     // Set document background to black during transition to prevent white flash
     document.body.style.backgroundColor = '#000';
     
-    // Loading time of 5 seconds as requested
+    // Reduced loading time to 2.5 seconds for a quicker experience
     const timer = setTimeout(() => {
       setIsLoading(false);
       // Reset background color after content is loaded
       setTimeout(() => {
         document.body.style.backgroundColor = '';
-      }, 500);
-    }, 5000);
+      }, 300);
+    }, 2500); // Reduced from 5000ms to 2500ms
     
     return () => clearTimeout(timer);
   }, []);
@@ -71,7 +71,7 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 1.5, ease: "easeInOut" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }} // Faster transition
           >
             <Navbar />
             <Hero />

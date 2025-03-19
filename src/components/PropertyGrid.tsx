@@ -8,7 +8,7 @@ const PropertyGrid = () => {
   const properties = projectsData.slice(0, 4).map(project => ({
     id: project.id,
     image: project.heroImage || project.image,
-    title: project.title,
+    title: project.propertyName,
     location: project.location,
     description: project.description,
   }));
