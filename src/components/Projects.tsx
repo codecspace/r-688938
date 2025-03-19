@@ -1,11 +1,46 @@
 
 import { motion } from "framer-motion";
-import { projectsData } from "@/data/projectsData";
+
+// Define a new array with updated project data that matches the UI in the screenshot
+const projectsData = [
+  {
+    id: "tarc-ishva",
+    developerName: "TARC ISHVĀ",
+    location: "63A, Gurugram",
+    image: "https://i.imgur.com/qtB7wnT.png",
+    description: "TARC Ishva provides 3 and 4 BHK residences starting from 2850 square feet. These houses mix contemporary elegance with a huge layout, making them an ideal choice for those who appreciate the sophisticated life.",
+  },
+  {
+    id: "birla-arika",
+    developerName: "BIRLA ARIKA",
+    location: "GURUGRAM",
+    image: "https://i.imgur.com/VIVNtTM.png",
+    description: "Birla Arika Super-Paljari 4 bhk + staff residences are designed for those who desire grandeur. With 4200 – 4900 square feet to extended size, these houses offer a unique lifestyle of specificity and elegance set within a reputed and cool enclave.",
+  },
+  {
+    id: "godrej-aristocrat",
+    developerName: "THE PALJARI",
+    location: "By hero homes",
+    image: "https://i.imgur.com/Tm5t9pp.jpg",
+    description: "Located in Sector 49, the Golf Course presents an artistic and huge 3 and 4 BHK apartments with the extension roads, Gurugram, Godrej Aristocrat Utility areas. This work of craftsmanship has a triple-hit entrance lobby, an 18-hole golf course, landscaped terrace, a swimming pool, a luxury clubhouse, and more-which reduces the lifestyle of sophistication and indulgence.",
+  },
+  {
+    id: "hero-homes",
+    developerName: "THE PALJARI",
+    location: "By hero homes",
+    image: "https://i.imgur.com/1qjWa6d.jpg",
+    description: "Sector 104, settled in Sector 104, is a premium residential project by Gurgaon, Hero Realty, extending with five high-growing towers in 11 acres. While offering 3 and 4 BHK apartments, this development is designed for modern urban families and professionals, which basically combines luxury and convenience in a rich place.",
+  },
+  {
+    id: "aipl-joy-district",
+    developerName: "AIPL JOY DISTRICT",
+    location: "Gurugram",
+    image: "https://i.imgur.com/V3ZYKie.jpg",
+    description: "AIPL Joy Square (Sector 62A) and AIPL Joy District (Sector 88) redefine commercial excellence with double-hit faces for branding, expander basements, dedicated escalators and lifts and lifts and a reputed ski garden at LID B level. These projects provide a perfect environment for retail, F&B and corporate development, making them a major investment site.",
+  }
+];
 
 const Projects = () => {
-  // Take the first 4 projects for display
-  const displayProjects = projectsData.slice(0, 4);
-
   return (
     <section id="projects" className="py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="container mx-auto px-4 max-w-6xl">
@@ -32,7 +67,7 @@ const Projects = () => {
         </motion.div>
 
         <div className="space-y-8">
-          {displayProjects.map((project, index) => (
+          {projectsData.map((project, index) => (
             <motion.div
               key={project.id}
               initial={{ opacity: 0, y: 50 }}
