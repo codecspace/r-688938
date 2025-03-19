@@ -45,13 +45,13 @@ const Projects = () => {
                 <div className="w-full md:w-2/5">
                   <img
                     src={project.image}
-                    alt={project.propertyName}
+                    alt={project.developerName}
                     className="w-full h-auto rounded-lg object-contain"
                   />
                 </div>
                 <div className="w-full md:w-3/5">
                   <h4 className="text-2xl font-display font-semibold mb-4 text-lion-black">
-                    {project.propertyName}
+                    {project.developerName}
                   </h4>
                   <p className="text-gray-600 leading-relaxed">
                     {project.description}
