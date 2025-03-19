@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
@@ -137,7 +138,7 @@ const ProjectDetails = () => {
         
         <motion.img 
           src={project?.heroImage || project?.image} 
-          alt={project?.title} 
+          alt={project?.propertyName} 
           className="absolute inset-0 w-full h-full object-cover"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
@@ -157,7 +158,7 @@ const ProjectDetails = () => {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Back to Home
             </Link>
-            <h1 className="text-4xl md:text-5xl font-display text-white mb-4">{project?.title}</h1>
+            <h1 className="text-4xl md:text-5xl font-display text-white mb-4">{project?.propertyName}</h1>
             <div className="flex items-center text-white/90">
               <MapPin className="w-5 h-5 mr-2 text-lion-gold" />
               <p>{project?.location}</p>
@@ -211,7 +212,7 @@ const ProjectDetails = () => {
                           >
                             <img 
                               src={image} 
-                              alt={`${project?.title} - Image ${index + 1}`} 
+                              alt={`${project?.propertyName} - Image ${index + 1}`} 
                               className="w-full h-full object-cover object-center"
                             />
                           </motion.div>
@@ -399,7 +400,7 @@ const ProjectDetails = () => {
           <DialogHeader>
             <DialogTitle>Schedule a Visit</DialogTitle>
             <DialogDescription>
-              Choose how you would like to be contacted for scheduling a visit to {project.title}
+              Choose how you would like to be contacted for scheduling a visit to {project.propertyName}
             </DialogDescription>
           </DialogHeader>
           <div className="grid grid-cols-2 gap-4 py-4">
