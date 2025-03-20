@@ -11,23 +11,6 @@ import FeaturedProperties from "@/components/FeaturedProperties";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
-import { ErrorBoundary } from "react-error-boundary";
-
-// Simple fallback component for 3D background
-const FallbackBackground = () => (
-  <div className="fixed inset-0 z-[-1] bg-gradient-to-b from-gray-100 to-white opacity-50"></div>
-);
-
-// Simplified background component that doesn't use 3D
-const SafeBackground = () => (
-  <div className="fixed inset-0 z-[-1] opacity-30 pointer-events-none bg-gradient-to-b from-gray-50 to-white"></div>
-);
-
-const ThreeDBackground = () => (
-  <ErrorBoundary FallbackComponent={FallbackBackground}>
-    <SafeBackground />
-  </ErrorBoundary>
-);
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -53,47 +36,31 @@ const Index = () => {
         "https://i.postimg.cc/vB1W24fs/image.png"
       ];
       
-      const promises = images.map(src => {
-        return new Promise((resolve, reject) => {
-          const img = new Image();
-          img.onload = resolve;
-          img.onerror = resolve; // Continue even if an image fails to load
-          img.src = src;
-        });
+      images.forEach(src => {
+        const img = new Image();
+        img.src = src;
       });
-      
-      return Promise.all(promises);
     };
+    
+    preloadImages();
     
     // Set document background to black during transition to prevent white flash
     document.body.style.backgroundColor = '#000';
     
-    // Load images then show content
-    preloadImages()
-      .then(() => {
-        setTimeout(() => {
-          setIsLoading(false);
-          // Reset background color after content is loaded
-          setTimeout(() => {
-            document.body.style.backgroundColor = '';
-          }, 300);
-        }, 1500); // Reduced loading time further
-      })
-      .catch(err => {
-        console.error("Error preloading images:", err);
-        setIsLoading(false);
+    // Reduced loading time to 2.5 seconds for a quicker experience
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+      // Reset background color after content is loaded
+      setTimeout(() => {
         document.body.style.backgroundColor = '';
-      });
+      }, 300);
+    }, 2500); // Reduced from 5000ms to 2500ms
     
+    return () => clearTimeout(timer);
   }, []);
 
   return (
-    <ErrorBoundary FallbackComponent={() => (
-      <div className="min-h-screen w-full bg-gray-50 p-4">
-        <h1 className="text-xl font-semibold">Lionvest Realty</h1>
-        <p>There was an error loading the page content. Please refresh the page.</p>
-      </div>
-    )}>
+    <>
       <AnimatePresence mode="wait">
         {isLoading ? (
           <LoadingScreen key="loading" />
@@ -104,9 +71,8 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }}
+            transition={{ duration: 0.8, ease: "easeInOut" }} // Faster transition
           >
-            <ThreeDBackground />
             <Navbar />
             <Hero />
             <AboutUs />
@@ -119,7 +85,7 @@ const Index = () => {
           </motion.div>
         )}
       </AnimatePresence>
-    </ErrorBoundary>
+    </>
   );
 };
 
