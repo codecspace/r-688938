@@ -2,7 +2,7 @@
 import { useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
-import { Text, PerspectiveCamera, RoundedBox } from '@react-three/drei';
+import { Text, PerspectiveCamera, RoundedBox, useTexture } from '@react-three/drei';
 import { Mesh, Group } from 'three';
 
 interface CardMeshProps {
@@ -14,6 +14,9 @@ interface CardMeshProps {
 const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
   const meshRef = useRef<Group>(null!);
   const textRef = useRef<Mesh>(null!);
+  
+  // Load texture using useTexture hook from drei
+  const texture = useTexture(imgUrl);
   
   // Spring animation for hover effect
   const { scale, positionZ } = useSpring({
@@ -47,9 +50,7 @@ const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
         {/* Property image as a texture */}
         <mesh position={[0, 0.5, 0.11]}>
           <planeGeometry args={[2.8, 2]} />
-          <meshBasicMaterial>
-            <textureLoader url={imgUrl} />
-          </meshBasicMaterial>
+          <meshBasicMaterial map={texture} />
         </mesh>
         
         {/* Title text */}
