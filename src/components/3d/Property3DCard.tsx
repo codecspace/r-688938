@@ -3,7 +3,7 @@ import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
 import { PerspectiveCamera, RoundedBox } from '@react-three/drei';
-import { Mesh, Group, TextureLoader } from 'three';
+import { Mesh, Group, TextureLoader, Texture } from 'three';
 import { ErrorBoundary } from 'react-error-boundary';
 
 // Fallback component when texture loading fails
@@ -21,7 +21,7 @@ interface CardMeshProps {
 
 const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
   const meshRef = useRef<Group>(null!);
-  const [texture, setTexture] = useState<THREE.Texture | null>(null);
+  const [texture, setTexture] = useState<Texture | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState(false);
   
