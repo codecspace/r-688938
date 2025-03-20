@@ -28,9 +28,12 @@ const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
   // Load texture manually to handle errors
   useEffect(() => {
     const loader = new TextureLoader();
+    let textureInstance: Texture | null = null;
+    
     loader.load(
       imgUrl,
       (loadedTexture) => {
+        textureInstance = loadedTexture;
         setTexture(loadedTexture);
         setLoaded(true);
       },
@@ -43,8 +46,8 @@ const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
     
     // Cleanup
     return () => {
-      if (texture) {
-        texture.dispose();
+      if (textureInstance) {
+        textureInstance.dispose();
       }
     };
   }, [imgUrl]);
