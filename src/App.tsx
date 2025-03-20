@@ -8,13 +8,19 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ProjectDetails from "./pages/ProjectDetails";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
-import { ErrorBoundary } from "react-error-boundary";
+import { ErrorBoundary, FallbackProps } from "react-error-boundary";
 
 const queryClient = new QueryClient();
 
 // Fallback component when 3D context fails
-const ThreeDFallback = ({ children }) => {
-  return <>{children}</>;
+const ThreeDFallback = ({ error, resetErrorBoundary }: FallbackProps) => {
+  console.error("3D rendering error:", error);
+  
+  return (
+    <div className="3d-fallback">
+      {/* Content continues to render even if 3D fails */}
+    </div>
+  );
 };
 
 // Global 3D context provider with error handling
