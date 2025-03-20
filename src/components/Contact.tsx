@@ -227,7 +227,7 @@ const Contact = () => {
             <div className="grid grid-cols-1 gap-8">
               <div className="h-[300px] rounded-lg overflow-hidden shadow-lg">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d224345.83923192866!2d77.06889754725781!3d28.527580594036787!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390cfd5b347eb62d%3A0x52c2b7494e204dce!2sGurugram%2C%20Haryana!5e0!3m2!1sen!2sin!4v1652345678901!5m2!1sen!2sin" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.9050944893197!2d77.09392!3d28.449557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d18a97b76db1d%3A0x3cdda32a5df5b58!2sSector%2063A%2C%20Gurugram%2C%20Haryana%20122002!5e0!3m2!1sen!2sin!4v1652345678901!5m2!1sen!2sin" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
