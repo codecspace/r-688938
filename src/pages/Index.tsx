@@ -11,6 +11,20 @@ import FeaturedProperties from "@/components/FeaturedProperties";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
+import { Canvas } from "@react-three/fiber";
+import { Environment, Stars } from "@react-three/drei";
+import RotatingCube from "@/components/3d/RotatingCube";
+
+const ThreeDBackground = () => (
+  <div className="fixed inset-0 z-[-1] opacity-30 pointer-events-none">
+    <Canvas>
+      <ambientLight intensity={0.3} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
+      <Environment preset="sunset" />
+    </Canvas>
+  </div>
+);
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -73,6 +87,7 @@ const Index = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }} // Faster transition
           >
+            <ThreeDBackground />
             <Navbar />
             <Hero />
             <AboutUs />

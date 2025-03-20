@@ -1,8 +1,44 @@
-
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import { toast } from "@/hooks/use-toast";
+import { Canvas } from "@react-three/fiber";
+import { Text3D, Center, Float } from "@react-three/drei";
+
+const Logo3D = () => {
+  return (
+    <Canvas className="h-40">
+      <ambientLight intensity={0.8} />
+      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
+      <Float
+        speed={4}
+        rotationIntensity={0.2}
+        floatIntensity={0.5}
+      >
+        <Center>
+          <Text3D
+            font="/fonts/inter_bold.json"
+            size={0.6}
+            height={0.2}
+            curveSegments={12}
+            bevelEnabled
+            bevelThickness={0.02}
+            bevelSize={0.02}
+            bevelOffset={0}
+            bevelSegments={5}
+          >
+            LIONVEST
+            <meshStandardMaterial
+              color="#D4AF37"
+              metalness={0.8}
+              roughness={0.2}
+            />
+          </Text3D>
+        </Center>
+      </Float>
+    </Canvas>
+  );
+};
 
 const Footer = () => {
   const [email, setEmail] = useState("");
@@ -34,11 +70,9 @@ const Footer = () => {
             <p className="text-gray-400 mb-6">
               Company formed with a vision to provide seamless support to all real estate queries related to buying of residence and commercial properties in and around Delhi noida gurgaon regions.
             </p>
-            <img 
-              src="https://imgur.com/ku5rlCk.jpg" 
-              alt="Lionvest Realty" 
-              className="h-12"
-            />
+            <div className="h-32 relative">
+              <Logo3D />
+            </div>
           </div>
           
           <div>

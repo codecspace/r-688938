@@ -1,7 +1,7 @@
 
 import { Button } from "./ui/button";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+import HeroScene from "./3d/HeroScene";
 
 const Hero = () => {
   const scrollToSection = (sectionId: string) => {
@@ -13,6 +13,9 @@ const Hero = () => {
 
   return (
     <div className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden" id="home">
+      {/* 3D Background Scene */}
+      <HeroScene />
+      
       {/* Animated background with gradient overlay */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
@@ -29,34 +32,7 @@ const Hero = () => {
         <div className="absolute inset-0 backdrop-blur-[2px]"></div>
       </motion.div>
       
-      {/* Floating decorative elements */}
-      <motion.div 
-        className="absolute top-32 right-20 w-32 h-32 rounded-full bg-lion-gold/20 backdrop-blur-xl"
-        animate={{ 
-          y: [0, 30, 0],
-          opacity: [0.2, 0.4, 0.2],
-        }}
-        transition={{ 
-          duration: 8, 
-          repeat: Infinity,
-          repeatType: "reverse" 
-        }}
-      />
-      
-      <motion.div 
-        className="absolute bottom-36 left-20 w-20 h-20 rounded-full bg-white/10 backdrop-blur-xl"
-        animate={{ 
-          y: [0, -20, 0],
-          opacity: [0.1, 0.3, 0.1],
-        }}
-        transition={{ 
-          duration: 6, 
-          repeat: Infinity,
-          repeatType: "reverse",
-          delay: 1
-        }}
-      />
-      
+      {/* Content */}
       <div className="relative z-10 container mx-auto px-8 text-left max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
