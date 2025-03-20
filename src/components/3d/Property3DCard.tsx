@@ -2,7 +2,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
-import { Text, PerspectiveCamera, RoundedBox, useTexture } from '@react-three/drei';
+import { PerspectiveCamera, RoundedBox } from '@react-three/drei';
 import { Mesh, Group, TextureLoader } from 'three';
 import { ErrorBoundary } from 'react-error-boundary';
 
@@ -21,9 +21,9 @@ interface CardMeshProps {
 
 const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
   const meshRef = useRef<Group>(null!);
-  const textRef = useRef<Mesh>(null!);
-  const [texture, setTexture] = useState(null);
+  const [texture, setTexture] = useState<THREE.Texture | null>(null);
   const [loaded, setLoaded] = useState(false);
+  const [error, setError] = useState(false);
   
   // Load texture manually to handle errors
   useEffect(() => {
@@ -35,10 +35,18 @@ const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
         setLoaded(true);
       },
       undefined,
-      (error) => {
-        console.error("Error loading texture:", error);
+      (err) => {
+        console.error("Error loading texture:", err);
+        setError(true);
       }
     );
+    
+    // Cleanup
+    return () => {
+      if (texture) {
+        texture.dispose();
+      }
+    };
   }, [imgUrl]);
   
   // Spring animation for hover effect
@@ -54,6 +62,27 @@ const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
       meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime) * 0.05;
     }
   });
+
+  // If there was an error loading the texture, render a simple colored card
+  if (error) {
+    return (
+      <animated.group
+        ref={meshRef}
+        position={position}
+        scale={scale}
+      >
+        <animated.mesh position-z={positionZ}>
+          <RoundedBox args={[3, 4, 0.2]} radius={0.1} smoothness={4}>
+            <meshStandardMaterial 
+              color="#f0f0f0" 
+              metalness={0.1}
+              roughness={0.2}
+            />
+          </RoundedBox>
+        </animated.mesh>
+      </animated.group>
+    );
+  }
 
   return (
     <animated.group
@@ -72,26 +101,11 @@ const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
         
         {/* Property image as a texture */}
         {loaded && texture && (
-          <mesh position={[0, 0.5, 0.11]}>
-            <planeGeometry args={[2.8, 2]} />
+          <mesh position={[0, 0, 0.11]}>
+            <planeGeometry args={[2.8, 3.8]} />
             <meshBasicMaterial map={texture} />
           </mesh>
         )}
-        
-        {/* Title text */}
-        <Text
-          ref={textRef}
-          position={[0, -1, 0.15]}
-          fontSize={0.2}
-          maxWidth={2.5}
-          lineHeight={1.2}
-          letterSpacing={0.02}
-          textAlign="center"
-          color="#333333"
-          font="/fonts/inter-bold.ttf"
-        >
-          Luxury Property
-        </Text>
       </animated.mesh>
     </animated.group>
   );
