@@ -11,19 +11,17 @@ import FeaturedProperties from "@/components/FeaturedProperties";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
-import { Canvas } from "@react-three/fiber";
-import { Environment, Stars } from "@react-three/drei";
-import RotatingCube from "@/components/3d/RotatingCube";
+import { ErrorBoundary } from "react-error-boundary";
+
+// Simple fallback component for 3D background
+const FallbackBackground = () => (
+  <div className="fixed inset-0 z-[-1] bg-gradient-to-b from-gray-100 to-white opacity-50"></div>
+);
 
 const ThreeDBackground = () => (
-  <div className="fixed inset-0 z-[-1] opacity-30 pointer-events-none">
-    <Canvas>
-      <ambientLight intensity={0.3} />
-      <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} />
-      <Stars radius={100} depth={50} count={5000} factor={4} saturation={0} fade speed={1} />
-      <Environment preset="sunset" />
-    </Canvas>
-  </div>
+  <ErrorBoundary FallbackComponent={FallbackBackground}>
+    <div className="fixed inset-0 z-[-1] opacity-30 pointer-events-none bg-gradient-to-b from-gray-50 to-white"></div>
+  </ErrorBoundary>
 );
 
 const Index = () => {

@@ -1,9 +1,17 @@
 
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { useSpring, animated } from '@react-spring/three';
 import { Text, PerspectiveCamera, RoundedBox, useTexture } from '@react-three/drei';
-import { Mesh, Group } from 'three';
+import { Mesh, Group, TextureLoader } from 'three';
+import { ErrorBoundary } from 'react-error-boundary';
+
+// Fallback component when texture loading fails
+const FallbackCard = () => (
+  <div className="relative h-64 w-full rounded-lg overflow-hidden shadow-xl bg-gradient-to-r from-gray-100 to-gray-200 flex items-center justify-center">
+    <div className="text-gray-500">Property Image</div>
+  </div>
+);
 
 interface CardMeshProps {
   isHovered: boolean;
@@ -14,9 +22,24 @@ interface CardMeshProps {
 const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
   const meshRef = useRef<Group>(null!);
   const textRef = useRef<Mesh>(null!);
+  const [texture, setTexture] = useState(null);
+  const [loaded, setLoaded] = useState(false);
   
-  // Load texture using useTexture hook from drei
-  const texture = useTexture(imgUrl);
+  // Load texture manually to handle errors
+  useEffect(() => {
+    const loader = new TextureLoader();
+    loader.load(
+      imgUrl,
+      (loadedTexture) => {
+        setTexture(loadedTexture);
+        setLoaded(true);
+      },
+      undefined,
+      (error) => {
+        console.error("Error loading texture:", error);
+      }
+    );
+  }, [imgUrl]);
   
   // Spring animation for hover effect
   const { scale, positionZ } = useSpring({
@@ -48,10 +71,12 @@ const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
         </RoundedBox>
         
         {/* Property image as a texture */}
-        <mesh position={[0, 0.5, 0.11]}>
-          <planeGeometry args={[2.8, 2]} />
-          <meshBasicMaterial map={texture} />
-        </mesh>
+        {loaded && texture && (
+          <mesh position={[0, 0.5, 0.11]}>
+            <planeGeometry args={[2.8, 2]} />
+            <meshBasicMaterial map={texture} />
+          </mesh>
+        )}
         
         {/* Title text */}
         <Text
@@ -63,6 +88,7 @@ const CardMesh = ({ isHovered, position, imgUrl }: CardMeshProps) => {
           letterSpacing={0.02}
           textAlign="center"
           color="#333333"
+          font="/fonts/inter-bold.ttf"
         >
           Luxury Property
         </Text>
@@ -80,18 +106,20 @@ const Property3DCard = ({ imgUrl, className = "" }: Property3DCardProps) => {
   const [hovered, setHovered] = useState(false);
   
   return (
-    <div 
-      className={`relative h-64 w-full rounded-lg overflow-hidden shadow-xl ${className}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      <Canvas>
-        <PerspectiveCamera makeDefault position={[0, 0, 5]} />
-        <ambientLight intensity={0.6} />
-        <spotLight position={[5, 10, 7.5]} angle={0.15} penumbra={1} intensity={1} castShadow />
-        <CardMesh isHovered={hovered} position={[0, 0, 0]} imgUrl={imgUrl} />
-      </Canvas>
-    </div>
+    <ErrorBoundary FallbackComponent={FallbackCard}>
+      <div 
+        className={`relative h-64 w-full rounded-lg overflow-hidden shadow-xl ${className}`}
+        onMouseEnter={() => setHovered(true)}
+        onMouseLeave={() => setHovered(false)}
+      >
+        <Canvas>
+          <PerspectiveCamera makeDefault position={[0, 0, 5]} />
+          <ambientLight intensity={0.6} />
+          <spotLight position={[5, 10, 7.5]} angle={0.15} penumbra={1} intensity={1} castShadow />
+          <CardMesh isHovered={hovered} position={[0, 0, 0]} imgUrl={imgUrl} />
+        </Canvas>
+      </div>
+    </ErrorBoundary>
   );
 };
 

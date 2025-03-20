@@ -1,5 +1,5 @@
 
-import { Suspense } from "react";
+import { Suspense, lazy } from "react";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -8,24 +8,20 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Index from "./pages/Index";
 import ProjectDetails from "./pages/ProjectDetails";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
-import { Canvas } from "@react-three/fiber";
-import { Environment, Preload } from "@react-three/drei";
+import { ErrorBoundary } from "react-error-boundary";
 
 const queryClient = new QueryClient();
 
-// Global 3D context provider to improve performance
+// Fallback component when 3D context fails
+const ThreeDFallback = ({ children }) => {
+  return <>{children}</>;
+};
+
+// Global 3D context provider with error handling
 const ThreeJSProvider = ({ children }) => (
-  <>
-    <div className="fixed top-0 left-0 w-0 h-0 overflow-hidden">
-      <Canvas>
-        <Suspense fallback={null}>
-          <Preload all />
-          <Environment preset="city" />
-        </Suspense>
-      </Canvas>
-    </div>
+  <ErrorBoundary FallbackComponent={ThreeDFallback}>
     {children}
-  </>
+  </ErrorBoundary>
 );
 
 const App = () => (
