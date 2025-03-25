@@ -23,7 +23,7 @@ const LoadingScreen = () => {
         className="w-64 h-64 relative"
       >
         <motion.img 
-          src="https://imgur.com/ku5rlCk.jpg" 
+          src="https://i.postimg.cc/CxxJP0fq/logo.webp" 
           alt="Lionvest Realty" 
           className="w-full h-full object-contain"
           animate={{ 
