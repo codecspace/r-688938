@@ -44,6 +44,40 @@ const ProjectDetails = () => {
     window.scrollTo(0, 0);
   }, [id]);
 
+  // Function to create a formatted email with property details
+  const createFormattedEmail = () => {
+    if (!project) return '';
+    
+    const subject = `Inquiry about ${project.propertyName}`;
+    const body = `
+Hello,
+
+I am interested in the property: ${project.propertyName} located at ${project.location}.
+
+Please contact me regarding this property.
+
+Additional details:
+- Name: [Your Name]
+- Phone Number: [Your Phone Number]
+- Best time to call: [Best Time to Call]
+- Additional Questions: [Any Additional Questions]
+
+Thank you,
+[Your Name]
+    `.trim();
+    
+    // Check if we're on desktop and use Gmail web interface
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    
+    if (!isMobileDevice) {
+      // For desktop, open Gmail in browser
+      return `https://mail.google.com/mail/?view=cm&fs=1&to=Lionvestrealty@gmail.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    } else {
+      // For mobile, use mailto:
+      return `mailto:Lionvestrealty@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+  };
+
   // Function to handle direct contact actions
   const handleContact = (type: string, value: string) => {
     if (type === "phone") {
@@ -54,10 +88,10 @@ const ProjectDetails = () => {
       });
       setDialogOpen(false);
     } else if (type === "email") {
-      window.location.href = `mailto:${value}`;
+      window.location.href = createFormattedEmail();
       toast({
         title: "Opening email client",
-        description: `Composing email to ${value}`,
+        description: `Composing email about ${project?.propertyName}`,
       });
       setDialogOpen(false);
     } else if (type === "schedule") {
