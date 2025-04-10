@@ -128,9 +128,9 @@ const Contact = () => {
                 <div className="flex items-start">
                   <MapPin className="text-lion-gold mr-4 mt-1 flex-shrink-0" />
                   <div>
-                    <h4 className="font-semibold text-lion-black">Gurugram</h4>
+                    <h4 className="font-semibold text-lion-black">Gurgaon</h4>
                     <address className="not-italic">
-                      Sector - 63A, Gurugram, Haryana
+                      Plus offices, 1st floor, landmark Cyber Park, Sector 67, Gurgaon. HR 122101
                     </address>
                   </div>
                 </div>
@@ -151,11 +151,11 @@ const Contact = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center cursor-pointer" onClick={() => handleDirectContact("email", "Lionvestrealty@gmail.com")}>
+                <div className="flex items-center cursor-pointer" onClick={() => handleDirectContact("email", "sales@lionvestrealty.com")}>
                   <Mail className="text-lion-gold mr-4 flex-shrink-0" />
                   <div>
                     <h4 className="font-semibold text-lion-black">Email</h4>
-                    <p>Lionvestrealty@gmail.com</p>
+                    <p>sales@lionvestrealty.com</p>
                   </div>
                 </div>
               </div>
@@ -227,12 +227,12 @@ const Contact = () => {
             <div className="grid grid-cols-1 gap-8">
               <div className="h-[300px] rounded-lg overflow-hidden shadow-lg">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.9050944893197!2d77.09392!3d28.449557!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d18a97b76db1d%3A0x3cdda32a5df5b58!2sSector%2063A%2C%20Gurugram%2C%20Haryana%20122002!5e0!3m2!1sen!2sin!4v1652345678901!5m2!1sen!2sin" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.8595726128035!2d77.0661351!3d28.4508983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d18e3dcc83a2d%3A0x97893b12605e1d8f!2sPlus%20Offices%20-%20Landmark%20Cyber%20Park!5e0!3m2!1sen!2sin!4v1650889076507!5m2!1sen!2sin" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 
                   loading="lazy"
-                  title="Gurugram Office Location"
+                  title="Gurgaon Office Location"
                   className="w-full h-full"
                 />
               </div>

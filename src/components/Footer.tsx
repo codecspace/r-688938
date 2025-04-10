@@ -46,7 +46,7 @@ const Footer = () => {
             <ul className="space-y-4 text-gray-400">
               <li className="flex">
                 <MapPin className="text-lion-gold mr-3 h-5 w-5 flex-shrink-0" />
-                <span>Sector - 63A, Gurugram, Haryana</span>
+                <span>Plus offices, 1st floor, landmark Cyber Park, Sector 67, Gurgaon. HR 122101</span>
               </li>
               <li className="flex">
                 <Phone className="text-lion-gold mr-3 h-5 w-5 flex-shrink-0" />
@@ -58,7 +58,7 @@ const Footer = () => {
               </li>
               <li className="flex">
                 <Mail className="text-lion-gold mr-3 h-5 w-5 flex-shrink-0" />
-                <span>Lionvestrealty@gmail.com</span>
+                <span>sales@lionvestrealty.com</span>
               </li>
             </ul>
           </div>

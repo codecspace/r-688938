@@ -71,10 +71,10 @@ Thank you,
     
     if (!isMobileDevice) {
       // For desktop, open Gmail in browser
-      return `https://mail.google.com/mail/?view=cm&fs=1&to=Lionvestrealty@gmail.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      return `https://mail.google.com/mail/?view=cm&fs=1&to=sales@lionvestrealty.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     } else {
       // For mobile, use mailto:
-      return `mailto:Lionvestrealty@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      return `mailto:sales@lionvestrealty.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     }
   };
 
@@ -342,11 +342,11 @@ Thank you,
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-3 cursor-pointer" onClick={() => handleContact("email", "Lionvestrealty@gmail.com")}>
+                <div className="flex items-start gap-3 cursor-pointer" onClick={() => handleContact("email", "sales@lionvestrealty.com")}>
                   <Mail className="w-5 h-5 text-lion-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-500">Email</p>
-                    <p className="font-medium">Lionvestrealty@gmail.com</p>
+                    <p className="font-medium">sales@lionvestrealty.com</p>
                   </div>
                 </div>
                 
@@ -354,7 +354,7 @@ Thank you,
                   <MapPin className="w-5 h-5 text-lion-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-500">Address</p>
-                    <p className="font-medium">{project?.fullAddress || project?.location}</p>
+                    <p className="font-medium">Plus offices, 1st floor, landmark Cyber Park, Sector 67, Gurgaon. HR 122101</p>
                   </div>
                 </div>
                 
@@ -446,7 +446,7 @@ Thank you,
               Call Now
             </Button>
             <Button
-              onClick={() => handleContact("email", "Lionvestrealty@gmail.com")}
+              onClick={() => handleContact("email", "sales@lionvestrealty.com")}
               className="flex items-center justify-center gap-2 bg-lion-gold hover:bg-lion-darkgold text-black"
             >
               <Mail className="h-4 w-4" />
