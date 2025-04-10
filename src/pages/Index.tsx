@@ -8,9 +8,11 @@ import VisionMission from "@/components/VisionMission";
 import Projects from "@/components/Projects";
 import Team from "@/components/Team";
 import FeaturedProperties from "@/components/FeaturedProperties";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Phone, Mail } from "lucide-react";
+import { toast } from "@/hooks/use-toast";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -59,6 +61,70 @@ const Index = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleContactAction = (type) => {
+    if (type === "phone") {
+      window.location.href = "tel:9773552334";
+      toast({
+        title: "Dialing...",
+        description: "Calling 9773552334",
+      });
+    } else if (type === "email") {
+      // Check if we're on desktop and use Gmail web interface
+      const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+      let mailtoUrl = '';
+      
+      const subject = "Inquiry from Lionvest Realty Website";
+      const body = "Hi, I'm interested in knowing more about your services.";
+      
+      if (!isMobileDevice) {
+        // For desktop, open Gmail in browser
+        mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=sales@lionvestrealty.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.open(mailtoUrl, '_blank');
+      } else {
+        // For mobile, use mailto:
+        mailtoUrl = `mailto:sales@lionvestrealty.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        window.location.href = mailtoUrl;
+      }
+      
+      toast({
+        title: "Opening email client",
+        description: "Composing email to sales@lionvestrealty.com",
+      });
+    }
+  };
+
+  // Simple contact section component
+  const SimpleContact = () => (
+    <section id="contact" className="bg-gray-100 py-20">
+      <div className="container mx-auto px-4 max-w-6xl">
+        <div className="text-center mb-12">
+          <h2 className="text-4xl font-display font-bold mb-4 text-lion-black">Contact Us</h2>
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+            Ready to learn more about our properties or have questions? Reach out to us directly!
+          </p>
+        </div>
+        
+        <div className="flex flex-col md:flex-row justify-center items-center gap-6 max-w-md mx-auto">
+          <Button 
+            onClick={() => handleContactAction("phone")}
+            className="bg-lion-gold hover:bg-lion-darkgold text-black w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-2"
+            size="lg"
+          >
+            <Phone className="h-5 w-5" /> Call Us
+          </Button>
+          
+          <Button 
+            onClick={() => handleContactAction("email")}
+            className="bg-lion-black hover:bg-lion-darkgray text-white w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-2"
+            size="lg"
+          >
+            <Mail className="h-5 w-5" /> Email Us
+          </Button>
+        </div>
+      </div>
+    </section>
+  );
+
   return (
     <>
       <AnimatePresence mode="wait">
@@ -80,7 +146,7 @@ const Index = () => {
             <Projects />
             <Team />
             <FeaturedProperties />
-            <Contact />
+            <SimpleContact />
             <Footer />
           </motion.div>
         )}
