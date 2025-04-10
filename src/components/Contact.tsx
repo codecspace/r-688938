@@ -51,34 +51,45 @@ const Contact = () => {
       return;
     }
 
-    // In a real application, you'd send this data to a server or API
-    // For this example, we'll simulate a successful submission and show how it would work
-    // with the client's phone number
+    // Create an email body
+    const subject = `New Contact Form Submission from ${formData.name}`;
+    const body = `
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Message: ${formData.message}
+    `.trim();
     
-    // Format data for sending via SMS (hypothetical)
-    const messageText = `New Inquiry from Website\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\nMessage: ${formData.message}`;
+    // Check if we're on desktop and use Gmail web interface
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    let mailtoUrl = '';
     
-    // Simulating form submission success
-    setTimeout(() => {
-      // In a real implementation, you would use an SMS gateway API or other service here
-      console.log("Message would be sent to +91 9773552334:", messageText);
-      
-      toast({
-        title: "Message sent successfully!",
-        description: "We have received your inquiry and will contact you soon.",
-      });
-      
-      // Reset form
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-        consent: false
-      });
-      
-      setIsSubmitting(false);
-    }, 1500);
+    if (!isMobileDevice) {
+      // For desktop, open Gmail in browser
+      mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=sales@lionvestrealty.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    } else {
+      // For mobile, use mailto:
+      mailtoUrl = `mailto:sales@lionvestrealty.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    }
+    
+    // Open the email client
+    window.open(mailtoUrl, '_blank');
+    
+    toast({
+      title: "Message sent successfully!",
+      description: "We have received your inquiry and will contact you soon.",
+    });
+    
+    // Reset form
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      message: "",
+      consent: false
+    });
+    
+    setIsSubmitting(false);
   };
 
   // Function to handle direct calls/emails
@@ -90,10 +101,10 @@ const Contact = () => {
         description: `Dialing ${value}`,
       });
     } else if (type === "email") {
-      window.location.href = `mailto:${value}`;
+      window.location.href = `mailto:sales@lionvestrealty.com`;
       toast({
         title: "Opening email client",
-        description: `Composing email to ${value}`,
+        description: `Composing email to sales@lionvestrealty.com`,
       });
     }
   };
@@ -227,7 +238,7 @@ const Contact = () => {
             <div className="grid grid-cols-1 gap-8">
               <div className="h-[300px] rounded-lg overflow-hidden shadow-lg">
                 <iframe 
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.8595726128035!2d77.0661351!3d28.4508983!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d18e3dcc83a2d%3A0x97893b12605e1d8f!2sPlus%20Offices%20-%20Landmark%20Cyber%20Park!5e0!3m2!1sen!2sin!4v1650889076507!5m2!1sen!2sin" 
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3507.6788491617997!2d77.0644002761712!3d28.4557756497828!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390d18e3dcc83a2d%3A0x97893b12605e1d8f!2sPlus%20Offices%20-%20Landmark%20Cyber%20Park!5e0!3m2!1sen!2sin!4v1712772642883!5m2!1sen!2sin" 
                   width="100%" 
                   height="100%" 
                   style={{ border: 0 }} 

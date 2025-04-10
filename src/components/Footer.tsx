@@ -18,6 +18,26 @@ const Footer = () => {
       return;
     }
     
+    // Create an email body for subscription
+    const subject = "New Newsletter Subscription";
+    const body = `
+Please add this email to the newsletter: ${email}
+    `.trim();
+    
+    // Check if we're on desktop and use Gmail web interface
+    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    let mailtoUrl = '';
+    
+    if (!isMobileDevice) {
+      // For desktop, open Gmail in browser
+      mailtoUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=sales@lionvestrealty.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(mailtoUrl, '_blank');
+    } else {
+      // For mobile, use mailto:
+      mailtoUrl = `mailto:sales@lionvestrealty.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.location.href = mailtoUrl;
+    }
+    
     toast({
       title: "Subscription successful!",
       description: "Thank you for subscribing to our newsletter"
