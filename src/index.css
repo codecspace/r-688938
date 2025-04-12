@@ -76,7 +76,6 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    cursor: none;
   }
   
   /* Modern scrollbar */
@@ -95,11 +94,6 @@
   
   ::-webkit-scrollbar-thumb:hover {
     background: rgba(212, 175, 55, 0.8);
-  }
-  
-  /* Reset cursor on interactive elements for better UX */
-  a, button, input, textarea, select, [role="button"] {
-    cursor: pointer;
   }
 }
 
@@ -165,59 +159,6 @@
 /* Gold text gradient */
 .gold-gradient-text {
   @apply text-transparent bg-clip-text bg-gradient-to-r from-lion-gold to-lion-lightgold;
-}
-
-/* Dynamic gradient that moves on hover */
-.dynamic-gradient {
-  background-size: 200% 100%;
-  animation: gradientMove 5s infinite alternate ease-in-out;
-}
-
-/* Custom cursor styles */
-.custom-cursor {
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: rgba(212, 175, 55, 0.5);
-  mix-blend-mode: difference;
-  pointer-events: none;
-  transition: transform 0.1s ease-out;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-}
-
-.custom-cursor::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 5px;
-  height: 5px;
-  background-color: white;
-  border-radius: 50%;
-}
-
-/* Noise texture */
-.noise-texture {
-  position: relative;
-}
-
-.noise-texture::after {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 200 200'%3E%3Cfilter id='a'%3E%3CfeTurbulence baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23a)' opacity='.05'/%3E%3C/svg%3E");
-  opacity: 0.5;
-  mix-blend-mode: overlay;
-}
-
-/* Blob animation */
-.blob-animation {
-  transition: transform 0.3s ease-out;
 }
 
 /* Animated elements */
@@ -328,7 +269,6 @@
   @apply border-4 border-black p-6;
 }
 
-/* Enhanced keyframe animations */
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -358,15 +298,6 @@
   }
   100% {
     transform: translateX(100%);
-  }
-}
-
-@keyframes gradientMove {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
   }
 }
 
