@@ -97,17 +97,17 @@
   }
 }
 
-/* Glass morphism utilities */
+/* Enhanced glassmorphism utilities */
 .glass {
-  @apply backdrop-blur-md bg-white/20 border border-white/20 shadow-lg;
+  @apply backdrop-blur-lg bg-white/20 border border-white/20 shadow-lg;
 }
 
 .glass-dark {
-  @apply backdrop-blur-md bg-black/20 border border-white/10 shadow-lg;
+  @apply backdrop-blur-lg bg-black/20 border border-white/10 shadow-lg;
 }
 
 .glass-card {
-  @apply backdrop-blur-md bg-white/70 border border-white/30 shadow-xl;
+  @apply backdrop-blur-lg bg-white/70 border border-white/30 shadow-xl rounded-xl;
 }
 
 .glass-gold {
@@ -115,19 +115,19 @@
 }
 
 .glass-nav {
-  @apply backdrop-blur-lg bg-white/80 border-b border-white/20 shadow-sm;
+  @apply backdrop-blur-xl bg-white/80 border-b border-white/20 shadow-sm;
 }
 
 .glass-panel {
-  @apply backdrop-blur-md bg-white/40 border border-white/30 shadow-md rounded-xl;
+  @apply backdrop-blur-lg bg-white/40 border border-white/30 shadow-md rounded-xl;
 }
 
 .glass-footer {
-  @apply backdrop-blur-lg bg-lion-black/90 border-t border-white/10;
+  @apply backdrop-blur-xl bg-lion-black/90 border-t border-white/10;
 }
 
 .glass-contact {
-  @apply backdrop-blur-md bg-white/80 border border-white/30 shadow-lg;
+  @apply backdrop-blur-lg bg-white/80 border border-white/30 shadow-lg rounded-xl;
 }
 
 /* Gold text gradient */
@@ -206,3 +206,13 @@
   animation: glassShimmer 3s infinite;
 }
 
+/* Enhanced hover effects for glass elements */
+.glass-hover {
+  transition: all 0.3s ease;
+}
+
+.glass-hover:hover {
+  @apply backdrop-blur-xl bg-white/30 border-lion-gold/30;
+  transform: translateY(-5px);
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}

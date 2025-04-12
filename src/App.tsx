@@ -8,6 +8,8 @@ import Index from "./pages/Index";
 import ProjectDetails from "./pages/ProjectDetails";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 
+// Removed unused import of App.css
+
 const queryClient = new QueryClient();
 
 const App = () => (

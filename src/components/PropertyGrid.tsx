@@ -22,7 +22,7 @@ const PropertyGrid = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: index * 0.1 }}
-          className="bg-white rounded-lg shadow-lg overflow-hidden"
+          className="glass-panel rounded-lg overflow-hidden"
         >
           <div className="p-6 flex flex-col md:flex-row items-center gap-8">
             <div className="w-full md:w-1/3">

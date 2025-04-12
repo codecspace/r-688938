@@ -27,8 +27,8 @@ const PropertyCard = ({ id, image, title, location, price }: PropertyCardProps) 
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/50 to-transparent opacity-70 group-hover:opacity-90 transition-all duration-500"></div>
           
-          {/* Glass effect panel at bottom */}
-          <div className="absolute bottom-0 left-0 right-0 p-6 backdrop-blur-lg bg-black/30 border-t border-white/10">
+          {/* Enhanced glass effect panel */}
+          <div className="absolute bottom-0 left-0 right-0 p-6 backdrop-blur-md bg-black/20 border-t border-white/10 shadow-lg">
             <h3 className="text-xl font-medium mb-2 group-hover:text-lion-gold transition-colors duration-300">{title}</h3>
             <div className="flex items-center mt-2 text-gray-200">
               <MapPin className="w-4 h-4 mr-2" />
