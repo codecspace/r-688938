@@ -1,5 +1,5 @@
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -18,14 +18,7 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { scrollYProgress } = useScroll();
   const [revealElements, setRevealElements] = useState([]);
-  const blobRef = useRef(null);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const cursorRef = useRef(null);
 
-  // Dynamic gradient background effect
-  const gradientOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.2]);
-  const gradientRotation = useTransform(scrollYProgress, [0, 1], [0, 360]);
-  
   useEffect(() => {
     // Pre-load main content to prevent white flash
     const preloadImages = () => {
@@ -89,38 +82,11 @@ const Index = () => {
     // Store elements for cleanup
     setRevealElements(Array.from(elements));
     
-    // Mouse move handler for blob animation
-    const handleMouseMove = (e) => {
-      if (blobRef.current) {
-        const { clientX, clientY } = e;
-        const x = clientX;
-        const y = clientY;
-        
-        // Delay blob movement for smooth effect
-        setTimeout(() => {
-          blobRef.current.style.transform = `translate(${x - 200}px, ${y - 200}px)`;
-        }, 100);
-      }
-      
-      // Update cursor position with smooth transition
-      setCursorPosition({ x: e.clientX, y: e.clientY });
-    };
-    
-    window.addEventListener('mousemove', handleMouseMove);
-    
     return () => {
       clearTimeout(timer);
       revealElements.forEach(el => observer.unobserve(el));
-      window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [revealElements.length]);
-
-  // Update cursor position with smooth animation
-  useEffect(() => {
-    if (cursorRef.current) {
-      cursorRef.current.style.transform = `translate(${cursorPosition.x}px, ${cursorPosition.y}px)`;
-    }
-  }, [cursorPosition]);
 
   const handleContactAction = (type) => {
     if (type === "phone") {
@@ -193,19 +159,23 @@ const Index = () => {
             <div className="absolute inset-0 glass-shimmer pointer-events-none"></div>
             
             <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full relative z-10">
-              <MagneticButton 
+              <Button 
                 onClick={() => handleContactAction("phone")}
                 className="bg-lion-gold hover:bg-lion-darkgold text-black w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-3 shadow-lg btn-3d"
-                icon={<Phone className="h-5 w-5" />}
-                label="Call Us"
-              />
+                size="lg"
+              >
+                <Phone className="h-5 w-5" /> Call Us
+              </Button>
               
-              <MagneticButton 
+              <Button 
                 onClick={() => handleContactAction("email")}
                 className="bg-lion-black hover:bg-lion-darkgray text-white w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-3 shadow-lg btn-glow overflow-hidden relative"
-                icon={<Mail className="h-5 w-5" />}
-                label="Email Us"
-              />
+                size="lg"
+              >
+                <span className="relative z-10 flex items-center gap-3">
+                  <Mail className="h-5 w-5" /> Email Us
+                </span>
+              </Button>
             </div>
           </motion.div>
         </div>
@@ -213,112 +183,16 @@ const Index = () => {
     );
   };
 
-  // Magnetic Button Component
-  const MagneticButton = ({ onClick, className, icon, label }) => {
-    const buttonRef = useRef(null);
-    const [position, setPosition] = useState({ x: 0, y: 0 });
-
-    const handleMouseMove = (e) => {
-      const { clientX, clientY } = e;
-      const { left, top, width, height } = buttonRef.current.getBoundingClientRect();
-      
-      const x = clientX - (left + width / 2);
-      const y = clientY - (top + height / 2);
-      
-      // Calculate distance from center (0-1)
-      const distance = Math.sqrt(x * x + y * y);
-      const maxDistance = Math.sqrt((width/2) * (width/2) + (height/2) * (height/2));
-      const distanceRatio = Math.min(distance / maxDistance, 1);
-      
-      // Scale movement based on distance (stronger when closer)
-      const moveX = x * (0.15 - distanceRatio * 0.1);
-      const moveY = y * (0.15 - distanceRatio * 0.1);
-      
-      setPosition({ x: moveX, y: moveY });
-    };
-
-    const handleMouseLeave = () => {
-      setPosition({ x: 0, y: 0 });
-    };
-
-    return (
-      <motion.div
-        ref={buttonRef}
-        className="relative inline-block" 
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        animate={{ 
-          x: position.x, 
-          y: position.y,
-        }}
-        transition={{
-          type: "spring",
-          stiffness: 150,
-          damping: 15,
-          mass: 0.1
-        }}
-      >
-        <Button 
-          onClick={onClick} 
-          className={className}
-          size="lg"
-        >
-          <span className="relative z-10 flex items-center gap-3">
-            {icon}
-            {label}
-          </span>
-        </Button>
-      </motion.div>
-    );
-  };
-
   return (
     <>
-      {/* Dynamic blob background that follows the cursor */}
-      <div 
-        ref={blobRef}
-        className="fixed w-[400px] h-[400px] pointer-events-none z-0 opacity-5 blob-animation" 
-      >
-        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <motion.path 
-            fill="#D4AF37"
-            d="M44.2,-67.2C57.7,-59.6,69.5,-48.6,73.5,-35.3C77.5,-22,73.7,-6.3,69.8,8.5C65.8,23.3,61.7,37.1,53,48.1C44.4,59.1,31.3,67.2,17.7,69C4,70.8,-10.2,66.3,-23.1,60.2C-36,54.2,-47.5,46.5,-53.6,36C-59.6,25.4,-60.1,12.7,-60.2,0C-60.3,-12.8,-60,-25.5,-53.6,-34.9C-47.3,-44.2,-34.9,-50.1,-22.9,-58.1C-10.9,-66.1,0.8,-76.3,14.5,-78.5C28.2,-80.7,55.5,-75,69.6,-63.2C83.7,-51.4,84.8,-33.7,84,-16.7C83.1,0.4,80.4,16.7,70.6,25.9C60.9,35.1,44.1,37.2,30.3,47.1C16.5,57.1,5.7,74.9,-4.9,81.5C-15.5,88.2,-30.9,83.6,-44.6,75.7C-58.3,67.9,-70.2,56.7,-74.4,42.9C-78.6,29.1,-74.9,12.8,-71.7,-2.2C-68.4,-17.3,-65.5,-31.3,-57.8,-42.2C-50.1,-53.1,-37.6,-61,-24.6,-67.9C-11.6,-74.9,1.9,-81,15.9,-79.9C29.8,-78.9,44.3,-70.8,44.2,-67.2Z" 
-            animate={{
-              d: [
-                "M44.2,-67.2C57.7,-59.6,69.5,-48.6,73.5,-35.3C77.5,-22,73.7,-6.3,69.8,8.5C65.8,23.3,61.7,37.1,53,48.1C44.4,59.1,31.3,67.2,17.7,69C4,70.8,-10.2,66.3,-23.1,60.2C-36,54.2,-47.5,46.5,-53.6,36C-59.6,25.4,-60.1,12.7,-60.2,0C-60.3,-12.8,-60,-25.5,-53.6,-34.9C-47.3,-44.2,-34.9,-50.1,-22.9,-58.1C-10.9,-66.1,0.8,-76.3,14.5,-78.5C28.2,-80.7,55.5,-75,69.6,-63.2C83.7,-51.4,84.8,-33.7,84,-16.7C83.1,0.4,80.4,16.7,70.6,25.9C60.9,35.1,44.1,37.2,30.3,47.1C16.5,57.1,5.7,74.9,-4.9,81.5C-15.5,88.2,-30.9,83.6,-44.6,75.7C-58.3,67.9,-70.2,56.7,-74.4,42.9C-78.6,29.1,-74.9,12.8,-71.7,-2.2C-68.4,-17.3,-65.5,-31.3,-57.8,-42.2C-50.1,-53.1,-37.6,-61,-24.6,-67.9C-11.6,-74.9,1.9,-81,15.9,-79.9C29.8,-78.9,44.3,-70.8,44.2,-67.2Z",
-                "M63.4,-69.8C79.2,-60.8,87,-37.6,86.9,-17.6C86.8,2.3,78.9,19,68.1,33.1C57.2,47.2,43.2,58.7,27.7,64.1C12.2,69.5,-4.8,68.7,-23.1,65.5C-41.5,62.3,-61.2,56.6,-71.5,43.1C-81.8,29.7,-82.7,8.5,-77.2,-9.6C-71.7,-27.7,-59.9,-42.8,-45,-54C-30.2,-65.1,-12.2,-72.5,6.4,-79.8C25,-87.2,47.5,-94.6,59.3,-86C71.1,-77.4,79.2,-53.8,74.6,-37.8C70,-21.8,52.8,-13.3,52.6,-0.1C52.3,13,69,30.8,65.4,36.9C61.9,43,38.1,37.3,29.4,32.6C20.7,27.9,27.1,24.1,25.6,22.8C24.1,21.4,14.8,22.4,5.4,23.5",
-                "M44.2,-67.2C57.7,-59.6,69.5,-48.6,73.5,-35.3C77.5,-22,73.7,-6.3,69.8,8.5C65.8,23.3,61.7,37.1,53,48.1C44.4,59.1,31.3,67.2,17.7,69C4,70.8,-10.2,66.3,-23.1,60.2C-36,54.2,-47.5,46.5,-53.6,36C-59.6,25.4,-60.1,12.7,-60.2,0C-60.3,-12.8,-60,-25.5,-53.6,-34.9C-47.3,-44.2,-34.9,-50.1,-22.9,-58.1C-10.9,-66.1,0.8,-76.3,14.5,-78.5C28.2,-80.7,55.5,-75,69.6,-63.2C83.7,-51.4,84.8,-33.7,84,-16.7C83.1,0.4,80.4,16.7,70.6,25.9C60.9,35.1,44.1,37.2,30.3,47.1C16.5,57.1,5.7,74.9,-4.9,81.5C-15.5,88.2,-30.9,83.6,-44.6,75.7C-58.3,67.9,-70.2,56.7,-74.4,42.9C-78.6,29.1,-74.9,12.8,-71.7,-2.2C-68.4,-17.3,-65.5,-31.3,-57.8,-42.2C-50.1,-53.1,-37.6,-61,-24.6,-67.9C-11.6,-74.9,1.9,-81,15.9,-79.9C29.8,-78.9,44.3,-70.8,44.2,-67.2Z"
-              ],
-            }}
-            transition={{ 
-              duration: 8, 
-              repeat: Infinity,
-              repeatType: "mirror",
-              ease: "easeInOut" 
-            }}
-          />
-        </svg>
-      </div>
-      
-      {/* Custom cursor */}
-      <div 
-        ref={cursorRef} 
-        className="custom-cursor pointer-events-none fixed top-0 left-0 z-[999] hidden md:block"
-      ></div>
-      
-      {/* Dynamic background gradient that reacts to scroll */}
-      <motion.div 
-        className="fixed inset-0 pointer-events-none z-[-1]"
-        style={{ 
-          opacity: gradientOpacity, 
-          backgroundImage: "linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(255, 255, 255, 0.05), rgba(212, 175, 55, 0.15))",
-          rotate: gradientRotation
-        }}
-      ></motion.div>
-      
       <motion.div
-        className="fixed top-0 left-0 right-0 h-[5px] bg-gradient-to-r from-lion-gold to-lion-lightgold"
         style={{
+          position: "fixed",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "5px",
+          background: "linear-gradient(to right, #D4AF37, #F5D76E)",
           transformOrigin: "0%",
           zIndex: 1000,
           scaleX: scrollYProgress
