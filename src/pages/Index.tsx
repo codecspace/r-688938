@@ -13,7 +13,6 @@ import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion"
 import { Button } from "@/components/ui/button";
 import { Phone, Mail } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
-import CustomCursor from "@/components/CustomCursor";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -186,17 +185,6 @@ const Index = () => {
 
   return (
     <>
-      {/* Custom Cursor */}
-      <CustomCursor />
-      
-      {/* Noise Texture Overlay */}
-      <div className="noise-texture"></div>
-      
-      {/* Animated Blob Elements */}
-      <div className="blob fixed top-[20%] left-[10%] w-[300px] h-[300px] bg-lion-gold/10"></div>
-      <div className="blob fixed bottom-[30%] right-[15%] w-[400px] h-[400px] bg-lion-lightgold/5 animation-delay-2000"></div>
-      <div className="blob fixed top-[60%] left-[20%] w-[250px] h-[250px] bg-white/10 animation-delay-4000"></div>
-      
       <motion.div
         style={{
           position: "fixed",
