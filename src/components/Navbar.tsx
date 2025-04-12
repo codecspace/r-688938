@@ -2,6 +2,7 @@
 import { Menu, Phone } from "lucide-react";
 import { Button } from "./ui/button";
 import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import {
   Sheet,
   SheetContent,
@@ -9,6 +10,17 @@ import {
 } from "./ui/sheet";
 
 const Navbar = () => {
+  const [scrolled, setScrolled] = useState(false);
+  
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   // Function to scroll to a section or navigate to home page section
   const scrollToSection = (sectionId: string, event: React.MouseEvent) => {
     event.preventDefault();
@@ -26,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="absolute w-full z-40">
+    <nav className={`floating-nav site-navbar ${scrolled ? 'scrolled' : ''} transition-all duration-500`}>
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="flex items-center justify-between h-24">
           <Link to="/" className="flex items-center">
@@ -35,15 +47,41 @@ const Navbar = () => {
               alt="Lionvest Realty" 
               className="h-12 mr-3"
             />
-            <span className="text-2xl font-display text-white">Lionvest Realty</span>
+            <span className={`text-2xl font-display transition-colors duration-300 ${scrolled ? 'text-lion-black' : 'text-white'}`}>
+              Lionvest Realty
+            </span>
           </Link>
           
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="#home" onClick={(e) => scrollToSection("home", e)} className="text-white hover:text-lion-gold transition-colors">Home</a>
-            <a href="#about" onClick={(e) => scrollToSection("about", e)} className="text-white hover:text-lion-gold transition-colors">About Company</a>
-            <a href="#projects" onClick={(e) => scrollToSection("projects", e)} className="text-white hover:text-lion-gold transition-colors">Projects</a>
-            <a href="#contact" onClick={(e) => scrollToSection("contact", e)} className="text-white hover:text-lion-gold transition-colors">Contact Us</a>
+            <a 
+              href="#home" 
+              onClick={(e) => scrollToSection("home", e)} 
+              className={`transition-colors duration-300 hover:text-lion-gold ${scrolled ? 'text-lion-black' : 'text-white'}`}
+            >
+              Home
+            </a>
+            <a 
+              href="#about" 
+              onClick={(e) => scrollToSection("about", e)} 
+              className={`transition-colors duration-300 hover:text-lion-gold ${scrolled ? 'text-lion-black' : 'text-white'}`}
+            >
+              About Company
+            </a>
+            <a 
+              href="#projects" 
+              onClick={(e) => scrollToSection("projects", e)} 
+              className={`transition-colors duration-300 hover:text-lion-gold ${scrolled ? 'text-lion-black' : 'text-white'}`}
+            >
+              Projects
+            </a>
+            <a 
+              href="#contact" 
+              onClick={(e) => scrollToSection("contact", e)} 
+              className={`transition-colors duration-300 hover:text-lion-gold ${scrolled ? 'text-lion-black' : 'text-white'}`}
+            >
+              Contact Us
+            </a>
             <div className="flex items-center text-lion-gold">
               <Phone className="w-4 h-4 mr-2" />
               <span>9773552334</span>
@@ -57,16 +95,20 @@ const Navbar = () => {
             </a>
             <Sheet>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-white hover:bg-white/10">
+                <Button 
+                  variant="ghost" 
+                  size="icon" 
+                  className={`${scrolled ? 'text-lion-black hover:bg-black/5' : 'text-white hover:bg-white/10'}`}
+                >
                   <Menu className="h-6 w-6" />
                 </Button>
               </SheetTrigger>
-              <SheetContent>
-                <div className="flex flex-col space-y-6 mt-8">
-                  <a href="#home" onClick={(e) => scrollToSection("home", e)} className="text-lg border-b border-lion-lightgray pb-2">Home</a>
-                  <a href="#about" onClick={(e) => scrollToSection("about", e)} className="text-lg border-b border-lion-lightgray pb-2">About Company</a>
-                  <a href="#projects" onClick={(e) => scrollToSection("projects", e)} className="text-lg border-b border-lion-lightgray pb-2">Projects</a>
-                  <a href="#contact" onClick={(e) => scrollToSection("contact", e)} className="text-lg border-b border-lion-lightgray pb-2">Contact Us</a>
+              <SheetContent className="glass-depth-card border-none">
+                <div className="flex flex-col space-y-6 mt-12">
+                  <a href="#home" onClick={(e) => scrollToSection("home", e)} className="text-lg border-b border-lion-lightgray pb-3 hover:text-lion-gold transition-colors">Home</a>
+                  <a href="#about" onClick={(e) => scrollToSection("about", e)} className="text-lg border-b border-lion-lightgray pb-3 hover:text-lion-gold transition-colors">About Company</a>
+                  <a href="#projects" onClick={(e) => scrollToSection("projects", e)} className="text-lg border-b border-lion-lightgray pb-3 hover:text-lion-gold transition-colors">Projects</a>
+                  <a href="#contact" onClick={(e) => scrollToSection("contact", e)} className="text-lg border-b border-lion-lightgray pb-3 hover:text-lion-gold transition-colors">Contact Us</a>
                   <div className="flex items-center text-lion-gold pt-4">
                     <Phone className="w-4 h-4 mr-2" />
                     <span>9773552334</span>

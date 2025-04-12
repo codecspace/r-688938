@@ -97,7 +97,7 @@
   }
 }
 
-/* Enhanced glassmorphism utilities */
+/* Enhanced glassmorphism v2 utilities */
 .glass {
   @apply backdrop-blur-lg bg-white/20 border border-white/20 shadow-lg;
 }
@@ -130,6 +130,32 @@
   @apply backdrop-blur-lg bg-white/80 border border-white/30 shadow-lg rounded-xl;
 }
 
+/* Enhanced glassmorphism v2 - more depth */
+.glass-depth {
+  @apply backdrop-blur-xl bg-white/30 border border-white/40 shadow-[0_8px_32px_rgba(0,0,0,0.1)] rounded-xl;
+}
+
+.glass-depth-dark {
+  @apply backdrop-blur-xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] rounded-xl;
+}
+
+.glass-depth-card {
+  @apply backdrop-blur-2xl bg-white/40 border border-white/30 shadow-[0_10px_30px_rgba(0,0,0,0.15)] rounded-xl;
+}
+
+/* Claymorphism styles */
+.clay {
+  @apply bg-white/90 border-2 border-white/80 shadow-[6px_6px_12px_rgba(0,0,0,0.1),-6px_-6px_12px_rgba(255,255,255,0.8)] rounded-2xl p-6;
+}
+
+.clay-pastel {
+  @apply bg-lion-ivory border-2 border-white/80 shadow-[6px_6px_16px_rgba(0,0,0,0.08),-6px_-6px_16px_rgba(255,255,255,0.9)] rounded-2xl p-6;
+}
+
+.clay-gold {
+  @apply bg-lion-lightgold/40 border-2 border-lion-gold/30 shadow-[6px_6px_16px_rgba(0,0,0,0.1),-4px_-4px_12px_rgba(255,255,255,0.8)] rounded-2xl p-6;
+}
+
 /* Gold text gradient */
 .gold-gradient-text {
   @apply text-transparent bg-clip-text bg-gradient-to-r from-lion-gold to-lion-lightgold;
@@ -159,6 +185,90 @@
   box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
 }
 
+/* Glass/Glow button effects */
+.btn-glow {
+  @apply relative overflow-hidden transition-all duration-500;
+}
+
+.btn-glow::before {
+  content: "";
+  @apply absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 transition-opacity duration-500;
+  transform: translateX(-100%);
+}
+
+.btn-glow:hover::before {
+  @apply opacity-100;
+  animation: glow-sweep 1.5s infinite;
+}
+
+/* Floating elements */
+.floating-nav {
+  @apply fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-white/10 border-b border-white/10 transition-all duration-500;
+}
+
+.floating-nav.scrolled {
+  @apply bg-white/70 shadow-md;
+}
+
+/* 3D effect classes */
+.btn-3d {
+  @apply transition-all duration-300 shadow-md;
+  transform: translateY(0);
+}
+
+.btn-3d:hover {
+  transform: translateY(-3px) rotateX(5deg);
+  @apply shadow-lg;
+}
+
+.btn-3d:active {
+  transform: translateY(0) rotateX(0);
+  @apply shadow-sm;
+}
+
+.card-3d {
+  @apply transition-all duration-500;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.card-3d:hover {
+  transform: rotateY(5deg) rotateX(5deg) translateZ(10px);
+}
+
+/* Scroll animation classes */
+.reveal-on-scroll {
+  @apply opacity-0 translate-y-10 transition-all duration-700;
+}
+
+.reveal-on-scroll.revealed {
+  @apply opacity-100 translate-y-0;
+}
+
+.parallax-slow {
+  transform: translateY(0);
+  transition: transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.parallax-medium {
+  transform: translateY(0);
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+.parallax-fast {
+  transform: translateY(0);
+  transition: transform 0.1s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+/* Brutalist minimalism */
+.brutalist-text {
+  @apply font-bold tracking-tight leading-none;
+}
+
+.brutalist-container {
+  @apply border-4 border-black p-6;
+}
+
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -179,6 +289,15 @@
   }
   100% {
     transform: translateY(0);
+  }
+}
+
+@keyframes glow-sweep {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
   }
 }
 
@@ -215,4 +334,27 @@
   @apply backdrop-blur-xl bg-white/30 border-lion-gold/30;
   transform: translateY(-5px);
   box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+}
+
+/* Page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.5s, transform 0.5s;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 0.5s, transform 0.5s;
 }
