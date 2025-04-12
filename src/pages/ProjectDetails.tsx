@@ -184,6 +184,7 @@ Thank you,
             initial={{ y: 30, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ delay: 0.4, duration: 0.8 }}
+            className="glass-dark px-6 py-4 rounded-lg inline-block max-w-3xl"
           >
             <Link 
               to="/" 
@@ -208,7 +209,7 @@ Thank you,
           <div className="lg:col-span-2">
             {/* Project Description */}
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-8 mb-8"
+              className="glass-card rounded-xl p-8 mb-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -227,7 +228,7 @@ Thank you,
             {/* Image Gallery - Only show when project has images */}
             {projectImages.length > 0 && (
               <motion.div 
-                className="mb-8"
+                className="mb-8 glass-panel p-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -263,7 +264,7 @@ Thank you,
             {/* Specifications */}
             {project?.specifications && (
               <motion.div 
-                className="bg-white rounded-xl shadow-md p-8 mb-8"
+                className="glass-card rounded-xl p-8 mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -294,7 +295,7 @@ Thank you,
             {/* Amenities */}
             {project?.amenities && (
               <motion.div 
-                className="bg-white rounded-xl shadow-md p-8 mb-8"
+                className="glass-card rounded-xl p-8 mb-8"
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -305,7 +306,7 @@ Thank you,
                   {project.amenities.map((amenity, index) => (
                     <motion.div
                       key={index}
-                      className="flex items-center gap-2 p-3 rounded-lg bg-gray-50"
+                      className="flex items-center gap-2 p-3 rounded-lg glass"
                       whileHover={{ y: -5 }}
                       transition={{ duration: 0.3 }}
                     >
@@ -322,19 +323,19 @@ Thank you,
           <div className="lg:col-span-1">
             {/* Contact Card - Fixed position */}
             <motion.div 
-              className="bg-white rounded-xl shadow-md overflow-hidden sticky top-8 z-10"
+              className="glass-card rounded-xl overflow-hidden sticky top-8 z-10"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <div className="bg-lion-gold p-6">
+              <div className="bg-lion-gold p-6 glass-gold">
                 <h3 className="text-xl font-semibold text-black">Interested in this property?</h3>
                 <p className="text-black/80 mt-1">Contact our agent for more information</p>
               </div>
               
               <div className="p-6 space-y-5">
-                <div className="flex items-start gap-3 cursor-pointer" onClick={() => handleContact("phone", "+91 9773552334")}>
+                <div className="flex items-start gap-3 cursor-pointer hover:bg-gray-50/50 p-2 rounded-lg transition-colors" onClick={() => handleContact("phone", "+91 9773552334")}>
                   <Phone className="w-5 h-5 text-lion-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-500">Phone</p>
@@ -342,7 +343,7 @@ Thank you,
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-3 cursor-pointer" onClick={() => handleContact("email", "sales@lionvestrealty.com")}>
+                <div className="flex items-start gap-3 cursor-pointer hover:bg-gray-50/50 p-2 rounded-lg transition-colors" onClick={() => handleContact("email", "sales@lionvestrealty.com")}>
                   <Mail className="w-5 h-5 text-lion-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-500">Email</p>
@@ -350,7 +351,7 @@ Thank you,
                   </div>
                 </div>
                 
-                <div className="flex items-start gap-3">
+                <div className="flex items-start gap-3 p-2">
                   <MapPin className="w-5 h-5 text-lion-gold flex-shrink-0 mt-0.5" />
                   <div>
                     <p className="text-sm text-gray-500">Address</p>
@@ -382,7 +383,7 @@ Thank you,
             
             {/* Features */}
             <motion.div 
-              className="bg-white rounded-xl shadow-md p-6 mt-8"
+              className="glass-card rounded-xl p-6 mt-8"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -428,9 +429,9 @@ Thank you,
         </div>
       </div>
       
-      {/* Contact Dialog */}
+      {/* Contact Dialog with glassmorphism */}
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md glass-card border-0">
           <DialogHeader>
             <DialogTitle>Schedule a Visit</DialogTitle>
             <DialogDescription>

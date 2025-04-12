@@ -99,11 +99,35 @@
 
 /* Glass morphism utilities */
 .glass {
-  @apply backdrop-blur-md bg-white/20 border border-white/20;
+  @apply backdrop-blur-md bg-white/20 border border-white/20 shadow-lg;
 }
 
 .glass-dark {
-  @apply backdrop-blur-md bg-black/20 border border-white/10;
+  @apply backdrop-blur-md bg-black/20 border border-white/10 shadow-lg;
+}
+
+.glass-card {
+  @apply backdrop-blur-md bg-white/70 border border-white/30 shadow-xl;
+}
+
+.glass-gold {
+  @apply backdrop-blur-md bg-lion-gold/30 border border-lion-gold/50 shadow-lg;
+}
+
+.glass-nav {
+  @apply backdrop-blur-lg bg-white/80 border-b border-white/20 shadow-sm;
+}
+
+.glass-panel {
+  @apply backdrop-blur-md bg-white/40 border border-white/30 shadow-md rounded-xl;
+}
+
+.glass-footer {
+  @apply backdrop-blur-lg bg-lion-black/90 border-t border-white/10;
+}
+
+.glass-contact {
+  @apply backdrop-blur-md bg-white/80 border border-white/30 shadow-lg;
 }
 
 /* Gold text gradient */
@@ -161,3 +185,24 @@
 .animate-float {
   animation: floatAnimation 3s ease-in-out infinite;
 }
+
+/* New glassmorphism specific animations */
+@keyframes glassShimmer {
+  0% {
+    background-position: -100% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.glass-shimmer {
+  background: linear-gradient(90deg, 
+    rgba(255,255,255,0) 0%, 
+    rgba(255,255,255,0.2) 25%, 
+    rgba(255,255,255,0.2) 50%, 
+    rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: glassShimmer 3s infinite;
+}
+

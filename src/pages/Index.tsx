@@ -93,33 +93,39 @@ const Index = () => {
     }
   };
 
-  // Simple contact section component
+  // Simple contact section component with glassmorphism
   const SimpleContact = () => (
-    <section id="contact" className="bg-gray-100 py-20">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section id="contact" className="bg-gray-100 py-20 relative overflow-hidden">
+      {/* Glassmorphism decorative elements */}
+      <div className="absolute top-10 left-10 w-32 h-32 rounded-full bg-lion-gold/20 filter blur-3xl"></div>
+      <div className="absolute bottom-10 right-10 w-40 h-40 rounded-full bg-lion-gold/30 filter blur-3xl"></div>
+      
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-display font-bold mb-4 text-lion-black">Contact Us</h2>
+          <h2 className="text-4xl font-display font-bold mb-4 gold-gradient-text">Contact Us</h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
             Ready to learn more about our properties or have questions? Reach out to us directly!
           </p>
         </div>
         
-        <div className="flex flex-col md:flex-row justify-center items-center gap-6 max-w-md mx-auto">
-          <Button 
-            onClick={() => handleContactAction("phone")}
-            className="bg-lion-gold hover:bg-lion-darkgold text-black w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-2"
-            size="lg"
-          >
-            <Phone className="h-5 w-5" /> Call Us
-          </Button>
-          
-          <Button 
-            onClick={() => handleContactAction("email")}
-            className="bg-lion-black hover:bg-lion-darkgray text-white w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-2"
-            size="lg"
-          >
-            <Mail className="h-5 w-5" /> Email Us
-          </Button>
+        <div className="glass-panel py-10 px-6 mb-6 mx-auto max-w-lg">
+          <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full">
+            <Button 
+              onClick={() => handleContactAction("phone")}
+              className="bg-lion-gold hover:bg-lion-darkgold text-black w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
+              size="lg"
+            >
+              <Phone className="h-5 w-5" /> Call Us
+            </Button>
+            
+            <Button 
+              onClick={() => handleContactAction("email")}
+              className="bg-lion-black hover:bg-lion-darkgray text-white w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-2 shadow-lg hover:shadow-xl transition-all"
+              size="lg"
+            >
+              <Mail className="h-5 w-5" /> Email Us
+            </Button>
+          </div>
         </div>
       </div>
     </section>
@@ -137,7 +143,7 @@ const Index = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.8, ease: "easeInOut" }} // Faster transition
+            transition={{ duration: 0.8, ease: "easeInOut" }}
           >
             <Navbar />
             <Hero />
