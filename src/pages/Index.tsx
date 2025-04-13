@@ -94,31 +94,24 @@ const Index = () => {
               transition={{ duration: 0.8, ease: "easeInOut" }}
             >
               <Navbar />
-              
-              <PageSection id="home">
+              <div id="home">
                 <Hero />
-              </PageSection>
-              
-              <PageSection id="about">
+              </div>
+              <div id="about">
                 <AboutUs />
-              </PageSection>
-              
-              <PageSection id="vision-mission">
+              </div>
+              <div id="vision-mission">
                 <VisionMission />
-              </PageSection>
-              
-              <PageSection id="projects">
+              </div>
+              <div id="projects">
                 <Projects />
-              </PageSection>
-              
-              <PageSection id="team">
+              </div>
+              <div id="team">
                 <Team />
-              </PageSection>
-              
-              <PageSection id="properties">
+              </div>
+              <div id="properties">
                 <FeaturedProperties />
-              </PageSection>
-              
+              </div>
               <SimpleContact />
               <Footer />
             </motion.div>
@@ -126,15 +119,6 @@ const Index = () => {
         </AnimatePresence>
       </motion.div>
     </>
-  );
-};
-
-// Helper component to wrap each section
-const PageSection = ({ id, children }: { id: string; children: React.ReactNode }) => {
-  return (
-    <div id={id}>
-      {children}
-    </div>
   );
 };
 
