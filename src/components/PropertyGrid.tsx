@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import { projectsData } from "@/data/projectsData";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Skeleton } from "./ui/skeleton";
 
 const PropertyGrid = () => {
@@ -148,10 +148,43 @@ const PropertyGrid = () => {
 
 // Magnetic Button Component
 const MagneticButton = ({ children }) => {
+  const buttonRef = useRef(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouseMove = (e) => {
+    if (!buttonRef.current) return;
+    
+    const { clientX, clientY } = e;
+    const { left, top, width, height } = buttonRef.current.getBoundingClientRect();
+    
+    const x = clientX - (left + width / 2);
+    const y = clientY - (top + height / 2);
+    
+    // Scale movement based on distance
+    setPosition({ x: x * 0.1, y: y * 0.1 });
+  };
+
+  const handleMouseLeave = () => {
+    setPosition({ x: 0, y: 0 });
+  };
+
   return (
     <motion.div
       className="relative inline-block"
       whileHover={{ scale: 1.05 }}
+      ref={buttonRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      animate={{
+        x: position.x,
+        y: position.y
+      }}
+      transition={{
+        type: "spring",
+        stiffness: 150,
+        damping: 15,
+        mass: 0.1
+      }}
     >
       <motion.button 
         className="mt-4 px-6 py-2 bg-white text-lion-black rounded-lg border border-lion-gold/30 shadow-sm btn-glow overflow-hidden relative"

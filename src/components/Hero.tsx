@@ -2,7 +2,7 @@
 import { Button } from "./ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -147,6 +147,7 @@ const Hero = () => {
             <MagneticButton 
               className="bg-gradient-to-r from-lion-gold to-lion-darkgold hover:from-lion-darkgold hover:to-lion-gold text-black shadow-lg btn-3d px-8 py-6 rounded-md"
               onClick={() => scrollToSection('properties')}
+              variant="default"
             >
               Explore Properties
             </MagneticButton>

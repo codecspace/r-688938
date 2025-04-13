@@ -98,7 +98,9 @@ const Index = () => {
         
         // Delay blob movement for smooth effect
         setTimeout(() => {
-          blobRef.current.style.transform = `translate(${x - 200}px, ${y - 200}px)`;
+          if (blobRef.current) {
+            blobRef.current.style.transform = `translate(${x - 200}px, ${y - 200}px)`;
+          }
         }, 100);
       }
       
@@ -110,7 +112,11 @@ const Index = () => {
     
     return () => {
       clearTimeout(timer);
-      revealElements.forEach(el => observer.unobserve(el));
+      if (revealElements.length > 0) {
+        revealElements.forEach(el => {
+          if (el && observer) observer.unobserve(el);
+        });
+      }
       window.removeEventListener('mousemove', handleMouseMove);
     };
   }, [revealElements.length]);
@@ -219,6 +225,8 @@ const Index = () => {
     const [position, setPosition] = useState({ x: 0, y: 0 });
 
     const handleMouseMove = (e) => {
+      if (!buttonRef.current) return;
+      
       const { clientX, clientY } = e;
       const { left, top, width, height } = buttonRef.current.getBoundingClientRect();
       
