@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -426,4 +425,91 @@
   opacity: 0;
   transform: translateY(-20px);
   transition: opacity 0.5s, transform 0.5s;
+}
+
+/* New 3D perspective classes */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.perspective-800 {
+  perspective: 800px;
+}
+
+.perspective-500 {
+  perspective: 500px;
+}
+
+.transform-3d {
+  transform-style: preserve-3d;
+}
+
+/* 3D card effect */
+.card-3d {
+  transform-style: preserve-3d;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.card-3d-content {
+  transform: translateZ(60px);
+}
+
+.card-3d-shadow {
+  position: absolute;
+  top: 5%;
+  left: 5%;
+  width: 90%;
+  height: 90%;
+  transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+  filter: blur(20px);
+  opacity: 0.5;
+  background: rgba(0, 0, 0, 0.2);
+  transform: translateZ(-60px) translateY(20px);
+}
+
+/* Advanced 3D morphing */
+.morphism-card {
+  @apply bg-gradient-to-br from-white/10 to-white/5 backdrop-blur-md border border-white/20 shadow-lg rounded-xl overflow-hidden;
+  transform-style: preserve-3d;
+  transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.morphism-card:hover {
+  @apply shadow-2xl border-white/30 from-white/15 to-white/10;
+  transform: translateY(-5px) rotateX(2deg) rotateY(-2deg) scale(1.02);
+}
+
+/* 3D text effect */
+.text-3d {
+  text-shadow: 0px 1px 0px rgba(255,255,255,0.2), 
+               0px 2px 0px rgba(255,255,255,0.1),
+               0px 3px 5px rgba(0,0,0,0.2);
+}
+
+.gold-text-3d {
+  color: #D4AF37;
+  text-shadow: 0px 1px 0px rgba(255,215,0,0.3), 
+               0px 2px 0px rgba(212,175,55,0.2),
+               0px 3px 5px rgba(0,0,0,0.3);
+}
+
+/* Parallax depth effect */
+.depth-layer-1 {
+  transform: translateZ(50px);
+}
+
+.depth-layer-2 {
+  transform: translateZ(25px);
+}
+
+.depth-layer-3 {
+  transform: translateZ(0px);
+}
+
+.depth-layer-4 {
+  transform: translateZ(-25px);
+}
+
+.depth-layer-5 {
+  transform: translateZ(-50px);
 }
