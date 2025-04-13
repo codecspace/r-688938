@@ -79,19 +79,9 @@ const OurVision = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.2 * index }}
               viewport={{ once: true }}
-              whileHover={{
-                y: -10,
-                boxShadow: "0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
-                transition: { duration: 0.3 }
-              }}
             >
               <motion.div 
                 className="w-16 h-16 rounded-full bg-lion-gold/10 flex items-center justify-center mx-auto mb-6"
-                whileHover={{ 
-                  scale: 1.1,
-                  backgroundColor: "rgba(212, 175, 55, 0.2)",
-                  transition: { duration: 0.3 } 
-                }}
               >
                 <Check className="w-8 h-8 text-lion-gold" />
               </motion.div>

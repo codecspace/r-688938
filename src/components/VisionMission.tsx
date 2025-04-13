@@ -81,10 +81,10 @@ const VisionMission = () => {
         </motion.div>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-          {/* Vision Card with 3D effects */}
+          {/* Vision Card with 3D effects - hover animations removed */}
           <motion.div
             ref={visionRef}
-            className="vision-card relative bg-gradient-to-br from-white/5 to-white/15 backdrop-blur-md p-8 rounded-xl shadow-lg border-t-2 border-l-2 border-white/20 hover:shadow-2xl transition-all duration-300 overflow-hidden"
+            className="vision-card relative bg-gradient-to-br from-white/5 to-white/15 backdrop-blur-md p-8 rounded-xl shadow-lg border-t-2 border-l-2 border-white/20 transition-all duration-300 overflow-hidden"
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
@@ -169,10 +169,10 @@ const VisionMission = () => {
             <div className="absolute -bottom-10 -left-10 w-20 h-20 rotate-45 bg-lion-gold/5 rounded-md" />
           </motion.div>
 
-          {/* Mission Card with 3D effects */}
+          {/* Mission Card with 3D effects - hover animations removed */}
           <motion.div
             ref={missionRef}
-            className="mission-card relative bg-gradient-to-br from-white/5 to-white/15 backdrop-blur-md p-8 rounded-xl shadow-lg border-t-2 border-l-2 border-white/20 hover:shadow-2xl transition-all duration-300 overflow-hidden"
+            className="mission-card relative bg-gradient-to-br from-white/5 to-white/15 backdrop-blur-md p-8 rounded-xl shadow-lg border-t-2 border-l-2 border-white/20 transition-all duration-300 overflow-hidden"
             variants={cardVariants}
             initial="hidden"
             whileInView="visible"
