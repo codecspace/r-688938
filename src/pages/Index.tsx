@@ -68,6 +68,16 @@ const Index = () => {
     };
   }, []);
 
+  // Page sections for easy navigation
+  const sections = [
+    { id: 'home', component: <Hero /> },
+    { id: 'about', component: <AboutUs /> },
+    { id: 'vision-mission', component: <VisionMission /> },
+    { id: 'projects', component: <Projects /> },
+    { id: 'team', component: <Team /> },
+    { id: 'properties', component: <FeaturedProperties /> }
+  ];
+
   return (
     <>
       <ScrollProgress />
@@ -94,24 +104,14 @@ const Index = () => {
               transition={{ duration: 0.8, ease: "easeInOut" }}
             >
               <Navbar />
-              <div id="home">
-                <Hero />
-              </div>
-              <div id="about">
-                <AboutUs />
-              </div>
-              <div id="vision-mission">
-                <VisionMission />
-              </div>
-              <div id="projects">
-                <Projects />
-              </div>
-              <div id="team">
-                <Team />
-              </div>
-              <div id="properties">
-                <FeaturedProperties />
-              </div>
+              
+              {/* Render all page sections */}
+              {sections.map(section => (
+                <div key={section.id} id={section.id}>
+                  {section.component}
+                </div>
+              ))}
+              
               <SimpleContact />
               <Footer />
             </motion.div>

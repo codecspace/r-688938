@@ -37,7 +37,7 @@ const Hero = () => {
 
   return (
     <div className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden" id="home" ref={heroRef}>
-      {/* Parallax background with gradient overlay */}
+      {/* Modern abstract background with pattern overlay */}
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
@@ -45,18 +45,38 @@ const Hero = () => {
           y
         }}
       >
-        <motion.div 
-          className="absolute inset-0 bg-gradient-to-r from-lion-black/90 to-lion-black/50" 
-          style={{ opacity }}
-        />
+        {/* Modern overlay with pattern */}
+        <div className="absolute inset-0 bg-lion-black/80"></div>
+        
+        {/* Subtle pattern overlay */}
+        <div className="absolute inset-0" 
+          style={{ 
+            backgroundImage: "url('data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'/%3E%3C/svg%3E')",
+            backgroundSize: '150px 150px'
+          }}
+        ></div>
         
         {/* Modern blur element */}
         <div className="absolute inset-0 backdrop-blur-[2px]"></div>
       </motion.div>
       
+      {/* Modern geometric shapes for visual interest */}
+      <div className="absolute top-0 right-0 w-full h-full overflow-hidden opacity-20">
+        <motion.div 
+          className="absolute -top-20 -right-20 w-96 h-96 rounded-full border border-white/10"
+          animate={{ rotate: 360 }}
+          transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
+        ></motion.div>
+        <motion.div 
+          className="absolute -bottom-40 -left-40 w-[40rem] h-[40rem] rounded-full border border-white/5"
+          animate={{ rotate: -360 }}
+          transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
+        ></motion.div>
+      </div>
+      
       {/* Floating decorative elements */}
       <motion.div 
-        className="absolute top-28 right-16 w-40 h-40 rounded-full bg-lion-gold/20 backdrop-blur-xl"
+        className="absolute top-28 right-16 w-40 h-40 rounded-full bg-white/5 backdrop-blur-xl border border-white/10"
         animate={{ 
           y: [0, 30, 0],
           opacity: [0.2, 0.4, 0.2],
@@ -70,7 +90,7 @@ const Hero = () => {
       />
       
       <motion.div 
-        className="absolute bottom-40 left-20 w-24 h-24 rounded-full bg-white/10 backdrop-blur-xl"
+        className="absolute bottom-40 left-20 w-24 h-24 rounded-full bg-white/5 backdrop-blur-xl border border-white/10"
         animate={{ 
           y: [0, -20, 0],
           opacity: [0.1, 0.3, 0.1],
@@ -85,7 +105,7 @@ const Hero = () => {
       />
 
       <motion.div 
-        className="absolute top-48 left-[10%] w-16 h-16 rounded-full bg-lion-gold/10 backdrop-blur-lg"
+        className="absolute top-48 left-[10%] w-16 h-16 rounded-full bg-white/5 backdrop-blur-lg border border-white/10"
         animate={{ 
           y: [0, 15, 0],
           opacity: [0.1, 0.25, 0.1],
@@ -103,7 +123,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3 }}
-          className="max-w-xl glass-depth-dark p-10 rounded-2xl"
+          className="max-w-xl backdrop-blur-xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] p-10 rounded-2xl"
         >
           <motion.h1 
             className="text-5xl md:text-7xl font-display text-white mb-6 leading-tight brutalist-text"
@@ -129,7 +149,7 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.9 }}
           >
             <Button 
-              className="bg-gradient-to-r from-lion-gold to-lion-darkgold hover:from-lion-darkgold hover:to-lion-gold text-black shadow-lg btn-3d px-8 py-6 rounded-md"
+              className="bg-lion-gold hover:bg-lion-darkgold text-black shadow-lg btn-3d px-8 py-6 rounded-md"
               size="lg"
               onClick={() => scrollToSection('properties')}
             >
@@ -137,7 +157,7 @@ const Hero = () => {
             </Button>
             <Button 
               variant="outline" 
-              className="border-2 border-white/70 bg-white/10 backdrop-blur-sm text-white btn-glow overflow-hidden px-8 py-6 rounded-md shadow-md"
+              className="border-2 border-white/20 bg-white/5 backdrop-blur-sm text-white btn-glow overflow-hidden px-8 py-6 rounded-md shadow-md"
               size="lg"
               onClick={() => scrollToSection('contact')}
             >
