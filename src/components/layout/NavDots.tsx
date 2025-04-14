@@ -2,21 +2,19 @@
 import { motion, useScroll } from "framer-motion";
 import { useEffect, useState } from "react";
 
-const NavigationDots = () => {
+const NavDots = () => {
   const { scrollYProgress } = useScroll();
   const [activeSection, setActiveSection] = useState(0);
-  const sections = ["home", "about", "projects", "properties", "contact"];
+  const sections = ["home", "about", "vision-mission", "projects", "properties", "contact"];
   
   useEffect(() => {
-    const unsubscribe = scrollYProgress.on("change", (latest) => {
-      const newActiveSection = Math.floor(latest * 5);
-      if (newActiveSection !== activeSection) {
-        setActiveSection(newActiveSection);
-      }
+    const unsubscribe = scrollYProgress.onChange(v => {
+      const sectionIndex = Math.floor(v * sections.length);
+      setActiveSection(Math.min(sectionIndex, sections.length - 1));
     });
     
     return () => unsubscribe();
-  }, [scrollYProgress, activeSection]);
+  }, [scrollYProgress, sections.length]);
   
   return (
     <motion.div
@@ -34,10 +32,9 @@ const NavigationDots = () => {
             document.getElementById(section)?.scrollIntoView({behavior: 'smooth'});
           }}
           className="w-3 h-3 rounded-full bg-white/50 backdrop-blur-sm"
-          whileHover={{ scale: 1.4, backgroundColor: "#D4AF37" }}
           animate={{
-            scale: i === activeSection ? 1.4 : 1,
-            backgroundColor: i === activeSection ? "#D4AF37" : "rgba(255,255,255,0.5)"
+            scale: activeSection === i ? 1.4 : 1,
+            backgroundColor: activeSection === i ? "#D4AF37" : "rgba(255,255,255,0.5)"
           }}
           transition={{ duration: 0.2 }}
         />
@@ -46,4 +43,4 @@ const NavigationDots = () => {
   );
 };
 
-export default NavigationDots;
+export default NavDots;
