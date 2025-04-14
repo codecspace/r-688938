@@ -1,6 +1,4 @@
-
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Button } from "./ui/button";
 import { useRef, useEffect, useState } from "react";
 import { Brain, Sparkles, CheckCircle } from "lucide-react";
 
@@ -205,17 +203,9 @@ const AboutUs = () => {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
               >
-                <p className="text-lg mb-6">
+                <p className="text-lg">
                   With a client-first approach, we are proud to give real estate solutions supported by deep market insight and unwavering integrity. Whether you are looking for your dream house or a strategic commercial investment, Lionvest Realty Private. Limited Dynamic is your reliable partner in navigating the real estate landscape.
                 </p>
-                <Button 
-                  className="bg-gradient-to-r from-lion-gold to-amber-500 hover:from-lion-darkgold hover:to-amber-600 text-black font-medium px-8 py-6 h-auto text-lg shadow-lg btn-glow btn-3d group relative overflow-hidden"
-                >
-                  <span className="relative z-10">Learn More</span>
-                  
-                  {/* Animated glow effect */}
-                  <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-white/0 via-white/30 to-white/0 opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full transition-all duration-1000 ease-out"></div>
-                </Button>
               </motion.div>
             </motion.div>
           </motion.div>
@@ -254,10 +244,18 @@ const AboutUs = () => {
               </div>
             </div>
             
-            {/* Stats badge */}
-            <div className="absolute -bottom-6 -right-6 glass-depth-dark w-28 h-28 rounded-full flex flex-col items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.3)]">
-              <span className="gold-gradient-text text-4xl font-bold">12+</span>
-              <span className="text-sm text-white/90">Years Experience</span>
+            {/* Redesigned experience badge */}
+            <div className="absolute -bottom-6 -right-6 glass-depth-dark w-32 h-32 rounded-full flex flex-col items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.3)] bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 backdrop-blur-md border border-white/10">
+              <div className="relative">
+                <motion.div 
+                  className="absolute inset-0 rounded-full bg-lion-gold/20"
+                  animate={{ scale: [1, 1.2, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                />
+                <span className="gold-gradient-text text-4xl font-bold relative z-10">12+</span>
+              </div>
+              <span className="text-sm text-white/90 mt-1">Years Experience</span>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-t from-lion-gold/20 to-transparent opacity-30"></div>
             </div>
             
             {/* Decorative elements */}

@@ -1,4 +1,3 @@
-
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Book, Target, Sparkles, Lightbulb, ArrowRight, CheckCircle } from "lucide-react";
@@ -37,7 +36,7 @@ const VisionMission = () => {
     },
   };
 
-  // 3D card tilt effect with improved interaction
+  // Reduced 3D card tilt effect with improved interaction
   const [visionTilt, setVisionTilt] = useState({ x: 0, y: 0 });
   const [missionTilt, setMissionTilt] = useState({ x: 0, y: 0 });
   const [isInView, setIsInView] = useState(false);
@@ -69,8 +68,8 @@ const VisionMission = () => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    const tiltX = (centerY - y) / 25;
-    const tiltY = (x - centerX) / 25;
+    const tiltX = (centerY - y) / 40;
+    const tiltY = (x - centerX) / 40;
     
     if (isVision) {
       setVisionTilt({ x: tiltX, y: tiltY });
@@ -138,7 +137,6 @@ const VisionMission = () => {
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-0 left-0 w-full h-full bg-grid-pattern opacity-5"></div>
         
-        {/* Animated gradient orbs */}
         <motion.div 
           className="absolute top-20 left-[10%] w-64 h-64 rounded-full bg-purple-500/20 filter blur-[100px]"
           animate={{ 
@@ -165,7 +163,6 @@ const VisionMission = () => {
           }}
         />
         
-        {/* Enhanced floating neon lines with glow */}
         <div className="absolute inset-0">
           {[...Array(5)].map((_, i) => (
             <motion.div 
@@ -235,7 +232,6 @@ const VisionMission = () => {
           viewport={{ once: true, margin: "-50px" }}
           className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-20"
         >
-          {/* Vision Card with enhanced design */}
           <motion.div 
             variants={itemVariants} 
             className="h-full" 
@@ -248,10 +244,9 @@ const VisionMission = () => {
               onMouseLeave={() => resetTilt(true)}
               style={{ 
                 transform: `perspective(1000px) rotateX(${visionTilt.x}deg) rotateY(${visionTilt.y}deg)`,
-                transition: "transform 0.1s ease"
+                transition: "transform 0.2s ease"
               }}
             >
-              {/* Enhanced gradient border and background */}
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/5"></div>
               <div className="absolute -top-2 -right-2 -left-2 h-2 rounded-full bg-gradient-to-r from-blue-500/0 via-blue-500 to-blue-500/0 glass-shimmer"></div>
               
@@ -326,7 +321,6 @@ const VisionMission = () => {
                   </motion.div>
                 </div>
                 
-                {/* Interactive floating indicators */}
                 <div className="absolute bottom-6 right-6 flex items-center space-x-2">
                   <motion.div 
                     className="h-1.5 w-1.5 rounded-full bg-blue-400/60"
@@ -345,14 +339,12 @@ const VisionMission = () => {
                   />
                 </div>
                 
-                {/* Interactive corner decorations */}
                 <div className="absolute top-4 right-4 w-3 h-3 rounded-full border border-blue-400/30"></div>
                 <div className="absolute bottom-4 left-4 w-2 h-2 rounded-full border border-blue-400/20"></div>
               </CardContent>
             </Card>
           </motion.div>
 
-          {/* Mission Card with enhanced design */}
           <motion.div 
             variants={itemVariants} 
             className="h-full" 
@@ -365,10 +357,9 @@ const VisionMission = () => {
               onMouseLeave={() => resetTilt(false)}
               style={{ 
                 transform: `perspective(1000px) rotateX(${missionTilt.x}deg) rotateY(${missionTilt.y}deg)`,
-                transition: "transform 0.1s ease"
+                transition: "transform 0.2s ease"
               }}
             >
-              {/* Enhanced gradient border and background */}
               <div className="absolute inset-0 bg-gradient-to-br from-amber-600/10 to-red-600/5"></div>
               <div className="absolute -top-2 -right-2 -left-2 h-2 rounded-full bg-gradient-to-r from-amber-500/0 via-amber-500 to-amber-500/0 glass-shimmer"></div>
               
@@ -443,7 +434,6 @@ const VisionMission = () => {
                   </motion.div>
                 </div>
                 
-                {/* Interactive floating indicators */}
                 <div className="absolute bottom-6 right-6 flex items-center space-x-2">
                   <motion.div 
                     className="h-1.5 w-1.5 rounded-full bg-amber-400/60"
@@ -462,7 +452,6 @@ const VisionMission = () => {
                   />
                 </div>
                 
-                {/* Interactive corner decorations */}
                 <div className="absolute top-4 right-4 w-3 h-3 rounded-full border border-amber-400/30"></div>
                 <div className="absolute bottom-4 left-4 w-2 h-2 rounded-full border border-amber-400/20"></div>
               </CardContent>
@@ -470,7 +459,6 @@ const VisionMission = () => {
           </motion.div>
         </motion.div>
         
-        {/* Enhanced decorative element */}
         <motion.div 
           initial={{ opacity: 0, scale: 0.8 }}
           whileInView={{ opacity: 1, scale: 1 }}

@@ -1,4 +1,3 @@
-
 import { Award, Building, Trophy, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
@@ -52,7 +51,6 @@ const OurVision = () => {
     },
   };
   
-  // 3D card tilt effect
   const [tiltAngles, setTiltAngles] = useState({ x: 0, y: 0 });
   
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
@@ -63,8 +61,8 @@ const OurVision = () => {
     const centerX = rect.width / 2;
     const centerY = rect.height / 2;
     
-    const tiltX = (centerY - y) / 15;
-    const tiltY = (x - centerX) / 15;
+    const tiltX = (centerY - y) / 30;
+    const tiltY = (x - centerX) / 30;
     
     setTiltAngles({ x: tiltX, y: tiltY });
   };
@@ -75,13 +73,11 @@ const OurVision = () => {
 
   return (
     <section ref={containerRef} className="py-28 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white">
-      {/* Abstract background elements */}
       <div className="absolute inset-0 -z-10 opacity-20">
         <div className="absolute top-40 left-[20%] w-72 h-72 rounded-full bg-lion-gold/20 filter blur-[80px]"></div>
         <div className="absolute bottom-40 right-[10%] w-96 h-96 rounded-full bg-blue-400/10 filter blur-[100px]"></div>
       </div>
       
-      {/* Subtle grid pattern overlay */}
       <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlmOWY5ZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-40 -z-20"></div>
       
       <motion.div style={{ y, opacity }} className="container mx-auto px-4 max-w-6xl">
@@ -126,7 +122,6 @@ const OurVision = () => {
               onMouseMove={(e) => handleMouseMove(e, index)}
               onMouseLeave={handleMouseLeave}
             >
-              {/* Claymorphism card */}
               <div 
                 className="clay-gold p-8 h-full flex flex-col items-center text-center transform transition-transform duration-200"
                 style={{ 
@@ -151,7 +146,6 @@ const OurVision = () => {
                     </div>
                   </div>
                   
-                  {/* Decorative elements */}
                   <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-lion-gold/30"></div>
                   <div className="absolute -bottom-1 -left-1 w-2 h-2 rounded-full bg-lion-gold/20"></div>
                 </motion.div>
@@ -161,17 +155,14 @@ const OurVision = () => {
                   <p className="text-estate-500 text-lg">{value.description}</p>
                 </div>
                 
-                {/* Decorative underline */}
                 <div className="mt-5 w-16 h-1 bg-gradient-to-r from-lion-gold/0 via-lion-gold to-lion-gold/0"></div>
               </div>
               
-              {/* Decorative background effect */}
               <div className="absolute -z-10 inset-0 translate-x-3 translate-y-3 rounded-xl bg-lion-gold/5"></div>
             </motion.div>
           ))}
         </motion.div>
         
-        {/* Decorative floating elements */}
         <div className="relative h-20 mt-16">
           <motion.div 
             className="absolute left-1/4 top-1/2 w-3 h-3 rounded-full bg-lion-gold/30"

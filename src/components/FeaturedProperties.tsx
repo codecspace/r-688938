@@ -123,13 +123,23 @@ const FeaturedProperties = () => {
           viewport={{ once: true }}
         >
           <Link to="/project/aipl-joy-district">
+            {/* Updated modern button with glass/glow effect */}
             <motion.button 
-              className="px-8 py-3 bg-gradient-to-r from-lion-gold to-lion-darkgold hover:from-lion-darkgold hover:to-lion-gold text-black font-medium rounded transition-colors shadow-lg"
-              whileHover={{ scale: 1.05, boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)" }}
+              className="glass-depth-dark px-8 py-3 bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-black font-medium rounded-xl transition-all duration-300 border border-white/10 shadow-[0_8px_20px_rgba(212,175,55,0.3)] relative overflow-hidden group"
+              whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.98 }}
               transition={{ duration: 0.3 }}
             >
-              Load More Listings
+              <span className="relative z-10">Load More Listings</span>
+              
+              {/* Animated glow hover effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent opacity-0 group-hover:opacity-100 -translate-x-full group-hover:translate-x-full"
+                transition={{ duration: 1, ease: "easeOut" }}
+              />
+              
+              {/* Subtle gradient background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-lion-gold/20 to-amber-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </motion.button>
           </Link>
         </motion.div>
