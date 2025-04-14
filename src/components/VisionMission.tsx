@@ -1,3 +1,4 @@
+
 import React, { useRef, useState, useEffect } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { Book, Target, Sparkles, Lightbulb, ArrowRight, CheckCircle } from "lucide-react";
@@ -36,9 +37,6 @@ const VisionMission = () => {
     },
   };
 
-  // Reduced 3D card tilt effect with improved interaction
-  const [visionTilt, setVisionTilt] = useState({ x: 0, y: 0 });
-  const [missionTilt, setMissionTilt] = useState({ x: 0, y: 0 });
   const [isInView, setIsInView] = useState(false);
   
   useEffect(() => {
@@ -59,32 +57,6 @@ const VisionMission = () => {
       }
     };
   }, []);
-  
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, isVision: boolean) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const tiltX = (centerY - y) / 40;
-    const tiltY = (x - centerX) / 40;
-    
-    if (isVision) {
-      setVisionTilt({ x: tiltX, y: tiltY });
-    } else {
-      setMissionTilt({ x: tiltX, y: tiltY });
-    }
-  };
-  
-  const resetTilt = (isVision: boolean) => {
-    if (isVision) {
-      setVisionTilt({ x: 0, y: 0 });
-    } else {
-      setMissionTilt({ x: 0, y: 0 });
-    }
-  };
 
   // Typing text effect
   const TypingText = ({ text, delay = 0 }: { text: string; delay?: number }) => {
@@ -239,13 +211,7 @@ const VisionMission = () => {
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           >
             <Card 
-              className="glass-depth-dark h-full overflow-hidden relative group"
-              onMouseMove={(e) => handleMouseMove(e, true)}
-              onMouseLeave={() => resetTilt(true)}
-              style={{ 
-                transform: `perspective(1000px) rotateX(${visionTilt.x}deg) rotateY(${visionTilt.y}deg)`,
-                transition: "transform 0.2s ease"
-              }}
+              className="glass-depth-dark h-full overflow-hidden relative group card-glow-blue"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-blue-600/10 to-purple-600/5"></div>
               <div className="absolute -top-2 -right-2 -left-2 h-2 rounded-full bg-gradient-to-r from-blue-500/0 via-blue-500 to-blue-500/0 glass-shimmer"></div>
@@ -271,16 +237,7 @@ const VisionMission = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.7 }}
                     viewport={{ once: true }}
-                    className="neo-blur p-6 rounded-xl relative overflow-hidden"
-                    onMouseMove={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const x = e.clientX - rect.left;
-                      const y = e.clientY - rect.top;
-                      e.currentTarget.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(59, 130, 246, 0.2), rgba(30, 64, 175, 0.1))`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '';
-                    }}
+                    className="neo-blur p-6 rounded-xl relative overflow-hidden glow-hover-blue"
                   >
                     <div className="absolute -top-10 -right-10 w-20 h-20 bg-blue-500/20 rounded-full blur-xl"></div>
                     <p className="relative z-10 text-lg leading-relaxed">
@@ -298,16 +255,7 @@ const VisionMission = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, duration: 0.7 }}
                     viewport={{ once: true }}
-                    className="neo-blur p-6 rounded-xl relative overflow-hidden"
-                    onMouseMove={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const x = e.clientX - rect.left;
-                      const y = e.clientY - rect.top;
-                      e.currentTarget.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(147, 51, 234, 0.2), rgba(79, 70, 229, 0.1))`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '';
-                    }}
+                    className="neo-blur p-6 rounded-xl relative overflow-hidden glow-hover-purple"
                   >
                     <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-purple-500/20 rounded-full blur-xl"></div>
                     <p className="relative z-10 text-lg leading-relaxed">
@@ -352,13 +300,7 @@ const VisionMission = () => {
             transition={{ type: "spring", stiffness: 300, damping: 15 }}
           >
             <Card 
-              className="glass-depth-dark h-full overflow-hidden relative group"
-              onMouseMove={(e) => handleMouseMove(e, false)}
-              onMouseLeave={() => resetTilt(false)}
-              style={{ 
-                transform: `perspective(1000px) rotateX(${missionTilt.x}deg) rotateY(${missionTilt.y}deg)`,
-                transition: "transform 0.2s ease"
-              }}
+              className="glass-depth-dark h-full overflow-hidden relative group card-glow-amber"
             >
               <div className="absolute inset-0 bg-gradient-to-br from-amber-600/10 to-red-600/5"></div>
               <div className="absolute -top-2 -right-2 -left-2 h-2 rounded-full bg-gradient-to-r from-amber-500/0 via-amber-500 to-amber-500/0 glass-shimmer"></div>
@@ -384,16 +326,7 @@ const VisionMission = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.3, duration: 0.7 }}
                     viewport={{ once: true }}
-                    className="neo-blur p-6 rounded-xl relative overflow-hidden"
-                    onMouseMove={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const x = e.clientX - rect.left;
-                      const y = e.clientY - rect.top;
-                      e.currentTarget.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(245, 158, 11, 0.2), rgba(180, 83, 9, 0.1))`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '';
-                    }}
+                    className="neo-blur p-6 rounded-xl relative overflow-hidden glow-hover-amber"
                   >
                     <div className="absolute -top-10 -right-10 w-20 h-20 bg-amber-500/20 rounded-full blur-xl"></div>
                     <p className="relative z-10 text-lg leading-relaxed">
@@ -411,16 +344,7 @@ const VisionMission = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.5, duration: 0.7 }}
                     viewport={{ once: true }}
-                    className="neo-blur p-6 rounded-xl relative overflow-hidden"
-                    onMouseMove={(e) => {
-                      const rect = e.currentTarget.getBoundingClientRect();
-                      const x = e.clientX - rect.left;
-                      const y = e.clientY - rect.top;
-                      e.currentTarget.style.background = `radial-gradient(circle at ${x}px ${y}px, rgba(239, 68, 68, 0.2), rgba(185, 28, 28, 0.1))`;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.currentTarget.style.background = '';
-                    }}
+                    className="neo-blur p-6 rounded-xl relative overflow-hidden glow-hover-red"
                   >
                     <div className="absolute -bottom-10 -left-10 w-20 h-20 bg-red-500/20 rounded-full blur-xl"></div>
                     <p className="relative z-10 text-lg leading-relaxed">

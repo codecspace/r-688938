@@ -1,3 +1,4 @@
+
 import { Award, Building, Trophy, Sparkles } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef, useState } from "react";
@@ -50,26 +51,6 @@ const OurVision = () => {
       transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] },
     },
   };
-  
-  const [tiltAngles, setTiltAngles] = useState({ x: 0, y: 0 });
-  
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>, index: number) => {
-    const card = e.currentTarget;
-    const rect = card.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const y = e.clientY - rect.top;
-    const centerX = rect.width / 2;
-    const centerY = rect.height / 2;
-    
-    const tiltX = (centerY - y) / 30;
-    const tiltY = (x - centerX) / 30;
-    
-    setTiltAngles({ x: tiltX, y: tiltY });
-  };
-  
-  const handleMouseLeave = () => {
-    setTiltAngles({ x: 0, y: 0 });
-  };
 
   return (
     <section ref={containerRef} className="py-28 relative overflow-hidden bg-gradient-to-b from-gray-50 to-white">
@@ -119,13 +100,10 @@ const OurVision = () => {
               className="relative"
               whileHover={{ y: -8 }}
               transition={{ duration: 0.4, type: "spring", stiffness: 300, damping: 20 }}
-              onMouseMove={(e) => handleMouseMove(e, index)}
-              onMouseLeave={handleMouseLeave}
             >
               <div 
-                className="clay-gold p-8 h-full flex flex-col items-center text-center transform transition-transform duration-200"
+                className="clay-gold p-8 h-full flex flex-col items-center text-center card-glow-gold transition-all duration-300"
                 style={{ 
-                  transform: `perspective(1000px) rotateX(${tiltAngles.x}deg) rotateY(${tiltAngles.y}deg)`,
                   boxShadow: `
                     6px 6px 16px rgba(0,0,0,0.08),
                     -6px -6px 16px rgba(255,255,255,0.8),

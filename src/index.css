@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
 
 @tailwind base;
@@ -186,6 +185,106 @@
 }
 
 /* Glass/Glow button effects */
+.card-glow-blue {
+  transition: all 0.3s ease-out;
+  position: relative;
+}
+
+.card-glow-blue::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.5), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.card-glow-blue:hover::before {
+  opacity: 0.4;
+}
+
+.card-glow-amber {
+  transition: all 0.3s ease-out;
+  position: relative;
+}
+
+.card-glow-amber::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.5), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.card-glow-amber:hover::before {
+  opacity: 0.4;
+}
+
+.card-glow-gold {
+  transition: all 0.3s ease-out;
+  position: relative;
+}
+
+.card-glow-gold::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.5), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  border-radius: inherit;
+  z-index: 0;
+}
+
+.card-glow-gold:hover::before {
+  opacity: 0.4;
+}
+
+.glow-hover-blue {
+  transition: all 0.3s ease;
+}
+
+.glow-hover-blue:hover {
+  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3);
+  border-color: rgba(59, 130, 246, 0.5);
+  background: radial-gradient(circle at 50% 50%, rgba(59, 130, 246, 0.06), transparent 70%);
+}
+
+.glow-hover-purple {
+  transition: all 0.3s ease;
+}
+
+.glow-hover-purple:hover {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+  border-color: rgba(139, 92, 246, 0.5);
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 246, 0.06), transparent 70%);
+}
+
+.glow-hover-amber {
+  transition: all 0.3s ease;
+}
+
+.glow-hover-amber:hover {
+  box-shadow: 0 0 20px rgba(245, 158, 11, 0.3);
+  border-color: rgba(245, 158, 11, 0.5);
+  background: radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.06), transparent 70%);
+}
+
+.glow-hover-red {
+  transition: all 0.3s ease;
+}
+
+.glow-hover-red:hover {
+  box-shadow: 0 0 20px rgba(239, 68, 68, 0.3);
+  border-color: rgba(239, 68, 68, 0.5);
+  background: radial-gradient(circle at 50% 50%, rgba(239, 68, 68, 0.06), transparent 70%);
+}
+
 .btn-glow {
   @apply relative overflow-hidden transition-all duration-500;
 }
