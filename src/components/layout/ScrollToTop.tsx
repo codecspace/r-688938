@@ -26,23 +26,23 @@ const ScrollToTop = () => {
           transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 20 }}
         >
           <motion.button
-            className="glass-depth-dark w-12 h-12 rounded-full flex items-center justify-center cursor-pointer shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-white/10 group overflow-hidden"
+            className="glass-depth-dark w-14 h-14 rounded-full flex items-center justify-center cursor-pointer shadow-[0_0_20px_rgba(212,175,55,0.6)] border border-white/10 group overflow-hidden"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.1, boxShadow: "0 0 25px rgba(212,175,55,0.8)" }}
             whileTap={{ scale: 0.95 }}
           >
-            {/* Animated background */}
-            <div className="absolute inset-0 bg-gradient-to-br from-lion-gold/20 to-lion-darkgold/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            {/* Enhanced animated background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-lion-gold/30 to-lion-darkgold/30 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             
-            {/* Animated shine effect */}
+            {/* Enhanced animated shine effect */}
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
               initial={{ x: "-100%" }}
               animate={{ x: "100%" }}
               transition={{ repeat: Infinity, repeatType: "mirror", duration: 1.5, ease: "linear" }}
             />
             
-            <ChevronUp className="h-5 w-5 text-white/90 relative z-10 group-hover:text-white transition-colors" />
+            <ChevronUp className="h-6 w-6 text-white/90 relative z-10 group-hover:text-white transition-colors" />
           </motion.button>
         </motion.div>
       )}

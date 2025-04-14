@@ -6,7 +6,7 @@ const ScrollProgress = () => {
   
   return (
     <>
-      {/* Main progress bar with glassmorphism */}
+      {/* Main progress bar with enhanced glassmorphism */}
       <motion.div
         style={{
           position: "fixed",
@@ -18,23 +18,39 @@ const ScrollProgress = () => {
           zIndex: 1000,
           scaleX: scrollYProgress
         }}
-        className="bg-gradient-to-r from-lion-gold via-lion-lightgold to-amber-300 backdrop-blur-sm shadow-[0_0_10px_rgba(212,175,55,0.5)]"
+        className="bg-gradient-to-r from-lion-gold via-lion-lightgold to-amber-300 backdrop-blur-sm shadow-[0_0_15px_rgba(212,175,55,0.7)]"
       />
       
-      {/* Subtle glow effect underneath */}
+      {/* Enhanced glow effect underneath */}
+      <motion.div
+        style={{
+          position: "fixed",
+          top: 4,
+          left: 0,
+          right: 0,
+          height: "2px",
+          transformOrigin: "0%",
+          zIndex: 999,
+          scaleX: scrollYProgress,
+          filter: "blur(3px)"
+        }}
+        className="bg-lion-gold/60"
+      />
+      
+      {/* Subtle shimmer animation */}
       <motion.div
         style={{
           position: "fixed",
           top: 0,
           left: 0,
           right: 0,
-          height: "1px",
+          height: "4px",
           transformOrigin: "0%",
-          zIndex: 999,
+          zIndex: 1001,
           scaleX: scrollYProgress,
-          filter: "blur(1px)"
+          opacity: 0.5
         }}
-        className="bg-lion-gold/50"
+        className="glass-shimmer"
       />
     </>
   );
