@@ -1,6 +1,7 @@
 
-import { motion, useScroll } from "framer-motion";
+import { motion, useScroll, AnimatePresence } from "framer-motion";
 import { useEffect, useState } from "react";
+import { ChevronUp } from "lucide-react";
 
 const ScrollToTop = () => {
   const { scrollYProgress } = useScroll();
@@ -15,18 +16,37 @@ const ScrollToTop = () => {
   }, [scrollYProgress]);
   
   return (
-    <motion.div
-      className="fixed bottom-6 right-6 w-12 h-12 bg-lion-gold/90 backdrop-blur-lg rounded-full flex items-center justify-center cursor-pointer z-50 shadow-lg"
-      whileTap={{ scale: 0.95 }}
-      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: showButton ? 1 : 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 10l7-7m0 0l7 7m-7-7v18" />
-      </svg>
-    </motion.div>
+    <AnimatePresence>
+      {showButton && (
+        <motion.div
+          className="fixed bottom-8 right-8 z-50"
+          initial={{ opacity: 0, scale: 0.5, y: 20 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
+          exit={{ opacity: 0, scale: 0.5, y: 20 }}
+          transition={{ duration: 0.3, type: "spring", stiffness: 300, damping: 20 }}
+        >
+          <motion.button
+            className="glass-depth-dark w-12 h-12 rounded-full flex items-center justify-center cursor-pointer shadow-[0_0_15px_rgba(212,175,55,0.5)] border border-white/10 group overflow-hidden"
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.95 }}
+          >
+            {/* Animated background */}
+            <div className="absolute inset-0 bg-gradient-to-br from-lion-gold/20 to-lion-darkgold/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            
+            {/* Animated shine effect */}
+            <motion.div
+              className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+              initial={{ x: "-100%" }}
+              animate={{ x: "100%" }}
+              transition={{ repeat: Infinity, repeatType: "mirror", duration: 1.5, ease: "linear" }}
+            />
+            
+            <ChevronUp className="h-5 w-5 text-white/90 relative z-10 group-hover:text-white transition-colors" />
+          </motion.button>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };
 
