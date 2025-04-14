@@ -1,7 +1,7 @@
 
-import { Button } from "@/components/ui/button";
-import { Mail, Phone } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Phone, Mail } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
 
 const SimpleContact = () => {
@@ -9,7 +9,7 @@ const SimpleContact = () => {
   const opacity = useTransform(scrollYProgress, [0.8, 0.9], [0, 1]);
   const scale = useTransform(scrollYProgress, [0.8, 0.9], [0.95, 1]);
 
-  const handleContactAction = (type) => {
+  const handleContactAction = (type: string) => {
     if (type === "phone") {
       window.location.href = "tel:9773552334";
       toast({
@@ -77,19 +77,23 @@ const SimpleContact = () => {
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 w-full relative z-10">
             <Button 
               onClick={() => handleContactAction("phone")}
-              className="bg-lion-gold hover:bg-lion-darkgold text-black w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-3 shadow-lg btn-3d"
+              className="bg-lion-gold hover:bg-lion-darkgold text-black w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-3 shadow-lg"
               size="lg"
             >
-              <Phone className="h-5 w-5" /> Call Us
+              <span className="relative z-10 flex items-center gap-3">
+                <Phone className="h-5 w-5" />
+                Call Us
+              </span>
             </Button>
             
             <Button 
               onClick={() => handleContactAction("email")}
-              className="bg-lion-black hover:bg-lion-darkgray text-white w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-3 shadow-lg btn-glow overflow-hidden relative"
+              className="bg-lion-black hover:bg-lion-darkgray text-white w-full md:w-auto py-6 px-8 text-lg font-medium flex items-center justify-center gap-3 shadow-lg overflow-hidden relative"
               size="lg"
             >
               <span className="relative z-10 flex items-center gap-3">
-                <Mail className="h-5 w-5" /> Email Us
+                <Mail className="h-5 w-5" />
+                Email Us
               </span>
             </Button>
           </div>

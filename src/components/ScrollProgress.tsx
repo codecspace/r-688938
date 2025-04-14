@@ -6,13 +6,8 @@ const ScrollProgress = () => {
   
   return (
     <motion.div
+      className="fixed top-0 left-0 right-0 h-[5px] bg-gradient-to-r from-lion-gold to-lion-lightgold"
       style={{
-        position: "fixed",
-        top: 0,
-        left: 0,
-        right: 0,
-        height: "5px",
-        background: "linear-gradient(to right, #D4AF37, #F5D76E)",
         transformOrigin: "0%",
         zIndex: 1000,
         scaleX: scrollYProgress

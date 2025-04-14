@@ -7,8 +7,8 @@ const ScrollToTop = () => {
   const [showButton, setShowButton] = useState(false);
   
   useEffect(() => {
-    const unsubscribe = scrollYProgress.onChange(v => {
-      setShowButton(v > 0.1);
+    const unsubscribe = scrollYProgress.on("change", (latest) => {
+      setShowButton(latest > 0.1);
     });
     
     return () => unsubscribe();
@@ -17,6 +17,7 @@ const ScrollToTop = () => {
   return (
     <motion.div
       className="fixed bottom-6 right-6 w-12 h-12 bg-lion-gold/90 backdrop-blur-lg rounded-full flex items-center justify-center cursor-pointer z-50 shadow-lg"
+      whileHover={{ scale: 1.1 }}
       whileTap={{ scale: 0.95 }}
       onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
       initial={{ opacity: 0 }}

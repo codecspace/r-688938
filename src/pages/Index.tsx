@@ -1,13 +1,5 @@
 
 import { useEffect, useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-
-// Layout Components
-import ScrollProgress from "@/components/layout/ScrollProgress";
-import ScrollToTop from "@/components/layout/ScrollToTop";
-import NavDots from "@/components/layout/NavDots";
-
-// Page Components
 import LoadingScreen from "@/components/LoadingScreen";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -16,11 +8,21 @@ import VisionMission from "@/components/VisionMission";
 import Projects from "@/components/Projects";
 import Team from "@/components/Team";
 import FeaturedProperties from "@/components/FeaturedProperties";
-import SimpleContact from "@/components/SimpleContact";
 import Footer from "@/components/Footer";
+import SimpleContact from "@/components/SimpleContact";
+import ScrollProgress from "@/components/ScrollProgress";
+import ScrollToTop from "@/components/ScrollToTop";
+import NavigationDots from "@/components/NavigationDots";
+import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
+  const { scrollYProgress } = useScroll();
+  const [revealElements, setRevealElements] = useState([]);
+
+  // Dynamic gradient background effect
+  const gradientOpacity = useTransform(scrollYProgress, [0, 0.5], [0, 0.2]);
+  const gradientRotation = useTransform(scrollYProgress, [0, 1], [0, 360]);
   
   useEffect(() => {
     // Pre-load main content to prevent white flash
@@ -63,16 +65,53 @@ const Index = () => {
       }, 300);
     }, 2500);
     
+    // Setup scroll reveal observer
+    const observerOptions = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.1,
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, observerOptions);
+    
+    const elements = document.querySelectorAll('.reveal-on-scroll');
+    elements.forEach(el => observer.observe(el));
+    
+    // Store elements for cleanup
+    setRevealElements(Array.from(elements));
+    
     return () => {
       clearTimeout(timer);
+      if (revealElements.length > 0) {
+        revealElements.forEach(el => {
+          if (el && observer) observer.unobserve(el);
+        });
+      }
     };
-  }, []);
+  }, [revealElements.length]);
 
   return (
     <>
+      {/* Dynamic background gradient that reacts to scroll */}
+      <motion.div 
+        className="fixed inset-0 pointer-events-none z-[-1]"
+        style={{ 
+          opacity: gradientOpacity, 
+          backgroundImage: "linear-gradient(45deg, rgba(212, 175, 55, 0.1), rgba(255, 255, 255, 0.05), rgba(212, 175, 55, 0.15))",
+          rotate: gradientRotation
+        }}
+      />
+      
       <ScrollProgress />
       <ScrollToTop />
-      <NavDots />
+      <NavigationDots />
 
       <motion.div
         className="page-wrapper"
@@ -94,31 +133,12 @@ const Index = () => {
               transition={{ duration: 0.8, ease: "easeInOut" }}
             >
               <Navbar />
-              
-              <PageSection id="home">
-                <Hero />
-              </PageSection>
-              
-              <PageSection id="about">
-                <AboutUs />
-              </PageSection>
-              
-              <PageSection id="vision-mission">
-                <VisionMission />
-              </PageSection>
-              
-              <PageSection id="projects">
-                <Projects />
-              </PageSection>
-              
-              <PageSection id="team">
-                <Team />
-              </PageSection>
-              
-              <PageSection id="properties">
-                <FeaturedProperties />
-              </PageSection>
-              
+              <Hero />
+              <AboutUs />
+              <VisionMission />
+              <Projects />
+              <Team />
+              <FeaturedProperties />
               <SimpleContact />
               <Footer />
             </motion.div>
@@ -126,15 +146,6 @@ const Index = () => {
         </AnimatePresence>
       </motion.div>
     </>
-  );
-};
-
-// Helper component to wrap each section
-const PageSection = ({ id, children }: { id: string; children: React.ReactNode }) => {
-  return (
-    <div id={id}>
-      {children}
-    </div>
   );
 };
 
