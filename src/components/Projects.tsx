@@ -1,5 +1,7 @@
 
 import { motion } from "framer-motion";
+import { ArrowRight, Map } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Define a new array with updated project data that matches the UI in the screenshot
 const projectsData = [
@@ -66,7 +68,7 @@ const Projects = () => {
           />
         </motion.div>
 
-        <div className="space-y-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {projectsData.map((project, index) => (
             <motion.div
               key={project.id}
@@ -74,31 +76,53 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100"
+              className="glass-depth overflow-hidden rounded-xl"
+              whileHover={{ 
+                y: -10,
+                transition: { duration: 0.3 }
+              }}
             >
-              <div className="p-8 flex flex-col md:flex-row items-center gap-12">
-                <div className="w-full md:w-2/5">
-                  <img
-                    src={project.image}
-                    alt={project.developerName}
-                    className="w-full h-auto rounded-lg object-contain"
-                  />
+              <div className="aspect-video relative overflow-hidden">
+                <img
+                  src={project.image}
+                  alt={project.developerName}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent"></div>
+                <div className="absolute bottom-0 left-0 w-full p-6 flex items-center justify-between">
+                  <div>
+                    <h4 className="text-white text-2xl font-medium">{project.developerName}</h4>
+                    <div className="flex items-center mt-1 text-white/70">
+                      <Map size={14} className="mr-1" />
+                      <span className="text-sm">{project.location}</span>
+                    </div>
+                  </div>
+                  <Link to={`/project/${project.id}`}>
+                    <motion.div 
+                      className="w-10 h-10 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20"
+                      whileHover={{ 
+                        scale: 1.1, 
+                        backgroundColor: "rgba(212, 175, 55, 0.3)"
+                      }}
+                    >
+                      <ArrowRight size={18} className="text-white" />
+                    </motion.div>
+                  </Link>
                 </div>
-                <div className="w-full md:w-3/5">
-                  <h4 className="text-2xl font-display font-semibold mb-4 text-lion-black">
-                    {project.developerName}
-                  </h4>
-                  <p className="text-gray-600 leading-relaxed">
-                    {project.description}
-                  </p>
-                </div>
+              </div>
+              <div className="p-6 bg-white">
+                <p className="text-gray-600 line-clamp-3">{project.description}</p>
+                <Link to={`/project/${project.id}`} className="inline-flex items-center mt-4 text-lion-gold font-medium group">
+                  <span className="group-hover:underline">View Details</span>
+                  <ArrowRight size={16} className="ml-1 transition-transform group-hover:translate-x-1" />
+                </Link>
               </div>
             </motion.div>
           ))}
         </div>
 
         <motion.div
-          className="text-center mt-16 bg-white p-10 rounded-2xl shadow-md border border-gray-100 backdrop-blur-sm bg-white/80"
+          className="text-center mt-16 glass-depth-card p-10 backdrop-blur-sm"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}

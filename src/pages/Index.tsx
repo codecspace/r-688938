@@ -68,16 +68,6 @@ const Index = () => {
     };
   }, []);
 
-  // Page sections for easy navigation
-  const sections = [
-    { id: 'home', component: <Hero /> },
-    { id: 'about', component: <AboutUs /> },
-    { id: 'vision-mission', component: <VisionMission /> },
-    { id: 'projects', component: <Projects /> },
-    { id: 'team', component: <Team /> },
-    { id: 'properties', component: <FeaturedProperties /> }
-  ];
-
   return (
     <>
       <ScrollProgress />
@@ -97,7 +87,7 @@ const Index = () => {
           ) : (
             <motion.div 
               key="content"
-              className="min-h-screen w-full overflow-hidden bg-black"
+              className="min-h-screen w-full overflow-hidden bg-white"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -105,12 +95,29 @@ const Index = () => {
             >
               <Navbar />
               
-              {/* Render all page sections */}
-              {sections.map(section => (
-                <div key={section.id} id={section.id}>
-                  {section.component}
-                </div>
-              ))}
+              <PageSection id="home">
+                <Hero />
+              </PageSection>
+              
+              <PageSection id="about">
+                <AboutUs />
+              </PageSection>
+              
+              <PageSection id="vision-mission">
+                <VisionMission />
+              </PageSection>
+              
+              <PageSection id="projects">
+                <Projects />
+              </PageSection>
+              
+              <PageSection id="team">
+                <Team />
+              </PageSection>
+              
+              <PageSection id="properties">
+                <FeaturedProperties />
+              </PageSection>
               
               <SimpleContact />
               <Footer />
@@ -119,6 +126,15 @@ const Index = () => {
         </AnimatePresence>
       </motion.div>
     </>
+  );
+};
+
+// Helper component to wrap each section
+const PageSection = ({ id, children }: { id: string; children: React.ReactNode }) => {
+  return (
+    <div id={id}>
+      {children}
+    </div>
   );
 };
 
