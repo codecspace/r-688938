@@ -97,7 +97,7 @@ const Index = () => {
           ) : (
             <motion.div 
               key="content"
-              className="min-h-screen w-full overflow-hidden bg-white"
+              className="min-h-screen w-full overflow-hidden bg-black"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
