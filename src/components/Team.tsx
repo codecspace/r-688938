@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/dialog";
-import { Mail, Phone, Award, MapPin } from "lucide-react";
+import { Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { toast } from "@/hooks/use-toast";
 
@@ -255,17 +255,6 @@ Thank you,
                     </p>
                   </motion.div>
                 </motion.div>
-                
-                {/* Experience badge for all team members (now includes Jazbi Fatema) */}
-                <motion.div 
-                  className="absolute top-6 right-6 z-30 flex items-center gap-2 backdrop-blur-md bg-lion-gold/90 border border-white/20 px-4 py-2 rounded-full shadow-lg"
-                  initial={{ x: 20, opacity: 0 }}
-                  animate={{ x: 0, opacity: 1 }}
-                  transition={{ delay: 0.6, duration: 0.4 }}
-                >
-                  <Award className="h-4 w-4 text-white" />
-                  <span className="text-white text-sm font-medium">12+ Years Experience</span>
-                </motion.div>
               </div>
             </motion.div>
           ))}
@@ -341,17 +330,6 @@ Thank you,
                     <DialogDescription className="text-gray-600 whitespace-pre-line text-base leading-relaxed">
                       {selectedMember.bio}
                     </DialogDescription>
-                    
-                    {/* Experience showcase */}
-                    <div className="mt-8 flex items-center gap-3 bg-gray-50 p-4 rounded-lg border border-gray-100">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-lion-gold to-amber-600 flex items-center justify-center border border-white">
-                        <Award className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <p className="text-sm text-gray-500">Industry Experience</p>
-                        <p className="text-xl font-semibold text-gray-800">12+ Years</p>
-                      </div>
-                    </div>
                   </div>
                 </div>
               </DialogHeader>
