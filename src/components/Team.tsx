@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "./ui/dialog";
-import { Mail, Phone } from "lucide-react";
+import { Mail, Phone, Award, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { toast } from "@/hooks/use-toast";
 
@@ -102,21 +102,68 @@ Thank you,
   };
 
   return (
-    <section className="py-20 bg-white" id="team">
-      <div className="container mx-auto px-4 max-w-6xl">
+    <section className="py-24 relative bg-white" id="team">
+      {/* Abstract background elements */}
+      <div className="absolute inset-0 -z-10 overflow-hidden">
+        <div className="absolute top-20 left-[10%] w-72 h-72 rounded-full bg-purple-500/5 filter blur-[120px]"></div>
+        <div className="absolute bottom-40 right-[15%] w-80 h-80 rounded-full bg-blue-500/5 filter blur-[100px]"></div>
+        <div className="absolute top-[40%] right-[30%] w-64 h-64 rounded-full bg-lion-gold/5 filter blur-[80px]"></div>
+        
+        {/* Subtle grid pattern */}
+        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlmOWY5ZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDIiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
+      </div>
+
+      <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <motion.div 
-          className="text-center mb-16"
+          className="text-center mb-20"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7 }}
           viewport={{ once: true, margin: "-50px" }}
         >
-          <h2 className="text-sm uppercase tracking-wider text-lion-gold mb-2">Team</h2>
-          <h3 className="text-4xl font-display text-lion-black">Our Team</h3>
+          <motion.span 
+            className="block text-sm uppercase tracking-widest text-lion-gold mb-2 font-medium"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.2, duration: 0.5 }}
+            viewport={{ once: true }}
+          >
+            Expert Team
+          </motion.span>
+          
+          <motion.h2 
+            className="text-4xl md:text-5xl font-display text-lion-black mb-6"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.3, duration: 0.6 }}
+            viewport={{ once: true }}
+          >
+            Meet Our Leadership
+          </motion.h2>
+          
+          <motion.div 
+            className="mx-auto max-w-2xl"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.4, duration: 0.7 }}
+            viewport={{ once: true }}
+          >
+            <p className="text-gray-600 text-lg">
+              Our talented team of industry professionals brings decades of combined experience to deliver exceptional real estate solutions.
+            </p>
+          </motion.div>
+          
+          <motion.div 
+            className="w-24 h-1 bg-gradient-to-r from-lion-gold/20 via-lion-gold to-lion-gold/20 mx-auto mt-8 rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: "6rem" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          />
         </motion.div>
 
         <motion.div 
-          className="grid grid-cols-1 md:grid-cols-3 gap-12"
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
@@ -128,31 +175,51 @@ Thank you,
               variants={itemVariants}
               className="group cursor-pointer"
               onClick={() => openProfile(member)}
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 300, damping: 10 }}
             >
-              <div className="relative overflow-hidden rounded-xl shadow-xl h-[450px]">
-                <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent z-10 opacity-70 group-hover:opacity-90 transition-opacity duration-300"></div>
-                <motion.img 
-                  src={member.image} 
-                  alt={member.name} 
-                  className="w-full h-full object-cover object-center"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.7 }}
-                />
+              <div className="overflow-hidden glass-depth-card relative h-[480px] rounded-2xl transition-all duration-500 card-glow-gold">
+                {/* Image container with gradient overlay */}
+                <div className="absolute inset-0 z-10">
+                  <motion.div 
+                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-500"
+                    initial={{ opacity: 0.5 }}
+                    whileHover={{ opacity: 0.7 }}
+                    transition={{ duration: 0.5 }}
+                  />
+                  <motion.img 
+                    src={member.image} 
+                    alt={member.name} 
+                    className="w-full h-full object-cover object-center transition-transform duration-700"
+                    initial={{ scale: 1 }}
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.7 }}
+                  />
+                </div>
+                
+                {/* Content overlay with glass effect */}
                 <motion.div 
-                  className="absolute bottom-0 left-0 right-0 p-8 z-20 text-white transform transition-all duration-500"
-                  initial={{ y: 20, opacity: 0.8 }}
+                  className="absolute bottom-0 left-0 right-0 p-8 z-20 backdrop-blur-sm bg-black/10"
+                  initial={{ y: 20, opacity: 0.9 }}
                   whileHover={{ y: 0, opacity: 1 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <h4 className="text-3xl font-display mb-2">{member.name}</h4>
-                  <p className="text-lion-gold font-medium mb-4">{member.role}</p>
+                  <div className="relative">
+                    {/* Gold accent line */}
+                    <div className="absolute -left-8 top-1/2 -translate-y-1/2 w-5 h-[2px] bg-lion-gold"></div>
+                    
+                    <h3 className="text-2xl font-display text-white mb-1 tracking-wide">
+                      {member.name}
+                    </h3>
+                    
+                    <p className="text-lion-gold font-medium mb-4 tracking-wider text-sm uppercase">
+                      {member.role}
+                    </p>
+                  </div>
                   
-                  <motion.div className="flex space-x-4 mt-4">
+                  <div className="flex items-center gap-4 mt-6">
                     {/* Only show email for Prem Mohan Singh */}
                     {member.name === "Prem Mohan Singh" && member.email && (
-                      <motion.span
-                        className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center"
+                      <motion.button
+                        className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10"
                         whileHover={{ scale: 1.1, backgroundColor: "rgba(212, 175, 55, 0.3)" }}
                         onClick={(e) => {
                           e.stopPropagation();
@@ -160,11 +227,11 @@ Thank you,
                         }}
                       >
                         <Mail className="w-5 h-5 text-white" />
-                      </motion.span>
+                      </motion.button>
                     )}
                     {member.phoneNumber && (
-                      <motion.span
-                        className="w-10 h-10 bg-white/10 backdrop-blur-md rounded-full flex items-center justify-center"
+                      <motion.button
+                        className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center backdrop-blur-sm border border-white/10"
                         whileHover={{ scale: 1.1, backgroundColor: "rgba(212, 175, 55, 0.3)" }}
                         onClick={(e) => {
                           e.stopPropagation();
@@ -172,18 +239,35 @@ Thank you,
                         }}
                       >
                         <Phone className="w-5 h-5 text-white" />
-                      </motion.span>
+                      </motion.button>
                     )}
-                  </motion.div>
+                  </div>
                   
-                  <motion.div
+                  <motion.div 
                     className="mt-6 pt-4 border-t border-white/20"
                     initial={{ opacity: 0, height: 0 }}
-                    whileHover={{ opacity: 1, height: "auto" }}
+                    animate={{ opacity: 1, height: "auto" }}
+                    transition={{ duration: 0.5 }}
                   >
-                    <p className="text-white/80 line-clamp-2">View profile</p>
+                    <p className="text-white/90 font-medium flex items-center gap-2">
+                      <span className="text-lion-gold">View Profile</span>
+                      <span className="w-6 h-[1px] bg-lion-gold/50"></span>
+                    </p>
                   </motion.div>
                 </motion.div>
+                
+                {/* Experience badge for Prem Singh and Vaibhav Gupta */}
+                {(member.name === "Prem Mohan Singh" || member.name === "Vaibhav Gupta") && (
+                  <motion.div 
+                    className="absolute top-6 right-6 z-30 flex items-center gap-2 backdrop-blur-md bg-black/40 border border-white/10 px-4 py-2 rounded-full"
+                    initial={{ x: 20, opacity: 0 }}
+                    animate={{ x: 0, opacity: 1 }}
+                    transition={{ delay: 0.6, duration: 0.4 }}
+                  >
+                    <Award className="h-4 w-4 text-lion-gold" />
+                    <span className="text-white text-sm font-medium">12+ Years</span>
+                  </motion.div>
+                )}
               </div>
             </motion.div>
           ))}
@@ -193,55 +277,89 @@ Thank you,
       {/* Team Member Profile Dialog */}
       {selectedMember && (
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
-            <DialogHeader>
-              <div className="flex flex-col md:flex-row gap-8 items-start">
-                <div className="w-full md:w-1/3">
-                  <div className="rounded-xl overflow-hidden shadow-xl">
-                    <img 
-                      src={selectedMember.image} 
-                      alt={selectedMember.name} 
-                      className="w-full h-auto object-cover"
-                    />
-                  </div>
-                  
-                  <div className="mt-6 space-y-4">
-                    <h4 className="text-xl font-semibold">Contact</h4>
-                    <div className="flex items-center space-x-4">
-                      {/* Only show email button for Prem Mohan Singh */}
-                      {selectedMember.name === "Prem Mohan Singh" && selectedMember.email && (
-                        <Button 
-                          variant="outline" 
-                          size="icon"
-                          onClick={() => handleContactClick("email", selectedMember.email)}
-                        >
-                          <Mail className="h-4 w-4" />
-                        </Button>
-                      )}
-                      {selectedMember.phoneNumber && (
-                        <Button 
-                          variant="outline" 
-                          size="icon"
-                          onClick={() => handleContactClick("phone", selectedMember.phoneNumber)}
-                        >
-                          <Phone className="h-4 w-4" />
-                        </Button>
-                      )}
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto glass-depth p-0 border border-white/20">
+            <div className="relative w-full">
+              {/* Header image with gradient overlay */}
+              <div className="h-32 md:h-48 w-full relative overflow-hidden rounded-t-xl">
+                <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent z-10"></div>
+                <img 
+                  src={selectedMember.image} 
+                  alt={selectedMember.name}
+                  className="w-full h-full object-cover object-top blur-sm scale-110"
+                />
+              </div>
+
+              <DialogHeader className="p-0">
+                <div className="px-8 py-10 flex flex-col md:flex-row gap-8 items-start relative">
+                  {/* Profile image */}
+                  <div className="w-full md:w-1/3 -mt-24 md:-mt-32 z-20 relative">
+                    <div className="rounded-xl overflow-hidden shadow-2xl border-4 border-white bg-white">
+                      <img 
+                        src={selectedMember.image} 
+                        alt={selectedMember.name} 
+                        className="w-full h-auto object-cover"
+                      />
+                    </div>
+                    
+                    <div className="mt-6 space-y-4 glass-card p-6">
+                      <h4 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                        <MapPin className="h-4 w-4 text-lion-gold" /> 
+                        <span>Contact</span>
+                      </h4>
+                      
+                      <div className="flex items-center space-x-4">
+                        {/* Only show email button for Prem Mohan Singh */}
+                        {selectedMember.name === "Prem Mohan Singh" && selectedMember.email && (
+                          <Button 
+                            className="bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-white hover:shadow-lg hover:shadow-lion-gold/20 transition-all duration-300"
+                            onClick={() => handleContactClick("email", selectedMember.email)}
+                          >
+                            <Mail className="h-4 w-4 mr-2" /> Email
+                          </Button>
+                        )}
+                        {selectedMember.phoneNumber && (
+                          <Button 
+                            className="bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-white hover:shadow-lg hover:shadow-lion-gold/20 transition-all duration-300"
+                            onClick={() => handleContactClick("phone", selectedMember.phoneNumber)}
+                          >
+                            <Phone className="h-4 w-4 mr-2" /> Call
+                          </Button>
+                        )}
+                      </div>
                     </div>
                   </div>
-                </div>
-                
-                <div className="w-full md:w-2/3">
-                  <DialogTitle className="text-3xl font-display mb-1">{selectedMember.name}</DialogTitle>
-                  <p className="text-lion-gold font-medium mb-6">{selectedMember.role}</p>
                   
-                  <h3 className="text-xl font-semibold mb-4">About</h3>
-                  <DialogDescription className="text-gray-700 whitespace-pre-line">
-                    {selectedMember.bio}
-                  </DialogDescription>
+                  <div className="w-full md:w-2/3">
+                    <div className="flex items-center gap-3 mb-2">
+                      <div className="w-10 h-[2px] bg-lion-gold"></div>
+                      <span className="text-lion-gold text-sm uppercase tracking-wider font-medium">{selectedMember.role}</span>
+                    </div>
+                    
+                    <DialogTitle className="text-3xl md:text-4xl font-display mb-6 text-gray-800">
+                      {selectedMember.name}
+                    </DialogTitle>
+                    
+                    <h3 className="text-xl font-semibold mb-4 text-gray-700">About</h3>
+                    <DialogDescription className="text-gray-600 whitespace-pre-line text-base leading-relaxed">
+                      {selectedMember.bio}
+                    </DialogDescription>
+                    
+                    {/* Experience showcase */}
+                    {(selectedMember.name === "Prem Mohan Singh" || selectedMember.name === "Vaibhav Gupta") && (
+                      <div className="mt-8 flex items-center gap-3">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-lion-gold/20 to-amber-600/20 flex items-center justify-center border border-lion-gold/30">
+                          <Award className="w-6 h-6 text-lion-gold" />
+                        </div>
+                        <div>
+                          <p className="text-sm text-gray-500">Industry Experience</p>
+                          <p className="text-xl font-semibold text-gray-800">12+ Years</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              </div>
-            </DialogHeader>
+              </DialogHeader>
+            </div>
           </DialogContent>
         </Dialog>
       )}
