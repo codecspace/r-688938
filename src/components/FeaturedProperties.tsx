@@ -114,39 +114,6 @@ const FeaturedProperties = () => {
             </motion.div>
           ))}
         </motion.div>
-
-        <motion.div 
-          className="text-center mt-12"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.3 }}
-          viewport={{ once: true }}
-        >
-          <Link to="/project/aipl-joy-district">
-            <motion.button 
-              className="glass-depth-dark px-8 py-3 bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-black font-medium rounded-xl transition-all duration-300 border border-white/10 shadow-[0_8px_20px_rgba(212,175,55,0.3)] relative overflow-hidden group btn-glow"
-              whileHover={{ scale: 1.05, boxShadow: "0 12px 24px rgba(212,175,55,0.4)" }}
-              whileTap={{ scale: 0.98 }}
-              transition={{ duration: 0.3 }}
-            >
-              <span className="relative z-10">Load More Listings</span>
-              
-              {/* Enhanced glowing effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-lion-gold/0 via-white/30 to-lion-gold/0 opacity-0 group-hover:opacity-100"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%" }}
-                transition={{ duration: 1.2, ease: "easeOut", repeat: Infinity, repeatDelay: 0.5 }}
-              />
-              
-              {/* Subtle gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-lion-gold/20 to-amber-600/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              
-              {/* Extra glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-r from-lion-gold/0 via-lion-gold/30 to-lion-gold/0 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-300"></div>
-            </motion.button>
-          </Link>
-        </motion.div>
       </div>
     </section>
   );

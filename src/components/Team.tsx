@@ -102,7 +102,7 @@ Thank you,
   };
 
   return (
-    <section className="py-24 relative bg-white" id="team">
+    <section className="py-24 relative bg-gradient-to-b from-white to-gray-50" id="team">
       {/* Abstract background elements */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-20 left-[10%] w-72 h-72 rounded-full bg-purple-500/5 filter blur-[120px]"></div>
@@ -256,32 +256,30 @@ Thank you,
                   </motion.div>
                 </motion.div>
                 
-                {/* Experience badge for Prem Singh and Vaibhav Gupta */}
-                {(member.name === "Prem Mohan Singh" || member.name === "Vaibhav Gupta") && (
-                  <motion.div 
-                    className="absolute top-6 right-6 z-30 flex items-center gap-2 backdrop-blur-md bg-black/40 border border-white/10 px-4 py-2 rounded-full"
-                    initial={{ x: 20, opacity: 0 }}
-                    animate={{ x: 0, opacity: 1 }}
-                    transition={{ delay: 0.6, duration: 0.4 }}
-                  >
-                    <Award className="h-4 w-4 text-lion-gold" />
-                    <span className="text-white text-sm font-medium">12+ Years</span>
-                  </motion.div>
-                )}
+                {/* Experience badge for all team members (now includes Jazbi Fatema) */}
+                <motion.div 
+                  className="absolute top-6 right-6 z-30 flex items-center gap-2 backdrop-blur-md bg-lion-gold/90 border border-white/20 px-4 py-2 rounded-full shadow-lg"
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: 0.6, duration: 0.4 }}
+                >
+                  <Award className="h-4 w-4 text-white" />
+                  <span className="text-white text-sm font-medium">12+ Years Experience</span>
+                </motion.div>
               </div>
             </motion.div>
           ))}
         </motion.div>
       </div>
 
-      {/* Team Member Profile Dialog */}
+      {/* Team Member Profile Dialog - Enhanced for luxury look */}
       {selectedMember && (
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto glass-depth p-0 border border-white/20">
-            <div className="relative w-full">
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 border-none rounded-xl shadow-2xl">
+            <div className="relative w-full bg-white">
               {/* Header image with gradient overlay */}
               <div className="h-32 md:h-48 w-full relative overflow-hidden rounded-t-xl">
-                <div className="absolute inset-0 bg-gradient-to-b from-black/40 to-transparent z-10"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30 z-10"></div>
                 <img 
                   src={selectedMember.image} 
                   alt={selectedMember.name}
@@ -301,7 +299,7 @@ Thank you,
                       />
                     </div>
                     
-                    <div className="mt-6 space-y-4 glass-card p-6">
+                    <div className="mt-6 space-y-4 bg-white shadow-lg p-6 rounded-xl border border-gray-100">
                       <h4 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
                         <MapPin className="h-4 w-4 text-lion-gold" /> 
                         <span>Contact</span>
@@ -329,7 +327,7 @@ Thank you,
                     </div>
                   </div>
                   
-                  <div className="w-full md:w-2/3">
+                  <div className="w-full md:w-2/3 bg-white p-6 rounded-lg shadow-sm">
                     <div className="flex items-center gap-3 mb-2">
                       <div className="w-10 h-[2px] bg-lion-gold"></div>
                       <span className="text-lion-gold text-sm uppercase tracking-wider font-medium">{selectedMember.role}</span>
@@ -345,17 +343,15 @@ Thank you,
                     </DialogDescription>
                     
                     {/* Experience showcase */}
-                    {(selectedMember.name === "Prem Mohan Singh" || selectedMember.name === "Vaibhav Gupta") && (
-                      <div className="mt-8 flex items-center gap-3">
-                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-lion-gold/20 to-amber-600/20 flex items-center justify-center border border-lion-gold/30">
-                          <Award className="w-6 h-6 text-lion-gold" />
-                        </div>
-                        <div>
-                          <p className="text-sm text-gray-500">Industry Experience</p>
-                          <p className="text-xl font-semibold text-gray-800">12+ Years</p>
-                        </div>
+                    <div className="mt-8 flex items-center gap-3 bg-gray-50 p-4 rounded-lg border border-gray-100">
+                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-lion-gold to-amber-600 flex items-center justify-center border border-white">
+                        <Award className="w-6 h-6 text-white" />
                       </div>
-                    )}
+                      <div>
+                        <p className="text-sm text-gray-500">Industry Experience</p>
+                        <p className="text-xl font-semibold text-gray-800">12+ Years</p>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </DialogHeader>
