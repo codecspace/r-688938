@@ -61,7 +61,7 @@ const Index = () => {
       setTimeout(() => {
         document.body.style.backgroundColor = '';
       }, 300);
-    }, 4500);
+    }, 2900);
     
     return () => {
       clearTimeout(timer);
