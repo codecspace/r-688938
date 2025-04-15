@@ -54,14 +54,14 @@ const Index = () => {
     // Set document background to black during transition to prevent white flash
     document.body.style.backgroundColor = '#000';
     
-    // Extended loading time to 4.5 seconds for a more luxurious experience
+    // Reduced loading time to 2.5 seconds for a quicker experience
     const timer = setTimeout(() => {
       setIsLoading(false);
       // Reset background color after content is loaded
       setTimeout(() => {
         document.body.style.backgroundColor = '';
       }, 300);
-    }, 4500);
+    }, 2500);
     
     return () => {
       clearTimeout(timer);
