@@ -95,26 +95,9 @@ const AboutUs = () => {
 
   return (
     <section id="about" ref={containerRef} className="py-32 relative overflow-hidden">
-      {/* Abstract background shapes with enhanced design */}
+      {/* Minimal background */}
       <div className="absolute inset-0 -z-10">
-        <div className="absolute top-20 left-[10%] w-64 h-64 rounded-full bg-purple-500/20 filter blur-[100px]"></div>
-        <div className="absolute bottom-40 right-[15%] w-80 h-80 rounded-full bg-blue-500/10 filter blur-[120px]"></div>
-        <div className="absolute top-[40%] right-[30%] w-48 h-48 rounded-full bg-lion-gold/10 filter blur-[80px]"></div>
-        
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlmOWY5ZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
-        
-        {/* Floating elements */}
-        <motion.div 
-          className="absolute top-1/4 left-[5%] w-6 h-6 rounded-full border border-lion-gold/30"
-          animate={{ y: [-10, 10, -10], opacity: [0.3, 0.7, 0.3] }}
-          transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-        />
-        <motion.div 
-          className="absolute bottom-1/4 right-[8%] w-4 h-4 rounded-full border border-lion-gold/20"
-          animate={{ y: [-8, 8, -8], opacity: [0.2, 0.5, 0.2] }}
-          transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut", delay: 0.5 }}
-        />
+        <div className="absolute top-20 left-[10%] w-64 h-64 rounded-full bg-lion-gold/5 filter blur-[100px]"></div>
       </div>
       
       <div className="container mx-auto px-4 max-w-6xl">
@@ -145,17 +128,8 @@ const AboutUs = () => {
                 <div className="absolute -bottom-2 left-0 h-1 w-24 bg-gradient-to-r from-lion-gold/0 via-lion-gold to-lion-gold/0"></div>
               </h3>
               
-              <div 
-                className="glass-depth p-8 mb-8 space-y-4 text-gray-700 relative rounded-2xl"
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
+              <div className="bg-white/60 backdrop-blur-sm p-8 mb-8 space-y-4 text-gray-700 rounded-xl border border-gray-100"
               >
-                <div className="absolute -top-5 -left-5 w-10 h-10 bg-gradient-to-br from-lion-gold to-amber-400 rounded-full flex items-center justify-center shadow-lg">
-                  <Brain className="w-5 h-5 text-white" />
-                </div>
-                
-                {/* Glass shine effect */}
-                <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-transparent opacity-10 rounded-2xl"></div>
                 
                 <p className="relative z-10 text-lg">
                   At Lionvest Realty Pvt. Ltd., We are committed to providing seamless and expert real estate solutions for residential and commercial property buyers in Delhi, Noida and Gurgaon. With a vision to simplify property transactions, we provide strategic guidance and unmatched support to help you make informed investment decisions.
@@ -166,12 +140,10 @@ const AboutUs = () => {
               </div>
               
               <motion.div 
-                className="clay-pastel p-8 space-y-5 mb-8 rounded-2xl"
+                className="bg-white/40 backdrop-blur-sm p-8 space-y-5 mb-8 rounded-xl border border-gray-100"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.3, duration: 0.8 }}
-                onMouseMove={handleMouseMove}
-                onMouseLeave={handleMouseLeave}
               >
                 {[
                   {label: "Strength and power", desc: "Performing our dominance and leadership in the real estate industry."},
@@ -198,7 +170,7 @@ const AboutUs = () => {
               </motion.div>
               
               <motion.div 
-                className="glass-depth-card p-8 text-gray-700 rounded-2xl"
+                className="bg-white/40 backdrop-blur-sm p-8 text-gray-700 rounded-xl border border-gray-100"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5, duration: 0.8 }}
@@ -217,11 +189,7 @@ const AboutUs = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.3 }}
           >
-            {/* 3D layered card effect */}
-            <div className="absolute -top-10 -left-10 w-full h-full rounded-2xl bg-lion-gold/5 transform rotate-6"></div>
-            <div className="absolute -bottom-10 -right-10 w-full h-full rounded-2xl bg-lion-gold/10 transform -rotate-6"></div>
-            
-            <div className="relative z-10 rounded-2xl overflow-hidden shadow-2xl card-3d w-full">
+            <div className="relative z-10 rounded-xl overflow-hidden shadow-lg w-full">
               <img
                 src="https://images.unsplash.com/photo-1560518883-ce09059eeffa"
                 alt="Modern building"
@@ -231,39 +199,20 @@ const AboutUs = () => {
               {/* Overlay gradient */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
               
-              {/* Info card with glassmorphism */}
-              <div className="absolute bottom-0 left-0 right-0 p-8">
-                <div className="glass-depth-card p-6 backdrop-blur-xl bg-white/10 border border-white/20 rounded-xl">
-                  <h3 className="text-2xl font-display text-white mb-3">Luxury Real Estate</h3>
-                  <p className="text-white/80">Discover premium properties carefully selected for discerning investors</p>
-                  
-                  {/* Decorative elements */}
-                  <div className="absolute -top-2 -right-2 w-4 h-4 rounded-full bg-lion-gold/40"></div>
-                  <div className="absolute -bottom-2 -left-2 w-3 h-3 rounded-full bg-lion-gold/30"></div>
+              {/* Simple overlay text */}
+              <div className="absolute bottom-0 left-0 right-0 p-6">
+                <div className="bg-black/60 backdrop-blur-sm p-4 rounded-lg">
+                  <h3 className="text-xl font-medium text-white mb-2">Luxury Real Estate</h3>
+                  <p className="text-white/90 text-sm">Premium properties for discerning investors</p>
                 </div>
               </div>
             </div>
             
-            {/* Redesigned experience badge */}
-            <div className="absolute -bottom-6 -right-6 glass-depth-dark w-32 h-32 rounded-full flex flex-col items-center justify-center shadow-[0_8px_32px_rgba(0,0,0,0.3)] bg-gradient-to-br from-zinc-800/90 to-zinc-900/90 backdrop-blur-md border border-white/10">
-              <div className="relative">
-                <motion.div 
-                  className="absolute inset-0 rounded-full bg-lion-gold/20"
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ duration: 2, repeat: Infinity }}
-                />
-                <span className="gold-gradient-text text-4xl font-bold relative z-10">12+</span>
-              </div>
-              <span className="text-sm text-white/90 mt-1">Years Experience</span>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-t from-lion-gold/20 to-transparent opacity-30"></div>
+            {/* Clean experience badge */}
+            <div className="absolute -bottom-4 -right-4 bg-lion-gold w-24 h-24 rounded-full flex flex-col items-center justify-center shadow-lg">
+              <span className="text-black text-2xl font-bold">12+</span>
+              <span className="text-black text-xs">Years</span>
             </div>
-            
-            {/* Decorative elements */}
-            <motion.div 
-              className="absolute -top-4 -left-4 w-8 h-8 rounded-full border border-lion-gold/30"
-              animate={{ scale: [1, 1.2, 1] }}
-              transition={{ repeat: Infinity, duration: 3, ease: "easeInOut" }}
-            />
           </motion.div>
         </div>
       </div>

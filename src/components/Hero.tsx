@@ -60,71 +60,22 @@ const Hero = () => {
         <div className="absolute inset-0 backdrop-blur-[2px]"></div>
       </motion.div>
       
-      {/* Modern geometric shapes for visual interest */}
-      <div className="absolute top-0 right-0 w-full h-full overflow-hidden opacity-20">
+      {/* Simplified minimal decoration */}
+      <div className="absolute top-0 right-0 w-full h-full overflow-hidden opacity-10">
         <motion.div 
-          className="absolute -top-20 -right-20 w-96 h-96 rounded-full border border-white/10"
+          className="absolute -top-20 -right-20 w-96 h-96 rounded-full border border-white/5"
           animate={{ rotate: 360 }}
-          transition={{ duration: 100, repeat: Infinity, ease: "linear" }}
-        ></motion.div>
-        <motion.div 
-          className="absolute -bottom-40 -left-40 w-[40rem] h-[40rem] rounded-full border border-white/5"
-          animate={{ rotate: -360 }}
           transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-        ></motion.div>
+        />
       </div>
       
-      {/* Floating decorative elements */}
-      <motion.div 
-        className="absolute top-28 right-16 w-40 h-40 rounded-full bg-white/5 backdrop-blur-xl border border-white/10"
-        animate={{ 
-          y: [0, 30, 0],
-          opacity: [0.2, 0.4, 0.2],
-          rotate: [0, 5, 0]
-        }}
-        transition={{ 
-          duration: 8, 
-          repeat: Infinity,
-          repeatType: "reverse" 
-        }}
-      />
-      
-      <motion.div 
-        className="absolute bottom-40 left-20 w-24 h-24 rounded-full bg-white/5 backdrop-blur-xl border border-white/10"
-        animate={{ 
-          y: [0, -20, 0],
-          opacity: [0.1, 0.3, 0.1],
-          rotate: [0, -5, 0]
-        }}
-        transition={{ 
-          duration: 6, 
-          repeat: Infinity,
-          repeatType: "reverse",
-          delay: 1
-        }}
-      />
-
-      <motion.div 
-        className="absolute top-48 left-[10%] w-16 h-16 rounded-full bg-white/5 backdrop-blur-lg border border-white/10"
-        animate={{ 
-          y: [0, 15, 0],
-          opacity: [0.1, 0.25, 0.1],
-        }}
-        transition={{ 
-          duration: 7, 
-          repeat: Infinity,
-          repeatType: "reverse",
-          delay: 2
-        }}
-      />
-      
       <div className="relative z-10 container mx-auto px-8 text-left max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.3 }}
-          className="max-w-xl backdrop-blur-xl bg-black/30 border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)] p-10 rounded-2xl"
-        >
+          <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.3 }}
+            className="max-w-xl backdrop-blur-lg bg-black/20 border border-white/10 p-8 rounded-xl"
+          >
           <motion.h1 
             className="text-5xl md:text-7xl font-display text-white mb-6 leading-tight brutalist-text"
             initial={{ opacity: 0, y: 20 }}

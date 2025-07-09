@@ -38,7 +38,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className={`floating-nav site-navbar ${scrolled ? 'scrolled' : ''} transition-all duration-500`}>
+    <nav className={`fixed top-0 left-0 right-0 z-50 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'} transition-all duration-300`}>
       <div className="container mx-auto px-4 max-w-6xl">
         <div className="flex items-center justify-between h-24">
           <Link to="/" className="flex items-center">
