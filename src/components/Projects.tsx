@@ -42,7 +42,7 @@ const projectsData = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section id="projects" className="py-24 bg-background">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div
           className="text-center mb-16"
@@ -51,19 +51,12 @@ const Projects = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-50px" }}
         >
-          <h2 className="text-sm uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-lion-gold to-lion-darkgold mb-2">
+          <span className="text-sm uppercase tracking-wider text-primary mb-2 block">
             Developers
-          </h2>
-          <h3 className="text-4xl font-display text-lion-black">
+          </span>
+          <h3 className="text-4xl font-display text-foreground font-light">
             Our Projects
           </h3>
-          <motion.div 
-            className="w-24 h-1 bg-gradient-to-r from-lion-gold to-lion-darkgold mx-auto mt-4 rounded-full"
-            initial={{ width: 0 }}
-            whileInView={{ width: "6rem" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          />
         </motion.div>
 
         <div className="space-y-8">
@@ -74,7 +67,7 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100"
+              className="bg-card rounded-xl border overflow-hidden"
             >
               <div className="p-8 flex flex-col md:flex-row items-center gap-12">
                 <div className="w-full md:w-2/5">
@@ -85,10 +78,10 @@ const Projects = () => {
                   />
                 </div>
                 <div className="w-full md:w-3/5">
-                  <h4 className="text-2xl font-display font-semibold mb-4 text-lion-black">
+                  <h4 className="text-2xl font-display font-medium mb-4 text-foreground">
                     {project.developerName}
                   </h4>
-                  <p className="text-gray-600 leading-relaxed">
+                  <p className="text-muted-foreground leading-relaxed">
                     {project.description}
                   </p>
                 </div>

@@ -102,16 +102,7 @@ Thank you,
   };
 
   return (
-    <section className="py-24 relative bg-gradient-to-b from-white to-gray-50" id="team">
-      {/* Abstract background elements */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-20 left-[10%] w-72 h-72 rounded-full bg-purple-500/5 filter blur-[120px]"></div>
-        <div className="absolute bottom-40 right-[15%] w-80 h-80 rounded-full bg-blue-500/5 filter blur-[100px]"></div>
-        <div className="absolute top-[40%] right-[30%] w-64 h-64 rounded-full bg-lion-gold/5 filter blur-[80px]"></div>
-        
-        {/* Subtle grid pattern */}
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlmOWY5ZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDIiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
-      </div>
+    <section className="py-24 bg-background" id="team">
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
         <motion.div 
@@ -121,45 +112,17 @@ Thank you,
           transition={{ duration: 0.7 }}
           viewport={{ once: true, margin: "-50px" }}
         >
-          <motion.span 
-            className="block text-sm uppercase tracking-widest text-lion-gold mb-2 font-medium"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.2, duration: 0.5 }}
-            viewport={{ once: true }}
-          >
+          <span className="block text-sm uppercase tracking-widest text-primary mb-2 font-medium">
             Expert Team
-          </motion.span>
+          </span>
           
-          <motion.h2 
-            className="text-4xl md:text-5xl font-display text-lion-black mb-6"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3, duration: 0.6 }}
-            viewport={{ once: true }}
-          >
+          <h2 className="text-4xl md:text-5xl font-display text-foreground mb-6 font-light">
             Meet Our Leadership
-          </motion.h2>
+          </h2>
           
-          <motion.div 
-            className="mx-auto max-w-2xl"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.7 }}
-            viewport={{ once: true }}
-          >
-            <p className="text-gray-600 text-lg">
-              Our talented team of industry professionals brings decades of combined experience to deliver exceptional real estate solutions.
-            </p>
-          </motion.div>
-          
-          <motion.div 
-            className="w-24 h-1 bg-gradient-to-r from-lion-gold/20 via-lion-gold to-lion-gold/20 mx-auto mt-8 rounded-full"
-            initial={{ width: 0 }}
-            whileInView={{ width: "6rem" }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.5 }}
-          />
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            Our talented team of industry professionals brings decades of combined experience to deliver exceptional real estate solutions.
+          </p>
         </motion.div>
 
         <motion.div 
