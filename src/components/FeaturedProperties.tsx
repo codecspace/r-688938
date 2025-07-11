@@ -29,7 +29,7 @@ const FeaturedProperties = () => {
   };
 
   return (
-    <section id="properties" className="py-20 bg-background">
+    <section id="properties" className="py-20 bg-gradient-to-b from-white to-gray-50">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div 
           className="text-center mb-16"
@@ -38,12 +38,31 @@ const FeaturedProperties = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true, margin: "-50px" }}
         >
-          <span className="text-sm uppercase tracking-wider text-primary mb-2 block">
-            Featured
-          </span>
-          <h3 className="text-4xl font-display text-foreground mb-4 font-light">
+          <motion.h2 
+            className="text-sm uppercase tracking-wider mb-2"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            viewport={{ once: true }}
+          >
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-lion-gold to-lion-darkgold">featured</span>
+          </motion.h2>
+          <motion.h3 
+            className="text-4xl font-display text-lion-black mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            viewport={{ once: true }}
+          >
             Explore the featured properties in<br/>our list to find your perfect home
-          </h3>
+          </motion.h3>
+          <motion.div 
+            className="w-24 h-1 bg-gradient-to-r from-lion-gold to-lion-darkgold mx-auto mt-4 rounded-full"
+            initial={{ width: 0 }}
+            whileInView={{ width: "6rem" }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+          />
         </motion.div>
 
         <motion.div 
@@ -57,7 +76,7 @@ const FeaturedProperties = () => {
             <motion.div
               key={property.id}
               variants={itemVariants}
-              className="group cursor-pointer bg-card rounded-xl overflow-hidden border hover:shadow-lg transition-all duration-300"
+              className="group cursor-pointer backdrop-blur-sm bg-white/50 rounded-xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300"
               whileHover={{ y: -10 }}
               transition={{ duration: 0.4 }}
             >
