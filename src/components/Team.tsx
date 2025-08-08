@@ -192,6 +192,8 @@ Thank you,
                     initial={{ scale: 1 }}
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.7 }}
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 
@@ -273,6 +275,8 @@ Thank you,
                   src={selectedMember.image} 
                   alt={selectedMember.name}
                   className="w-full h-full object-cover object-top blur-sm scale-110"
+                  loading="lazy"
+                  decoding="async"
                 />
               </div>
 
@@ -285,6 +289,8 @@ Thank you,
                         src={selectedMember.image} 
                         alt={selectedMember.name} 
                         className="w-full h-auto object-cover"
+                        loading="lazy"
+                        decoding="async"
                       />
                     </div>
                     

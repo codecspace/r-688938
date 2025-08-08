@@ -1,6 +1,6 @@
 
 import { Button } from "./ui/button";
-import SearchBar from "./SearchBar";
+
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
@@ -94,14 +94,6 @@ const Hero = () => {
           >
             From browsing listings to unlocking your dream home, your journey begins with us—where every search leads to a new beginning.
           </motion.p>
-          <motion.div
-            className="mt-2 mb-6 max-w-2xl"
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.8 }}
-          >
-            <SearchBar />
-          </motion.div>
           <motion.div 
             className="flex flex-col sm:flex-row gap-4"
             initial={{ opacity: 0, y: 20 }}

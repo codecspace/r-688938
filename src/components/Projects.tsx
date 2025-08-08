@@ -42,7 +42,7 @@ const projectsData = [
 
 const Projects = () => {
   return (
-    <section id="projects" className="py-24 bg-gradient-to-b from-gray-50 to-white">
+    <section id="projects" className="py-28 bg-gradient-to-b from-white to-lion-ivory">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div
           className="text-center mb-16"
@@ -54,7 +54,7 @@ const Projects = () => {
           <h2 className="text-sm uppercase tracking-wider text-transparent bg-clip-text bg-gradient-to-r from-lion-gold to-lion-darkgold mb-2">
             Developers
           </h2>
-          <h3 className="text-4xl font-display text-lion-black">
+          <h3 className="text-5xl md:text-6xl font-display tracking-tight text-lion-black">
             Our Projects
           </h3>
           <motion.div 
@@ -74,14 +74,16 @@ const Projects = () => {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
               viewport={{ once: true, margin: "-100px" }}
-              className="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-100"
+              className="glass-card overflow-hidden hover-lift card-glow-gold"
             >
               <div className="p-8 flex flex-col md:flex-row items-center gap-12">
                 <div className="w-full md:w-2/5">
                   <img
                     src={project.image}
                     alt={project.developerName}
-                    className="w-full h-auto rounded-lg object-contain"
+                    className="w-full h-auto rounded-lg object-contain transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                    decoding="async"
                   />
                 </div>
                 <div className="w-full md:w-3/5">
@@ -98,7 +100,7 @@ const Projects = () => {
         </div>
 
         <motion.div
-          className="text-center mt-16 bg-white p-10 rounded-2xl shadow-md border border-gray-100 backdrop-blur-sm bg-white/80"
+          className="text-center mt-16 glass-card p-10"
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
