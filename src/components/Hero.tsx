@@ -1,5 +1,6 @@
 
 import { Button } from "./ui/button";
+import SearchBar from "./SearchBar";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
@@ -93,6 +94,14 @@ const Hero = () => {
           >
             From browsing listings to unlocking your dream home, your journey begins with us—where every search leads to a new beginning.
           </motion.p>
+          <motion.div
+            className="mt-2 mb-6 max-w-2xl"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.8 }}
+          >
+            <SearchBar />
+          </motion.div>
           <motion.div 
             className="flex flex-col sm:flex-row gap-4"
             initial={{ opacity: 0, y: 20 }}
@@ -100,15 +109,16 @@ const Hero = () => {
             transition={{ duration: 0.8, delay: 0.9 }}
           >
             <Button 
-              className="bg-lion-gold hover:bg-lion-darkgold text-black shadow-lg btn-3d px-8 py-6 rounded-md"
+              variant="premium"
               size="lg"
+              className="btn-3d btn-glow"
               onClick={() => scrollToSection('properties')}
             >
               <span className="relative z-10">Explore Properties</span>
             </Button>
             <Button 
-              variant="outline" 
-              className="border-2 border-white/20 bg-white/5 backdrop-blur-sm text-white btn-glow overflow-hidden px-8 py-6 rounded-md shadow-md"
+              variant="glass" 
+              className="btn-glow"
               size="lg"
               onClick={() => scrollToSection('contact')}
             >

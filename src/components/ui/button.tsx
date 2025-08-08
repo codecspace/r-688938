@@ -18,6 +18,11 @@ const buttonVariants = cva(
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        // Added premium and glass variants aligned with design tokens
+        premium:
+          "bg-gradient-to-r from-lion-gold to-lion-lightgold text-lion-black hover:from-lion-darkgold hover:to-lion-gold shadow-soft-lg",
+        glass:
+          "border border-white/20 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 hover:border-white/30",
       },
       size: {
         default: "h-10 px-4 py-2",

@@ -99,7 +99,8 @@ const FeaturedProperties = () => {
                     src={property.heroImage || property.images?.[0] || property.image} 
                     alt={property.propertyName} 
                     className="w-full h-full object-cover object-center"
-                    whileHover={{ scale: 1.05 }}
+                    loading="lazy"
+                    decoding="async"
                     transition={{ duration: 0.8 }}
                   />
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white backdrop-blur-sm bg-black/20">
