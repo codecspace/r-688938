@@ -7,6 +7,7 @@ interface IntroVideoOverlayProps {
 
 const IntroVideoOverlay = ({ src, className }: IntroVideoOverlayProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const hideTimerRef = useRef<number | null>(null);
   const [fading, setFading] = useState(false);
   const [visible, setVisible] = useState(true);
 
@@ -21,12 +22,10 @@ const IntroVideoOverlay = ({ src, className }: IntroVideoOverlayProps) => {
 
     const handleEnded = () => {
       setFading(true);
-      const timeout = setTimeout(() => {
+      hideTimerRef.current = window.setTimeout(() => {
         setVisible(false); // Unmount after fade
       }, 700);
-      return () => clearTimeout(timeout);
     };
-
     video.addEventListener("ended", handleEnded);
 
     // Attempt to play immediately
@@ -48,13 +47,24 @@ const IntroVideoOverlay = ({ src, className }: IntroVideoOverlayProps) => {
     <div className="fixed inset-0 z-[9999]">
       <video
         ref={videoRef}
-        src={src}
         autoPlay
         muted
         playsInline
         preload="auto"
+        controls={false}
+        disablePictureInPicture
+        onLoadedData={() => {
+          const v = videoRef.current;
+          v?.play?.().catch(() => {});
+        }}
+        onError={() => {
+          // If the video fails to load or codec unsupported, remove overlay immediately
+          setVisible(false);
+        }}
         className={`fixed inset-0 w-full h-screen object-cover bg-black transition-opacity duration-700 ease-out ${fading ? "opacity-0" : "opacity-100"} ${className ?? ""}`}
-      />
+      >
+        <source src={src} type="video/mp4" />
+      </video>
     </div>
   );
 };
