@@ -80,7 +80,7 @@ const Index = () => {
             exit={{ opacity: 0 }}
             transition={{ duration: 0.8, ease: "easeInOut" }}
           >
-            <IntroVideoOverlay src="https://pub-ebd511cec1b24f38a54e24f9f3319801.r2.dev/videos/copy_8F92F6AE-726B-49B7-811A-476CA32498A3.M4V" />
+            <IntroVideoOverlay iframeSrc="https://drive.google.com/file/d/12E1Nlkt7VcRsSw70ekeejszck3kebzln/preview" fallbackDurationMs={15000} />
             <Navbar />
             
             {/* Render all page sections */}
