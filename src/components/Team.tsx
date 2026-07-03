@@ -18,13 +18,13 @@ const teamData = [
   {
     name: "Vaibhav Gupta",
     role: "Director",
-    image: "https://i.imgur.com/2rVC1DK.jpeg",
+    image: null,
     bio: "With more than 12 years of experience in B2B and B2C sales, Vaibhav Gupta brings a strong strategic and out-operated approach to Lionvest Realty Private. An MBA graduate in Limited Sales and Marketing, he has created an impressive career in real estate and allied industries, holding major sales positions in famous multinational corporations such as Berger Paints, UltraTech Cement, and AkzoNobel India.\n\nHis expertise lies in sales strategy, market expansion, and business growth, making him a valuable leader in driving high-impact real estate transactions. With a deep understanding of consumer behavior, market trends, and investment dynamics, Vaibhav plays a crucial role in delivering tailored property solutions that align with client aspirations and long-term investment goals."
   },
   {
     name: "Jazbi Fatema",
     role: "Marketing Head",
-    image: "https://i.imgur.com/UcLqNp5.jpeg",
+    image: null,
     bio: "Expert Senior Digital marketing Management Professional with 12+ years of insightful & broad experience in; Marketing Strategy, Branding, Digital Marketing, Ecommerce end to end Marketing, Marketing Communications, Google Analytics, Retail, Corporate Communication, Media Planning, Budgeting, Advertising, Social Media Marketing, Channel Marketing, Campaigns, Strategic Marketing, liaising with external and internal stakeholders to promote business product. Passionate about nurturing talent and building high performance teams that are built on a culture of trust and transparency, respect for individual."
   }
 ];
@@ -176,26 +176,37 @@ Thank you,
               className="group cursor-pointer"
               onClick={() => openProfile(member)}
             >
-              <div className="overflow-hidden glass-depth-card relative h-[480px] rounded-2xl transition-all duration-500 card-glow-gold">
+              <div className={`overflow-hidden glass-depth-card relative h-[480px] rounded-2xl transition-all duration-500 card-glow-gold ${!member.image ? 'bg-gradient-to-br from-lion-black via-[#1a1a1a] to-lion-black' : ''}`}>
                 {/* Image container with gradient overlay */}
-                <div className="absolute inset-0 z-10">
-                  <motion.div 
-                    className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-500"
-                    initial={{ opacity: 0.5 }}
-                    whileHover={{ opacity: 0.7 }}
-                    transition={{ duration: 0.5 }}
-                  />
-                  <motion.img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-full h-full object-cover object-center transition-transform duration-700"
-                    initial={{ scale: 1 }}
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.7 }}
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </div>
+                {member.image ? (
+                  <div className="absolute inset-0 z-10">
+                    <motion.div 
+                      className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent opacity-60 group-hover:opacity-70 transition-opacity duration-500"
+                      initial={{ opacity: 0.5 }}
+                      whileHover={{ opacity: 0.7 }}
+                      transition={{ duration: 0.5 }}
+                    />
+                    <motion.img 
+                      src={member.image} 
+                      alt={member.name} 
+                      className="w-full h-full object-cover object-center transition-transform duration-700"
+                      initial={{ scale: 1 }}
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.7 }}
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                ) : (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center">
+                    <div className="absolute inset-0 bg-gradient-to-br from-lion-gold/10 via-transparent to-lion-gold/5 opacity-50" />
+                    <div className="w-32 h-32 rounded-full bg-gradient-to-br from-lion-gold/20 to-lion-gold/5 border border-lion-gold/30 flex items-center justify-center backdrop-blur-sm">
+                      <span className="text-4xl font-display text-lion-gold/60">
+                        {member.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
+                      </span>
+                    </div>
+                  </div>
+                )}
                 
                 {/* Content overlay with glass effect */}
                 <motion.div 
@@ -268,59 +279,101 @@ Thank you,
         <Dialog open={open} onOpenChange={setOpen}>
           <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto p-0 border-none rounded-xl shadow-2xl">
             <div className="relative w-full bg-white">
-              {/* Header image with gradient overlay */}
-              <div className="h-32 md:h-48 w-full relative overflow-hidden rounded-t-xl">
-                <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30 z-10"></div>
-                <img 
-                  src={selectedMember.image} 
-                  alt={selectedMember.name}
-                  className="w-full h-full object-cover object-top blur-sm scale-110"
-                  loading="lazy"
-                  decoding="async"
-                />
+              {/* Header image or gradient fallback */}
+              <div className={`h-32 md:h-48 w-full relative overflow-hidden rounded-t-xl ${!selectedMember.image ? 'bg-gradient-to-br from-lion-black via-[#1a1a1a] to-lion-black' : ''}`}>
+                {selectedMember.image ? (
+                  <>
+                    <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30 z-10"></div>
+                    <img 
+                      src={selectedMember.image} 
+                      alt={selectedMember.name}
+                      className="w-full h-full object-cover object-top blur-sm scale-110"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </>
+                ) : (
+                  <div className="absolute inset-0 bg-gradient-to-br from-lion-gold/10 via-transparent to-lion-gold/5 opacity-60" />
+                )}
               </div>
 
               <DialogHeader className="p-0">
-                <div className="px-8 py-10 flex flex-col md:flex-row gap-8 items-start relative">
-                  {/* Profile image */}
-                  <div className="w-full md:w-1/3 -mt-24 md:-mt-32 z-20 relative">
-                    <div className="rounded-xl overflow-hidden shadow-2xl border-4 border-white bg-white">
-                      <img 
-                        src={selectedMember.image} 
-                        alt={selectedMember.name} 
-                        className="w-full h-auto object-cover"
-                        loading="lazy"
-                        decoding="async"
-                      />
-                    </div>
-                    
-                    <div className="mt-6 space-y-4 bg-white shadow-lg p-6 rounded-xl border border-gray-100">
-                      <h4 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
-                        <MapPin className="h-4 w-4 text-lion-gold" /> 
-                        <span>Contact</span>
-                      </h4>
+                <div className={`px-8 py-10 flex flex-col gap-8 items-start relative ${selectedMember.image ? 'md:flex-row' : ''}`}>
+                  {/* Profile image or initials fallback */}
+                  {selectedMember.image ? (
+                    <div className="w-full md:w-1/3 -mt-24 md:-mt-32 z-20 relative">
+                      <div className="rounded-xl overflow-hidden shadow-2xl border-4 border-white bg-white">
+                        <img 
+                          src={selectedMember.image} 
+                          alt={selectedMember.name} 
+                          className="w-full h-auto object-cover"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
                       
-                      <div className="flex items-center space-x-4">
-                        {/* Only show email button for Prem Mohan Singh */}
-                        {selectedMember.name === "Prem Mohan Singh" && selectedMember.email && (
-                          <Button 
-                            className="bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-white hover:shadow-lg hover:shadow-lion-gold/20 transition-all duration-300"
-                            onClick={() => handleContactClick("email", selectedMember.email)}
-                          >
-                            <Mail className="h-4 w-4 mr-2" /> Email
-                          </Button>
-                        )}
-                        {selectedMember.phoneNumber && (
-                          <Button 
-                            className="bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-white hover:shadow-lg hover:shadow-lion-gold/20 transition-all duration-300"
-                            onClick={() => handleContactClick("phone", selectedMember.phoneNumber)}
-                          >
-                            <Phone className="h-4 w-4 mr-2" /> Call
-                          </Button>
-                        )}
+                      <div className="mt-6 space-y-4 bg-white shadow-lg p-6 rounded-xl border border-gray-100">
+                        <h4 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                          <MapPin className="h-4 w-4 text-lion-gold" /> 
+                          <span>Contact</span>
+                        </h4>
+                        
+                        <div className="flex items-center space-x-4">
+                          {/* Only show email button for Prem Mohan Singh */}
+                          {selectedMember.name === "Prem Mohan Singh" && selectedMember.email && (
+                            <Button 
+                              className="bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-white hover:shadow-lg hover:shadow-lion-gold/20 transition-all duration-300"
+                              onClick={() => handleContactClick("email", selectedMember.email)}
+                            >
+                              <Mail className="h-4 w-4 mr-2" /> Email
+                            </Button>
+                          )}
+                          {selectedMember.phoneNumber && (
+                            <Button 
+                              className="bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-white hover:shadow-lg hover:shadow-lion-gold/20 transition-all duration-300"
+                              onClick={() => handleContactClick("phone", selectedMember.phoneNumber)}
+                            >
+                              <Phone className="h-4 w-4 mr-2" /> Call
+                            </Button>
+                          )}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  ) : (
+                    <div className="w-full md:w-1/3 -mt-16 md:-mt-24 z-20 relative">
+                      <div className="w-28 h-28 md:w-36 md:h-36 rounded-full bg-gradient-to-br from-lion-gold/20 to-lion-gold/5 border-2 border-lion-gold/30 flex items-center justify-center backdrop-blur-sm shadow-xl mx-auto md:mx-0">
+                        <span className="text-4xl md:text-5xl font-display text-lion-gold/80">
+                          {selectedMember.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
+                        </span>
+                      </div>
+                      
+                      <div className="mt-6 space-y-4 bg-white shadow-lg p-6 rounded-xl border border-gray-100">
+                        <h4 className="text-lg font-semibold text-gray-800 flex items-center gap-2">
+                          <MapPin className="h-4 w-4 text-lion-gold" /> 
+                          <span>Contact</span>
+                        </h4>
+                        
+                        <div className="flex items-center space-x-4">
+                          {selectedMember.name === "Prem Mohan Singh" && selectedMember.email && (
+                            <Button 
+                              className="bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-white hover:shadow-lg hover:shadow-lion-gold/20 transition-all duration-300"
+                              onClick={() => handleContactClick("email", selectedMember.email)}
+                            >
+                              <Mail className="h-4 w-4 mr-2" /> Email
+                            </Button>
+                          )}
+                          {selectedMember.phoneNumber && (
+                            <Button 
+                              className="bg-gradient-to-r from-lion-gold/90 to-lion-darkgold/90 text-white hover:shadow-lg hover:shadow-lion-gold/20 transition-all duration-300"
+                              onClick={() => handleContactClick("phone", selectedMember.phoneNumber)}
+                            >
+                              <Phone className="h-4 w-4 mr-2" /> Call
+                            </Button>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   
                   <div className="w-full md:w-2/3 bg-white p-6 rounded-lg shadow-sm">
                     <div className="flex items-center gap-3 mb-2">
