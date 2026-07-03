@@ -6,6 +6,7 @@ import { MapPin, Phone, Mail, CheckCircle, ArrowLeft, Calendar, Clock } from "lu
 import { Carousel, CarouselContent, CarouselItem, CarouselPrevious, CarouselNext } from "@/components/ui/carousel";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RouteHead from "@/components/RouteHead";
 import { Button } from "@/components/ui/button";
 import { projectsData } from "@/data/projectsData";
 import { toast } from "@/hooks/use-toast";
@@ -154,6 +155,11 @@ Thank you,
 
   return (
     <div className="bg-white min-h-screen">
+      <RouteHead
+        title={`${project.propertyName} in ${project.location} — Lionvest Realty`}
+        description={`Explore ${project.propertyName} by ${project.developerName} in ${project.location}. Get pricing, floor plans and expert guidance from Lionvest Realty across Gurgaon & Delhi NCR.`.slice(0, 158)}
+        path={`/project/${project.id}`}
+      />
       <Navbar />
       
       {/* Hero Section */}
