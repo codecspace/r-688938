@@ -2,10 +2,16 @@
 import { motion } from "framer-motion";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import RouteHead from "@/components/RouteHead";
 
 const PrivacyPolicy = () => {
   return (
     <div className="bg-white min-h-screen">
+      <RouteHead
+        title="Privacy Policy — Lionvest Realty"
+        description="Learn how Lionvest Realty collects, uses, and safeguards your personal information when you browse properties and services across Gurgaon and Delhi NCR."
+        path="/privacy-policy"
+      />
       <Navbar />
       
       <main className="py-20">
