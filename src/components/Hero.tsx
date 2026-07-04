@@ -4,6 +4,7 @@ import { Button } from "./ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
+import ParticleField from "@/components/layout/ParticleField";
 
 const Hero = () => {
   const heroRef = useRef(null);
@@ -69,16 +70,19 @@ const Hero = () => {
           transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
         />
       </div>
+
+      {/* Mouse-reactive particle field — subtle, sits above the image, behind the content card */}
+      <ParticleField className="z-[1]" />
       
       <div className="relative z-10 container mx-auto px-8 text-left max-w-6xl">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
-            className="max-w-xl backdrop-blur-lg bg-black/20 border border-white/10 p-8 rounded-xl"
+            className="max-w-xl lg:max-w-2xl backdrop-blur-lg bg-black/20 border border-white/10 p-8 rounded-xl"
           >
           <motion.h1 
-            className="text-5xl md:text-7xl font-display text-white mb-6 leading-tight brutalist-text"
+            className="text-6xl md:text-7xl lg:text-8xl font-display text-white mb-6 leading-[0.95] tracking-tight"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.5 }}

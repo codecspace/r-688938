@@ -40,14 +40,14 @@ const Navbar = () => {
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 ${scrolled ? 'bg-white/95 backdrop-blur-md shadow-sm' : 'bg-transparent'} transition-all duration-300`}>
       <div className="container mx-auto px-4 max-w-6xl">
-        <div className="flex items-center justify-between h-24">
+        <div className={`flex items-center justify-between transition-all duration-300 ${scrolled ? 'h-16' : 'h-24'}`}>
           <Link to="/" className="flex items-center">
             <img 
-              src="https://imgur.com/ku5rlCk.jpg" 
+              src="https://i.imgur.com/ku5rlCk.jpg" 
               alt="Lionvest Realty" 
-              className="h-12 mr-3"
+              className={`mr-3 transition-all duration-300 ${scrolled ? 'h-8' : 'h-12'}`}
             />
-            <span className={`text-2xl font-display transition-colors duration-300 ${scrolled ? 'text-lion-black' : 'text-white'}`}>
+            <span className={`font-display transition-all duration-300 ${scrolled ? 'text-lg text-lion-black' : 'text-2xl text-white'}`}>
               Lionvest Realty
             </span>
           </Link>

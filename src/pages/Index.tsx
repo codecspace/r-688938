@@ -6,6 +6,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import ScrollToTop from "@/components/layout/ScrollToTop";
 import NavDots from "@/components/layout/NavDots";
+import SmoothScroll from "@/components/layout/SmoothScroll";
+import Marquee from "@/components/layout/Marquee";
 
 // Page Components
 import LoadingScreen from "@/components/LoadingScreen";
@@ -13,11 +15,14 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import AboutUs from "@/components/AboutUs";
 import VisionMission from "@/components/VisionMission";
+import Stats from "@/components/Stats";
 import Projects from "@/components/Projects";
 import Team from "@/components/Team";
 import FeaturedProperties from "@/components/FeaturedProperties";
 import SimpleContact from "@/components/SimpleContact";
 import Footer from "@/components/Footer";
+
+const TICKER_ITEMS = ["Delhi", "Gurugram", "Noida", "Luxury Real Estate", "Lionvest Realty"];
 
 const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -26,12 +31,13 @@ const Index = () => {
     // Pre-load main content to prevent white flash
     const preloadImages = () => {
       const images = [
-        "https://imgur.com/ku5rlCk.jpg",
+        "https://i.imgur.com/ku5rlCk.jpg",
         "https://i.imgur.com/YQSL3gr.jpg",
-        "https://i.imgur.com/VIVNtTM.jpg",
+        "https://i.imgur.com/VIVNtTM.png",
         "https://i.imgur.com/Tm5t9pp.jpg",
         "https://i.imgur.com/1qjWa6d.jpg",
         "https://i.imgur.com/V3ZYKie.jpg",
+        "https://i.postimg.cc/NFWpPcFN/image.png",
         "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
         "https://i.postimg.cc/vBpHhk8h/image.png", 
         "https://i.postimg.cc/XqdNzLpb/image.png",
@@ -54,7 +60,7 @@ const Index = () => {
     // Set document background to black during transition to prevent white flash
     document.body.style.backgroundColor = '#000';
     
-    // Increased loading time to 4.5 seconds
+    // Loading screen duration
     const timer = setTimeout(() => {
       setIsLoading(false);
       // Reset background color after content is loaded
@@ -67,16 +73,6 @@ const Index = () => {
       clearTimeout(timer);
     };
   }, []);
-
-  // Page sections for easy navigation
-  const sections = [
-    { id: 'home', component: <Hero /> },
-    { id: 'about', component: <AboutUs /> },
-    { id: 'vision-mission', component: <VisionMission /> },
-    { id: 'projects', component: <Projects /> },
-    { id: 'team', component: <Team /> },
-    { id: 'properties', component: <FeaturedProperties /> }
-  ];
 
   return (
     <>
@@ -95,26 +91,35 @@ const Index = () => {
           {isLoading ? (
             <LoadingScreen key="loading" />
           ) : (
-            <motion.div 
-              key="content"
-              className="min-h-screen w-full overflow-hidden bg-white"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.8, ease: "easeInOut" }}
-            >
-              <Navbar />
-              
-              {/* Render all page sections */}
-              {sections.map(section => (
-                <div key={section.id} id={section.id}>
-                  {section.component}
+            <SmoothScroll>
+              <motion.div 
+                key="content"
+                className="min-h-screen w-full overflow-hidden bg-white"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.8, ease: "easeInOut" }}
+              >
+                <Navbar />
+
+                <div id="home"><Hero /></div>
+                <div id="about"><AboutUs /></div>
+                <div id="vision-mission">
+                  <VisionMission />
+                  <Stats />
+                  <Marquee items={TICKER_ITEMS} className="bg-lion-obsidian py-5 text-white/40" />
                 </div>
-              ))}
-              
-              <SimpleContact />
-              <Footer />
-            </motion.div>
+                <div id="projects"><Projects /></div>
+                <div id="team"><Team /></div>
+                <div id="properties">
+                  <FeaturedProperties />
+                  <Marquee items={TICKER_ITEMS} reverse className="bg-lion-ivory py-5 text-lion-black/30 border-y border-black/5" />
+                </div>
+
+                <SimpleContact />
+                <Footer />
+              </motion.div>
+            </SmoothScroll>
           )}
         </AnimatePresence>
       </motion.div>

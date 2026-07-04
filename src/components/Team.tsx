@@ -5,6 +5,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Mail, Phone, MapPin } from "lucide-react";
 import { Button } from "./ui/button";
 import { toast } from "@/hooks/use-toast";
+import ImageWithFallback from "@/components/layout/ImageWithFallback";
 
 const teamData = [
   {
@@ -102,14 +103,9 @@ Thank you,
   };
 
   return (
-    <section className="py-24 relative bg-gradient-to-b from-white to-gray-50" id="team">
-      {/* Abstract background elements */}
+    <section className="py-24 relative bg-lion-ivory" id="team">
+      {/* Subtle grid texture only — no gold wash, which reads pink/muddy on a light background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-20 left-[10%] w-72 h-72 rounded-full bg-purple-500/5 filter blur-[120px]"></div>
-        <div className="absolute bottom-40 right-[15%] w-80 h-80 rounded-full bg-blue-500/5 filter blur-[100px]"></div>
-        <div className="absolute top-[40%] right-[30%] w-64 h-64 rounded-full bg-lion-gold/5 filter blur-[80px]"></div>
-        
-        {/* Subtle grid pattern */}
         <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+PGRlZnM+PHBhdHRlcm4gaWQ9ImdyaWQiIHdpZHRoPSI0MCIgaGVpZ2h0PSI0MCIgcGF0dGVyblVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+PHBhdGggZD0iTSAwIDEwIEwgNDAgMTAgTSAxMCAwIEwgMTAgNDAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzlmOWY5ZiIgc3Ryb2tlLW9wYWNpdHk9IjAuMDIiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3Qgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNncmlkKSIvPjwvc3ZnPg==')] opacity-30"></div>
       </div>
 
@@ -186,16 +182,30 @@ Thank you,
                       whileHover={{ opacity: 0.7 }}
                       transition={{ duration: 0.5 }}
                     />
-                    <motion.img 
-                      src={member.image} 
-                      alt={member.name} 
-                      className="w-full h-full object-cover object-center transition-transform duration-700"
+                    <motion.div
+                      className="w-full h-full"
                       initial={{ scale: 1 }}
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.7 }}
-                      loading="lazy"
-                      decoding="async"
-                    />
+                    >
+                      <ImageWithFallback
+                        src={member.image}
+                        alt={member.name}
+                        className="w-full h-full object-cover object-center"
+                        loading="lazy"
+                        decoding="async"
+                        fallbackContent={
+                          <div className="absolute inset-0 z-10 flex items-center justify-center">
+                            <div className="absolute inset-0 bg-gradient-to-br from-lion-gold/10 via-transparent to-lion-gold/5 opacity-50" />
+                            <div className="w-32 h-32 rounded-full bg-gradient-to-br from-lion-gold/20 to-lion-gold/5 border border-lion-gold/30 flex items-center justify-center backdrop-blur-sm">
+                              <span className="text-4xl font-display text-lion-gold/60">
+                                {member.name.split(' ').map(n => n[0]).join('').substring(0, 2)}
+                              </span>
+                            </div>
+                          </div>
+                        }
+                      />
+                    </motion.div>
                   </div>
                 ) : (
                   <div className="absolute inset-0 z-10 flex items-center justify-center">
@@ -284,12 +294,13 @@ Thank you,
                 {selectedMember.image ? (
                   <>
                     <div className="absolute inset-0 bg-gradient-to-b from-black/70 to-black/30 z-10"></div>
-                    <img 
-                      src={selectedMember.image} 
+                    <ImageWithFallback
+                      src={selectedMember.image}
                       alt={selectedMember.name}
                       className="w-full h-full object-cover object-top blur-sm scale-110"
                       loading="lazy"
                       decoding="async"
+                      fallbackContent={<div className="absolute inset-0 bg-gradient-to-br from-lion-black to-lion-obsidian" />}
                     />
                   </>
                 ) : (
@@ -303,12 +314,13 @@ Thank you,
                   {selectedMember.image ? (
                     <div className="w-full md:w-1/3 -mt-24 md:-mt-32 z-20 relative">
                       <div className="rounded-xl overflow-hidden shadow-2xl border-4 border-white bg-white">
-                        <img 
-                          src={selectedMember.image} 
-                          alt={selectedMember.name} 
+                        <ImageWithFallback
+                          src={selectedMember.image}
+                          alt={selectedMember.name}
                           className="w-full h-auto object-cover"
                           loading="lazy"
                           decoding="async"
+                          fallbackLabel={selectedMember.name}
                         />
                       </div>
                       

@@ -61,13 +61,13 @@ export default {
           lightgold: "#F5D76E",
           darkgold: "#996515",
           black: "#1A1A1A",
+          obsidian: "#0B0A08", // Deepest warm black, for signature dark sections
           darkgray: "#333333",
           gray: "#555555",
           lightgray: "#CCCCCC",
-          // Added modern accent colors
-          teal: "#38B2AC", // Soft teal for modern accents
-          coral: "#F687B3", // Warm coral for highlights
-          ivory: "#F8F1E9", // Off-white for backgrounds
+          ivory: "#F6F5F1", // Crisp warm-white for light sections — not peach/pink
+          ink: "#211F1C", // Warm near-black body text on light sections
+          stone: "#8A8378", // Warm muted secondary text
         },
       },
       fontFamily: {
@@ -129,6 +129,10 @@ export default {
           "0%, 100%": { opacity: "1" },
           "50%": { opacity: "0.7" },
         },
+        marquee: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.3s ease-out", // Slightly slower for smoothness
@@ -139,6 +143,7 @@ export default {
         slideInLeft: "slideInLeft 0.5s ease-out forwards",
         bounce: "bounce 0.8s ease-in-out",
         pulse: "pulse 1.5s ease-in-out infinite",
+        marquee: "marquee 28s linear infinite",
       },
     },
   },

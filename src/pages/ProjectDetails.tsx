@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { projectsData } from "@/data/projectsData";
 import { toast } from "@/hooks/use-toast";
 import { ProjectDataType } from "@/data/projectsData";
+import ImageWithFallback from "@/components/layout/ImageWithFallback";
 import {
   Dialog,
   DialogContent,
@@ -176,14 +177,19 @@ Thank you,
           transition={{ delay: 0.3, duration: 0.8 }}
         />
         
-        <motion.img 
-          src={project?.heroImage || project?.image} 
-          alt={project?.propertyName} 
-          className="absolute inset-0 w-full h-full object-cover"
+        <motion.div
+          className="absolute inset-0 w-full h-full"
           initial={{ scale: 1.1 }}
           animate={{ scale: 1 }}
           transition={{ duration: 1.2 }}
-        />
+        >
+          <ImageWithFallback
+            src={project?.heroImage || project?.image}
+            alt={project?.propertyName}
+            fallbackLabel={project?.propertyName}
+            className="w-full h-full object-cover"
+          />
+        </motion.div>
         
         <div className="container mx-auto px-4 h-full flex flex-col justify-end pb-16 relative z-20">
           <motion.div
@@ -251,9 +257,10 @@ Thank you,
                             whileHover={{ scale: 1.02 }}
                             transition={{ duration: 0.3 }}
                           >
-                            <img 
-                              src={image} 
-                              alt={`${project?.propertyName} - Image ${index + 1}`} 
+                            <ImageWithFallback
+                              src={image}
+                              alt={`${project?.propertyName} - Image ${index + 1}`}
+                              fallbackLabel={project?.propertyName}
                               className="w-full h-full object-cover object-center"
                             />
                           </motion.div>
@@ -335,9 +342,9 @@ Thank you,
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <div className="bg-lion-gold p-6 glass-gold">
-                <h3 className="text-xl font-semibold text-black">Interested in this property?</h3>
-                <p className="text-black/80 mt-1">Contact our agent for more information</p>
+              <div className="bg-gradient-to-br from-lion-gold to-lion-darkgold p-6">
+                <h3 className="text-xl font-semibold text-lion-black">Interested in this property?</h3>
+                <p className="text-lion-black/80 mt-1">Contact our agent for more information</p>
               </div>
               
               <div className="p-6 space-y-5">
