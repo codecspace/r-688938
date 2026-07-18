@@ -28,51 +28,22 @@ const Index = () => {
   const [isLoading, setIsLoading] = useState(true);
   
   useEffect(() => {
-    // Pre-load main content to prevent white flash
-    const preloadImages = () => {
-      const images = [
-        "https://i.imgur.com/ku5rlCk.jpg",
-        "https://i.imgur.com/YQSL3gr.jpg",
-        "https://i.imgur.com/VIVNtTM.png",
-        "https://i.imgur.com/Tm5t9pp.jpg",
-        "https://i.imgur.com/1qjWa6d.jpg",
-        "https://i.imgur.com/V3ZYKie.jpg",
-        "https://i.postimg.cc/NFWpPcFN/image.png",
-        "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
-        "https://i.postimg.cc/vBpHhk8h/image.png", 
-        "https://i.postimg.cc/XqdNzLpb/image.png",
-        "https://i.postimg.cc/dVmnGZmN/image.png",
-        "https://i.postimg.cc/MHQmHnpD/image.png",
-        "https://i.postimg.cc/rF59LRby/image.png",
-        "https://i.postimg.cc/nhkYXbp6/image.png",
-        "https://i.postimg.cc/d0VRdH0D/image.png",
-        "https://i.postimg.cc/vB1W24fs/image.png"
-      ];
-      
-      images.forEach(src => {
-        const img = new Image();
-        img.src = src;
-      });
-    };
-    
-    preloadImages();
-    
     // Set document background to black during transition to prevent white flash
     document.body.style.backgroundColor = '#000';
-    
-    // Loading screen duration
+
+    // Loading screen duration (kept short so it doesn't hurt FCP/LCP)
     const timer = setTimeout(() => {
       setIsLoading(false);
-      // Reset background color after content is loaded
       setTimeout(() => {
         document.body.style.backgroundColor = '';
       }, 300);
-    }, 2388);
-    
+    }, 900);
+
     return () => {
       clearTimeout(timer);
     };
   }, []);
+
 
   return (
     <>
