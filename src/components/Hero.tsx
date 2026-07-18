@@ -43,9 +43,10 @@ const Hero = () => {
       <motion.div
         className="absolute inset-0 bg-cover bg-center"
         style={{ 
-          backgroundImage: "url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c')",
+          backgroundImage: "url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=70')",
           y
         }}
+
       >
         {/* Modern overlay with pattern */}
         <div className="absolute inset-0 bg-lion-black/80"></div>
