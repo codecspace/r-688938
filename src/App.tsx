@@ -21,12 +21,15 @@ const App = () => (
       <Toaster />
       <Sonner />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Index />} />
-          <Route path="/project/:id" element={<ProjectDetails />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-        </Routes>
+        <Suspense fallback={null}>
+          <Routes>
+            <Route path="/" element={<Index />} />
+            <Route path="/project/:id" element={<ProjectDetails />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
+
       <SpeedInsights />
     </TooltipProvider>
   </QueryClientProvider>
