@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Compass, Flag } from "lucide-react";
 import { Reveal, RevealMask, EASE } from "@/components/layout/Reveal";
+import SplitReveal from "@/components/layout/SplitReveal";
 
 interface Pillar {
   icon: typeof Compass;
