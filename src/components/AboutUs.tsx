@@ -1,7 +1,9 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 import { Sparkles, ShieldCheck, Swords, Crown, Compass as CompassIcon } from "lucide-react";
-import { Reveal, RevealMask, StaggerGroup, StaggerItem, EASE } from "@/components/layout/Reveal";
+import { Reveal, StaggerGroup, StaggerItem, EASE } from "@/components/layout/Reveal";
+import SplitReveal from "@/components/layout/SplitReveal";
+import { gsap, prefersReducedMotion } from "@/lib/gsap";
+import { useGsap } from "@/hooks/useGsap";
 
 const traits = [
   { icon: Swords, label: "Strength and power", desc: "Performing our dominance and leadership in the real estate industry." },
@@ -11,14 +13,19 @@ const traits = [
 ];
 
 const AboutUs = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
+  // Slow inner parallax on the feature image, scrubbed against scroll.
+  const containerRef = useGsap<HTMLElement>((_ctx, root) => {
+    if (prefersReducedMotion()) return;
+    gsap.fromTo(
+      "[data-about-img]",
+      { yPercent: -7 },
+      {
+        yPercent: 7,
+        ease: "none",
+        scrollTrigger: { trigger: root, start: "top bottom", end: "bottom top", scrub: 0.5 },
+      }
+    );
+  }, []);
 
   return (
     <section id="about" ref={containerRef} className="py-24 md:py-32 relative overflow-hidden bg-lion-ivory">
@@ -31,10 +38,14 @@ const AboutUs = () => {
                 <Sparkles className="w-3.5 h-3.5" />
                 About Us
               </span>
-              <h3 className="font-display text-4xl md:text-6xl text-lion-black mb-8 leading-[1.05] tracking-tight">
-                <RevealMask>About Lionvest Realty</RevealMask>
-              </h3>
             </Reveal>
+            <SplitReveal
+              as="h3"
+              className="font-display text-4xl md:text-6xl text-lion-black mb-8 leading-[1.05] tracking-tight"
+            >
+              About Lionvest Realty
+            </SplitReveal>
+
 
             <Reveal delay={0.1} className="space-y-5 text-lion-ink/75 text-lg leading-relaxed mb-10">
               <p>
