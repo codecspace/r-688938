@@ -1,66 +1,78 @@
-
-import { motion } from "framer-motion";
 import { Badge } from "./ui/badge";
 import { Link } from "react-router-dom";
 import { projectsData } from "@/data/projectsData";
 import { MapPin } from "lucide-react";
-import { Reveal, RevealMask } from "@/components/layout/Reveal";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
-import TiltCard from "@/components/layout/TiltCard";
+import SplitReveal from "@/components/layout/SplitReveal";
+import { gsap, ScrollTrigger, prefersReducedMotion } from "@/lib/gsap";
+import { useGsap } from "@/hooks/useGsap";
 
 const FeaturedProperties = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
+  /**
+   * ScrollTrigger.batch groups cards that enter together into a single
+   * staggered tween, so a row reads as one gesture rather than three
+   * independent fades. Each card image also gets a slow inner parallax.
+   */
+  const scope = useGsap<HTMLElement>((_ctx, root) => {
+    if (prefersReducedMotion()) return;
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: "easeOut"
+    const cards = gsap.utils.toArray<HTMLElement>("[data-card]", root);
+    gsap.set(cards, { y: 40, opacity: 0 });
+
+    ScrollTrigger.batch(cards, {
+      start: "top 88%",
+      once: true,
+      onEnter: (batch) =>
+        gsap.to(batch, { y: 0, opacity: 1, duration: 0.9, stagger: 0.1, ease: "power3.out" }),
+    });
+
+    cards.forEach((card) => {
+      const img = card.querySelector("[data-img]");
+      if (!img) return;
+      gsap.fromTo(
+        img,
+        { yPercent: -6 },
+        {
+          yPercent: 6,
+          ease: "none",
+          scrollTrigger: { trigger: card, start: "top bottom", end: "bottom top", scrub: 0.5 },
+        }
+      );
+    });
+
+    gsap.fromTo(
+      "[data-rule]",
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: { trigger: "[data-rule]", start: "top 92%", once: true },
       }
-    }
-  };
+    );
+  }, []);
 
   return (
-    <section id="properties" className="py-24 md:py-32 bg-lion-ivory">
+    <section ref={scope} id="properties" className="py-24 md:py-32 bg-lion-ivory">
       <div className="container mx-auto px-4 max-w-6xl">
-        <Reveal className="text-center mb-16">
+        <div className="text-center mb-16">
           <span className="eyebrow justify-center mb-3">Featured</span>
-          <h3 className="font-display text-4xl md:text-6xl text-lion-black mb-4 leading-[1.05] tracking-tight">
-            <RevealMask>Properties worth a second look</RevealMask>
-          </h3>
-          <motion.div 
-            className="w-16 h-px bg-lion-gold mx-auto mt-6"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          />
-        </Reveal>
+          <SplitReveal
+            as="h3"
+            className="font-display text-4xl md:text-6xl text-lion-black mb-4 leading-[1.05] tracking-tight"
+          >
+            Properties worth a second look
+          </SplitReveal>
+          <div data-rule className="w-16 h-px bg-lion-gold mx-auto mt-6 origin-center" />
+        </div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projectsData.map((property) => (
-            <motion.div key={property.id} variants={itemVariants}>
-              <TiltCard
-                maxTilt={6}
-                className="group cursor-pointer backdrop-blur-sm bg-white/50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              >
+            <div
+              key={property.id}
+              data-card
+              className="group cursor-pointer backdrop-blur-sm bg-white/50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300 will-change-transform"
+            >
               <Link to={`/project/${property.id}`}>
                 <div className="relative overflow-hidden rounded-t-xl h-[280px]">
                   <div className="absolute top-3 left-3 z-20 flex gap-2">
@@ -77,10 +89,11 @@ const FeaturedProperties = () => {
                   </div>
                   <div className="bg-gradient-to-t from-lion-black to-transparent absolute inset-0 z-10 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
                   <ImageWithFallback
+                    data-img
                     src={property.heroImage || property.images?.[0] || property.image}
                     alt={property.propertyName}
                     fallbackLabel={property.propertyName}
-                    className="w-full h-full object-cover object-center"
+                    className="w-full h-full object-cover object-center scale-[1.14] will-change-transform"
                     loading="lazy"
                     decoding="async"
                   />
@@ -93,10 +106,9 @@ const FeaturedProperties = () => {
                   </div>
                 </div>
               </Link>
-              </TiltCard>
-            </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   );

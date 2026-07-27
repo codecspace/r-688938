@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import { Compass, Flag } from "lucide-react";
 import { Reveal, RevealMask, EASE } from "@/components/layout/Reveal";
+import SplitReveal from "@/components/layout/SplitReveal";
 
 interface Pillar {
   icon: typeof Compass;
@@ -38,16 +39,23 @@ const VisionMission = () => {
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-lion-gold/[0.07] blur-[140px] pointer-events-none" />
 
       <div className="container mx-auto px-4 max-w-6xl relative z-10">
-        <Reveal className="text-center mb-20 md:mb-28">
-          <span className="eyebrow justify-center mb-4">
-            <span className="w-6 h-px bg-lion-gold" />
-            Our Philosophy
-            <span className="w-6 h-px bg-lion-gold" />
-          </span>
-          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] tracking-tight">
-            <RevealMask>Vision &amp; Mission</RevealMask>
-          </h2>
-        </Reveal>
+        <div className="text-center mb-20 md:mb-28">
+          <Reveal>
+            <span className="eyebrow justify-center mb-4">
+              <span className="w-6 h-px bg-lion-gold" />
+              Our Philosophy
+              <span className="w-6 h-px bg-lion-gold" />
+            </span>
+          </Reveal>
+          <SplitReveal
+            as="h2"
+            type="chars"
+            className="font-display text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] tracking-tight"
+          >
+            Vision &amp; Mission
+          </SplitReveal>
+        </div>
+
 
         <div className="space-y-20 md:space-y-28">
           {pillars.map((pillar, index) => {
