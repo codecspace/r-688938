@@ -88,7 +88,6 @@ const AboutUs = () => {
 
           <motion.div
             className="relative h-full flex items-center justify-center"
-            style={{ y: imageY, opacity }}
             initial={{ opacity: 0, scale: 0.92 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -96,10 +95,12 @@ const AboutUs = () => {
           >
             <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl w-full">
               <img
+                data-about-img
                 src="https://images.unsplash.com/photo-1560518883-ce09059eeffa"
                 alt="Modern building facade"
-                className="w-full h-[520px] md:h-[600px] object-cover"
+                className="w-full h-[520px] md:h-[600px] object-cover scale-[1.14] will-change-transform"
               />
+
               <div className="absolute inset-0 bg-gradient-to-t from-lion-black/80 via-lion-black/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <div className="border-t border-lion-gold/40 pt-4">
