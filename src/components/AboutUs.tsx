@@ -1,9 +1,7 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef } from "react";
 import { Sparkles, ShieldCheck, Swords, Crown, Compass as CompassIcon } from "lucide-react";
-import { Reveal, StaggerGroup, StaggerItem, EASE } from "@/components/layout/Reveal";
-import SplitReveal from "@/components/layout/SplitReveal";
-import { gsap, prefersReducedMotion } from "@/lib/gsap";
-import { useGsap } from "@/hooks/useGsap";
+import { Reveal, RevealMask, StaggerGroup, StaggerItem, EASE } from "@/components/layout/Reveal";
 
 const traits = [
   { icon: Swords, label: "Strength and power", desc: "Performing our dominance and leadership in the real estate industry." },
@@ -13,19 +11,14 @@ const traits = [
 ];
 
 const AboutUs = () => {
-  // Slow inner parallax on the feature image, scrubbed against scroll.
-  const containerRef = useGsap<HTMLElement>((_ctx, root) => {
-    if (prefersReducedMotion()) return;
-    gsap.fromTo(
-      "[data-about-img]",
-      { yPercent: -7 },
-      {
-        yPercent: 7,
-        ease: "none",
-        scrollTrigger: { trigger: root, start: "top bottom", end: "bottom top", scrub: 0.5 },
-      }
-    );
-  }, []);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
   return (
     <section id="about" ref={containerRef} className="py-24 md:py-32 relative overflow-hidden bg-lion-ivory">
@@ -38,14 +31,10 @@ const AboutUs = () => {
                 <Sparkles className="w-3.5 h-3.5" />
                 About Us
               </span>
+              <h3 className="font-display text-4xl md:text-6xl text-lion-black mb-8 leading-[1.05] tracking-tight">
+                <RevealMask>About Lionvest Realty</RevealMask>
+              </h3>
             </Reveal>
-            <SplitReveal
-              as="h3"
-              className="font-display text-4xl md:text-6xl text-lion-black mb-8 leading-[1.05] tracking-tight"
-            >
-              About Lionvest Realty
-            </SplitReveal>
-
 
             <Reveal delay={0.1} className="space-y-5 text-lion-ink/75 text-lg leading-relaxed mb-10">
               <p>
@@ -88,6 +77,7 @@ const AboutUs = () => {
 
           <motion.div
             className="relative h-full flex items-center justify-center"
+            style={{ y: imageY, opacity }}
             initial={{ opacity: 0, scale: 0.92 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -95,12 +85,10 @@ const AboutUs = () => {
           >
             <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl w-full">
               <img
-                data-about-img
                 src="https://images.unsplash.com/photo-1560518883-ce09059eeffa"
                 alt="Modern building facade"
-                className="w-full h-[520px] md:h-[600px] object-cover scale-[1.14] will-change-transform"
+                className="w-full h-[520px] md:h-[600px] object-cover"
               />
-
               <div className="absolute inset-0 bg-gradient-to-t from-lion-black/80 via-lion-black/10 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <div className="border-t border-lion-gold/40 pt-4">

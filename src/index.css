@@ -261,11 +261,3 @@
   opacity: 0;
   animation: fadeIn 0.5s ease-out forwards;
 }
-
-/* GSAP SplitText — masked line/char reveals.
-   SplitText's mask option wraps each line in an overflow-hidden parent; these
-   rules just make sure transforms stay crisp and text isn't clipped mid-glyph. */
-.split-line {
-  will-change: transform;
-  padding-bottom: 0.08em;
-}

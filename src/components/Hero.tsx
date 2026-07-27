@@ -1,13 +1,19 @@
 
 import { Button } from "./ui/button";
 
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { Link } from "react-router-dom";
 import { useRef, useEffect } from "react";
 import ParticleField from "@/components/layout/ParticleField";
 
 const Hero = () => {
-  const heroRef = useRef<HTMLDivElement>(null);
-
+  const heroRef = useRef(null);
+  const { scrollY } = useScroll();
+  
+  // Parallax effect
+  const y = useTransform(scrollY, [0, 500], [0, 150]);
+  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -15,10 +21,10 @@ const Hero = () => {
     }
   };
 
-  // Floating navbar state
+  // Initialize floating navbar
   useEffect(() => {
     const navbar = document.querySelector(".site-navbar");
-
+    
     const handleScroll = () => {
       if (window.scrollY > 50) {
         navbar?.classList.add("scrolled");
@@ -26,57 +32,22 @@ const Hero = () => {
         navbar?.classList.remove("scrolled");
       }
     };
-
+    
     window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  /**
-   * Hero exit, scrubbed with GSAP: the backdrop drifts and scales while the
-   * copy lifts, blurs and fades — so the hero hands off to the next section
-   * as one continuous move instead of two separate scroll events. GSAP is
-   * imported dynamically so it stays out of the initial (LCP) bundle.
-   */
-  useEffect(() => {
-    const root = heroRef.current;
-    if (!root) return;
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-
-    let ctx: { revert: () => void } | undefined;
-    let cancelled = false;
-
-    import("@/lib/gsap").then(({ gsap }) => {
-      if (cancelled) return;
-      ctx = gsap.context(() => {
-        const tl = gsap.timeline({
-          scrollTrigger: { trigger: root, start: "top top", end: "bottom top", scrub: 0.6 },
-        });
-
-        tl.to("[data-hero-bg]", { yPercent: 18, scale: 1.12, ease: "none" }, 0)
-          .to(
-            "[data-hero-copy]",
-            { yPercent: -22, opacity: 0, filter: "blur(8px)", ease: "none" },
-            0
-          )
-          .to("[data-hero-scroll]", { opacity: 0, y: 20, ease: "none", duration: 0.3 }, 0);
-      }, root);
-    });
-
-    return () => {
-      cancelled = true;
-      ctx?.revert();
-    };
-  }, []);
 
   return (
     <div className="relative h-screen min-h-[600px] flex items-center justify-center overflow-hidden" id="home" ref={heroRef}>
       {/* Modern abstract background with pattern overlay */}
-      <div
-        data-hero-bg
-        className="absolute inset-0 bg-cover bg-center will-change-transform"
-        style={{
+      <motion.div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ 
           backgroundImage: "url('https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=70')",
+          y
         }}
+
       >
         {/* Modern overlay with pattern */}
         <div className="absolute inset-0 bg-lion-black/80"></div>
@@ -91,7 +62,7 @@ const Hero = () => {
         
         {/* Modern blur element */}
         <div className="absolute inset-0 backdrop-blur-[2px]"></div>
-      </div>
+      </motion.div>
       
       {/* Simplified minimal decoration */}
       <div className="absolute top-0 right-0 w-full h-full overflow-hidden opacity-10">
@@ -107,7 +78,6 @@ const Hero = () => {
       
       <div className="relative z-10 container mx-auto px-8 text-left max-w-6xl">
           <motion.div
-            data-hero-copy
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.3 }}
@@ -158,7 +128,6 @@ const Hero = () => {
       
       {/* Scroll indicator */}
       <motion.div 
-        data-hero-scroll
         className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
