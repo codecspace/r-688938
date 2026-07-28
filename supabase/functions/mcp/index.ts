@@ -10,17 +10,6 @@ import { defineTool } from "npm:@lovable.dev/mcp-js@0.20.0";
 import { z } from "npm:zod@^4.4.3";
 
 // src/data/projectsData.ts
-import projectImg0 from "npm:@/assets/project-0.webp.asset.json";
-import projectImg1 from "npm:@/assets/project-1.webp.asset.json";
-import projectImg2 from "npm:@/assets/project-2.webp.asset.json";
-import projectImg3 from "npm:@/assets/project-3.webp.asset.json";
-import projectImg4 from "npm:@/assets/project-4.webp.asset.json";
-import projectImg5 from "npm:@/assets/project-5.webp.asset.json";
-import projectImg6 from "npm:@/assets/project-6.webp.asset.json";
-import projectImg7 from "npm:@/assets/project-7.webp.asset.json";
-import projectImg8 from "npm:@/assets/project-8.webp.asset.json";
-import projectImg9 from "npm:@/assets/project-9.webp.asset.json";
-import projectImg10 from "npm:@/assets/project-10.webp.asset.json";
 var projectsData = [
   {
     id: "aipl-joy-district",
@@ -36,7 +25,7 @@ var projectsData = [
     isFeatured: true,
     images: [
       "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
-      projectImg0.url
+      "/projects/project-0.webp"
     ],
     specifications: {
       overview: [
@@ -77,15 +66,15 @@ var projectsData = [
     developerName: "Godrej",
     location: "Sector - 49, Gurugram",
     image: "https://i.imgur.com/Tm5t9pp.jpg",
-    heroImage: projectImg10.url,
+    heroImage: "/projects/project-10.webp",
     fullAddress: "Sector 49, Gurugram, Haryana 122018, India",
     description: "Set in Sector 49 along the Golf Course Extension Road, Godrej Aristocrat offers spacious 3 and 4 BHK apartments behind a triple-height entrance lobby, an 18-hole golf course view, a landscaped terrace, a swimming pool, and a luxury clubhouse.",
     longDescription: "Soon to be launched Godrej Aristocrat Gurgaon development has generated quite a stir. There are several reasons to choose Godrej Aristocrat Gurgaon that go into making this fabulous project stand out.",
     isNew: true,
     isFeatured: true,
     images: [
-      projectImg10.url,
-      projectImg4.url,
+      "/projects/project-10.webp",
+      "/projects/project-4.webp",
       "https://i.imgur.com/Tm5t9pp.jpg"
     ],
     specifications: {
@@ -143,14 +132,14 @@ var projectsData = [
     developerName: "Hero Realty",
     location: "Sector - 104, Gurugram",
     image: "https://i.imgur.com/1qjWa6d.jpg",
-    heroImage: projectImg6.url,
+    heroImage: "/projects/project-6.webp",
     fullAddress: "Sector 104, Gurugram, Haryana 122001, India",
     description: "A premium residential development in Sector 104, Gurugram, spread across 11 acres with five high-rise towers. Hero Homes offers 3 and 4 BHK apartments built for modern urban families and professionals.",
     longDescription: "Hero Homes Gurgaon Sector 104 is a residential project which is coming up with 4 BHK apartments in Gurgaon. This residential building will be developed at Hero Realty Group at Gurgaon Sector 104.",
     isNew: true,
     isFeatured: true,
     images: [
-      projectImg6.url,
+      "/projects/project-6.webp",
       "https://i.imgur.com/1qjWa6d.jpg"
     ],
     amenities: [
@@ -176,14 +165,14 @@ var projectsData = [
     developerName: "AIPL",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/V3ZYKie.jpg",
-    heroImage: projectImg2.url,
+    heroImage: "/projects/project-2.webp",
     fullAddress: "Sector 63A, Gurugram, Haryana 122001, India",
     description: "AIPL Joy Square and its sister development, AIPL Joy District, redefine commercial real estate with double-height retail frontage, expansive basements, dedicated escalators and lifts, and a landscaped sky garden \u2014 built for retail, F&B, and corporate tenants alike.",
     longDescription: "Experience the epitome of integrated retail and commercial development at AIPL Joy Square, Gurugram, India. Crafted by DP Architects, this visionary project embodies the essence of integrated retail and commercial spaces.",
     isNew: true,
     isFeatured: true,
     images: [
-      projectImg2.url,
+      "/projects/project-2.webp",
       "https://i.imgur.com/V3ZYKie.jpg"
     ],
     specifications: {
@@ -213,15 +202,15 @@ var projectsData = [
     propertyName: "Birla Arika Sector 31 Gurgaon",
     developerName: "Birla Estates",
     location: "Sector 31, Gurgaon",
-    image: projectImg3.url,
-    heroImage: projectImg3.url,
+    image: "/projects/project-3.webp",
+    heroImage: "/projects/project-3.webp",
     fullAddress: "Sector 31, Gurugram, Haryana 122001, India",
     description: "Birla Estates Private Limited, a 100 per cent wholly owned subsidiary of Century Textiles and Industries Limited.",
     longDescription: "Birla Estates Private Limited, a 100 per cent wholly owned subsidiary of Century Textiles and Industries Limited, the over Rs. 8000 crore flagship Company of the B. K. Birla Group, is involved in creating iconic spaces.",
     isFeatured: true,
     images: [
-      projectImg3.url,
-      projectImg1.url
+      "/projects/project-3.webp",
+      "/projects/project-1.webp"
     ],
     amenities: [
       "Swimming Pool",
@@ -242,16 +231,16 @@ var projectsData = [
     developerName: "TARC",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/YQSL3gr.jpg",
-    heroImage: projectImg8.url,
+    heroImage: "/projects/project-8.webp",
     fullAddress: "Sector 63A, Gurugram, Haryana 122001, India",
     description: "At TARC Ishva, experience a blend of luxurious and harmonious lifestyle that celebrates the essence of your aspirations.",
     longDescription: "At TARC Ishva, experience a blend of luxurious and harmonious lifestyle that celebrates the essence of your aspirations. Inspired by the four directions, TARC Ishva embodies the nurturing spirit of the south, the potential of new beginnings from the east, the reality of dreams in the west and the ambition to achieve in the north.",
     isFeatured: true,
     images: [
-      projectImg8.url,
-      projectImg7.url,
-      projectImg5.url,
-      projectImg9.url
+      "/projects/project-8.webp",
+      "/projects/project-7.webp",
+      "/projects/project-5.webp",
+      "/projects/project-9.webp"
     ],
     amenities: [
       "Jogging Track",
