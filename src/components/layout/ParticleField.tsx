@@ -25,7 +25,15 @@ const ParticleField = ({ className }: { className?: string }) => {
     if (!canvas || !ctx) return;
 
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    // Phones (especially iOS Safari) choke when this canvas runs alongside
+    // stacked backdrop-blur layers — the page can lock up entirely. Desktop
+    // pointers only.
+    const isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+    const isSmallScreen = window.innerWidth < 1024;
+    const lowCoreCount = (navigator.hardwareConcurrency ?? 8) <= 4;
+    if (isCoarsePointer || isSmallScreen || lowCoreCount) return;
+
+    const dpr = Math.min(window.devicePixelRatio || 1, 1.5);
 
     let width = 0;
     let height = 0;
@@ -35,7 +43,7 @@ const ParticleField = ({ className }: { className?: string }) => {
     let inViewport = true;
     const mouse = { x: -9999, y: -9999 };
 
-    const particleCountFor = (w: number, h: number) => Math.min(70, Math.max(26, Math.round((w * h) / 22000)));
+    const particleCountFor = (w: number, h: number) => Math.min(48, Math.max(20, Math.round((w * h) / 32000)));
 
     const resize = () => {
       const rect = canvas.parentElement?.getBoundingClientRect();
