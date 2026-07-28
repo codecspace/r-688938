@@ -187,7 +187,6 @@ Thank you,
             src={project?.heroImage || project?.image}
             alt={project?.propertyName}
             fallbackLabel={project?.propertyName}
-            optimizeWidth={1280}
             loading="eager"
             fetchPriority="high"
             className="w-full h-full object-cover"
@@ -264,7 +263,6 @@ Thank you,
                               src={image}
                               alt={`${project?.propertyName} - Image ${index + 1}`}
                               fallbackLabel={project?.propertyName}
-                              optimizeWidth={900}
                               loading={index === 0 ? "eager" : "lazy"}
                               className="w-full h-full object-cover object-center"
                             />

@@ -45,7 +45,6 @@ const Projects = () => {
                         src={project.heroImage || project.images?.[0] || project.image}
                         alt={project.propertyName}
                         fallbackLabel={project.propertyName}
-                        optimizeWidth={720}
                         width={720}
                         height={380}
                         className="w-full h-[280px] md:h-[380px] object-cover"
@@ -64,7 +63,6 @@ const Projects = () => {
                         <ImageWithFallback
                           src={project.image}
                           alt={`${project.developerName} logo`}
-                          optimizeWidth={72}
                           className="w-full h-full object-contain"
                           loading="lazy"
                         />

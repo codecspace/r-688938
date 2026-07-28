@@ -191,7 +191,6 @@ Thank you,
                       <ImageWithFallback
                         src={member.image}
                         alt={member.name}
-                        optimizeWidth={480}
                         className="w-full h-full object-cover object-center"
                         loading="lazy"
                         decoding="async"
@@ -298,7 +297,6 @@ Thank you,
                     <ImageWithFallback
                       src={selectedMember.image}
                       alt={selectedMember.name}
-                      optimizeWidth={640}
                       className="w-full h-full object-cover object-top blur-sm scale-110"
                       loading="lazy"
                       decoding="async"
@@ -319,7 +317,6 @@ Thank you,
                         <ImageWithFallback
                           src={selectedMember.image}
                           alt={selectedMember.name}
-                          optimizeWidth={520}
                           className="w-full h-auto object-cover"
                           loading="lazy"
                           decoding="async"
