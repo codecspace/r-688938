@@ -187,6 +187,9 @@ Thank you,
             src={project?.heroImage || project?.image}
             alt={project?.propertyName}
             fallbackLabel={project?.propertyName}
+            optimizeWidth={1280}
+            loading="eager"
+            fetchPriority="high"
             className="w-full h-full object-cover"
           />
         </motion.div>
