@@ -264,6 +264,8 @@ Thank you,
                               src={image}
                               alt={`${project?.propertyName} - Image ${index + 1}`}
                               fallbackLabel={project?.propertyName}
+                              optimizeWidth={900}
+                              loading={index === 0 ? "eager" : "lazy"}
                               className="w-full h-full object-cover object-center"
                             />
                           </motion.div>
