@@ -1,3 +1,15 @@
+import projectImg0 from "@/assets/project-0.webp.asset.json";
+import projectImg1 from "@/assets/project-1.webp.asset.json";
+import projectImg2 from "@/assets/project-2.webp.asset.json";
+import projectImg3 from "@/assets/project-3.webp.asset.json";
+import projectImg4 from "@/assets/project-4.webp.asset.json";
+import projectImg5 from "@/assets/project-5.webp.asset.json";
+import projectImg6 from "@/assets/project-6.webp.asset.json";
+import projectImg7 from "@/assets/project-7.webp.asset.json";
+import projectImg8 from "@/assets/project-8.webp.asset.json";
+import projectImg9 from "@/assets/project-9.webp.asset.json";
+import projectImg10 from "@/assets/project-10.webp.asset.json";
+
 export interface ProjectDataType {
   id: string;
   propertyName: string;  // Changed from 'title'
@@ -30,7 +42,7 @@ export const projectsData: ProjectDataType[] = [
     isFeatured: true,
     images: [
       "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
-      "https://i.imgur.com/qPI8uVd.png"
+      projectImg0.url
     ],
     specifications: {
       overview: [
@@ -61,15 +73,15 @@ export const projectsData: ProjectDataType[] = [
     developerName: "Godrej",
     location: "Sector - 49, Gurugram",
     image: "https://i.imgur.com/Tm5t9pp.jpg",
-    heroImage: "https://i.postimg.cc/vBpHhk8h/image.png",
+    heroImage: projectImg10.url,
     fullAddress: "Sector 49, Gurugram, Haryana 122018, India",
     description: "Set in Sector 49 along the Golf Course Extension Road, Godrej Aristocrat offers spacious 3 and 4 BHK apartments behind a triple-height entrance lobby, an 18-hole golf course view, a landscaped terrace, a swimming pool, and a luxury clubhouse.",
     longDescription: "Soon to be launched Godrej Aristocrat Gurgaon development has generated quite a stir. There are several reasons to choose Godrej Aristocrat Gurgaon that go into making this fabulous project stand out.",
     isNew: true,
     isFeatured: true,
     images: [
-      "https://i.postimg.cc/vBpHhk8h/image.png",
-      "https://i.postimg.cc/XqdNzLpb/image.png",
+      projectImg10.url,
+      projectImg4.url,
       "https://i.imgur.com/Tm5t9pp.jpg"
     ],
     specifications: {
@@ -120,14 +132,14 @@ export const projectsData: ProjectDataType[] = [
     developerName: "Hero Realty",
     location: "Sector - 104, Gurugram",
     image: "https://i.imgur.com/1qjWa6d.jpg",
-    heroImage: "https://i.postimg.cc/dVmnGZmN/image.png",
+    heroImage: projectImg6.url,
     fullAddress: "Sector 104, Gurugram, Haryana 122001, India",
     description: "A premium residential development in Sector 104, Gurugram, spread across 11 acres with five high-rise towers. Hero Homes offers 3 and 4 BHK apartments built for modern urban families and professionals.",
     longDescription: "Hero Homes Gurgaon Sector 104 is a residential project which is coming up with 4 BHK apartments in Gurgaon. This residential building will be developed at Hero Realty Group at Gurgaon Sector 104.",
     isNew: true,
     isFeatured: true,
     images: [
-      "https://i.postimg.cc/dVmnGZmN/image.png",
+      projectImg6.url,
       "https://i.imgur.com/1qjWa6d.jpg"
     ],
     amenities: [
@@ -143,14 +155,14 @@ export const projectsData: ProjectDataType[] = [
     developerName: "AIPL",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/V3ZYKie.jpg",
-    heroImage: "https://i.postimg.cc/MHQmHnpD/image.png",
+    heroImage: projectImg2.url,
     fullAddress: "Sector 63A, Gurugram, Haryana 122001, India",
     description: "AIPL Joy Square and its sister development, AIPL Joy District, redefine commercial real estate with double-height retail frontage, expansive basements, dedicated escalators and lifts, and a landscaped sky garden — built for retail, F&B, and corporate tenants alike.",
     longDescription: "Experience the epitome of integrated retail and commercial development at AIPL Joy Square, Gurugram, India. Crafted by DP Architects, this visionary project embodies the essence of integrated retail and commercial spaces.",
     isNew: true,
     isFeatured: true,
     images: [
-      "https://i.postimg.cc/MHQmHnpD/image.png",
+      projectImg2.url,
       "https://i.imgur.com/V3ZYKie.jpg"
     ],
     specifications: {
@@ -174,15 +186,15 @@ export const projectsData: ProjectDataType[] = [
     propertyName: "Birla Arika Sector 31 Gurgaon",
     developerName: "Birla Estates",
     location: "Sector 31, Gurgaon",
-    image: "https://i.postimg.cc/NFWpPcFN/image.png",
-    heroImage: "https://i.postimg.cc/NFWpPcFN/image.png",
+    image: projectImg3.url,
+    heroImage: projectImg3.url,
     fullAddress: "Sector 31, Gurugram, Haryana 122001, India",
     description: "Birla Estates Private Limited, a 100 per cent wholly owned subsidiary of Century Textiles and Industries Limited.",
     longDescription: "Birla Estates Private Limited, a 100 per cent wholly owned subsidiary of Century Textiles and Industries Limited, the over Rs. 8000 crore flagship Company of the B. K. Birla Group, is involved in creating iconic spaces.",
     isFeatured: true,
     images: [
-      "https://i.postimg.cc/NFWpPcFN/image.png",
-      "https://i.postimg.cc/0y1VYPLj/image.png"
+      projectImg3.url,
+      projectImg1.url
     ],
     amenities: [
       "Swimming Pool", "Gym", "Clubhouse", "Kids Play Area", 
@@ -196,16 +208,16 @@ export const projectsData: ProjectDataType[] = [
     developerName: "TARC",
     location: "Sector - 63A, Gurugram",
     image: "https://i.imgur.com/YQSL3gr.jpg",
-    heroImage: "https://i.postimg.cc/rF59LRby/image.png",
+    heroImage: projectImg8.url,
     fullAddress: "Sector 63A, Gurugram, Haryana 122001, India",
     description: "At TARC Ishva, experience a blend of luxurious and harmonious lifestyle that celebrates the essence of your aspirations.",
     longDescription: "At TARC Ishva, experience a blend of luxurious and harmonious lifestyle that celebrates the essence of your aspirations. Inspired by the four directions, TARC Ishva embodies the nurturing spirit of the south, the potential of new beginnings from the east, the reality of dreams in the west and the ambition to achieve in the north.",
     isFeatured: true,
     images: [
-      "https://i.postimg.cc/rF59LRby/image.png",
-      "https://i.postimg.cc/nhkYXbp6/image.png",
-      "https://i.postimg.cc/d0VRdH0D/image.png",
-      "https://i.postimg.cc/vB1W24fs/image.png"
+      projectImg8.url,
+      projectImg7.url,
+      projectImg5.url,
+      projectImg9.url
     ],
     amenities: [
       "Jogging Track", "Children's Play Area", "Gymnasium", 
