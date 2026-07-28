@@ -261,3 +261,42 @@
   opacity: 0;
   animation: fadeIn 0.5s ease-out forwards;
 }
+
+/* ==========================================================================
+   Mobile performance guard
+   Stacked backdrop-filter layers are the single most expensive effect on iOS
+   Safari — combined with scroll animations they can lock the page up until a
+   reload. On phones we drop the blur (keeping the translucent surface look)
+   for everything except the navbar, and quiet always-on decorative motion.
+   ========================================================================== */
+@media (max-width: 768px) {
+  .glass-card,
+  .glass-panel,
+  .glass-dark,
+  .glass-depth,
+  .glass-depth-card,
+  .glass-depth-dark,
+  [class*="backdrop-blur"]:not(.glass-nav):not(.site-navbar):not(.site-navbar *) {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .glass-card,
+  .glass-panel {
+    background-color: rgba(255, 255, 255, 0.92);
+  }
+
+  .glass-depth-card {
+    background-color: rgba(255, 255, 255, 0.88);
+  }
+
+  .glass-dark,
+  .glass-depth-dark {
+    background-color: rgba(15, 15, 15, 0.72);
+  }
+
+  /* Decorative infinite loops (rotating rings, breathing orbs) off on phones */
+  .decor-loop {
+    display: none !important;
+  }
+}

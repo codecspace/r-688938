@@ -13,9 +13,19 @@ interface ImageWithFallbackProps extends ImgHTMLAttributes<HTMLImageElement> {
  * hosts (imgur/postimg), which occasionally go dead. Rather than showing the
  * browser's broken-image icon — which looks like a bug on a "premium" site —
  * this quietly swaps in an on-brand placeholder so a dead link degrades
- * gracefully instead of looking broken.
+ * gracefully instead of looking broken. Also defaults to lazy/async decoding
+ * so off-screen photos never block the main thread on mobile.
  */
-const ImageWithFallback = ({ fallbackLabel, fallbackContent, className, alt, onError, ...props }: ImageWithFallbackProps) => {
+const ImageWithFallback = ({
+  fallbackLabel,
+  fallbackContent,
+  className,
+  alt,
+  loading,
+  decoding,
+  onError,
+  ...props
+}: ImageWithFallbackProps) => {
   const [failed, setFailed] = useState(false);
 
   if (failed) {
@@ -37,6 +47,8 @@ const ImageWithFallback = ({ fallbackLabel, fallbackContent, className, alt, onE
       {...props}
       alt={alt}
       className={className}
+      loading={loading ?? "lazy"}
+      decoding={decoding ?? "async"}
       onError={(e) => {
         setFailed(true);
         onError?.(e);

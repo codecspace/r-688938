@@ -187,6 +187,8 @@ Thank you,
             src={project?.heroImage || project?.image}
             alt={project?.propertyName}
             fallbackLabel={project?.propertyName}
+            loading="eager"
+            fetchPriority="high"
             className="w-full h-full object-cover"
           />
         </motion.div>
@@ -261,6 +263,7 @@ Thank you,
                               src={image}
                               alt={`${project?.propertyName} - Image ${index + 1}`}
                               fallbackLabel={project?.propertyName}
+                              loading={index === 0 ? "eager" : "lazy"}
                               className="w-full h-full object-cover object-center"
                             />
                           </motion.div>

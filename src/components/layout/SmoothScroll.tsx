@@ -11,7 +11,10 @@ import Lenis from "lenis";
 const SmoothScroll = ({ children }: { children: ReactNode }) => {
   useEffect(() => {
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) return;
+    // Touch devices already have momentum scrolling; running Lenis on top of
+    // it burns a frame budget iOS Safari doesn't have and can freeze the page.
+    const isTouch = window.matchMedia("(pointer: coarse)").matches;
+    if (prefersReducedMotion || isTouch) return;
 
     const lenis = new Lenis({
       duration: 1.15,
