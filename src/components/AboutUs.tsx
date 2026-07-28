@@ -85,8 +85,12 @@ const AboutUs = () => {
           >
             <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl w-full">
               <img
-                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa"
+                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=68"
                 alt="Modern building facade"
+                loading="lazy"
+                decoding="async"
+                width={900}
+                height={600}
                 className="w-full h-[520px] md:h-[600px] object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-lion-black/80 via-lion-black/10 to-transparent" />
