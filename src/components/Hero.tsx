@@ -65,7 +65,7 @@ const Hero = () => {
       </motion.div>
       
       {/* Simplified minimal decoration */}
-      <div className="absolute top-0 right-0 w-full h-full overflow-hidden opacity-10">
+      <div className="decor-loop absolute top-0 right-0 w-full h-full overflow-hidden opacity-10">
         <motion.div 
           className="absolute -top-20 -right-20 w-96 h-96 rounded-full border border-white/5"
           animate={{ rotate: 360 }}
