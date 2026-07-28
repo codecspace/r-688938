@@ -191,6 +191,7 @@ Thank you,
                       <ImageWithFallback
                         src={member.image}
                         alt={member.name}
+                        optimizeWidth={480}
                         className="w-full h-full object-cover object-center"
                         loading="lazy"
                         decoding="async"
