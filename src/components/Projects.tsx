@@ -64,6 +64,7 @@ const Projects = () => {
                         <ImageWithFallback
                           src={project.image}
                           alt={`${project.developerName} logo`}
+                          optimizeWidth={72}
                           className="w-full h-full object-contain"
                           loading="lazy"
                         />
