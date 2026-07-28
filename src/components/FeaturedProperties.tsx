@@ -80,6 +80,9 @@ const FeaturedProperties = () => {
                     src={property.heroImage || property.images?.[0] || property.image}
                     alt={property.propertyName}
                     fallbackLabel={property.propertyName}
+                    optimizeWidth={520}
+                    width={520}
+                    height={280}
                     className="w-full h-full object-cover object-center"
                     loading="lazy"
                     decoding="async"
