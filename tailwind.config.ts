@@ -57,23 +57,31 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         lion: {
-          gold: "#D4AF37",
-          lightgold: "#F5D76E",
-          darkgold: "#996515",
-          black: "#1A1A1A",
-          obsidian: "#0B0A08", // Deepest warm black, for signature dark sections
-          darkgray: "#333333",
-          gray: "#555555",
-          lightgray: "#CCCCCC",
-          ivory: "#F6F5F1", // Crisp warm-white for light sections — not peach/pink
-          ink: "#211F1C", // Warm near-black body text on light sections
-          stone: "#8A8378", // Warm muted secondary text
+          // Editorial luxury palette — paper, ink, and gold used sparingly
+          gold: "#C9A84C",
+          lightgold: "#F0D78C",
+          darkgold: "#8F7328",
+          black: "#0D0D0D",
+          obsidian: "#0A0A0A", // Full-bleed noir chapters
+          darkgray: "#2D2D2D",
+          gray: "#585652",
+          lightgray: "#D8D4CC",
+          ivory: "#F5F3EE", // Paper base
+          paper: "#F5F3EE",
+          paper2: "#E8E4DD", // Second paper tone for banding
+          ink: "#1A1A1A", // Body text on paper
+          stone: "#77736C", // Muted secondary text
         },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "sans-serif"], // Added system-ui for better fallback
-        display: ["Playfair Display", "serif"],
-        heading: ["Poppins", "sans-serif"], // Modern, geometric font for headings
+        sans: ['"Work Sans"', "system-ui", "sans-serif"],
+        display: ['"Instrument Serif"', "Georgia", "serif"],
+        heading: ['"Instrument Serif"', "Georgia", "serif"],
+      },
+      fontSize: {
+        "display-sm": ["clamp(2.25rem, 5vw, 3.25rem)", { lineHeight: "1.02", letterSpacing: "-0.02em" }],
+        "display-md": ["clamp(2.75rem, 7vw, 5rem)", { lineHeight: "0.98", letterSpacing: "-0.025em" }],
+        "display-lg": ["clamp(3.25rem, 10vw, 8rem)", { lineHeight: "0.92", letterSpacing: "-0.03em" }],
       },
       borderRadius: {
         lg: "var(--radius, 0.75rem)", // Slightly larger default radius for a softer look
