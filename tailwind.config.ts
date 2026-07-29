@@ -84,14 +84,14 @@ export default {
         "display-lg": ["clamp(3.25rem, 10vw, 8rem)", { lineHeight: "0.92", letterSpacing: "-0.03em" }],
       },
       borderRadius: {
-        lg: "var(--radius, 0.75rem)", // Slightly larger default radius for a softer look
-        md: "calc(var(--radius, 0.75rem) - 2px)",
-        sm: "calc(var(--radius, 0.75rem) - 4px)",
+        lg: "var(--radius, 0.25rem)", // Editorial: near-square corners
+        md: "calc(var(--radius, 0.25rem) - 1px)",
+        sm: "calc(var(--radius, 0.25rem) - 2px)",
       },
       boxShadow: {
-        // Added modern shadow utilities for depth
-        soft: "0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1)",
-        "soft-lg": "0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)",
+        soft: "0 4px 6px -1px rgba(0, 0, 0, 0.06), 0 2px 4px -2px rgba(0, 0, 0, 0.06)",
+        "soft-lg": "0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.08)",
+        editorial: "0 30px 60px -30px rgba(13, 13, 13, 0.35)",
       },
       transitionProperty: {
         // Added global transition for smoother hover effects
