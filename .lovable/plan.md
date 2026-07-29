@@ -1,31 +1,47 @@
-## What I found
+## Direction
 
-Two separate problems, both confirmed by inspection:
+**Editorial Luxury** — a gallery-like light "paper" canvas broken by full-bleed noir chapters, with gold used sparingly as a rare accent rather than a coating. Composition takes cues from Awwwards architecture/property studios: oversized serif display type, generous margins, asymmetric image/text pairings, and slow, weighted motion.
 
-**1. Very heavy images.** Project images are unoptimized PNGs served straight from imgur/postimg. Measured sizes include 1.95 MB, 1.58 MB, 1.41 MB, 875 KB, 665 KB and 487 KB files — for photos that render at a few hundred pixels wide on a phone. On mobile data these take seconds each, and several load at once.
+Locked decisions:
+- **Type**: Instrument Serif (display) + Work Sans (body/UI). Fluid `clamp()` type scale, tight display tracking, wide uppercase micro-labels.
+- **Color**: Paper `#F5F3EE` / `#E8E4DD`, Ink `#0D0D0D` / `#2D2D2D`, Gold `#C9A84C` with a light `#F0D78C` highlight. All as HSL semantic tokens.
+- **Layout**: editorial magazine grid on the homepage and projects, full-bleed cinematic bands for hero/statement/contact.
 
-**2. Too much continuous GPU/CPU work on iOS Safari.** Three things stack up:
-- `ParticleField` (hero) runs a full particle sim every frame plus an O(n²) neighbour-line pass — up to ~2,400 distance checks and hundreds of canvas strokes per frame, at up to 2× device pixel ratio, even on phones.
-- Lenis smooth scroll (`SmoothScroll`) drives scroll on every frame.
-- Many stacked `backdrop-blur` layers (Team has 6, FeaturedProperties 3, Hero 2, Navbar, PropertyCard, NavDots) plus ~120 animated `motion` elements. Backdrop blur is the single most expensive effect on iOS Safari, and combining it with canvas + hijacked scroll is the classic cause of "page freezes until I reload".
+Everything happens in this Lovable project only — no GitHub writes; you review it in the preview here.
 
-## Plan
+## What changes
 
-### Images
-- Convert every project image to a size- and format-optimized URL: use `wsrv.nl`-style resizing (or postimg/imgur's own size suffixes where available) so cards request ~600–800 px WebP instead of full-resolution PNG. Expected reduction: 1.9 MB → roughly 60–90 KB per image.
-- Add a small `ProjectImage` helper that takes the base URL and a target width, so card grids, hero images and detail galleries each request an appropriate size.
-- Ensure every non-LCP `<img>` has `loading="lazy"`, `decoding="async"`, plus explicit `width`/`height` (or aspect-ratio wrapper) to stop layout shift.
-- On the project detail page, load only the first gallery image eagerly and lazy-load the rest.
+**Design system (`src/index.css`, `tailwind.config.ts`)**
+- Replace the Playfair/Inter import with Instrument Serif + Work Sans; new `font-display` / `font-sans` families.
+- New semantic tokens: paper/ink surfaces, gold accent, hairline borders, editorial shadows, `--radius` reduced to a sharper 4px feel.
+- Retire the glass-soup utilities (`glass-card`, `glass-depth-*`, multiple glow classes) in favour of a small set: `.surface-paper`, `.surface-ink`, `.hairline`, `.eyebrow`, `.gold-rule`, `.hover-lift`, `.media-reveal`. Mobile blur/perf guards stay.
 
-### iOS Safari stability
-- Disable `ParticleField` on small/touch devices and when the device reports low core count; keep it on desktop. Also cap DPR at 1.5 and skip the neighbour-line pass below a width threshold.
-- Disable Lenis smooth scroll on touch devices (it already respects reduced-motion) — native iOS scrolling is smoother and far cheaper.
-- Reduce stacked blur: keep backdrop-blur on the navbar and a single card layer, and on mobile fall back to a solid/translucent background instead of blur (a `@media (max-width: 768px)` rule that neutralizes `backdrop-filter` for the decorative layers).
-- Trim always-on animations on mobile: infinite rotate/pulse loops in Hero/Team pause below the tablet breakpoint.
+**Motion system (new `src/components/motion/`)**
+- `Reveal` (staggered mask-up reveals), `SplitText` (word-by-word display headline entry), `MediaParallax` (image drifts inside a fixed frame), `Magnetic` CTA (reuse existing), `PageTransition` wrapper for route changes.
+- One shared easing/duration set; all motion respects `prefers-reduced-motion` and stays off the main thread (transform/opacity only).
 
-### Verify
-- Re-measure transferred image bytes for the homepage and a project page.
-- Run the site in a mobile-emulated browser, scroll the full page, and confirm no long-task pileup and no console errors.
+**Homepage sections (rebuilt, same order & anchors)**
+- `Hero`: full-bleed image with slow scale-out, split-word serif headline, gold hairline rule, two restrained CTAs, index-style meta row (location · established · segment) along the bottom.
+- `AboutUs`: asymmetric 60/40 — tall image column with parallax against a text column with a numbered manifesto.
+- `VisionMission` + `Stats`: ink-dark chapter band, oversized counters with hairline dividers, no cards.
+- `Projects` / `FeaturedProperties`: editorial grid — one featured tall tile plus staggered offset tiles, image-first with type overlaid on hover, existing `projectsData` untouched.
+- `Team`: portrait grid with initials placeholders preserved for Vaibhav and Jazbi; no experience badges (per existing rule).
+- `SimpleContact` + `Footer`: full-bleed ink footer, large serif CTA line, existing Gmail-desktop / native-mail-mobile behaviour kept exactly.
+- `Navbar`: floating pill nav on paper, ink-on-scroll, refined mobile sheet.
+- Marquee bands restyled as thin editorial tickers.
+
+**Other pages**
+- `ProjectDetails`: cinematic hero, sticky spec sidebar, editorial gallery with parallax, unchanged data/routing and `RouteHead` SEO.
+- `PrivacyPolicy`: proper editorial long-form layout (measure-limited column, serif headings).
+
+## What is deliberately untouched
+
+Routes in `App.tsx`, `RouteHead` usage and all metadata, `index.html` head tags, `public/sitemap.xml`, `public/robots.txt`, `vercel.json`, `src/data/projectsData.ts`, MCP tools and edge function, self-hosted WebP image pipeline, and the existing mobile performance guards (no blur on phones, desktop-only particles, no Lenis on touch).
 
 ## Technical notes
-Files touched: `src/data/projectsData.ts` (or a new `src/lib/imageUrl.ts` wrapper so data stays clean), `src/components/layout/ParticleField.tsx`, `src/components/layout/SmoothScroll.tsx`, `src/components/Hero.tsx`, `src/components/Team.tsx`, `src/components/FeaturedProperties.tsx`, `src/components/Projects.tsx`, `src/components/PropertyCard.tsx`, `src/pages/ProjectDetails.tsx`, `src/index.css`. No backend or content changes — the design stays the same on desktop; mobile loses only the effects that are causing the freeze.
+
+- Framer Motion is already a dependency — the motion layer builds on it; no new heavy libraries.
+- Page transitions use `AnimatePresence` keyed on `location.pathname` inside `BrowserRouter`, keeping lazy routes and `Suspense` intact.
+- Images keep `width`/`height`, `loading`/`fetchpriority` attributes so LCP and CLS don't regress; the hero preload in `index.html` is updated only if the hero image path changes.
+- Accessibility: single H1 per page, focus-visible gold outline retained, AA contrast checked on gold-on-paper (used for large text/accents only, not body copy), all motion gated behind `prefers-reduced-motion`.
+- Work is done section by section with a build check after each batch so the preview never goes dark.

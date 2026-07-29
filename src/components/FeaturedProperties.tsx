@@ -1,104 +1,86 @@
-
-import { motion } from "framer-motion";
-import { Badge } from "./ui/badge";
 import { Link } from "react-router-dom";
 import { projectsData } from "@/data/projectsData";
-import { MapPin } from "lucide-react";
-import { Reveal, RevealMask } from "@/components/layout/Reveal";
+import { ArrowUpRight } from "lucide-react";
+import { StaggerGroup, StaggerItem, Reveal } from "@/components/layout/Reveal";
+import { SplitHeading } from "@/components/layout/Editorial";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
-import TiltCard from "@/components/layout/TiltCard";
 
+/** Gallery grid — restrained cards, hairline meta, one slow zoom on hover. */
 const FeaturedProperties = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { 
-      opacity: 1, 
-      y: 0,
-      transition: {
-        duration: 0.7,
-        ease: "easeOut"
-      }
-    }
-  };
-
   return (
-    <section id="properties" className="py-24 md:py-32 bg-lion-ivory">
-      <div className="container mx-auto px-4 max-w-6xl">
-        <Reveal className="text-center mb-16">
-          <span className="eyebrow justify-center mb-3">Featured</span>
-          <h3 className="font-display text-4xl md:text-6xl text-lion-black mb-4 leading-[1.05] tracking-tight">
-            <RevealMask>Properties worth a second look</RevealMask>
-          </h3>
-          <motion.div 
-            className="w-16 h-px bg-lion-gold mx-auto mt-6"
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-          />
-        </Reveal>
+    <section id="properties" className="bg-lion-paper2 py-24 md:py-36">
+      <div className="container mx-auto px-6 md:px-8 max-w-7xl">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14 md:mb-20">
+          <div>
+            <Reveal>
+              <span className="eyebrow mb-6">Featured</span>
+            </Reveal>
+            <SplitHeading
+              text="Addresses worth a second look."
+              className="font-display text-display-sm text-lion-black max-w-[14ch]"
+            />
+          </div>
+          <Reveal delay={0.1}>
+            <p className="text-lion-stone text-sm max-w-xs leading-relaxed md:text-right">
+              Currently open for enquiry across Gurugram, Noida and Delhi.
+            </p>
+          </Reveal>
+        </div>
 
-        <motion.div 
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-        >
+        <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" stagger={0.09}>
           {projectsData.map((property) => (
-            <motion.div key={property.id} variants={itemVariants}>
-              <TiltCard
-                maxTilt={6}
-                className="group cursor-pointer backdrop-blur-sm bg-white/50 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-shadow duration-300"
-              >
-              <Link to={`/project/${property.id}`}>
-                <div className="relative overflow-hidden rounded-t-xl h-[280px]">
-                  <div className="absolute top-3 left-3 z-20 flex gap-2">
-                    {property.isNew && (
-                      <Badge className="bg-lion-black/90 backdrop-blur-sm text-lion-gold border border-lion-gold/40 py-1 shadow-md">
-                        New Offer
-                      </Badge>
-                    )}
-                    {property.isFeatured && (
-                      <Badge className="bg-gradient-to-r from-lion-gold to-lion-darkgold text-lion-black border-none py-1 shadow-md font-medium">
-                        Featured
-                      </Badge>
-                    )}
-                  </div>
-                  <div className="bg-gradient-to-t from-lion-black to-transparent absolute inset-0 z-10 opacity-50 group-hover:opacity-70 transition-opacity duration-500"></div>
+            <StaggerItem key={property.id}>
+              <Link to={`/project/${property.id}`} className="group block h-full">
+                <div className="media-frame media-zoom h-[300px] md:h-[340px]">
                   <ImageWithFallback
                     src={property.heroImage || property.images?.[0] || property.image}
                     alt={property.propertyName}
                     fallbackLabel={property.propertyName}
-                    width={520}
-                    height={280}
-                    className="w-full h-full object-cover object-center"
+                    width={560}
+                    height={340}
+                    className="w-full h-full object-cover"
                     loading="lazy"
                     decoding="async"
                   />
-                  <div className="absolute bottom-0 left-0 right-0 p-6 z-20 text-white backdrop-blur-sm bg-black/20">
-                    <h4 className="text-xl font-semibold mb-1 group-hover:text-lion-gold transition-colors duration-300">{property.propertyName}</h4>
-                    <div className="flex items-center mt-1 text-gray-200">
-                      <MapPin className="w-4 h-4 mr-1" />
-                      <span className="text-sm">{property.location}</span>
+                  {(property.isNew || property.isFeatured) && (
+                    <div className="absolute top-4 left-4 flex gap-2 z-10">
+                      {property.isNew && (
+                        <span className="bg-lion-obsidian/85 text-lion-lightgold text-[0.6rem] uppercase tracking-[0.22em] px-3 py-1.5">
+                          New
+                        </span>
+                      )}
+                      {property.isFeatured && (
+                        <span className="bg-lion-gold text-lion-black text-[0.6rem] uppercase tracking-[0.22em] px-3 py-1.5">
+                          Featured
+                        </span>
+                      )}
                     </div>
+                  )}
+                </div>
+
+                <div className="border-t border-black/15 mt-5 pt-5 transition-colors duration-500 group-hover:border-lion-gold">
+                  <div className="flex items-start justify-between gap-4">
+                    <div>
+                      <span className="text-lion-gold text-[0.6rem] uppercase tracking-[0.28em]">
+                        {property.developerName}
+                      </span>
+                      <h3 className="font-display text-2xl text-lion-black mt-2 leading-tight">
+                        {property.propertyName}
+                      </h3>
+                      <p className="text-lion-stone text-xs uppercase tracking-[0.18em] mt-2">
+                        {property.location}
+                      </p>
+                    </div>
+                    <ArrowUpRight
+                      className="w-5 h-5 text-lion-black/40 shrink-0 mt-1 transition-all duration-500 group-hover:text-lion-gold group-hover:translate-x-1 group-hover:-translate-y-1"
+                      strokeWidth={1.25}
+                    />
                   </div>
                 </div>
               </Link>
-              </TiltCard>
-            </motion.div>
+            </StaggerItem>
           ))}
-        </motion.div>
+        </StaggerGroup>
       </div>
     </section>
   );

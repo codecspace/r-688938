@@ -1,9 +1,9 @@
 import { motion } from "framer-motion";
-import { Compass, Flag } from "lucide-react";
-import { Reveal, RevealMask, EASE } from "@/components/layout/Reveal";
+import { Reveal } from "@/components/layout/Reveal";
+import { SplitHeading } from "@/components/layout/Editorial";
 
 interface Pillar {
-  icon: typeof Compass;
+  n: string;
   eyebrow: string;
   title: string;
   paragraphs: string[];
@@ -11,84 +11,77 @@ interface Pillar {
 
 const pillars: Pillar[] = [
   {
-    icon: Compass,
+    n: "01",
     eyebrow: "Where we're headed",
-    title: "Our Vision",
+    title: "Vision",
     paragraphs: [
-      "To be recognised as a leader in the real estate industry — known for an unwavering commitment to quality, transparency, and customer-first solutions. We aim to shape the future of real estate with investment opportunities and experiences that meet the ambitions of modern buyers and investors.",
-      "We're expanding our presence across the major residential and commercial hubs of Delhi NCR, setting new benchmarks in luxury, stability, and investment security — building an ecosystem where every client finds the right asset, whether for living in or for growing wealth.",
+      "To be recognised as a leader in the real estate industry — known for an unwavering commitment to quality, transparency, and customer-first solutions, shaping investment opportunities that meet the ambitions of modern buyers.",
+      "We're expanding across the major residential and commercial hubs of Delhi NCR, setting benchmarks in luxury, stability, and investment security.",
     ],
   },
   {
-    icon: Flag,
+    n: "02",
     eyebrow: "How we get there",
-    title: "Our Mission",
+    title: "Mission",
     paragraphs: [
-      "To redefine the real estate experience through exceptional service, strategic investment guidance, and genuine customer satisfaction — becoming a trusted partner for homebuyers, investors, and businesses across Delhi, Noida, and Gurugram.",
-      "With a firm commitment to integrity, innovation, and market expertise, every transaction we handle is transparent, secure, and rewarding. Our role goes beyond selling property — it's equipping clients with practical guidance and data-led strategies for long-term financial growth.",
+      "To redefine the real estate experience through exceptional service, strategic investment guidance, and genuine customer satisfaction across Delhi, Noida, and Gurugram.",
+      "Every transaction we handle is transparent, secure, and rewarding. Our role goes beyond selling property — it's equipping clients with data-led strategies for long-term growth.",
     ],
   },
 ];
 
+/** Full-bleed noir chapter. Oversized serif, hairline dividers, zero cards. */
 const VisionMission = () => {
   return (
-    <section className="relative bg-lion-obsidian py-28 md:py-36 overflow-hidden">
-      {/* Ambient depth: one texture, one soft gold glow — not five competing colors */}
+    <section className="relative bg-lion-obsidian py-28 md:py-40 overflow-hidden">
       <div className="grain absolute inset-0" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[400px] rounded-full bg-lion-gold/[0.07] blur-[140px] pointer-events-none" />
 
-      <div className="container mx-auto px-4 max-w-6xl relative z-10">
-        <Reveal className="text-center mb-20 md:mb-28">
-          <span className="eyebrow justify-center mb-4">
-            <span className="w-6 h-px bg-lion-gold" />
-            Our Philosophy
-            <span className="w-6 h-px bg-lion-gold" />
-          </span>
-          <h2 className="font-display text-4xl md:text-6xl lg:text-7xl text-white leading-[1.05] tracking-tight">
-            <RevealMask>Vision &amp; Mission</RevealMask>
-          </h2>
-        </Reveal>
-
-        <div className="space-y-20 md:space-y-28">
-          {pillars.map((pillar, index) => {
-            const Icon = pillar.icon;
-            const reversed = index % 2 === 1;
-            return (
-              <div
-                key={pillar.title}
-                className={`flex flex-col ${reversed ? "md:flex-row-reverse" : "md:flex-row"} gap-8 md:gap-12 items-start`}
-              >
-                <Reveal y={20} className="md:w-1/3 flex md:flex-col items-center md:items-start gap-4 md:gap-6 shrink-0">
-                  <Icon strokeWidth={1} className="w-12 h-12 md:w-14 md:h-14 text-lion-gold/70 shrink-0" />
-                  <div>
-                    <span className="text-white/40 text-xs uppercase tracking-[0.25em]">{pillar.eyebrow}</span>
-                    <h3 className="font-display text-3xl md:text-4xl text-white mt-2 leading-tight">{pillar.title}</h3>
-                  </div>
-                </Reveal>
-
-                <div
-                  className={`md:w-2/3 space-y-6 md:border-white/10 ${
-                    reversed ? "md:border-r md:pr-12 md:text-right" : "md:border-l md:pl-12"
-                  }`}
-                >
-                  {pillar.paragraphs.map((p, i) => (
-                    <Reveal key={i} delay={0.1 + i * 0.12} y={16}>
-                      <p className="text-white/70 text-lg leading-relaxed">{p}</p>
-                    </Reveal>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+      <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-20 mb-20 md:mb-28">
+          <Reveal className="lg:col-span-4">
+            <span className="eyebrow">Our philosophy</span>
+          </Reveal>
+          <SplitHeading
+            text="We measure success in decisions clients don't regret."
+            className="lg:col-span-8 font-display text-display-md text-white max-w-[20ch]"
+          />
         </div>
 
-        <motion.div
-          className="gold-rule mt-24 md:mt-28 origin-center"
-          initial={{ scaleX: 0 }}
-          whileInView={{ scaleX: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 1.4, ease: EASE }}
-        />
+        <div className="border-t border-white/12">
+          {pillars.map((pillar, index) => (
+            <div
+              key={pillar.title}
+              className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 border-b border-white/12 py-14 md:py-20 group"
+            >
+              <Reveal y={18} className="lg:col-span-4 flex items-start gap-5">
+                <span className="index-num text-white/35 pt-3">{pillar.n}</span>
+                <div>
+                  <span className="text-white/40 text-[0.65rem] uppercase tracking-[0.3em]">{pillar.eyebrow}</span>
+                  <h3 className="font-display text-4xl md:text-5xl text-white mt-3 leading-none transition-colors duration-500 group-hover:text-lion-lightgold">
+                    {pillar.title}
+                  </h3>
+                </div>
+              </Reveal>
+
+              <div className="lg:col-span-8 space-y-6 max-w-3xl">
+                {pillar.paragraphs.map((p, i) => (
+                  <Reveal key={i} delay={0.08 + i * 0.1} y={14}>
+                    <p className={`leading-relaxed ${i === 0 ? "text-white/80 text-xl md:text-2xl font-light" : "text-white/55 text-base md:text-lg"}`}>
+                      {p}
+                    </p>
+                  </Reveal>
+                ))}
+                <motion.div
+                  className="h-px bg-lion-gold/60 origin-left mt-8 w-24"
+                  initial={{ scaleX: 0 }}
+                  whileInView={{ scaleX: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.2 + index * 0.05, ease: [0.22, 1, 0.36, 1] }}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

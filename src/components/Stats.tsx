@@ -1,5 +1,5 @@
 import { useEffect, useRef } from "react";
-import { motion, useInView, useMotionValue, useSpring } from "framer-motion";
+import { useInView, useMotionValue, useSpring } from "framer-motion";
 import { Reveal } from "@/components/layout/Reveal";
 
 interface StatItem {
@@ -19,7 +19,7 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
   const spanRef = useRef<HTMLSpanElement>(null);
   const isInView = useInView(spanRef, { once: true, margin: "-100px" });
   const motionValue = useMotionValue(0);
-  const springValue = useSpring(motionValue, { damping: 32, stiffness: 55 });
+  const springValue = useSpring(motionValue, { damping: 34, stiffness: 55 });
 
   useEffect(() => {
     if (isInView) motionValue.set(value);
@@ -28,9 +28,7 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
   useEffect(
     () =>
       springValue.on("change", (latest) => {
-        if (spanRef.current) {
-          spanRef.current.textContent = Math.floor(latest).toString() + suffix;
-        }
+        if (spanRef.current) spanRef.current.textContent = Math.floor(latest).toString() + suffix;
       }),
     [springValue, suffix]
   );
@@ -38,38 +36,28 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
   return <span ref={spanRef}>0{suffix}</span>;
 };
 
-/**
- * Thin, dark stat band bridging Vision/Mission and Projects. Numbers here
- * are all traceable to content already elsewhere on the site (12+ years,
- * 3 cities, 5 developer projects) rather than invented — swap in real
- * figures (transactions closed, sq. ft. under management, etc.) once you
- * have them, Arjun.
- */
+/** Numeric register closing the noir chapter — oversized serif figures on hairlines. */
 const Stats = () => {
   return (
-    <section className="relative bg-lion-obsidian py-16 md:py-20 overflow-hidden">
-      <div className="container mx-auto px-4 max-w-6xl relative z-10">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-10 md:gap-6">
+    <section className="relative bg-lion-obsidian pb-24 md:pb-32 overflow-hidden">
+      <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
           {stats.map((stat, i) => (
-            <Reveal key={stat.label} delay={i * 0.1} className="text-center md:border-l md:border-white/10 md:first:border-l-0 md:px-6">
-              <div className="font-display text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-b from-white to-lion-gold mb-2 tabular-nums">
+            <Reveal
+              key={stat.label}
+              delay={i * 0.08}
+              className="bg-lion-obsidian px-5 py-10 md:px-8 md:py-14"
+            >
+              <div className="font-display text-5xl md:text-7xl text-white mb-4 tabular-nums leading-none">
                 <Counter value={stat.value} suffix={stat.suffix} />
               </div>
-              <p className="text-white/50 text-xs md:text-sm uppercase tracking-wider leading-relaxed">
+              <p className="text-white/40 text-[0.68rem] md:text-xs uppercase tracking-[0.2em] leading-relaxed">
                 {stat.label}
               </p>
             </Reveal>
           ))}
         </div>
       </div>
-
-      <motion.div
-        className="gold-rule absolute bottom-0 left-0 right-0 origin-left"
-        initial={{ scaleX: 0 }}
-        whileInView={{ scaleX: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-      />
     </section>
   );
 };
