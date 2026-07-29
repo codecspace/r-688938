@@ -1,112 +1,94 @@
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
-import { Sparkles, ShieldCheck, Swords, Crown, Compass as CompassIcon } from "lucide-react";
-import { Reveal, RevealMask, StaggerGroup, StaggerItem, EASE } from "@/components/layout/Reveal";
+import { Reveal, StaggerGroup, StaggerItem } from "@/components/layout/Reveal";
+import { SplitHeading, Parallax } from "@/components/layout/Editorial";
 
 const traits = [
-  { icon: Swords, label: "Strength and power", desc: "Performing our dominance and leadership in the real estate industry." },
-  { icon: ShieldCheck, label: "Courage and belief", desc: "Empowering customers with bold, well-informed investment options." },
-  { icon: Crown, label: "Authority and reputation", desc: "Establishing faith through reliability, expertise, and excellence." },
-  { icon: CompassIcon, label: "Protection and reliability", desc: "Ensuring safe and transparent property transactions." },
+  { n: "01", label: "Strength and power", desc: "Leadership and conviction in every Delhi NCR market we operate in." },
+  { n: "02", label: "Courage and belief", desc: "Bold, well-informed investment options — never guesswork." },
+  { n: "03", label: "Authority and reputation", desc: "Faith built through reliability, expertise, and excellence." },
+  { n: "04", label: "Protection and reliability", desc: "Safe, transparent property transactions, start to finish." },
 ];
 
+/**
+ * Asymmetric editorial chapter: a 7/5 split with a manifesto column and a
+ * tall parallaxed portrait plate. Hairlines instead of cards.
+ */
 const AboutUs = () => {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"],
-  });
-
-  const imageY = useTransform(scrollYProgress, [0, 1], [0, 80]);
-  const opacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
-
   return (
-    <section id="about" ref={containerRef} className="py-24 md:py-32 relative overflow-hidden bg-lion-ivory">
-
-      <div className="container mx-auto px-4 max-w-6xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-14 lg:gap-16 items-center">
-          <div>
+    <section id="about" className="relative bg-lion-paper py-24 md:py-36 overflow-hidden">
+      <div className="container mx-auto px-6 md:px-8 max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
+          {/* Manifesto */}
+          <div className="lg:col-span-7">
             <Reveal>
-              <span className="eyebrow mb-4">
-                <Sparkles className="w-3.5 h-3.5" />
-                About Us
-              </span>
-              <h3 className="font-display text-4xl md:text-6xl text-lion-black mb-8 leading-[1.05] tracking-tight">
-                <RevealMask>About Lionvest Realty</RevealMask>
-              </h3>
+              <span className="eyebrow mb-8">About the firm</span>
             </Reveal>
 
-            <Reveal delay={0.1} className="space-y-5 text-lion-ink/75 text-lg leading-relaxed mb-10">
+            <SplitHeading
+              text="A property advisory built on judgement, not volume."
+              className="font-display text-display-md text-lion-black max-w-[18ch] mb-10"
+            />
+
+            <Reveal delay={0.1} className="space-y-6 text-lion-ink/70 text-lg leading-relaxed max-w-2xl">
               <p>
-                At Lionvest Realty Pvt. Ltd., we provide seamless, expert real estate
-                guidance for residential and commercial buyers across Delhi, Noida, and
-                Gurugram — simplifying property transactions with strategic advice and
-                unmatched support at every step.
+                Lionvest Realty Pvt. Ltd. provides seamless, expert guidance for residential and
+                commercial buyers across Delhi, Noida, and Gurugram — simplifying transactions
+                with strategic advice and support at every step.
               </p>
               <p>
-                Our name is more than a brand — <em className="text-lion-black not-italic font-medium">"Lionvest"</em> is
-                a symbol of the strength, confidence, and reliability we bring to the
-                real estate market:
+                Our name is more than a brand. <span className="serif-accent">Lionvest</span> stands for
+                the strength, confidence, and reliability we bring to the market.
               </p>
             </Reveal>
 
-            <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-10" stagger={0.1}>
-              {traits.map((item) => {
-                const Icon = item.icon;
-                return (
-                  <StaggerItem key={item.label} className="border-l-2 border-lion-gold/40 pl-4 py-1">
-                    <div className="flex items-center gap-2 mb-1.5">
-                      <Icon className="h-4 w-4 text-lion-gold" strokeWidth={1.5} />
-                      <span className="font-semibold text-lion-black text-sm">{item.label}</span>
+            <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 mt-14 border-t border-black/10" stagger={0.09}>
+              {traits.map((item) => (
+                <StaggerItem key={item.label} className="border-b border-black/10 py-6 group">
+                  <div className="flex items-baseline gap-4">
+                    <span className="index-num">{item.n}</span>
+                    <div>
+                      <h3 className="font-display text-xl text-lion-black mb-1 group-hover:text-lion-darkgold transition-colors">
+                        {item.label}
+                      </h3>
+                      <p className="text-lion-stone text-sm leading-relaxed">{item.desc}</p>
                     </div>
-                    <p className="text-lion-stone text-sm leading-relaxed">{item.desc}</p>
-                  </StaggerItem>
-                );
-              })}
+                  </div>
+                </StaggerItem>
+              ))}
             </StaggerGroup>
 
             <Reveal delay={0.15}>
-              <p className="text-lion-ink/75 text-lg leading-relaxed border-t border-lion-black/10 pt-6">
-                With a client-first approach, we back every recommendation with deep
-                market insight and unwavering integrity. Whether you're searching for
-                your dream home or a strategic commercial investment, Lionvest Realty
-                is your trusted partner in navigating Delhi NCR's real estate landscape.
+              <p className="text-lion-ink/70 text-lg leading-relaxed pt-10 max-w-2xl">
+                With a client-first approach, we back every recommendation with deep market
+                insight and unwavering integrity — whether you are searching for a home or a
+                strategic commercial investment.
               </p>
             </Reveal>
           </div>
 
-          <motion.div
-            className="relative h-full flex items-center justify-center"
-            style={{ y: imageY, opacity }}
-            initial={{ opacity: 0, scale: 0.92 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.9, ease: EASE }}
-          >
-            <div className="relative z-10 rounded-lg overflow-hidden shadow-2xl w-full">
-              <img
-                src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=68"
-                alt="Modern building facade"
-                loading="lazy"
-                decoding="async"
-                width={900}
-                height={600}
-                className="w-full h-[520px] md:h-[600px] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-lion-black/80 via-lion-black/10 to-transparent" />
-              <div className="absolute bottom-0 left-0 right-0 p-6">
-                <div className="border-t border-lion-gold/40 pt-4">
-                  <h4 className="text-xl font-display text-white mb-1">Luxury Real Estate</h4>
-                  <p className="text-white/70 text-sm">Premium properties for discerning investors</p>
-                </div>
-              </div>
-            </div>
+          {/* Plate */}
+          <div className="lg:col-span-5">
+            <div className="lg:sticky lg:top-32">
+              <Parallax distance={40} className="media-frame h-[460px] md:h-[620px]">
+                <img
+                  src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=68"
+                  alt="Modern residential facade in Delhi NCR"
+                  loading="lazy"
+                  decoding="async"
+                  width={900}
+                  height={620}
+                  className="w-full h-[120%] object-cover"
+                />
+              </Parallax>
 
-            <div className="absolute -bottom-5 -right-5 bg-gradient-to-br from-lion-gold to-lion-darkgold w-24 h-24 rounded-full flex flex-col items-center justify-center shadow-xl">
-              <span className="text-lion-black text-2xl font-bold">12+</span>
-              <span className="text-lion-black text-xs">Years</span>
+              <Reveal delay={0.1} className="border-t border-black/15 mt-6 pt-5 flex items-baseline justify-between gap-6">
+                <div>
+                  <p className="font-display text-2xl text-lion-black leading-tight">Delhi NCR, since 2013</p>
+                  <p className="text-lion-stone text-sm mt-1">Residential &amp; commercial advisory</p>
+                </div>
+                <span className="font-display text-5xl text-lion-gold leading-none tabular-nums">12+</span>
+              </Reveal>
             </div>
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>
