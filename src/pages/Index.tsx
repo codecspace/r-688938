@@ -1,6 +1,6 @@
 import { Suspense, lazy } from "react";
 
-// Layout Components (light, above-the-fold)
+// Above-the-fold
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
@@ -26,35 +26,45 @@ const Index = () => {
     <>
       <ScrollProgress />
 
-      <div className="page-wrapper">
-        <div className="min-h-screen w-full overflow-hidden bg-white">
-          <Navbar />
+      <div className="min-h-screen w-full overflow-x-hidden bg-lion-paper">
+        <Navbar />
 
-          <div id="home"><Hero /></div>
+        <main>
+          <Hero />
 
           <Suspense fallback={null}>
             <SmoothScroll>
               <ScrollToTop />
               <NavDots />
 
-              <div id="about"><AboutUs /></div>
-              <div id="vision-mission">
+              <AboutUs />
+
+              <Marquee
+                items={TICKER_ITEMS}
+                className="bg-lion-paper py-6 border-y border-black/10 text-lion-black/35"
+              />
+
+              <section id="vision-mission">
                 <VisionMission />
                 <Stats />
-                <Marquee items={TICKER_ITEMS} className="bg-lion-obsidian py-5 text-white/40" />
-              </div>
-              <div id="projects"><Projects /></div>
-              <div id="team"><Team /></div>
-              <div id="properties">
-                <FeaturedProperties />
-                <Marquee items={TICKER_ITEMS} reverse className="bg-lion-ivory py-5 text-lion-black/30 border-y border-black/5" />
-              </div>
+              </section>
+
+              <Projects />
+              <Team />
+
+              <FeaturedProperties />
+
+              <Marquee
+                items={TICKER_ITEMS}
+                reverse
+                className="bg-lion-paper py-6 border-y border-black/10 text-lion-black/35"
+              />
 
               <SimpleContact />
               <Footer />
             </SmoothScroll>
           </Suspense>
-        </div>
+        </main>
       </div>
     </>
   );
