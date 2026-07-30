@@ -24,8 +24,9 @@ const TICKER_ITEMS = ["Delhi", "Gurugram", "Noida", "Luxury Real Estate", "Lionv
 
 const Index = () => {
   return (
-    <>
+    <PageTransition animateIn={false}>
       <ScrollProgress />
+
 
       <div className="min-h-screen w-full overflow-x-hidden bg-lion-paper">
         <Navbar />
