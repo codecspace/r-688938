@@ -42,6 +42,12 @@ const Navbar = () => {
 
   return (
     <>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-lion-gold focus:text-lion-black focus:px-4 focus:py-2.5 focus:text-sm focus:font-medium focus:shadow-lg"
+      >
+        Skip to content
+      </a>
       <nav
         className={`site-navbar fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
           scrolled ? "glass-nav" : "bg-transparent"
