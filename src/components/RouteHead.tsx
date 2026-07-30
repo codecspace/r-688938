@@ -4,14 +4,16 @@ interface RouteHeadProps {
   title: string;
   description: string;
   path: string; // route path, e.g. "/privacy-policy"
+  /** When true, emits <meta name="robots" content="noindex, nofollow"> */
+  noindex?: boolean;
 }
 
 /**
- * Updates <title>, meta description, and canonical link for the current route.
+ * Updates <title>, meta description, canonical link and robots for the current route.
  * Note: crawlers of a static Vite SPA primarily read index.html; this improves
  * the in-browser experience and JS-executing crawlers.
  */
-const RouteHead = ({ title, description, path }: RouteHeadProps) => {
+const RouteHead = ({ title, description, path, noindex = false }: RouteHeadProps) => {
   useEffect(() => {
     const prevTitle = document.title;
     document.title = title;
