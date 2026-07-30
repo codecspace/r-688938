@@ -28,7 +28,9 @@ const Hero = () => {
   return (
     <header
       ref={heroRef}
-      className="relative min-h-[92vh] md:min-h-screen flex flex-col justify-end overflow-hidden bg-lion-obsidian"
+      id="main-content"
+      tabIndex={-1}
+      className="relative min-h-[92vh] md:min-h-screen flex flex-col justify-end overflow-hidden bg-lion-obsidian focus:outline-none"
     >
       {/* Full-bleed imagery */}
       <motion.div
