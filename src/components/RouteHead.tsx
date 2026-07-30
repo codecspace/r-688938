@@ -83,10 +83,22 @@ const RouteHead = ({ title, description, path, noindex = false }: RouteHeadProps
       }
     );
 
+    const robots = setMeta(
+      'meta[name="robots"]',
+      "content",
+      noindex ? "noindex, nofollow" : "index, follow",
+      () => {
+        const m = document.createElement("meta");
+        m.setAttribute("name", "robots");
+        return m;
+      }
+    );
+
     return () => {
       document.title = prevTitle;
+      robots.setAttribute("content", "index, follow");
     };
-  }, [title, description, path]);
+  }, [title, description, path, noindex]);
 
   return null;
 };
