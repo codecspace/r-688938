@@ -93,7 +93,7 @@ const Team = () => {
             <StaggerItem key={member.name}>
               <button
                 onClick={() => openProfile(member)}
-                className="group text-left w-full"
+                className="group text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lion-gold focus-visible:ring-offset-4 focus-visible:ring-offset-lion-paper"
                 aria-label={`View profile of ${member.name}`}
               >
                 <div className="media-frame media-zoom h-[380px] md:h-[440px] bg-lion-obsidian">

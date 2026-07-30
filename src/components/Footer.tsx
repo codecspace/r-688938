@@ -82,6 +82,7 @@ const Footer = () => {
               <li><Link to="/" className="link-rule hover:text-lion-gold transition-colors">Home</Link></li>
               <li><a href="/#about" className="link-rule hover:text-lion-gold transition-colors">About</a></li>
               <li><a href="/#projects" className="link-rule hover:text-lion-gold transition-colors">Projects</a></li>
+              <li><a href="/#team" className="link-rule hover:text-lion-gold transition-colors">Team</a></li>
               <li><a href="/#contact" className="link-rule hover:text-lion-gold transition-colors">Contact</a></li>
             </ul>
           </StaggerItem>

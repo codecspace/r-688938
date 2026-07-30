@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 
 // Above-the-fold
 import ScrollProgress from "@/components/layout/ScrollProgress";
+import PageTransition from "@/components/layout/PageTransition";
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 
@@ -23,8 +24,9 @@ const TICKER_ITEMS = ["Delhi", "Gurugram", "Noida", "Luxury Real Estate", "Lionv
 
 const Index = () => {
   return (
-    <>
+    <PageTransition animateIn={false}>
       <ScrollProgress />
+
 
       <div className="min-h-screen w-full overflow-x-hidden bg-lion-paper">
         <Navbar />
@@ -66,7 +68,7 @@ const Index = () => {
           </Suspense>
         </main>
       </div>
-    </>
+    </PageTransition>
   );
 };
 
