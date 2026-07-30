@@ -1,47 +1,45 @@
-## Direction
+# Apply the audit fixes to the current build
 
-**Editorial Luxury** — a gallery-like light "paper" canvas broken by full-bleed noir chapters, with gold used sparingly as a rare accent rather than a coating. Composition takes cues from Awwwards architecture/property studios: oversized serif display type, generous margins, asymmetric image/text pairings, and slow, weighted motion.
+The current build already includes many of the newer patterns (Editorial motion system, Navbar Team link, self-hosted images, mobile perf guards). The items below are the ones that still genuinely apply, adapted to the new design system — no rollback of the current styling or animations.
 
-Locked decisions:
-- **Type**: Instrument Serif (display) + Work Sans (body/UI). Fluid `clamp()` type scale, tight display tracking, wide uppercase micro-labels.
-- **Color**: Paper `#F5F3EE` / `#E8E4DD`, Ink `#0D0D0D` / `#2D2D2D`, Gold `#C9A84C` with a light `#F0D78C` highlight. All as HSL semantic tokens.
-- **Layout**: editorial magazine grid on the homepage and projects, full-bleed cinematic bands for hero/statement/contact.
+## 1. Performance & fonts
+- Move the Google Fonts load out of the `@import` at the top of `src/index.css` into `<link rel="preconnect">` + `<link rel="stylesheet">` tags in `index.html` (Instrument Serif + Work Sans — the fonts this build actually uses, not the old Inter/Playfair pair).
+- Keep the existing hero image preconnect/preload and all meta tags untouched.
 
-Everything happens in this Lovable project only — no GitHub writes; you review it in the preview here.
+## 2. Routing, 404 and route UX (`src/App.tsx`)
+- Add a global scroll-to-top on route change so every route starts at the top (removes the need for the local one in ProjectDetails).
+- Add a real `404` route (`path="*"`) — currently unmatched URLs render nothing.
+- Replace `Suspense fallback={null}` with a small branded loading state so slow connections don't get a blank flash.
+- Add a shared page-transition wrapper (fade/slide, reduced-motion aware). The homepage opts out of the entrance animation so hero LCP stays as tuned.
 
-## What changes
+New files: `src/components/layout/PageTransition.tsx`, `src/components/layout/RouteFallback.tsx`, `src/pages/NotFound.tsx` (styled with the current ink/paper/gold system, not the old glass style).
 
-**Design system (`src/index.css`, `tailwind.config.ts`)**
-- Replace the Playfair/Inter import with Instrument Serif + Work Sans; new `font-display` / `font-sans` families.
-- New semantic tokens: paper/ink surfaces, gold accent, hairline borders, editorial shadows, `--radius` reduced to a sharper 4px feel.
-- Retire the glass-soup utilities (`glass-card`, `glass-depth-*`, multiple glow classes) in favour of a small set: `.surface-paper`, `.surface-ink`, `.hairline`, `.eyebrow`, `.gold-rule`, `.hover-lift`, `.media-reveal`. Mobile blur/perf guards stay.
+## 3. SEO (`src/components/RouteHead.tsx`)
+- Add an optional `noindex` prop that writes `<meta name="robots">`, used by the 404 page and the "project not found" state. Existing callers are unaffected.
 
-**Motion system (new `src/components/motion/`)**
-- `Reveal` (staggered mask-up reveals), `SplitText` (word-by-word display headline entry), `MediaParallax` (image drifts inside a fixed frame), `Magnetic` CTA (reuse existing), `PageTransition` wrapper for route changes.
-- One shared easing/duration set; all motion respects `prefers-reduced-motion` and stays off the main thread (transform/opacity only).
+## 4. Project detail page (`src/pages/ProjectDetails.tsx`)
+Real bugs, fixed while keeping the page's content and contact logic identical:
+- Remove the artificial `setTimeout` loading delay — data comes from a local array, so resolve it synchronously.
+- Remove the hardcoded fake amenity list ("Basketball court", "Pool", etc.) that isn't derived from project data and misrepresents commercial listings.
+- Fix the sticky contact card offset (`top-8` tucks under the fixed navbar) → `lg:top-24`.
+- Standardise the office address to the Footer's version: "Plus Offices, 1st Floor, Landmark Cyber Park, Sector 67, Gurugram, HR 122101".
+- Restyle leftover `glass-card` / `text-gray-*` usages to the current editorial tokens so the page matches the rest of the site.
+- Add a proper branded "listing not found" state (with `noindex`) instead of bare text.
+- Keep untouched: phone/email constants, Gmail-vs-mailto logic, schedule-visit dialog and cooldown, `fetchPriority="high"` on the hero image.
 
-**Homepage sections (rebuilt, same order & anchors)**
-- `Hero`: full-bleed image with slow scale-out, split-word serif headline, gold hairline rule, two restrained CTAs, index-style meta row (location · established · segment) along the bottom.
-- `AboutUs`: asymmetric 60/40 — tall image column with parallax against a text column with a numbered manifesto.
-- `VisionMission` + `Stats`: ink-dark chapter band, oversized counters with hairline dividers, no cards.
-- `Projects` / `FeaturedProperties`: editorial grid — one featured tall tile plus staggered offset tiles, image-first with type overlaid on hover, existing `projectsData` untouched.
-- `Team`: portrait grid with initials placeholders preserved for Vaibhav and Jazbi; no experience badges (per existing rule).
-- `SimpleContact` + `Footer`: full-bleed ink footer, large serif CTA line, existing Gmail-desktop / native-mail-mobile behaviour kept exactly.
-- `Navbar`: floating pill nav on paper, ink-on-scroll, refined mobile sheet.
-- Marquee bands restyled as thin editorial tickers.
+## 5. Privacy policy (`src/pages/PrivacyPolicy.tsx`)
+- Bring it onto the current editorial system: dark header band (fixes the white-on-white navbar at the top of this page), Reveal-based entrance, editorial tokens instead of `text-gray-*`.
+- Legal copy stays word-for-word identical; all 8 sections preserved.
 
-**Other pages**
-- `ProjectDetails`: cinematic hero, sticky spec sidebar, editorial gallery with parallax, unchanged data/routing and `RouteHead` SEO.
-- `PrivacyPolicy`: proper editorial long-form layout (measure-limited column, serif headings).
+## 6. Small consistency fixes
+- `src/components/Footer.tsx`: add the missing "Team" link (Navbar already has it).
+- Accessibility: skip-to-content link in the Navbar plus an `id="main-content"` target on the hero, and keyboard activation (Enter/Space, focus ring, `role="button"`) for the Team cards, which are currently click-only.
+- Delete orphaned files with zero references: `src/App.css`, `Contact.tsx`, `LoadingScreen.tsx`, `OurVision.tsx`, `PropertyCard.tsx`, `PropertyGrid.tsx`, `SearchBar.tsx`, `Statement.tsx`, `Testimonials.tsx` (each verified unreferenced before removal).
 
-## What is deliberately untouched
+## Explicitly not doing
+- No changes to `projectsData.ts`, `sitemap.xml`, `robots.txt`, `vercel.json`, Supabase/MCP files, or shadcn primitives.
+- No reverting of the current Hero/Navbar/Team/FeaturedProperties designs — the audit's suggestions there were against the older build and are already superseded.
+- No new dependencies.
 
-Routes in `App.tsx`, `RouteHead` usage and all metadata, `index.html` head tags, `public/sitemap.xml`, `public/robots.txt`, `vercel.json`, `src/data/projectsData.ts`, MCP tools and edge function, self-hosted WebP image pipeline, and the existing mobile performance guards (no blur on phones, desktop-only particles, no Lenis on touch).
-
-## Technical notes
-
-- Framer Motion is already a dependency — the motion layer builds on it; no new heavy libraries.
-- Page transitions use `AnimatePresence` keyed on `location.pathname` inside `BrowserRouter`, keeping lazy routes and `Suspense` intact.
-- Images keep `width`/`height`, `loading`/`fetchpriority` attributes so LCP and CLS don't regress; the hero preload in `index.html` is updated only if the hero image path changes.
-- Accessibility: single H1 per page, focus-visible gold outline retained, AA contrast checked on gold-on-paper (used for large text/accents only, not body copy), all motion gated behind `prefers-reduced-motion`.
-- Work is done section by section with a build check after each batch so the preview never goes dark.
+## Verification
+Typecheck and production build after the edits, plus a browser pass over `/`, `/project/:id`, `/privacy-policy`, and an unknown URL.
