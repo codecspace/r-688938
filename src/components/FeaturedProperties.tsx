@@ -14,7 +14,7 @@ const PropertyPlate = ({ property, index }: { property: Property; index: number 
     to={`/project/${property.id}`}
     className="group block shrink-0 w-[78vw] sm:w-[62vw] lg:w-[30vw] focus-visible:outline-none"
   >
-    <div className="media-frame media-zoom h-[54vh] lg:h-[58vh] max-h-[520px]">
+    <div className="media-frame media-zoom h-[52vh] lg:h-[50vh] max-h-[480px]">
       <ImageWithFallback
         src={property.heroImage || property.images?.[0] || property.image}
         alt={property.propertyName}
