@@ -65,7 +65,7 @@ const HorizontalScroll = ({ children, rowClassName = "", footer, header }: Horiz
 
   return (
     <div ref={trackRef} style={{ height: `calc(100vh + ${distance}px)` }} className="relative">
-      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden">
+      <div className="sticky top-0 h-screen flex flex-col justify-center overflow-hidden pt-20 pb-8">
         {header}
         <motion.div ref={rowRef} style={{ x }} className={`flex will-change-transform ${rowClassName}`}>
           {children}
