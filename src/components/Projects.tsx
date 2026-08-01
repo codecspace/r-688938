@@ -39,15 +39,15 @@ const Projects = () => {
                 <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center`}>
                   <div className={`lg:col-span-7 ${reversed ? "lg:order-2" : ""}`}>
                     <MediaReveal>
-                      <Link to={`/project/${project.id}`} className="block media-frame media-zoom h-[280px] md:h-[460px]">
-                        <Parallax distance={44} className="h-full">
+                      <Link to={`/project/${project.id}`} className="block media-frame media-zoom h-[280px] md:h-[440px]">
+                        <Parallax distance={26} className="h-full">
                           <ImageWithFallback
                             src={project.heroImage || project.images?.[0] || project.image}
                             alt={project.propertyName}
                             fallbackLabel={project.propertyName}
                             width={880}
-                            height={460}
-                            className="w-full h-[124%] object-cover"
+                            height={440}
+                            className="w-full h-[112%] object-cover"
                             loading="lazy"
                             decoding="async"
                           />
@@ -57,7 +57,7 @@ const Projects = () => {
                   </div>
 
                   <div className={`lg:col-span-5 ${reversed ? "lg:order-1" : ""}`}>
-                    <Reveal delay={0.18}>
+                    <Reveal delay={0.08}>
                       <div className="flex items-center gap-4 mb-5">
                         <span className="index-num">
                           {String(index + 1).padStart(2, "0")}
