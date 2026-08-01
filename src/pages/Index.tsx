@@ -28,7 +28,8 @@ const Index = () => {
       <ScrollProgress />
 
 
-      <div className="min-h-screen w-full overflow-x-hidden bg-lion-paper">
+      {/* overflow-x: clip (not hidden) so position: sticky still works for the pinned gallery */}
+      <div className="min-h-screen w-full [overflow-x:clip] bg-lion-paper">
         <Navbar />
 
         <main>
