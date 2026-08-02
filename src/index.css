@@ -335,10 +335,10 @@
 .btn-gold:hover { @apply text-lion-gold; }
 
 .btn-ink {
-  @apply bg-transparent text-lion-black border border-lion-black/25;
+  @apply bg-transparent text-white border border-white/25;
 }
-.btn-ink::before { @apply bg-lion-black; }
-.btn-ink:hover { @apply text-lion-paper border-lion-black; }
+.btn-ink::before { @apply bg-white; }
+.btn-ink:hover { @apply text-lion-black border-white; }
 
 .btn-outline-light {
   @apply bg-transparent text-white border border-white/25;
@@ -382,8 +382,16 @@
     -webkit-backdrop-filter: none !important;
   }
 
+  /* Glass panels keep their tint and edge, drop the live blur */
+  .glass-lux {
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: linear-gradient(155deg, rgba(24, 26, 31, 0.92) 0%, rgba(14, 15, 18, 0.94) 100%);
+  }
+
   .decor-loop { display: none !important; }
 }
+
 
 /* Respect reduced-motion across the whole motion system */
 @media (prefers-reduced-motion: reduce) {
