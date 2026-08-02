@@ -57,21 +57,26 @@ export default {
           foreground: "hsl(var(--card-foreground))",
         },
         lion: {
-          // Editorial luxury palette — paper, ink, and gold used sparingly
+          // Cinematic noir palette — obsidian, chrome, and one warm gold accent
           gold: "#C9A84C",
+
           lightgold: "#F0D78C",
           darkgold: "#8F7328",
           black: "#0D0D0D",
-          obsidian: "#0A0A0A", // Full-bleed noir chapters
+          obsidian: "#07080A", // Page base
+          charcoal: "#101215", // Panel / media base
+          graphite: "#16181C",
+          chrome: "#8D8F94",
           darkgray: "#2D2D2D",
           gray: "#585652",
           lightgray: "#D8D4CC",
-          ivory: "#F5F3EE", // Paper base
+          ivory: "#F5F3EE",
           paper: "#F5F3EE",
-          paper2: "#E8E4DD", // Second paper tone for banding
-          ink: "#1A1A1A", // Body text on paper
-          stone: "#77736C", // Muted secondary text
+          paper2: "#E8E4DD",
+          ink: "#1A1A1A",
+          stone: "#77736C",
         },
+
       },
       fontFamily: {
         sans: ['"Work Sans"', "system-ui", "sans-serif"],

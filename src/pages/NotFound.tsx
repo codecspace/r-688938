@@ -8,7 +8,7 @@ import { RevealMask, Reveal } from "@/components/layout/Reveal";
 import Magnetic from "@/components/layout/Magnetic";
 
 const NotFound = () => (
-  <PageTransition className="bg-lion-paper min-h-screen">
+  <PageTransition className="bg-transparent min-h-screen">
     <RouteHead
       title="Page Not Found — Lionvest Realty"
       description="The page you're looking for doesn't exist. Return to Lionvest Realty to browse premium residential and commercial properties across Delhi NCR."

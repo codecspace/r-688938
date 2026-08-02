@@ -8,7 +8,7 @@ import ImageWithFallback from "@/components/layout/ImageWithFallback";
 /** Gallery grid — restrained cards, hairline meta, one slow zoom on hover. */
 const FeaturedProperties = () => {
   return (
-    <section id="properties" className="bg-lion-paper2 py-24 md:py-36">
+    <section id="properties" className="bg-lion-charcoal py-24 md:py-36">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14 md:mb-20">
           <div>
@@ -17,11 +17,11 @@ const FeaturedProperties = () => {
             </Reveal>
             <SplitHeading
               text="Addresses worth a second look."
-              className="font-display text-display-sm text-lion-black max-w-[14ch]"
+              className="font-display text-display-sm text-white max-w-[14ch]"
             />
           </div>
           <Reveal delay={0.1}>
-            <p className="text-lion-stone text-sm max-w-xs leading-relaxed md:text-right">
+            <p className="text-white/45 text-sm max-w-xs leading-relaxed md:text-right">
               Currently open for enquiry across Gurugram, Noida and Delhi.
             </p>
           </Reveal>
@@ -58,21 +58,21 @@ const FeaturedProperties = () => {
                   )}
                 </div>
 
-                <div className="border-t border-black/15 mt-5 pt-5 transition-colors duration-500 group-hover:border-lion-gold">
+                <div className="border-t border-white/12 mt-5 pt-5 transition-colors duration-500 group-hover:border-lion-gold">
                   <div className="flex items-start justify-between gap-4">
                     <div>
                       <span className="text-lion-gold text-[0.6rem] uppercase tracking-[0.28em]">
                         {property.developerName}
                       </span>
-                      <h3 className="font-display text-2xl text-lion-black mt-2 leading-tight">
+                      <h3 className="font-display text-2xl text-white mt-2 leading-tight">
                         {property.propertyName}
                       </h3>
-                      <p className="text-lion-stone text-xs uppercase tracking-[0.18em] mt-2">
+                      <p className="text-white/45 text-xs uppercase tracking-[0.18em] mt-2">
                         {property.location}
                       </p>
                     </div>
                     <ArrowUpRight
-                      className="w-5 h-5 text-lion-black/40 shrink-0 mt-1 transition-all duration-500 group-hover:text-lion-gold group-hover:translate-x-1 group-hover:-translate-y-1"
+                      className="w-5 h-5 text-white/40 shrink-0 mt-1 transition-all duration-500 group-hover:text-lion-gold group-hover:translate-x-1 group-hover:-translate-y-1"
                       strokeWidth={1.25}
                     />
                   </div>

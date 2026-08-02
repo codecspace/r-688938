@@ -8,7 +8,7 @@ import ImageWithFallback from "@/components/layout/ImageWithFallback";
 /** Editorial index of developer partnerships — alternating full-width plates. */
 const Projects = () => {
   return (
-    <section id="projects" className="bg-lion-paper py-24 md:py-36">
+    <section id="projects" className="bg-transparent py-24 md:py-36">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 mb-16 md:mb-24">
           <Reveal className="lg:col-span-4">
@@ -17,10 +17,10 @@ const Projects = () => {
           <div className="lg:col-span-8">
             <SplitHeading
               text="Projects we know inside out."
-              className="font-display text-display-md text-lion-black max-w-[16ch]"
+              className="font-display text-display-md text-white max-w-[16ch]"
             />
             <Reveal delay={0.1}>
-              <p className="text-lion-stone text-base md:text-lg mt-6 max-w-xl leading-relaxed">
+              <p className="text-white/45 text-base md:text-lg mt-6 max-w-xl leading-relaxed">
                 A curated shortlist across Gurugram, Noida and Delhi — every address vetted for
                 build quality, location, and long-term value.
               </p>
@@ -28,13 +28,13 @@ const Projects = () => {
           </div>
         </div>
 
-        <div className="border-t border-black/12">
+        <div className="border-t border-white/10">
           {projectsData.map((project, index) => {
             const reversed = index % 2 === 1;
             return (
               <article
                 key={project.id}
-                className="group border-b border-black/12 py-12 md:py-16"
+                className="group border-b border-white/10 py-12 md:py-16"
               >
                 <div className={`grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center`}>
                   <div className={`lg:col-span-7 ${reversed ? "lg:order-2" : ""}`}>
@@ -68,19 +68,19 @@ const Projects = () => {
                         </span>
                       </div>
 
-                      <h3 className="font-display text-3xl md:text-4xl text-lion-black leading-[1.05] mb-4">
+                      <h3 className="font-display text-3xl md:text-4xl text-white leading-[1.05] mb-4">
                         {project.propertyName}
                       </h3>
 
-                      <p className="text-lion-stone text-xs uppercase tracking-[0.2em] mb-6">
+                      <p className="text-white/45 text-xs uppercase tracking-[0.2em] mb-6">
                         {project.location}
                       </p>
 
-                      <p className="text-lion-ink/70 leading-relaxed mb-8">{project.description}</p>
+                      <p className="text-white/65 leading-relaxed mb-8">{project.description}</p>
 
                       <Link
                         to={`/project/${project.id}`}
-                        className="link-rule text-[0.7rem] uppercase tracking-[0.25em] text-lion-black hover:text-lion-darkgold transition-colors"
+                        className="link-rule text-[0.7rem] uppercase tracking-[0.25em] text-white hover:text-lion-darkgold transition-colors"
                       >
                         View project
                         <ArrowUpRight className="w-4 h-4 transition-transform duration-500 group-hover:translate-x-1 group-hover:-translate-y-1" />
@@ -94,7 +94,7 @@ const Projects = () => {
         </div>
 
         <Reveal delay={0.1} className="max-w-3xl mx-auto text-center mt-20 md:mt-28">
-          <p className="font-display text-2xl md:text-3xl text-lion-black/80 leading-snug italic">
+          <p className="font-display text-2xl md:text-3xl text-white/80 leading-snug italic">
             &ldquo;We bring you the best living and commercial spaces — places built on quality,
             location, and long-term value.&rdquo;
           </p>
