@@ -8,7 +8,6 @@ import {
   Noise,
   SMAA,
 } from "@react-three/postprocessing";
-import { BlendFunction } from "postprocessing";
 import { MathUtils } from "three";
 import { cinematicScroll } from "@/lib/cinematicScroll";
 
@@ -37,7 +36,7 @@ const PostFX = ({ quality = "high" }: { quality?: "high" | "low" }) => {
     return (
       <EffectComposer multisampling={0} enableNormalPass={false}>
         <Bloom intensity={0.6} luminanceThreshold={0.62} luminanceSmoothing={0.3} mipmapBlur />
-        <Vignette offset={0.28} darkness={0.72} eskil={false} blendFunction={BlendFunction.NORMAL} />
+        <Vignette offset={0.28} darkness={0.72} eskil={false} />
       </EffectComposer>
     );
   }
@@ -46,8 +45,8 @@ const PostFX = ({ quality = "high" }: { quality?: "high" | "low" }) => {
     <EffectComposer multisampling={0} enableNormalPass={false}>
       <Bloom intensity={0.85} luminanceThreshold={0.55} luminanceSmoothing={0.35} mipmapBlur radius={0.75} />
       <DepthOfField focusDistance={0.012} focalLength={0.05} bokehScale={size.width > 1024 ? 3.2 : 2} />
-      <Vignette offset={0.26} darkness={0.78} eskil={false} blendFunction={BlendFunction.NORMAL} />
-      <Noise premultiply blendFunction={BlendFunction.SOFT_LIGHT} opacity={0.35} />
+      <Vignette offset={0.26} darkness={0.78} eskil={false} />
+      <Noise premultiply opacity={0.35} />
       <SMAA />
     </EffectComposer>
   );
@@ -71,4 +70,3 @@ const SafePostFX = (props: { quality?: "high" | "low" }) => (
 );
 
 export default SafePostFX;
-
