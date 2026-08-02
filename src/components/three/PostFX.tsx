@@ -53,4 +53,22 @@ const PostFX = ({ quality = "high" }: { quality?: "high" | "low" }) => {
   );
 };
 
-export default PostFX;
+/** A failing post pass (older GPUs, software GL) must never blank the scene. */
+class FXBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
+  state = { failed: false };
+  static getDerivedStateFromError() {
+    return { failed: true };
+  }
+  render() {
+    return this.state.failed ? null : this.props.children;
+  }
+}
+
+const SafePostFX = (props: { quality?: "high" | "low" }) => (
+  <FXBoundary>
+    <PostFX {...props} />
+  </FXBoundary>
+);
+
+export default SafePostFX;
+
