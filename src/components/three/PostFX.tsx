@@ -1,4 +1,4 @@
-import { useRef } from "react";
+import { Component, ReactNode, useRef } from "react";
 import { useFrame, useThree } from "@react-three/fiber";
 import {
   EffectComposer,
