@@ -44,7 +44,7 @@ const Navbar = () => {
     <>
       <a
         href="#main-content"
-        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-lion-gold focus:text-lion-black focus:px-4 focus:py-2.5 focus:text-sm focus:font-medium focus:shadow-lg"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:bg-lion-gold focus:text-white focus:px-4 focus:py-2.5 focus:text-sm focus:font-medium focus:shadow-lg"
       >
         Skip to content
       </a>
@@ -67,7 +67,7 @@ const Navbar = () => {
               />
               <span
                 className={`font-display tracking-tight transition-all duration-500 ${
-                  scrolled ? "text-lg text-lion-black" : "text-xl text-white"
+                  scrolled ? "text-lg text-white" : "text-xl text-white"
                 }`}
               >
                 Lionvest Realty
@@ -82,7 +82,7 @@ const Navbar = () => {
                   href={`#${link.id}`}
                   onClick={(e) => go(link.id, e)}
                   className={`link-rule text-[0.7rem] uppercase tracking-[0.22em] transition-colors duration-300 hover:text-lion-gold ${
-                    scrolled ? "text-lion-ink/80" : "text-white/85"
+                    scrolled ? "text-white/80/80" : "text-white/85"
                   }`}
                 >
                   {link.label}
@@ -91,7 +91,7 @@ const Navbar = () => {
               <a
                 href="tel:+919773552334"
                 className={`flex items-center gap-2 text-[0.7rem] uppercase tracking-[0.22em] border-l pl-8 transition-colors ${
-                  scrolled ? "border-black/10 text-lion-black hover:text-lion-gold" : "border-white/20 text-lion-lightgold"
+                  scrolled ? "border-white/10 text-white hover:text-lion-gold" : "border-white/20 text-lion-lightgold"
                 }`}
               >
                 <Phone className="w-3.5 h-3.5" strokeWidth={1.5} />
@@ -103,7 +103,7 @@ const Navbar = () => {
             <button
               onClick={() => setOpen(true)}
               aria-label="Open menu"
-              className={`md:hidden p-2 -mr-2 transition-colors ${scrolled ? "text-lion-black" : "text-white"}`}
+              className={`md:hidden p-2 -mr-2 transition-colors ${scrolled ? "text-white" : "text-white"}`}
             >
               <Menu className="h-6 w-6" strokeWidth={1.25} />
             </button>

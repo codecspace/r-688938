@@ -66,7 +66,7 @@ const PrivacyPolicy = () => {
   });
 
   return (
-    <PageTransition className="bg-lion-paper min-h-screen">
+    <PageTransition className="bg-transparent min-h-screen">
       <RouteHead
         title="Privacy Policy — Lionvest Realty"
         description="Learn how Lionvest Realty collects, uses, and safeguards your personal information when you browse properties and services across Gurgaon and Delhi NCR."
@@ -98,12 +98,12 @@ const PrivacyPolicy = () => {
             <nav aria-label="Privacy policy sections" className="lg:col-span-1">
               <div className="lg:sticky lg:top-28">
                 <span className="eyebrow mb-6">Contents</span>
-                <ul className="space-y-3 border-l border-black/10 pl-5">
+                <ul className="space-y-3 border-l border-white/10 pl-5">
                   {SECTIONS.map((section) => (
                     <li key={section.id}>
                       <a
                         href={`#${section.id}`}
-                        className="text-sm text-lion-stone hover:text-lion-gold transition-colors leading-snug block"
+                        className="text-sm text-white/45 hover:text-lion-gold transition-colors leading-snug block"
                       >
                         {section.title}
                       </a>
@@ -116,7 +116,7 @@ const PrivacyPolicy = () => {
             {/* Body */}
             <div className="lg:col-span-3">
               <Reveal>
-                <p className="text-lion-ink/75 text-base md:text-lg leading-relaxed border-b border-black/10 pb-10">
+                <p className="text-white/80/75 text-base md:text-lg leading-relaxed border-b border-white/10 pb-10">
                   {INTRO}
                 </p>
               </Reveal>
@@ -124,24 +124,24 @@ const PrivacyPolicy = () => {
               {SECTIONS.map((section, i) => (
                 <Reveal key={section.id} delay={Math.min(i * 0.05, 0.3)}>
                   <article id={section.id} className="scroll-mt-28 pt-10">
-                    <h2 className="font-display text-2xl md:text-3xl text-lion-black mb-4">
+                    <h2 className="font-display text-2xl md:text-3xl text-white mb-4">
                       {section.title}
                     </h2>
-                    <p className="text-lion-ink/75 leading-relaxed">{section.body}</p>
+                    <p className="text-white/80/75 leading-relaxed">{section.body}</p>
                   </article>
                 </Reveal>
               ))}
 
-              <div className="mt-16 border-t border-black/10 pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-                <p className="text-lion-stone text-xs uppercase tracking-[0.18em]">
+              <div className="mt-16 border-t border-white/10 pt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <p className="text-white/45 text-xs uppercase tracking-[0.18em]">
                   Last updated: {updated}
                 </p>
-                <a href="/#contact" className="link-rule text-sm text-lion-black hover:text-lion-gold transition-colors">
+                <a href="/#contact" className="link-rule text-sm text-white hover:text-lion-gold transition-colors">
                   Questions? Get in touch
                 </a>
               </div>
 
-              <Link to="/" className="link-rule text-sm text-lion-stone hover:text-lion-gold transition-colors mt-8 inline-block">
+              <Link to="/" className="link-rule text-sm text-white/45 hover:text-lion-gold transition-colors mt-8 inline-block">
                 Return home
               </Link>
             </div>

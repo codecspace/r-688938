@@ -34,8 +34,8 @@ const OFFICE_ADDRESS =
 
 /** Editorial section header — display serif heading with a hairline rule. */
 const SectionHeading = ({ eyebrow, children }: { eyebrow: string; children: React.ReactNode }) => (
-  <div className="flex items-end justify-between gap-6 border-b border-black/10 pb-4 mb-8">
-    <h2 className="font-display text-3xl md:text-4xl text-lion-black leading-tight">{children}</h2>
+  <div className="flex items-end justify-between gap-6 border-b border-white/10 pb-4 mb-8">
+    <h2 className="font-display text-3xl md:text-4xl text-white leading-tight">{children}</h2>
     <span className="eyebrow no-rule shrink-0 hidden sm:block">{eyebrow}</span>
   </div>
 );
@@ -106,7 +106,7 @@ Thank you,
 
   if (!project) {
     return (
-      <PageTransition className="bg-lion-paper min-h-screen">
+      <PageTransition className="bg-transparent min-h-screen">
         <RouteHead
           title="Listing Unavailable — Lionvest Realty"
           description="This listing is no longer available. Browse current residential and commercial projects with Lionvest Realty across Delhi NCR."
@@ -150,7 +150,7 @@ Thank you,
   const related = projectsData.filter((p) => p.id !== project.id).slice(0, 3);
 
   return (
-    <PageTransition className="bg-lion-paper min-h-screen">
+    <PageTransition className="bg-transparent min-h-screen">
       <RouteHead
         title={`${project.propertyName} in ${project.location} — Lionvest Realty`}
         description={`Explore ${project.propertyName} by ${project.developerName} in ${project.location}. Get pricing, floor plans and expert guidance from Lionvest Realty across Gurgaon & Delhi NCR.`.slice(
@@ -234,7 +234,7 @@ Thank you,
           <div className="lg:col-span-2 space-y-16">
             <Reveal>
               <SectionHeading eyebrow="Overview">Description</SectionHeading>
-              <p className="text-lion-ink/75 text-base md:text-lg leading-relaxed">
+              <p className="text-white/80/75 text-base md:text-lg leading-relaxed">
                 {project.longDescription || project.description}
               </p>
             </Reveal>
@@ -258,8 +258,8 @@ Thank you,
                       </CarouselItem>
                     ))}
                   </CarouselContent>
-                  <CarouselPrevious className="left-3 bg-lion-obsidian/70 border-white/20 text-white hover:bg-lion-gold hover:text-lion-black" />
-                  <CarouselNext className="right-3 bg-lion-obsidian/70 border-white/20 text-white hover:bg-lion-gold hover:text-lion-black" />
+                  <CarouselPrevious className="left-3 bg-lion-obsidian/70 border-white/20 text-white hover:bg-lion-gold hover:text-white" />
+                  <CarouselNext className="right-3 bg-lion-obsidian/70 border-white/20 text-white hover:bg-lion-gold hover:text-white" />
                 </Carousel>
               </Reveal>
             )}
@@ -269,11 +269,11 @@ Thank you,
                 <SectionHeading eyebrow="Details">Specifications</SectionHeading>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8">
                   {Object.entries(project.specifications).map(([key, value]) => (
-                    <div key={key} className="border-t border-black/10 pt-4">
+                    <div key={key} className="border-t border-white/10 pt-4">
                       <h3 className="text-[0.65rem] uppercase tracking-[0.22em] text-lion-gold mb-3 capitalize">
                         {key}
                       </h3>
-                      <div className="text-lion-ink/75 text-sm leading-relaxed">
+                      <div className="text-white/80/75 text-sm leading-relaxed">
                         {Array.isArray(value) ? (
                           <ul className="space-y-1.5">
                             {value.map((item, index) => (
@@ -297,10 +297,10 @@ Thank you,
                   {project.amenities.map((amenity, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-2.5 p-3.5 bg-lion-ivory border border-black/5 hover:border-lion-gold/40 transition-colors duration-300"
+                      className="flex items-center gap-2.5 p-3.5 bg-white/[0.04] border border-white/10 hover:border-lion-gold/40 transition-colors duration-300"
                     >
                       <CheckCircle className="h-4 w-4 text-lion-gold flex-shrink-0" strokeWidth={1.5} />
-                      <span className="text-lion-ink/80 text-sm">{amenity}</span>
+                      <span className="text-white/80/80 text-sm">{amenity}</span>
                     </div>
                   ))}
                 </div>
@@ -310,7 +310,7 @@ Thank you,
 
           {/* Sidebar */}
           <aside className="lg:col-span-1">
-            <div className="lg:sticky lg:top-24 z-10 bg-white border border-black/10">
+            <div className="lg:sticky lg:top-24 z-10 glass-lux p-1">
               <div className="bg-lion-obsidian p-6 relative overflow-hidden">
                 <div className="grain absolute inset-0" />
                 <h2 className="relative z-10 font-display text-2xl text-white leading-tight">
@@ -325,42 +325,42 @@ Thank you,
                 <button
                   type="button"
                   onClick={() => handleContact("phone", CONTACT_PHONE)}
-                  className="w-full text-left flex items-start gap-3 p-3 hover:bg-lion-ivory transition-colors"
+                  className="w-full text-left flex items-start gap-3 p-3 hover:bg-lion-charcoal transition-colors"
                 >
                   <Phone className="w-4 h-4 text-lion-gold flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <span className="block">
-                    <span className="block text-[0.6rem] uppercase tracking-[0.22em] text-lion-stone">
+                    <span className="block text-[0.6rem] uppercase tracking-[0.22em] text-white/45">
                       Phone
                     </span>
-                    <span className="block text-lion-black text-sm mt-1">{CONTACT_PHONE}</span>
+                    <span className="block text-white text-sm mt-1">{CONTACT_PHONE}</span>
                   </span>
                 </button>
 
                 <button
                   type="button"
                   onClick={() => handleContact("email", CONTACT_EMAIL)}
-                  className="w-full text-left flex items-start gap-3 p-3 hover:bg-lion-ivory transition-colors"
+                  className="w-full text-left flex items-start gap-3 p-3 hover:bg-lion-charcoal transition-colors"
                 >
                   <Mail className="w-4 h-4 text-lion-gold flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <span className="block">
-                    <span className="block text-[0.6rem] uppercase tracking-[0.22em] text-lion-stone">
+                    <span className="block text-[0.6rem] uppercase tracking-[0.22em] text-white/45">
                       Email
                     </span>
-                    <span className="block text-lion-black text-sm mt-1 break-all">{CONTACT_EMAIL}</span>
+                    <span className="block text-white text-sm mt-1 break-all">{CONTACT_EMAIL}</span>
                   </span>
                 </button>
 
                 <div className="flex items-start gap-3 p-3">
                   <MapPin className="w-4 h-4 text-lion-gold flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
-                    <p className="text-[0.6rem] uppercase tracking-[0.22em] text-lion-stone">Office</p>
-                    <p className="text-lion-ink/75 text-sm mt-1 leading-relaxed">{OFFICE_ADDRESS}</p>
+                    <p className="text-[0.6rem] uppercase tracking-[0.22em] text-white/45">Office</p>
+                    <p className="text-white/80/75 text-sm mt-1 leading-relaxed">{OFFICE_ADDRESS}</p>
                   </div>
                 </div>
 
                 <div className="pt-4">
                   <Button
-                    className="w-full bg-lion-gold hover:bg-lion-darkgold text-lion-black rounded-none h-12 text-[0.7rem] uppercase tracking-[0.22em] disabled:bg-black/20"
+                    className="w-full bg-lion-gold hover:bg-lion-darkgold text-white rounded-none h-12 text-[0.7rem] uppercase tracking-[0.22em] disabled:bg-black/20"
                     onClick={handleScheduleVisit}
                     disabled={cooldown}
                   >
@@ -385,11 +385,11 @@ Thank you,
 
       {/* Related */}
       {related.length > 0 && (
-        <section className="bg-lion-paper2 py-20 md:py-28 border-t border-black/10">
+        <section className="bg-lion-charcoal py-20 md:py-28 border-t border-white/10">
           <div className="container mx-auto px-6 md:px-8 max-w-7xl">
             <div className="mb-12">
               <span className="eyebrow mb-6">Also worth seeing</span>
-              <h2 className="font-display text-display-sm text-lion-black max-w-[16ch]">
+              <h2 className="font-display text-display-sm text-white max-w-[16ch]">
                 <RevealMask>Other addresses</RevealMask>
               </h2>
             </div>
@@ -408,14 +408,14 @@ Thank you,
                         className="w-full h-full object-cover"
                       />
                     </div>
-                    <div className="border-t border-black/15 mt-5 pt-5 transition-colors duration-500 group-hover:border-lion-gold">
+                    <div className="border-t border-white/12 mt-5 pt-5 transition-colors duration-500 group-hover:border-lion-gold">
                       <span className="text-lion-gold text-[0.6rem] uppercase tracking-[0.28em]">
                         {item.developerName}
                       </span>
-                      <h3 className="font-display text-xl text-lion-black mt-2 leading-tight">
+                      <h3 className="font-display text-xl text-white mt-2 leading-tight">
                         {item.propertyName}
                       </h3>
-                      <p className="text-lion-stone text-xs uppercase tracking-[0.18em] mt-2">
+                      <p className="text-white/45 text-xs uppercase tracking-[0.18em] mt-2">
                         {item.location}
                       </p>
                     </div>
@@ -439,14 +439,14 @@ Thank you,
           <div className="grid grid-cols-2 gap-4 py-4">
             <Button
               onClick={() => handleContact("phone", CONTACT_PHONE)}
-              className="flex items-center justify-center gap-2 bg-lion-gold hover:bg-lion-darkgold text-lion-black"
+              className="flex items-center justify-center gap-2 bg-lion-gold hover:bg-lion-darkgold text-white"
             >
               <Phone className="h-4 w-4" />
               Call Now
             </Button>
             <Button
               onClick={() => handleContact("email", CONTACT_EMAIL)}
-              className="flex items-center justify-center gap-2 bg-lion-gold hover:bg-lion-darkgold text-lion-black"
+              className="flex items-center justify-center gap-2 bg-lion-gold hover:bg-lion-darkgold text-white"
             >
               <Mail className="h-4 w-4" />
               Email Us

@@ -74,7 +74,7 @@ const Team = () => {
   };
 
   return (
-    <section id="team" className="bg-lion-paper py-24 md:py-36 border-t border-black/10">
+    <section id="team" className="bg-transparent py-24 md:py-36 border-t border-white/10">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 mb-16 md:mb-20">
           <Reveal className="lg:col-span-4">
@@ -83,17 +83,17 @@ const Team = () => {
           <div className="lg:col-span-8">
             <SplitHeading
               text="The people you'll actually be working with."
-              className="font-display text-display-sm text-lion-black max-w-[18ch]"
+              className="font-display text-display-sm text-white max-w-[18ch]"
             />
           </div>
         </div>
 
-        <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 border-t border-black/12 pt-12" stagger={0.12}>
+        <StaggerGroup className="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12 border-t border-white/10 pt-12" stagger={0.12}>
           {teamData.map((member) => (
             <StaggerItem key={member.name}>
               <button
                 onClick={() => openProfile(member)}
-                className="group text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lion-gold focus-visible:ring-offset-4 focus-visible:ring-offset-lion-paper"
+                className="group text-left w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-lion-gold focus-visible:ring-offset-4 focus-visible:ring-offset-lion-obsidian"
                 aria-label={`View profile of ${member.name}`}
               >
                 <div className="media-frame media-zoom h-[380px] md:h-[440px] bg-lion-obsidian">
@@ -113,10 +113,10 @@ const Team = () => {
                   )}
                 </div>
 
-                <div className="border-t border-black/15 mt-5 pt-5 transition-colors duration-500 group-hover:border-lion-gold">
+                <div className="border-t border-white/12 mt-5 pt-5 transition-colors duration-500 group-hover:border-lion-gold">
                   <span className="text-lion-gold text-[0.6rem] uppercase tracking-[0.28em]">{member.role}</span>
-                  <h3 className="font-display text-2xl text-lion-black mt-2">{member.name}</h3>
-                  <span className="link-rule text-[0.65rem] uppercase tracking-[0.25em] text-lion-stone mt-4 inline-block">
+                  <h3 className="font-display text-2xl text-white mt-2">{member.name}</h3>
+                  <span className="link-rule text-[0.65rem] uppercase tracking-[0.25em] text-white/45 mt-4 inline-block">
                     Read profile
                   </span>
                 </div>
@@ -127,29 +127,29 @@ const Team = () => {
       </div>
 
       <Dialog open={open} onOpenChange={setOpen}>
-        <DialogContent className="max-w-2xl bg-lion-paper border-black/10 rounded-none max-h-[85vh] overflow-y-auto">
+        <DialogContent className="max-w-2xl bg-transparent border-white/10 rounded-none max-h-[85vh] overflow-y-auto">
           {selectedMember && (
             <>
               <DialogHeader className="text-left">
                 <span className="text-lion-gold text-[0.6rem] uppercase tracking-[0.3em]">
                   {selectedMember.role}
                 </span>
-                <DialogTitle className="font-display text-3xl md:text-4xl text-lion-black font-normal mt-2">
+                <DialogTitle className="font-display text-3xl md:text-4xl text-white font-normal mt-2">
                   {selectedMember.name}
                 </DialogTitle>
                 <DialogDescription className="sr-only">Profile of {selectedMember.name}</DialogDescription>
               </DialogHeader>
 
-              <div className="border-t border-black/10 pt-6 space-y-4">
+              <div className="border-t border-white/10 pt-6 space-y-4">
                 {selectedMember.bio.split("\n\n").map((para, i) => (
-                  <p key={i} className="text-lion-ink/75 leading-relaxed">
+                  <p key={i} className="text-white/80/75 leading-relaxed">
                     {para}
                   </p>
                 ))}
               </div>
 
               {(selectedMember.phoneNumber || selectedMember.email) && (
-                <div className="border-t border-black/10 pt-6 flex flex-wrap gap-4">
+                <div className="border-t border-white/10 pt-6 flex flex-wrap gap-4">
                   {selectedMember.phoneNumber && (
                     <button
                       onClick={() => handleContactClick("phone", selectedMember.phoneNumber!)}
