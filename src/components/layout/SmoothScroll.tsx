@@ -22,6 +22,7 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
     const reduced = prefersReducedMotion();
     const touch = isTouchDevice();
     let lenis: Lenis | null = null;
+    let cleanupTicker: (() => void) | undefined;
 
     if (!reduced && !touch) {
       lenis = new Lenis({
@@ -37,7 +38,7 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
       gsap.ticker.add(raf);
       gsap.ticker.lagSmoothing(0);
 
-      var cleanupTicker = () => gsap.ticker.remove(raf);
+      cleanupTicker = () => gsap.ticker.remove(raf);
     }
 
     const trigger = ScrollTrigger.create({
@@ -51,7 +52,7 @@ const SmoothScroll = ({ children }: { children: ReactNode }) => {
     });
 
     // Seed immediately so a reload part-way down the page composes correctly.
-    cinematicScroll.target = ScrollTrigger.isInViewport ? trigger.progress : 0;
+    cinematicScroll.target = trigger.progress;
     cinematicScroll.progress = cinematicScroll.target;
 
     const onResize = () => ScrollTrigger.refresh();
