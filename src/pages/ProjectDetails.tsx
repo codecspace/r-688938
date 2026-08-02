@@ -297,7 +297,7 @@ Thank you,
                   {project.amenities.map((amenity, index) => (
                     <div
                       key={index}
-                      className="flex items-center gap-2.5 p-3.5 bg-lion-charcoal border border-black/5 hover:border-lion-gold/40 transition-colors duration-300"
+                      className="flex items-center gap-2.5 p-3.5 bg-white/[0.04] border border-white/10 hover:border-lion-gold/40 transition-colors duration-300"
                     >
                       <CheckCircle className="h-4 w-4 text-lion-gold flex-shrink-0" strokeWidth={1.5} />
                       <span className="text-white/80/80 text-sm">{amenity}</span>
@@ -310,7 +310,7 @@ Thank you,
 
           {/* Sidebar */}
           <aside className="lg:col-span-1">
-            <div className="lg:sticky lg:top-24 z-10 bg-white border border-white/10">
+            <div className="lg:sticky lg:top-24 z-10 glass-lux p-1">
               <div className="bg-lion-obsidian p-6 relative overflow-hidden">
                 <div className="grain absolute inset-0" />
                 <h2 className="relative z-10 font-display text-2xl text-white leading-tight">
