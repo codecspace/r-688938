@@ -115,31 +115,34 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="text-[0.62rem] uppercase tracking-[0.25em] text-lion-gold hover:text-lion-lightgold transition-colors pl-4"
+                disabled={sending}
+                className="text-[0.62rem] uppercase tracking-[0.25em] text-lion-gold hover:text-lion-lightgold transition-colors pl-4 disabled:opacity-50"
               >
-                Send
+                {sending ? "Sending" : "Send"}
               </button>
             </form>
-
-            <div className="flex gap-3 mt-8">
-              {socials.map(({ icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="w-10 h-10 border border-white/15 flex items-center justify-center hover:bg-lion-gold hover:border-lion-gold hover:text-lion-black transition-colors"
-                >
-                  <Icon className="h-4 w-4" strokeWidth={1.5} />
-                </a>
-              ))}
-            </div>
+            <p className="text-white/30 text-[0.68rem] mt-4 leading-relaxed">
+              New launches and market notes. No spam, unsubscribe any time.
+            </p>
           </StaggerItem>
         </StaggerGroup>
 
-        <div className="border-t border-white/10 mt-16 pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-white/35 text-xs tracking-wide">
-          <p>&copy; {new Date().getFullYear()} Lionvest Realty Pvt. Ltd. All rights reserved.</p>
-          <Link to="/privacy-policy" className="link-rule hover:text-lion-gold transition-colors">Privacy Policy</Link>
+        <div className="border-t border-white/10 mt-16 pt-8">
+          <p className="text-white/25 text-[0.68rem] leading-relaxed max-w-4xl">
+            Disclaimer: Lionvest Realty is a channel partner and not the developer of the projects
+            listed. All images, layouts, plans, specifications and prices shown are indicative,
+            provided by the respective developers, and are subject to change without notice. Nothing
+            here constitutes an offer or contract. Buyers are advised to verify project details and
+            RERA registration with the respective developer and the relevant state RERA authority
+            before making any purchase decision.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-white/35 text-xs tracking-wide">
+            <p>&copy; {new Date().getFullYear()} Lionvest Realty Pvt. Ltd. All rights reserved.</p>
+            <Link to="/privacy-policy" className="link-rule hover:text-lion-gold transition-colors">Privacy Policy</Link>
+          </div>
         </div>
+
       </div>
     </footer>
   );
