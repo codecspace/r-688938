@@ -43,7 +43,7 @@ const Hero = () => {
           alt="Landscaped rooftop pool deck at a premium residential tower in Gurugram, Delhi NCR"
           width={1280}
           height={767}
-          fetchPriority="high"
+          {...({ fetchpriority: "high" } as Record<string, string>)}
           decoding="async"
           className="w-full h-full object-cover"
         />

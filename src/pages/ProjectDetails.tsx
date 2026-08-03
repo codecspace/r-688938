@@ -194,7 +194,7 @@ Thank you,
           alt={project.propertyName}
           fallbackLabel={project.propertyName}
           loading="eager"
-          fetchPriority="high"
+          {...({ fetchpriority: "high" } as Record<string, string>)}
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-lion-obsidian via-lion-obsidian/65 to-lion-obsidian/25" />
