@@ -82,9 +82,12 @@
 
   html {
     @apply scroll-smooth;
+    /* Anchor jumps must clear the fixed navbar */
+    scroll-padding-top: 6rem;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
+
 
   body {
     @apply bg-background text-foreground font-sans;
