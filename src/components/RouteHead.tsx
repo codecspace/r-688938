@@ -1,19 +1,24 @@
 import { useEffect } from "react";
 
+const SITE_ORIGIN = "https://lionvestrealty.com";
+
 interface RouteHeadProps {
   title: string;
   description: string;
   path: string; // route path, e.g. "/privacy-policy"
   /** When true, emits <meta name="robots" content="noindex, nofollow"> */
   noindex?: boolean;
+  /** Structured data injected as <script type="application/ld+json"> for this route. */
+  jsonLd?: Record<string, unknown>;
 }
 
 /**
- * Updates <title>, meta description, canonical link and robots for the current route.
- * Note: crawlers of a static Vite SPA primarily read index.html; this improves
- * the in-browser experience and JS-executing crawlers.
+ * Updates <title>, meta description, canonical link, robots and JSON-LD for the
+ * current route. Note: crawlers of a static Vite SPA primarily read index.html;
+ * this improves the in-browser experience and JS-executing crawlers.
  */
-const RouteHead = ({ title, description, path, noindex = false }: RouteHeadProps) => {
+const RouteHead = ({ title, description, path, noindex = false, jsonLd }: RouteHeadProps) => {
+
   useEffect(() => {
     const prevTitle = document.title;
     document.title = title;
