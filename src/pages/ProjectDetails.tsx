@@ -158,7 +158,21 @@ Thank you,
           158
         )}
         path={`/project/${project.id}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Residence",
+          name: project.propertyName,
+          description: project.longDescription || project.description,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: project.location,
+            addressCountry: "IN",
+          },
+          url: `https://lionvestrealty.com/project/${project.id}`,
+          brand: { "@type": "Organization", name: project.developerName },
+        }}
       />
+
       <ScrollProgress />
       <Navbar />
 
