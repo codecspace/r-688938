@@ -114,9 +114,11 @@ const RouteHead = ({ title, description, path, noindex = false, jsonLd }: RouteH
       document.title = prevTitle;
       robots.setAttribute("content", "index, follow");
       ldScript?.remove();
-
     };
-  }, [title, description, path, noindex]);
+    // jsonLd is stringified so callers can pass an inline object safely
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title, description, path, noindex, JSON.stringify(jsonLd ?? null)]);
+
 
   return null;
 };
