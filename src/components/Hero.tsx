@@ -3,8 +3,9 @@ import { useRef } from "react";
 import { ArrowDown } from "lucide-react";
 import { SplitHeading, EASE } from "@/components/layout/Editorial";
 
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=70";
+/** Self-hosted so the largest element on the page never depends on a third-party CDN. */
+const HERO_IMAGE = "/projects/project-4.webp";
+
 
 const scrollToSection = (sectionId: string) => {
   document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
@@ -39,11 +40,14 @@ const Hero = () => {
       >
         <img
           src={HERO_IMAGE}
-          alt="Contemporary residential architecture in Delhi NCR"
-          fetchPriority="high"
+          alt="Landscaped rooftop pool deck at a premium residential tower in Gurugram, Delhi NCR"
+          width={1280}
+          height={767}
+          {...({ fetchpriority: "high" } as Record<string, string>)}
           decoding="async"
           className="w-full h-full object-cover"
         />
+
         <div className="absolute inset-0 bg-gradient-to-t from-lion-obsidian via-lion-obsidian/70 to-lion-obsidian/40" />
         <div className="absolute inset-0 bg-lion-obsidian/25" />
       </motion.div>

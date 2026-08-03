@@ -1,19 +1,28 @@
 import { Link } from "react-router-dom";
 import { projectsData } from "@/data/projectsData";
+import { highlightedProjects } from "@/components/Projects";
 import { ArrowUpRight } from "lucide-react";
 import { StaggerGroup, StaggerItem, Reveal } from "@/components/layout/Reveal";
 import { SplitHeading } from "@/components/layout/Editorial";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
 
-/** Gallery grid — restrained cards, hairline meta, one slow zoom on hover. */
+/**
+ * The rest of the portfolio — everything the Projects section above didn't
+ * already showcase, so the homepage never lists the same address twice.
+ */
 const FeaturedProperties = () => {
+  const shownAbove = new Set(highlightedProjects.map((p) => p.id));
+  const remaining = projectsData.filter((p) => !shownAbove.has(p.id));
+
+  if (remaining.length === 0) return null;
+
   return (
     <section id="properties" className="bg-lion-paper2 py-24 md:py-36">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-14 md:mb-20">
           <div>
             <Reveal>
-              <span className="eyebrow mb-6">Featured</span>
+              <span className="eyebrow mb-6">More listings</span>
             </Reveal>
             <SplitHeading
               text="Addresses worth a second look."
@@ -28,7 +37,8 @@ const FeaturedProperties = () => {
         </div>
 
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10" stagger={0.09}>
-          {projectsData.map((property) => (
+          {remaining.map((property) => (
+
             <StaggerItem key={property.id}>
               <Link to={`/project/${property.id}`} className="group block h-full">
                 <div className="media-frame media-zoom h-[300px] md:h-[340px]">

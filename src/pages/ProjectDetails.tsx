@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, CheckCircle, Calendar, Clock } from "lucide-react";
+import { MapPin, Phone, Mail, CheckCircle, Calendar, Clock, MessageCircle } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -27,10 +27,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import EnquiryForm from "@/components/EnquiryForm";
+
 const CONTACT_PHONE = "+91 9773552334";
+const WHATSAPP_NUMBER = "919773552334";
 const CONTACT_EMAIL = "sales@lionvestrealty.com";
 const OFFICE_ADDRESS =
   "Plus Offices, 1st Floor, Landmark Cyber Park, Sector 67, Gurugram, HR 122101";
+
 
 /** Editorial section header — display serif heading with a hairline rule. */
 const SectionHeading = ({ eyebrow, children }: { eyebrow: string; children: React.ReactNode }) => (
@@ -158,7 +162,21 @@ Thank you,
           158
         )}
         path={`/project/${project.id}`}
+        jsonLd={{
+          "@context": "https://schema.org",
+          "@type": "Residence",
+          name: project.propertyName,
+          description: project.longDescription || project.description,
+          address: {
+            "@type": "PostalAddress",
+            addressLocality: project.location,
+            addressCountry: "IN",
+          },
+          url: `https://lionvestrealty.com/project/${project.id}`,
+          brand: { "@type": "Organization", name: project.developerName },
+        }}
       />
+
       <ScrollProgress />
       <Navbar />
 
@@ -176,7 +194,7 @@ Thank you,
           alt={project.propertyName}
           fallbackLabel={project.propertyName}
           loading="eager"
-          fetchPriority="high"
+          {...({ fetchpriority: "high" } as Record<string, string>)}
           className="absolute inset-0 w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-lion-obsidian via-lion-obsidian/65 to-lion-obsidian/25" />
@@ -358,7 +376,7 @@ Thank you,
                   </div>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-4 space-y-3">
                   <Button
                     className="w-full bg-lion-gold hover:bg-lion-darkgold text-lion-black rounded-none h-12 text-[0.7rem] uppercase tracking-[0.22em] disabled:bg-black/20"
                     onClick={handleScheduleVisit}
@@ -376,10 +394,37 @@ Thank you,
                       </span>
                     )}
                   </Button>
+
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                      `Hi Lionvest Realty, I'd like details about ${project.propertyName} in ${project.location}.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full h-12 flex items-center justify-center gap-2 border border-black/15 text-lion-black text-[0.7rem] uppercase tracking-[0.22em] hover:border-lion-gold hover:text-lion-gold transition-colors"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    WhatsApp us
+                  </a>
                 </div>
               </div>
             </div>
+
+            <div className="mt-6 border border-black/10 bg-lion-ivory p-6">
+              <h3 className="font-display text-2xl text-lion-black leading-tight">
+                Request details
+              </h3>
+              <p className="text-lion-stone text-sm mt-2 mb-6">
+                Pricing, floor plans and availability — sent to you directly.
+              </p>
+              <EnquiryForm
+                tone="light"
+                projectId={project.id}
+                projectName={project.propertyName}
+              />
+            </div>
           </aside>
+
         </div>
       </div>
 
@@ -428,25 +473,36 @@ Thank you,
       )}
 
       <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="font-display text-2xl">Schedule a Visit</DialogTitle>
             <DialogDescription>
-              Choose how you would like to be contacted for scheduling a visit to{" "}
-              {project.propertyName}
+              Leave your details and we'll arrange a site visit to {project.propertyName}.
             </DialogDescription>
           </DialogHeader>
-          <div className="grid grid-cols-2 gap-4 py-4">
+
+          <div className="py-2">
+            <EnquiryForm
+              tone="light"
+              projectId={project.id}
+              projectName={project.propertyName}
+              onSuccess={() => setTimeout(() => setDialogOpen(false), 1800)}
+            />
+          </div>
+
+          <div className="grid grid-cols-2 gap-3 border-t border-black/10 pt-4">
             <Button
+              variant="outline"
               onClick={() => handleContact("phone", CONTACT_PHONE)}
-              className="flex items-center justify-center gap-2 bg-lion-gold hover:bg-lion-darkgold text-lion-black"
+              className="flex items-center justify-center gap-2"
             >
               <Phone className="h-4 w-4" />
               Call Now
             </Button>
             <Button
+              variant="outline"
               onClick={() => handleContact("email", CONTACT_EMAIL)}
-              className="flex items-center justify-center gap-2 bg-lion-gold hover:bg-lion-darkgold text-lion-black"
+              className="flex items-center justify-center gap-2"
             >
               <Mail className="h-4 w-4" />
               Email Us
@@ -454,6 +510,7 @@ Thank you,
           </div>
         </DialogContent>
       </Dialog>
+
 
       <Footer />
     </PageTransition>

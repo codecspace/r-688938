@@ -70,14 +70,15 @@ const AboutUs = () => {
             <div className="lg:sticky lg:top-32">
               <Parallax distance={40} className="media-frame h-[460px] md:h-[620px]">
                 <img
-                  src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=900&q=68"
-                  alt="Modern residential facade in Delhi NCR"
+                  src="/about-advisory.webp"
+                  alt="Advisor and client reviewing a property shortlist"
                   loading="lazy"
                   decoding="async"
                   width={900}
-                  height={620}
+                  height={676}
                   className="w-full h-[120%] object-cover"
                 />
+
               </Parallax>
 
               <Reveal delay={0.1} className="border-t border-black/15 mt-6 pt-5 flex items-baseline justify-between gap-6">

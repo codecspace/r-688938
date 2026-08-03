@@ -21,16 +21,16 @@ export const projectsData: ProjectDataType[] = [
     propertyName: "AIPL Joy District Sector 88 Gurgaon",
     developerName: "AIPL",
     location: "Sector - 88, Gurugram",
-    image: "https://i.imgur.com/VIVNtTM.png",
-    heroImage: "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
+    image: "/projects/project-0.webp",
+    heroImage: "/projects/project-0.webp",
     fullAddress: "Sector 88, Gurugram, Haryana 122101, India",
     description: "A landmark commercial development in Sector 88, Gurugram, combining a high-street retail mall with premium office and leisure spaces — designed for brands that want visibility and footfall in one address.",
     longDescription: "AIPL Joy District Sector 88 Gurgaon is a newly launched landmark commercial development project located strategically at the prime area Sector 88 of Gurgaon city. The one-of-a-kind commercial project AIPL at Sector 88 Gurgaon is known for its innovation and excellence in the commercial domain.",
     isNew: true,
     isFeatured: true,
     images: [
-      "https://i.postimg.cc/N0dcJVDT/AIPL-Joy-District-Sector-88-Gurgaon-1719656222.webp",
-      "/projects/project-0.webp"
+      "/projects/project-0.webp",
+      "/projects/project-1.webp"
     ],
     specifications: {
       overview: [
@@ -60,7 +60,7 @@ export const projectsData: ProjectDataType[] = [
     propertyName: "Godrej Aristocrat Gurgaon",
     developerName: "Godrej",
     location: "Sector - 49, Gurugram",
-    image: "https://i.imgur.com/Tm5t9pp.jpg",
+    image: "/projects/project-10.webp",
     heroImage: "/projects/project-10.webp",
     fullAddress: "Sector 49, Gurugram, Haryana 122018, India",
     description: "Set in Sector 49 along the Golf Course Extension Road, Godrej Aristocrat offers spacious 3 and 4 BHK apartments behind a triple-height entrance lobby, an 18-hole golf course view, a landscaped terrace, a swimming pool, and a luxury clubhouse.",
@@ -69,8 +69,7 @@ export const projectsData: ProjectDataType[] = [
     isFeatured: true,
     images: [
       "/projects/project-10.webp",
-      "/projects/project-4.webp",
-      "https://i.imgur.com/Tm5t9pp.jpg"
+      "/projects/project-4.webp"
     ],
     specifications: {
       overview: [
@@ -119,7 +118,7 @@ export const projectsData: ProjectDataType[] = [
     propertyName: "HERO HOMES Sector 104 Gurugram",
     developerName: "Hero Realty",
     location: "Sector - 104, Gurugram",
-    image: "https://i.imgur.com/1qjWa6d.jpg",
+    image: "/projects/project-6.webp",
     heroImage: "/projects/project-6.webp",
     fullAddress: "Sector 104, Gurugram, Haryana 122001, India",
     description: "A premium residential development in Sector 104, Gurugram, spread across 11 acres with five high-rise towers. Hero Homes offers 3 and 4 BHK apartments built for modern urban families and professionals.",
@@ -127,8 +126,7 @@ export const projectsData: ProjectDataType[] = [
     isNew: true,
     isFeatured: true,
     images: [
-      "/projects/project-6.webp",
-      "https://i.imgur.com/1qjWa6d.jpg"
+      "/projects/project-6.webp"
     ],
     amenities: [
       "Swimming Pool", "Gym", "Clubhouse", "Kids Play Area", 
@@ -142,7 +140,7 @@ export const projectsData: ProjectDataType[] = [
     propertyName: "AIPL Joy Square Sector 63A Gurgaon",
     developerName: "AIPL",
     location: "Sector - 63A, Gurugram",
-    image: "https://i.imgur.com/V3ZYKie.jpg",
+    image: "/projects/project-2.webp",
     heroImage: "/projects/project-2.webp",
     fullAddress: "Sector 63A, Gurugram, Haryana 122001, India",
     description: "AIPL Joy Square and its sister development, AIPL Joy District, redefine commercial real estate with double-height retail frontage, expansive basements, dedicated escalators and lifts, and a landscaped sky garden — built for retail, F&B, and corporate tenants alike.",
@@ -150,8 +148,7 @@ export const projectsData: ProjectDataType[] = [
     isNew: true,
     isFeatured: true,
     images: [
-      "/projects/project-2.webp",
-      "https://i.imgur.com/V3ZYKie.jpg"
+      "/projects/project-2.webp"
     ],
     specifications: {
       overview: [
@@ -195,7 +192,7 @@ export const projectsData: ProjectDataType[] = [
     propertyName: "Tarc Ishva Sector 63A Gurugram",
     developerName: "TARC",
     location: "Sector - 63A, Gurugram",
-    image: "https://i.imgur.com/YQSL3gr.jpg",
+    image: "/projects/project-8.webp",
     heroImage: "/projects/project-8.webp",
     fullAddress: "Sector 63A, Gurugram, Haryana 122001, India",
     description: "At TARC Ishva, experience a blend of luxurious and harmonious lifestyle that celebrates the essence of your aspirations.",

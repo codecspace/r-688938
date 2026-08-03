@@ -1,44 +1,50 @@
-import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone, Twitter } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
 import { Link } from "react-router-dom";
 import { useState, FormEvent } from "react";
+import { z } from "zod";
 import { toast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 import { StaggerGroup, StaggerItem } from "@/components/layout/Reveal";
 
-const socials = [
-  { icon: Facebook, label: "Facebook" },
-  { icon: Instagram, label: "Instagram" },
-  { icon: Twitter, label: "Twitter" },
-  { icon: Linkedin, label: "LinkedIn" },
-];
+const emailSchema = z.string().trim().email().max(255);
 
 const Footer = () => {
   const [email, setEmail] = useState("");
+  const [sending, setSending] = useState(false);
 
-  const handleSubscribe = (e: FormEvent) => {
+  const handleSubscribe = async (e: FormEvent) => {
     e.preventDefault();
-    if (!email) {
+    const parsed = emailSchema.safeParse(email);
+    if (!parsed.success) {
       toast({
-        title: "Email required",
-        description: "Please enter your email address",
+        title: "Check that email",
+        description: "Please enter a valid email address.",
         variant: "destructive",
       });
       return;
     }
 
-    const subject = "New Newsletter Subscription";
-    const body = `Please add this email to the newsletter: ${email}`.trim();
-    const isMobileDevice = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    setSending(true);
+    // Stored alongside enquiries so no interest is lost to a mail client that never opens.
+    const { error } = await supabase.from("enquiries").insert({
+      name: "Newsletter subscriber",
+      phone: "not provided",
+      email: parsed.data,
+      message: "Requested to receive property updates.",
+      source_path: "/footer-newsletter",
+    });
+    setSending(false);
 
-    if (!isMobileDevice) {
-      window.open(
-        `https://mail.google.com/mail/?view=cm&fs=1&to=sales@lionvestrealty.com&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`,
-        "_blank"
-      );
-    } else {
-      window.location.href = `mailto:sales@lionvestrealty.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (error) {
+      toast({
+        title: "Couldn't subscribe",
+        description: "Please try again, or write to sales@lionvestrealty.com.",
+        variant: "destructive",
+      });
+      return;
     }
 
-    toast({ title: "Subscription successful!", description: "Thank you for subscribing to our newsletter" });
+    toast({ title: "You're on the list", description: "We'll send new launches your way." });
     setEmail("");
   };
 
@@ -49,7 +55,16 @@ const Footer = () => {
       <div className="container mx-auto px-6 md:px-8 max-w-7xl py-20 md:py-24 relative z-10">
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-10" stagger={0.09}>
           <StaggerItem className="lg:col-span-4">
-            <img src="https://i.imgur.com/ku5rlCk.jpg" alt="Lionvest Realty" className="h-9 mb-7" />
+            <img
+              src="/lionvest-logo.webp"
+              alt="Lionvest Realty"
+              width={200}
+              height={300}
+              loading="lazy"
+              decoding="async"
+              className="h-9 w-auto mb-7"
+            />
+
             <p className="font-display text-2xl leading-snug text-white/85 max-w-sm">
               Seamless support for every real estate query — residential and commercial —
               across Delhi, Noida and Gurugram.
@@ -100,31 +115,34 @@ const Footer = () => {
               />
               <button
                 type="submit"
-                className="text-[0.62rem] uppercase tracking-[0.25em] text-lion-gold hover:text-lion-lightgold transition-colors pl-4"
+                disabled={sending}
+                className="text-[0.62rem] uppercase tracking-[0.25em] text-lion-gold hover:text-lion-lightgold transition-colors pl-4 disabled:opacity-50"
               >
-                Send
+                {sending ? "Sending" : "Send"}
               </button>
             </form>
-
-            <div className="flex gap-3 mt-8">
-              {socials.map(({ icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href="#"
-                  aria-label={label}
-                  className="w-10 h-10 border border-white/15 flex items-center justify-center hover:bg-lion-gold hover:border-lion-gold hover:text-lion-black transition-colors"
-                >
-                  <Icon className="h-4 w-4" strokeWidth={1.5} />
-                </a>
-              ))}
-            </div>
+            <p className="text-white/30 text-[0.68rem] mt-4 leading-relaxed">
+              New launches and market notes. No spam, unsubscribe any time.
+            </p>
           </StaggerItem>
         </StaggerGroup>
 
-        <div className="border-t border-white/10 mt-16 pt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-white/35 text-xs tracking-wide">
-          <p>&copy; {new Date().getFullYear()} Lionvest Realty Pvt. Ltd. All rights reserved.</p>
-          <Link to="/privacy-policy" className="link-rule hover:text-lion-gold transition-colors">Privacy Policy</Link>
+        <div className="border-t border-white/10 mt-16 pt-8">
+          <p className="text-white/25 text-[0.68rem] leading-relaxed max-w-4xl">
+            Disclaimer: Lionvest Realty is a channel partner and not the developer of the projects
+            listed. All images, layouts, plans, specifications and prices shown are indicative,
+            provided by the respective developers, and are subject to change without notice. Nothing
+            here constitutes an offer or contract. Buyers are advised to verify project details and
+            RERA registration with the respective developer and the relevant state RERA authority
+            before making any purchase decision.
+          </p>
+
+          <div className="mt-8 flex flex-col sm:flex-row justify-between items-center gap-3 text-white/35 text-xs tracking-wide">
+            <p>&copy; {new Date().getFullYear()} Lionvest Realty Pvt. Ltd. All rights reserved.</p>
+            <Link to="/privacy-policy" className="link-rule hover:text-lion-gold transition-colors">Privacy Policy</Link>
+          </div>
         </div>
+
       </div>
     </footer>
   );
