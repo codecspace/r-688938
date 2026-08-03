@@ -3,8 +3,9 @@ import { useRef } from "react";
 import { ArrowDown } from "lucide-react";
 import { SplitHeading, EASE } from "@/components/layout/Editorial";
 
-const HERO_IMAGE =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1600&q=70";
+/** Self-hosted so the largest element on the page never depends on a third-party CDN. */
+const HERO_IMAGE = "/projects/project-4.webp";
+
 
 const scrollToSection = (sectionId: string) => {
   document.getElementById(sectionId)?.scrollIntoView({ behavior: "smooth" });
