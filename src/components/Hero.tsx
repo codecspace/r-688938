@@ -40,11 +40,14 @@ const Hero = () => {
       >
         <img
           src={HERO_IMAGE}
-          alt="Contemporary residential architecture in Delhi NCR"
+          alt="Landscaped rooftop pool deck at a premium residential tower in Gurugram, Delhi NCR"
+          width={1280}
+          height={767}
           fetchPriority="high"
           decoding="async"
           className="w-full h-full object-cover"
         />
+
         <div className="absolute inset-0 bg-gradient-to-t from-lion-obsidian via-lion-obsidian/70 to-lion-obsidian/40" />
         <div className="absolute inset-0 bg-lion-obsidian/25" />
       </motion.div>
