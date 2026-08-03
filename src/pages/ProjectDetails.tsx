@@ -27,10 +27,14 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 
+import EnquiryForm from "@/components/EnquiryForm";
+
 const CONTACT_PHONE = "+91 9773552334";
+const WHATSAPP_NUMBER = "919773552334";
 const CONTACT_EMAIL = "sales@lionvestrealty.com";
 const OFFICE_ADDRESS =
   "Plus Offices, 1st Floor, Landmark Cyber Park, Sector 67, Gurugram, HR 122101";
+
 
 /** Editorial section header — display serif heading with a hairline rule. */
 const SectionHeading = ({ eyebrow, children }: { eyebrow: string; children: React.ReactNode }) => (
