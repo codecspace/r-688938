@@ -61,10 +61,14 @@ const Navbar = () => {
           >
             <Link to="/" className="flex items-center gap-3 group">
               <img
-                src="https://i.imgur.com/ku5rlCk.jpg"
+                src="/lionvest-logo.webp"
                 alt="Lionvest Realty"
-                className={`transition-all duration-500 ${scrolled ? "h-7" : "h-9"}`}
+                width={200}
+                height={300}
+                fetchPriority="high"
+                className={`w-auto transition-all duration-500 ${scrolled ? "h-7" : "h-9"}`}
               />
+
               <span
                 className={`font-display tracking-tight transition-all duration-500 ${
                   scrolled ? "text-lg text-lion-black" : "text-xl text-white"
