@@ -66,10 +66,12 @@ const RouteHead = ({ title, description, path, noindex = false, jsonLd }: RouteH
       }
     );
 
+    const absoluteUrl = `${SITE_ORIGIN}${path}`;
+
     const canonical = setMeta(
       'link[rel="canonical"]',
       "href",
-      path,
+      absoluteUrl,
       () => {
         const l = document.createElement("link");
         l.setAttribute("rel", "canonical");
@@ -80,7 +82,7 @@ const RouteHead = ({ title, description, path, noindex = false, jsonLd }: RouteH
     const ogUrl = setMeta(
       'meta[property="og:url"]',
       "content",
-      path,
+      absoluteUrl,
       () => {
         const m = document.createElement("meta");
         m.setAttribute("property", "og:url");
@@ -99,9 +101,20 @@ const RouteHead = ({ title, description, path, noindex = false, jsonLd }: RouteH
       }
     );
 
+    let ldScript: HTMLScriptElement | null = null;
+    if (jsonLd) {
+      ldScript = document.createElement("script");
+      ldScript.type = "application/ld+json";
+      ldScript.dataset.routeHead = "true";
+      ldScript.textContent = JSON.stringify(jsonLd);
+      document.head.appendChild(ldScript);
+    }
+
     return () => {
       document.title = prevTitle;
       robots.setAttribute("content", "index, follow");
+      ldScript?.remove();
+
     };
   }, [title, description, path, noindex]);
 
