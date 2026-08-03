@@ -5,8 +5,14 @@ import { Reveal } from "@/components/layout/Reveal";
 import { SplitHeading, MediaReveal, Parallax } from "@/components/layout/Editorial";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
 
+/** Projects flagged as new or featured. The remaining catalogue lives in FeaturedProperties. */
+export const highlightedProjects = projectsData.filter((p) => p.isNew || p.isFeatured);
+
 /** Editorial index of developer partnerships — alternating full-width plates. */
 const Projects = () => {
+  // Fall back to the full list if nothing is flagged, so the section is never empty.
+  const items = highlightedProjects.length > 0 ? highlightedProjects : projectsData;
+
   return (
     <section id="projects" className="bg-lion-paper py-24 md:py-36">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">
@@ -29,7 +35,8 @@ const Projects = () => {
         </div>
 
         <div className="border-t border-black/12">
-          {projectsData.map((project, index) => {
+          {items.map((project, index) => {
+
             const reversed = index % 2 === 1;
             return (
               <article
