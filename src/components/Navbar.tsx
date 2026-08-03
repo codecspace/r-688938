@@ -65,7 +65,7 @@ const Navbar = () => {
                 alt="Lionvest Realty"
                 width={200}
                 height={300}
-                fetchPriority="high"
+                decoding="async"
                 className={`w-auto transition-all duration-500 ${scrolled ? "h-7" : "h-9"}`}
               />
 
