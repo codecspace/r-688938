@@ -372,7 +372,7 @@ Thank you,
                   </div>
                 </div>
 
-                <div className="pt-4">
+                <div className="pt-4 space-y-3">
                   <Button
                     className="w-full bg-lion-gold hover:bg-lion-darkgold text-lion-black rounded-none h-12 text-[0.7rem] uppercase tracking-[0.22em] disabled:bg-black/20"
                     onClick={handleScheduleVisit}
@@ -390,10 +390,37 @@ Thank you,
                       </span>
                     )}
                   </Button>
+
+                  <a
+                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                      `Hi Lionvest Realty, I'd like details about ${project.propertyName} in ${project.location}.`
+                    )}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="w-full h-12 flex items-center justify-center gap-2 border border-black/15 text-lion-black text-[0.7rem] uppercase tracking-[0.22em] hover:border-lion-gold hover:text-lion-gold transition-colors"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    WhatsApp us
+                  </a>
                 </div>
               </div>
             </div>
+
+            <div className="mt-6 border border-black/10 bg-lion-ivory p-6">
+              <h3 className="font-display text-2xl text-lion-black leading-tight">
+                Request details
+              </h3>
+              <p className="text-lion-stone text-sm mt-2 mb-6">
+                Pricing, floor plans and availability — sent to you directly.
+              </p>
+              <EnquiryForm
+                tone="light"
+                projectId={project.id}
+                projectName={project.propertyName}
+              />
+            </div>
           </aside>
+
         </div>
       </div>
 
