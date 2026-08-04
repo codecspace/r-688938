@@ -31,6 +31,11 @@ interface EnquiryFormProps {
   projectName?: string;
   /** "dark" sits on obsidian panels, "light" on paper. */
   tone?: "dark" | "light";
+  /** Shows a "I'd like a site visit" toggle above the submit button. */
+  showVisitToggle?: boolean;
+  /** Controlled value for that toggle, so an outside button can switch it on. */
+  visitRequested?: boolean;
+  onVisitRequestedChange?: (value: boolean) => void;
   onSuccess?: () => void;
 }
 
@@ -39,11 +44,26 @@ interface EnquiryFormProps {
  * lost to a missing mail client. Validated on the client and again by the
  * database policy.
  */
-const EnquiryForm = ({ projectId, projectName, tone = "dark", onSuccess }: EnquiryFormProps) => {
+const EnquiryForm = ({
+  projectId,
+  projectName,
+  tone = "dark",
+  showVisitToggle = false,
+  visitRequested,
+  onVisitRequestedChange,
+  onSuccess,
+}: EnquiryFormProps) => {
   const [values, setValues] = useState<Fields>({ name: "", phone: "", email: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const [visitInternal, setVisitInternal] = useState(false);
+
+  const visit = visitRequested ?? visitInternal;
+  const setVisit = (value: boolean) => {
+    setVisitInternal(value);
+    onVisitRequestedChange?.(value);
+  };
 
   const dark = tone === "dark";
   const fieldClass = dark
