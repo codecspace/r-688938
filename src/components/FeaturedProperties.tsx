@@ -29,9 +29,15 @@ const inCity = (location: string | undefined, city: string) =>
 const FeaturedProperties = () => {
   const [city, setCity] = useState<string>("All");
 
+  /**
+   * Prefer the listings the editorial section above didn't already show. If
+   * every listing is flagged as featured, fall back to the full portfolio so
+   * the "Explore Properties" CTA always lands on a browsable grid.
+   */
   const remaining = useMemo(() => {
     const shownAbove = new Set(highlightedProjects.map((p) => p.id));
-    return projectsData.filter((p) => !shownAbove.has(p.id));
+    const rest = projectsData.filter((p) => !shownAbove.has(p.id));
+    return rest.length > 0 ? rest : projectsData;
   }, []);
 
   /** Only offer a city chip when there is inventory behind it. */
@@ -62,7 +68,7 @@ const FeaturedProperties = () => {
               <span className="eyebrow mb-6">More listings</span>
             </Reveal>
             <SplitHeading
-              text="Addresses worth a second look."
+              text="Browse the full portfolio."
               className="font-display text-display-sm text-lion-black max-w-[14ch]"
             />
           </div>
