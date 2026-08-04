@@ -237,9 +237,20 @@ Thank you,
             {project.propertyName}
           </h1>
 
-          <div className="flex items-center text-white/70 mt-5 text-sm">
-            <MapPin className="w-4 h-4 mr-2 text-lion-gold" strokeWidth={1.5} />
-            {project.location}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-5">
+            <div className="flex items-center text-white/70 text-sm">
+              <MapPin className="w-4 h-4 mr-2 text-lion-gold" strokeWidth={1.5} />
+              {project.location}
+            </div>
+
+            <button
+              type="button"
+              onClick={handleScheduleVisit}
+              className="inline-flex items-center gap-2 bg-lion-gold hover:bg-lion-lightgold text-lion-black h-11 px-6 text-[0.7rem] uppercase tracking-[0.22em] transition-colors"
+            >
+              <Calendar className="h-4 w-4" strokeWidth={1.5} />
+              Schedule a visit
+            </button>
           </div>
         </div>
       </motion.div>
