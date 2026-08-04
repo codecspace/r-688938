@@ -215,6 +215,27 @@ const EnquiryForm = ({
         {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
       </div>
 
+      {showVisitToggle && (
+        <label
+          className={`flex items-start gap-3 cursor-pointer select-none text-sm ${
+            dark ? "text-white/70" : "text-lion-ink/80"
+          }`}
+        >
+          <input
+            type="checkbox"
+            checked={visit}
+            onChange={(e) => setVisit(e.target.checked)}
+            className="mt-0.5 h-4 w-4 accent-[hsl(var(--lion-gold-hsl,42_58%_52%))] cursor-pointer"
+          />
+          <span>
+            I&rsquo;d like to schedule a site visit
+            <span className={`block text-xs mt-0.5 ${dark ? "text-white/40" : "text-lion-stone"}`}>
+              We&rsquo;ll call to confirm a time that works for you.
+            </span>
+          </span>
+        </label>
+      )}
+
       <button
         type="submit"
         disabled={submitting}
@@ -222,7 +243,7 @@ const EnquiryForm = ({
       >
         <span className="flex items-center justify-center gap-2">
           {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
-          {submitting ? "Sending" : "Send enquiry"}
+          {submitting ? "Sending" : visit ? "Request site visit" : "Send enquiry"}
         </span>
       </button>
 
