@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, CheckCircle, Calendar, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, CheckCircle, Calendar, MessageCircle } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
