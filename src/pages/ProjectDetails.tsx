@@ -429,7 +429,7 @@ Thank you,
               {related.map((item) => (
                 <StaggerItem key={item.id}>
                   <Link to={`/project/${item.id}`} className="group block">
-                    <div className="media-frame media-zoom h-[260px]">
+                    <div className="media-frame media-zoom aspect-[4/3]">
                       <ImageWithFallback
                         src={item.heroImage || item.images?.[0] || item.image}
                         alt={item.propertyName}
