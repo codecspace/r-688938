@@ -458,44 +458,6 @@ Thank you,
         </section>
       )}
 
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="font-display text-2xl">Schedule a Visit</DialogTitle>
-            <DialogDescription>
-              Leave your details and we'll arrange a site visit to {project.propertyName}.
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="py-2">
-            <EnquiryForm
-              tone="light"
-              projectId={project.id}
-              projectName={project.propertyName}
-              onSuccess={() => setTimeout(() => setDialogOpen(false), 1800)}
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 border-t border-black/10 pt-4">
-            <Button
-              variant="outline"
-              onClick={() => handleContact("phone", CONTACT_PHONE)}
-              className="flex items-center justify-center gap-2"
-            >
-              <Phone className="h-4 w-4" />
-              Call Now
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => handleContact("email", CONTACT_EMAIL)}
-              className="flex items-center justify-center gap-2"
-            >
-              <Mail className="h-4 w-4" />
-              Email Us
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
 
 
       <Footer />
