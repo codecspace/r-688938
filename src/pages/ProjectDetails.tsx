@@ -46,8 +46,7 @@ const SectionHeading = ({ eyebrow, children }: { eyebrow: string; children: Reac
 
 const ProjectDetails = () => {
   const { id } = useParams();
-  const [cooldown, setCooldown] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [visitRequested, setVisitRequested] = useState(false);
 
   const project = useMemo(() => projectsData.find((p) => p.id === id) ?? null, [id]);
 
@@ -88,24 +87,23 @@ Thank you,
     if (type === "phone") {
       window.location.href = `tel:${value}`;
       toast({ title: "Calling...", description: `Dialing ${value}` });
-      setDialogOpen(false);
     } else if (type === "email") {
       window.location.href = createFormattedEmail();
       toast({
         title: "Opening email client",
         description: `Composing email about ${project?.propertyName}`,
       });
-      setDialogOpen(false);
-    } else if (type === "schedule") {
-      setDialogOpen(true);
     }
   };
 
+  /** One form on the page: this ticks the visit box and brings it into view. */
   const handleScheduleVisit = () => {
-    if (cooldown) return;
-    setCooldown(true);
-    setDialogOpen(true);
-    setTimeout(() => setCooldown(false), 5000);
+    setVisitRequested(true);
+    const target = document.getElementById("enquire");
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(() => {
+      document.getElementById("enq-name")?.focus({ preventScroll: true });
+    }, 500);
   };
 
   if (!project) {
