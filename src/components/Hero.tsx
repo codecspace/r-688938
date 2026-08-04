@@ -4,7 +4,7 @@ import { ArrowDown } from "lucide-react";
 import { SplitHeading, EASE } from "@/components/layout/Editorial";
 
 /** Self-hosted so the largest element on the page never depends on a third-party CDN. */
-const HERO_IMAGE = "/projects/project-4.webp";
+const HERO_IMAGE = "/hero-villa.webp";
 
 
 const scrollToSection = (sectionId: string) => {
@@ -40,9 +40,9 @@ const Hero = () => {
       >
         <img
           src={HERO_IMAGE}
-          alt="Landscaped rooftop pool deck at a premium residential tower in Gurugram, Delhi NCR"
-          width={1280}
-          height={767}
+          alt="Contemporary luxury villa with landscaped frontage, representative of Lionvest Realty's Delhi NCR portfolio"
+          width={1600}
+          height={1067}
           {...({ fetchpriority: "high" } as Record<string, string>)}
           decoding="async"
           className="w-full h-full object-cover"

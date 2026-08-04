@@ -56,10 +56,10 @@ const Footer = () => {
         <StaggerGroup className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-10" stagger={0.09}>
           <StaggerItem className="lg:col-span-4">
             <img
-              src="/lionvest-logo.webp"
+              src="/lionvest-logo.png"
               alt="Lionvest Realty"
-              width={200}
-              height={300}
+              width={197}
+              height={221}
               loading="lazy"
               decoding="async"
               className="h-9 w-auto mb-7"
