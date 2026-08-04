@@ -225,7 +225,7 @@ const EnquiryForm = ({
             type="checkbox"
             checked={visit}
             onChange={(e) => setVisit(e.target.checked)}
-            className="mt-0.5 h-4 w-4 accent-[hsl(var(--lion-gold-hsl,42_58%_52%))] cursor-pointer"
+            className="mt-0.5 h-4 w-4 accent-lion-gold cursor-pointer"
           />
           <span>
             I&rsquo;d like to schedule a site visit
