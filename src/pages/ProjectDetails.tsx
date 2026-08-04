@@ -15,18 +15,9 @@ import RouteHead from "@/components/RouteHead";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import PageTransition from "@/components/layout/PageTransition";
 import { Reveal, RevealMask, StaggerGroup, StaggerItem } from "@/components/layout/Reveal";
-import { Button } from "@/components/ui/button";
 import { projectsData } from "@/data/projectsData";
 import { toast } from "@/hooks/use-toast";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-
 import EnquiryForm from "@/components/EnquiryForm";
 
 const CONTACT_PHONE = "+91 9773552334";
