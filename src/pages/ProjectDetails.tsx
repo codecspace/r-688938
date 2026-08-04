@@ -326,23 +326,37 @@ Thank you,
             )}
           </div>
 
-          {/* Sidebar */}
+          {/* Sidebar — one enquiry form, one set of direct contact options */}
           <aside className="lg:col-span-1">
-            <div className="lg:sticky lg:top-24 z-10 bg-white border border-black/10">
+            <div id="enquire" className="lg:sticky lg:top-24 z-10 bg-white border border-black/10 scroll-mt-28">
               <div className="bg-lion-obsidian p-6 relative overflow-hidden">
                 <div className="grain absolute inset-0" />
                 <h2 className="relative z-10 font-display text-2xl text-white leading-tight">
-                  Interested in this address?
+                  Enquire about this property
                 </h2>
                 <p className="relative z-10 text-white/55 text-sm mt-2">
-                  Speak to our advisory team directly.
+                  Pricing, floor plans and availability — sent to you directly.
                 </p>
               </div>
 
-              <div className="p-6 space-y-1">
-                <button
-                  type="button"
-                  onClick={() => handleContact("phone", CONTACT_PHONE)}
+              <div className="p-6">
+                <EnquiryForm
+                  tone="light"
+                  projectId={project.id}
+                  projectName={project.propertyName}
+                  showVisitToggle
+                  visitRequested={visitRequested}
+                  onVisitRequestedChange={setVisitRequested}
+                />
+              </div>
+
+              <div className="border-t border-black/10 p-6 pt-5 space-y-1">
+                <p className="text-[0.6rem] uppercase tracking-[0.24em] text-lion-stone mb-3">
+                  Or reach us directly
+                </p>
+
+                <a
+                  href={`tel:${CONTACT_PHONE.replace(/\s/g, "")}`}
                   className="w-full text-left flex items-start gap-3 p-3 hover:bg-lion-ivory transition-colors"
                 >
                   <Phone className="w-4 h-4 text-lion-gold flex-shrink-0 mt-1" strokeWidth={1.5} />
@@ -352,7 +366,7 @@ Thank you,
                     </span>
                     <span className="block text-lion-black text-sm mt-1">{CONTACT_PHONE}</span>
                   </span>
-                </button>
+                </a>
 
                 <button
                   type="button"
@@ -368,6 +382,23 @@ Thank you,
                   </span>
                 </button>
 
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                    `Hi Lionvest Realty, I'd like details about ${project.propertyName} in ${project.location}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full text-left flex items-start gap-3 p-3 hover:bg-lion-ivory transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4 text-lion-gold flex-shrink-0 mt-1" strokeWidth={1.5} />
+                  <span className="block">
+                    <span className="block text-[0.6rem] uppercase tracking-[0.22em] text-lion-stone">
+                      WhatsApp
+                    </span>
+                    <span className="block text-lion-black text-sm mt-1">Message us directly</span>
+                  </span>
+                </a>
+
                 <div className="flex items-start gap-3 p-3">
                   <MapPin className="w-4 h-4 text-lion-gold flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
@@ -375,55 +406,10 @@ Thank you,
                     <p className="text-lion-ink/75 text-sm mt-1 leading-relaxed">{OFFICE_ADDRESS}</p>
                   </div>
                 </div>
-
-                <div className="pt-4 space-y-3">
-                  <Button
-                    className="w-full bg-lion-gold hover:bg-lion-darkgold text-lion-black rounded-none h-12 text-[0.7rem] uppercase tracking-[0.22em] disabled:bg-black/20"
-                    onClick={handleScheduleVisit}
-                    disabled={cooldown}
-                  >
-                    {cooldown ? (
-                      <span className="flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
-                        Please wait...
-                      </span>
-                    ) : (
-                      <span className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4" />
-                        Schedule a Visit
-                      </span>
-                    )}
-                  </Button>
-
-                  <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                      `Hi Lionvest Realty, I'd like details about ${project.propertyName} in ${project.location}.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full h-12 flex items-center justify-center gap-2 border border-black/15 text-lion-black text-[0.7rem] uppercase tracking-[0.22em] hover:border-lion-gold hover:text-lion-gold transition-colors"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    WhatsApp us
-                  </a>
-                </div>
               </div>
             </div>
-
-            <div className="mt-6 border border-black/10 bg-lion-ivory p-6">
-              <h3 className="font-display text-2xl text-lion-black leading-tight">
-                Request details
-              </h3>
-              <p className="text-lion-stone text-sm mt-2 mb-6">
-                Pricing, floor plans and availability — sent to you directly.
-              </p>
-              <EnquiryForm
-                tone="light"
-                projectId={project.id}
-                projectName={project.propertyName}
-              />
-            </div>
           </aside>
+
 
         </div>
       </div>
