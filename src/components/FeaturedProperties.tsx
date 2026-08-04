@@ -9,6 +9,18 @@ import ImageWithFallback from "@/components/layout/ImageWithFallback";
 
 const CITIES = ["Gurugram", "Noida", "Delhi"] as const;
 
+/** Listings write the same city a few different ways. */
+const CITY_ALIASES: Record<string, string[]> = {
+  Gurugram: ["gurugram", "gurgaon"],
+  Noida: ["noida"],
+  Delhi: ["delhi"],
+};
+
+const inCity = (location: string | undefined, city: string) =>
+  (CITY_ALIASES[city] ?? [city.toLowerCase()]).some((alias) =>
+    (location ?? "").toLowerCase().includes(alias)
+  );
+
 /**
  * The rest of the portfolio — everything the Projects section above didn't
  * already showcase, so the homepage never lists the same address twice.
@@ -24,7 +36,7 @@ const FeaturedProperties = () => {
 
   /** Only offer a city chip when there is inventory behind it. */
   const availableCities = useMemo(
-    () => CITIES.filter((c) => remaining.some((p) => p.location?.toLowerCase().includes(c.toLowerCase()))),
+    () => CITIES.filter((c) => remaining.some((p) => inCity(p.location, c))),
     [remaining]
   );
 
@@ -32,13 +44,14 @@ const FeaturedProperties = () => {
     () =>
       city === "All"
         ? remaining
-        : remaining.filter((p) => p.location?.toLowerCase().includes(city.toLowerCase())),
+        : remaining.filter((p) => inCity(p.location, city)),
     [remaining, city]
   );
 
   if (remaining.length === 0) return null;
 
-  const chips = ["All", ...availableCities];
+  /** A single-city portfolio doesn't need a filter row. */
+  const chips = availableCities.length > 1 ? ["All", ...availableCities] : [];
 
   return (
     <section id="properties" className="bg-lion-paper2 py-24 md:py-36">
@@ -72,9 +85,7 @@ const FeaturedProperties = () => {
                 const count =
                   chip === "All"
                     ? remaining.length
-                    : remaining.filter((p) =>
-                        p.location?.toLowerCase().includes(chip.toLowerCase())
-                      ).length;
+                    : remaining.filter((p) => inCity(p.location, chip)).length;
 
                 return (
                   <button
