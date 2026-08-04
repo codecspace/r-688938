@@ -31,6 +31,11 @@ interface EnquiryFormProps {
   projectName?: string;
   /** "dark" sits on obsidian panels, "light" on paper. */
   tone?: "dark" | "light";
+  /** Shows a "I'd like a site visit" toggle above the submit button. */
+  showVisitToggle?: boolean;
+  /** Controlled value for that toggle, so an outside button can switch it on. */
+  visitRequested?: boolean;
+  onVisitRequestedChange?: (value: boolean) => void;
   onSuccess?: () => void;
 }
 
@@ -39,11 +44,26 @@ interface EnquiryFormProps {
  * lost to a missing mail client. Validated on the client and again by the
  * database policy.
  */
-const EnquiryForm = ({ projectId, projectName, tone = "dark", onSuccess }: EnquiryFormProps) => {
+const EnquiryForm = ({
+  projectId,
+  projectName,
+  tone = "dark",
+  showVisitToggle = false,
+  visitRequested,
+  onVisitRequestedChange,
+  onSuccess,
+}: EnquiryFormProps) => {
   const [values, setValues] = useState<Fields>({ name: "", phone: "", email: "", message: "" });
   const [errors, setErrors] = useState<Errors>({});
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
+  const [visitInternal, setVisitInternal] = useState(false);
+
+  const visit = visitRequested ?? visitInternal;
+  const setVisit = (value: boolean) => {
+    setVisitInternal(value);
+    onVisitRequestedChange?.(value);
+  };
 
   const dark = tone === "dark";
   const fieldClass = dark
@@ -70,11 +90,19 @@ const EnquiryForm = ({ projectId, projectName, tone = "dark", onSuccess }: Enqui
     setErrors({});
     setSubmitting(true);
 
+    const composedMessage = [
+      visit ? "Site visit requested." : "",
+      parsed.data.message?.trim() || "",
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .slice(0, 1000);
+
     const { error } = await supabase.from("enquiries").insert({
       name: parsed.data.name,
       phone: parsed.data.phone,
       email: parsed.data.email || null,
-      message: parsed.data.message || null,
+      message: composedMessage || null,
       project_id: projectId ?? null,
       project_name: projectName ?? null,
       source_path: typeof window !== "undefined" ? window.location.pathname : null,
@@ -93,8 +121,9 @@ const EnquiryForm = ({ projectId, projectName, tone = "dark", onSuccess }: Enqui
 
     setDone(true);
     setValues({ name: "", phone: "", email: "", message: "" });
+    setVisit(false);
     toast({
-      title: "Enquiry received",
+      title: visit ? "Site visit request received" : "Enquiry received",
       description: "Our team will get back to you, usually within a day.",
     });
     onSuccess?.();
@@ -186,6 +215,27 @@ const EnquiryForm = ({ projectId, projectName, tone = "dark", onSuccess }: Enqui
         {errors.message && <p className="text-red-400 text-xs mt-1">{errors.message}</p>}
       </div>
 
+      {showVisitToggle && (
+        <label
+          className={`flex items-start gap-3 cursor-pointer select-none text-sm ${
+            dark ? "text-white/70" : "text-lion-ink/80"
+          }`}
+        >
+          <input
+            type="checkbox"
+            checked={visit}
+            onChange={(e) => setVisit(e.target.checked)}
+            className="mt-0.5 h-4 w-4 accent-lion-gold cursor-pointer"
+          />
+          <span>
+            I&rsquo;d like to schedule a site visit
+            <span className={`block text-xs mt-0.5 ${dark ? "text-white/40" : "text-lion-stone"}`}>
+              We&rsquo;ll call to confirm a time that works for you.
+            </span>
+          </span>
+        </label>
+      )}
+
       <button
         type="submit"
         disabled={submitting}
@@ -193,7 +243,7 @@ const EnquiryForm = ({ projectId, projectName, tone = "dark", onSuccess }: Enqui
       >
         <span className="flex items-center justify-center gap-2">
           {submitting && <Loader2 className="h-4 w-4 animate-spin" />}
-          {submitting ? "Sending" : "Send enquiry"}
+          {submitting ? "Sending" : visit ? "Request site visit" : "Send enquiry"}
         </span>
       </button>
 

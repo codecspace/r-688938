@@ -61,10 +61,10 @@ const Navbar = () => {
           >
             <Link to="/" className="flex items-center gap-3 group">
               <img
-                src="/lionvest-logo.webp"
+                src="/lionvest-logo.png"
                 alt="Lionvest Realty"
-                width={200}
-                height={300}
+                width={197}
+                height={221}
                 decoding="async"
                 className={`w-auto transition-all duration-500 ${scrolled ? "h-7" : "h-9"}`}
               />

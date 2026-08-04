@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { MapPin, Phone, Mail, CheckCircle, Calendar, Clock, MessageCircle } from "lucide-react";
+import { MapPin, Phone, Mail, CheckCircle, Calendar, MessageCircle } from "lucide-react";
 import {
   Carousel,
   CarouselContent,
@@ -15,18 +15,9 @@ import RouteHead from "@/components/RouteHead";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import PageTransition from "@/components/layout/PageTransition";
 import { Reveal, RevealMask, StaggerGroup, StaggerItem } from "@/components/layout/Reveal";
-import { Button } from "@/components/ui/button";
 import { projectsData } from "@/data/projectsData";
 import { toast } from "@/hooks/use-toast";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
-
 import EnquiryForm from "@/components/EnquiryForm";
 
 const CONTACT_PHONE = "+91 9773552334";
@@ -46,8 +37,7 @@ const SectionHeading = ({ eyebrow, children }: { eyebrow: string; children: Reac
 
 const ProjectDetails = () => {
   const { id } = useParams();
-  const [cooldown, setCooldown] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
+  const [visitRequested, setVisitRequested] = useState(false);
 
   const project = useMemo(() => projectsData.find((p) => p.id === id) ?? null, [id]);
 
@@ -88,24 +78,23 @@ Thank you,
     if (type === "phone") {
       window.location.href = `tel:${value}`;
       toast({ title: "Calling...", description: `Dialing ${value}` });
-      setDialogOpen(false);
     } else if (type === "email") {
       window.location.href = createFormattedEmail();
       toast({
         title: "Opening email client",
         description: `Composing email about ${project?.propertyName}`,
       });
-      setDialogOpen(false);
-    } else if (type === "schedule") {
-      setDialogOpen(true);
     }
   };
 
+  /** One form on the page: this ticks the visit box and brings it into view. */
   const handleScheduleVisit = () => {
-    if (cooldown) return;
-    setCooldown(true);
-    setDialogOpen(true);
-    setTimeout(() => setCooldown(false), 5000);
+    setVisitRequested(true);
+    const target = document.getElementById("enquire");
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+    window.setTimeout(() => {
+      document.getElementById("enq-name")?.focus({ preventScroll: true });
+    }, 500);
   };
 
   if (!project) {
@@ -239,9 +228,20 @@ Thank you,
             {project.propertyName}
           </h1>
 
-          <div className="flex items-center text-white/70 mt-5 text-sm">
-            <MapPin className="w-4 h-4 mr-2 text-lion-gold" strokeWidth={1.5} />
-            {project.location}
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-4 mt-5">
+            <div className="flex items-center text-white/70 text-sm">
+              <MapPin className="w-4 h-4 mr-2 text-lion-gold" strokeWidth={1.5} />
+              {project.location}
+            </div>
+
+            <button
+              type="button"
+              onClick={handleScheduleVisit}
+              className="inline-flex items-center gap-2 bg-lion-gold hover:bg-lion-lightgold text-lion-black h-11 px-6 text-[0.7rem] uppercase tracking-[0.22em] transition-colors"
+            >
+              <Calendar className="h-4 w-4" strokeWidth={1.5} />
+              Schedule a visit
+            </button>
           </div>
         </div>
       </motion.div>
@@ -326,23 +326,37 @@ Thank you,
             )}
           </div>
 
-          {/* Sidebar */}
+          {/* Sidebar — one enquiry form, one set of direct contact options */}
           <aside className="lg:col-span-1">
-            <div className="lg:sticky lg:top-24 z-10 bg-white border border-black/10">
+            <div id="enquire" className="lg:sticky lg:top-24 z-10 bg-white border border-black/10 scroll-mt-28">
               <div className="bg-lion-obsidian p-6 relative overflow-hidden">
                 <div className="grain absolute inset-0" />
                 <h2 className="relative z-10 font-display text-2xl text-white leading-tight">
-                  Interested in this address?
+                  Enquire about this property
                 </h2>
                 <p className="relative z-10 text-white/55 text-sm mt-2">
-                  Speak to our advisory team directly.
+                  Pricing, floor plans and availability — sent to you directly.
                 </p>
               </div>
 
-              <div className="p-6 space-y-1">
-                <button
-                  type="button"
-                  onClick={() => handleContact("phone", CONTACT_PHONE)}
+              <div className="p-6">
+                <EnquiryForm
+                  tone="light"
+                  projectId={project.id}
+                  projectName={project.propertyName}
+                  showVisitToggle
+                  visitRequested={visitRequested}
+                  onVisitRequestedChange={setVisitRequested}
+                />
+              </div>
+
+              <div className="border-t border-black/10 p-6 pt-5 space-y-1">
+                <p className="text-[0.6rem] uppercase tracking-[0.24em] text-lion-stone mb-3">
+                  Or reach us directly
+                </p>
+
+                <a
+                  href={`tel:${CONTACT_PHONE.replace(/\s/g, "")}`}
                   className="w-full text-left flex items-start gap-3 p-3 hover:bg-lion-ivory transition-colors"
                 >
                   <Phone className="w-4 h-4 text-lion-gold flex-shrink-0 mt-1" strokeWidth={1.5} />
@@ -352,7 +366,7 @@ Thank you,
                     </span>
                     <span className="block text-lion-black text-sm mt-1">{CONTACT_PHONE}</span>
                   </span>
-                </button>
+                </a>
 
                 <button
                   type="button"
@@ -368,6 +382,23 @@ Thank you,
                   </span>
                 </button>
 
+                <a
+                  href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
+                    `Hi Lionvest Realty, I'd like details about ${project.propertyName} in ${project.location}.`
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full text-left flex items-start gap-3 p-3 hover:bg-lion-ivory transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4 text-lion-gold flex-shrink-0 mt-1" strokeWidth={1.5} />
+                  <span className="block">
+                    <span className="block text-[0.6rem] uppercase tracking-[0.22em] text-lion-stone">
+                      WhatsApp
+                    </span>
+                    <span className="block text-lion-black text-sm mt-1">Message us directly</span>
+                  </span>
+                </a>
+
                 <div className="flex items-start gap-3 p-3">
                   <MapPin className="w-4 h-4 text-lion-gold flex-shrink-0 mt-1" strokeWidth={1.5} />
                   <div>
@@ -375,55 +406,10 @@ Thank you,
                     <p className="text-lion-ink/75 text-sm mt-1 leading-relaxed">{OFFICE_ADDRESS}</p>
                   </div>
                 </div>
-
-                <div className="pt-4 space-y-3">
-                  <Button
-                    className="w-full bg-lion-gold hover:bg-lion-darkgold text-lion-black rounded-none h-12 text-[0.7rem] uppercase tracking-[0.22em] disabled:bg-black/20"
-                    onClick={handleScheduleVisit}
-                    disabled={cooldown}
-                  >
-                    {cooldown ? (
-                      <span className="flex items-center gap-2">
-                        <Clock className="h-4 w-4" />
-                        Please wait...
-                      </span>
-                    ) : (
-                      <span className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4" />
-                        Schedule a Visit
-                      </span>
-                    )}
-                  </Button>
-
-                  <a
-                    href={`https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(
-                      `Hi Lionvest Realty, I'd like details about ${project.propertyName} in ${project.location}.`
-                    )}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full h-12 flex items-center justify-center gap-2 border border-black/15 text-lion-black text-[0.7rem] uppercase tracking-[0.22em] hover:border-lion-gold hover:text-lion-gold transition-colors"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    WhatsApp us
-                  </a>
-                </div>
               </div>
             </div>
-
-            <div className="mt-6 border border-black/10 bg-lion-ivory p-6">
-              <h3 className="font-display text-2xl text-lion-black leading-tight">
-                Request details
-              </h3>
-              <p className="text-lion-stone text-sm mt-2 mb-6">
-                Pricing, floor plans and availability — sent to you directly.
-              </p>
-              <EnquiryForm
-                tone="light"
-                projectId={project.id}
-                projectName={project.propertyName}
-              />
-            </div>
           </aside>
+
 
         </div>
       </div>
@@ -443,7 +429,7 @@ Thank you,
               {related.map((item) => (
                 <StaggerItem key={item.id}>
                   <Link to={`/project/${item.id}`} className="group block">
-                    <div className="media-frame media-zoom h-[260px]">
+                    <div className="media-frame media-zoom aspect-[4/3]">
                       <ImageWithFallback
                         src={item.heroImage || item.images?.[0] || item.image}
                         alt={item.propertyName}
@@ -472,44 +458,6 @@ Thank you,
         </section>
       )}
 
-      <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
-        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto">
-          <DialogHeader>
-            <DialogTitle className="font-display text-2xl">Schedule a Visit</DialogTitle>
-            <DialogDescription>
-              Leave your details and we'll arrange a site visit to {project.propertyName}.
-            </DialogDescription>
-          </DialogHeader>
-
-          <div className="py-2">
-            <EnquiryForm
-              tone="light"
-              projectId={project.id}
-              projectName={project.propertyName}
-              onSuccess={() => setTimeout(() => setDialogOpen(false), 1800)}
-            />
-          </div>
-
-          <div className="grid grid-cols-2 gap-3 border-t border-black/10 pt-4">
-            <Button
-              variant="outline"
-              onClick={() => handleContact("phone", CONTACT_PHONE)}
-              className="flex items-center justify-center gap-2"
-            >
-              <Phone className="h-4 w-4" />
-              Call Now
-            </Button>
-            <Button
-              variant="outline"
-              onClick={() => handleContact("email", CONTACT_EMAIL)}
-              className="flex items-center justify-center gap-2"
-            >
-              <Mail className="h-4 w-4" />
-              Email Us
-            </Button>
-          </div>
-        </DialogContent>
-      </Dialog>
 
 
       <Footer />
