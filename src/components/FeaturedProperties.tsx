@@ -74,7 +74,7 @@ const FeaturedProperties = () => {
           </div>
           <Reveal delay={0.1}>
             <p className="text-lion-stone text-sm max-w-xs leading-relaxed md:text-right">
-              Currently open for enquiry across Gurugram, Noida and Delhi.
+              Every address we currently represent across Delhi NCR — open for enquiry.
             </p>
           </Reveal>
         </div>
