@@ -90,11 +90,19 @@ const EnquiryForm = ({
     setErrors({});
     setSubmitting(true);
 
+    const composedMessage = [
+      visit ? "Site visit requested." : "",
+      parsed.data.message?.trim() || "",
+    ]
+      .filter(Boolean)
+      .join(" ")
+      .slice(0, 1000);
+
     const { error } = await supabase.from("enquiries").insert({
       name: parsed.data.name,
       phone: parsed.data.phone,
       email: parsed.data.email || null,
-      message: parsed.data.message || null,
+      message: composedMessage || null,
       project_id: projectId ?? null,
       project_name: projectName ?? null,
       source_path: typeof window !== "undefined" ? window.location.pathname : null,
@@ -113,8 +121,9 @@ const EnquiryForm = ({
 
     setDone(true);
     setValues({ name: "", phone: "", email: "", message: "" });
+    setVisit(false);
     toast({
-      title: "Enquiry received",
+      title: visit ? "Site visit request received" : "Enquiry received",
       description: "Our team will get back to you, usually within a day.",
     });
     onSuccess?.();
