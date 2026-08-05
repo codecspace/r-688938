@@ -1,61 +1,65 @@
-# Admin panel (/admin) — edit the whole site without touching code
+# Lionvest Admin Panel (CMS) — Plan
 
-A private, password-protected editor at `yoursite.com/admin` that lets you change almost everything visible on the site — projects, photos, homepage copy, team, contact details — and see it live within seconds. Plus the new logo and a pass of UI polish.
+## On your question: email check vs roles
+
+Stick with the **roles table** approach (your v2 SQL), not a hardcoded email check. A hardcoded email cannot support what you asked for next — adding more users and editing their access. Roles give you that for free, and they're safer: access is data in the database, not a string in the frontend bundle.
+
+Your account `jok38817@gmail.com` becomes the first **owner**.
+
+## Access model
+
+Two role levels, so you can hand out limited access:
+
+- **owner** — everything, plus can invite/remove users and change their roles. Only an owner can create another owner.
+- **editor** — can edit all site content and upload photos, but cannot manage users.
+
+Public visitors are unaffected: the site reads content anonymously, writes are locked to signed-in owners/editors.
+
+Public sign-ups stay disabled. New users are created only from inside the admin panel by an owner.
 
 ## What you'll be able to edit
 
-**Projects** (the core of it)
-- Add a new project, edit an existing one, delete one
-- Name, developer, location, full address, short + long description
-- Upload / replace / remove gallery photos straight from your phone camera roll, drag to reorder, pick which one is the cover
-- Amenities: add/remove as simple tags
-- Specifications: grouped lists (Overview, Leasing strategy, etc.) as plain text lines
-- Flags: "New", "Featured" (featured ones show on the homepage)
-- Drag to reorder how projects appear on the site and in "Explore properties"
+A single `/admin` panel, no technical knowledge needed:
 
-**Homepage & site content**
-- Hero: headline, sub-line, button labels, hero background image
-- About us, Vision & Mission, Stats numbers/labels
-- Section headings and intro copy for Projects, Team, Contact
-- Team members: name, role, bio, photo (or leave blank for the gold initials placeholder), phone, email — add/remove/reorder
-- Contact block + footer: phone, email, address, disclaimer text
-- Ticker words that scroll across the page
+- **Properties** — add, edit, delete, drag to reorder, mark as featured. Every field editable in plain text boxes: name, location, city, price, status, description, specifications, amenities (add/remove chips).
+- **Photos** — drag-and-drop upload per property, reorder the gallery, set the cover image, delete images. Uploads go to secured cloud storage.
+- **Homepage** — hero headline, sub-headline, background image, button text/link; the "Explore Properties" section heading and ordering; about, vision/mission, stats, ticker.
+- **Team** — add/remove members, photo or initials placeholder, name, role, bio.
+- **Contact** — phone, email, address, office hours (used across the site and the footer).
+- **Enquiries** — read-only inbox of leads submitted through the site, newest first, with the property they asked about.
+- **Users** — list of accounts, their role, invite a new one by email, change role, revoke access.
 
-Everything is a labelled text box with your current wording already in it, and a Save button. No page builders, no jargon.
+Every screen has a **Preview** and **Save** with a clear "unsaved changes" indicator, so nothing goes live by accident.
 
-## How access is protected
+## How it hangs together (technical)
 
-- `/admin` is a real login (email + password) on the site's backend, not a hardcoded password.
-- Only email addresses you explicitly approve can even see the editor, and the database itself refuses saves from anyone else — so it can't be bypassed from the browser.
-- No public signup. I create your account; you can change the password later.
-- The public site stays readable by everyone; only writing is locked down.
+Database (one migration, close to your uploaded SQL with adjustments):
 
-**I need one thing from you: the email address you want to log in with.** I'll set it as the admin and give you the initial password when it's live.
+- `user_roles` (user_id, role enum `owner`/`editor`) + `has_role(_user_id, _role)` security-definer function, and a `is_staff()` helper. Grants: `select` to authenticated, `all` to service_role. No anon access.
+- `site_content` single-row `jsonb` table, public read, write restricted to staff, `updated_at`/`updated_by` stamped by trigger.
+- `user_roles` write policies: only owners may insert/update/delete role rows.
+- Storage bucket `site-media` (public read, 8MB, jpeg/png/webp), writes restricted to staff.
+- Seed row for `site_content` generated from the current `projectsData.ts` and existing component copy, so the panel opens with today's live content already filled in — nothing on the site changes on day one.
 
-## Safety: your edits and my code can't collide
+Frontend:
 
-Content is stored in the backend, not in the site's source files. That means:
-- I can redesign or update the site any time and your edits survive untouched.
-- Saving a change never touches code, so a bad edit can't break or white-screen the site — anything missing or malformed falls back to the current built-in content.
-- Photos are shrunk in the browser before upload, so a 10MB phone photo becomes a fast, web-sized image automatically.
+- `SiteContentProvider` fetches `site_content` once and deep-merges it over the existing hardcoded defaults, so the site never breaks if a key is missing. `Hero`, `AboutUs`, `Projects`, `FeaturedProperties`, `Team`, `SimpleContact`, `Footer`, `ProjectDetails` read from it.
+- Routes `/admin/login` and `/admin/*` (lazy-loaded, `noindex`), guarded by a session + role check that re-validates against the database, not localStorage.
+- Admin UI styled to match the site: obsidian/gold, glass panels, restrained motion.
+- Inviting a user needs a server-side call, so a small edge function `admin-users` handles create/update/delete of accounts and roles, verifying the caller is an owner before doing anything.
 
-## Logo + UI polish (same pass)
+Also included in this pass (your earlier notes):
 
-- Replace the nav, footer and favicon logo with your new transparent high-res crest.
-- Rebuild the scroll-to-top arrow: the cheap glow/shine ring goes, replaced by a quiet dark glass circle with a thin gold progress ring that fills as you scroll, subtle hover lift only.
-- Tidy the same over-glowy treatment where it repeats: nav dots, floating WhatsApp/call buttons, and any leftover hard shadow rings — all moved to the restrained gold-hairline style used elsewhere.
-
-## Technical notes
-
-- New table `public.site_content`: single JSON row, public read, update restricted to admin emails via a `user_roles` table + `has_role()` security-definer function (never a role column on a profile). Grants issued in the same migration.
-- Storage bucket `site-media` (public read, authenticated write, image mime types, 8MB cap) for uploaded photos.
-- `SiteContentProvider` + `useSiteContent()` fetch the row once and deep-merge it over the existing `projectsData.ts` / hardcoded copy as defaults, so the site renders identically if the row is empty or the fetch fails.
-- Admin routes lazy-loaded (`/admin`, `/admin/login`) so they add nothing to the public bundle. Zod-validated forms, client-side canvas resize to max 1920px WebP before upload.
-- Components updated to read from the provider rather than their inline constants: Hero, AboutUs, VisionMission, Stats, Projects, Team, FeaturedProperties, SimpleContact, Footer, ProjectDetails.
+- Replace the nav/footer logo with your new transparent high-res crest, regenerate the favicon from it.
+- Rebuild the scroll-to-top button: remove the cheap glow, use a thin gold progress ring with a soft hover lift; same treatment for other over-glowy buttons.
 
 ## Order of work
 
-1. Database + storage migration, admin account.
-2. Content provider and defaults wiring (site looks identical, now data-driven).
-3. Admin login + editor shell, then Projects editor, then site-content editors.
-4. Logo swap + scroll-to-top and glow polish.
+1. Migration: roles, content table, storage, policies, seed.
+2. Auth + admin shell, login, route guard.
+3. Content provider and wiring the public site to it.
+4. Editors: properties/photos, homepage, team, contact.
+5. Enquiries inbox + user management (edge function).
+6. Logo swap, favicon, scroll-to-top and button polish.
+
+After step 1 you'll get a temporary password for `jok38817@gmail.com` to sign in and change.
