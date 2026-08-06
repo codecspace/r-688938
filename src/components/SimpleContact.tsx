@@ -3,18 +3,22 @@ import { toast } from "@/hooks/use-toast";
 import { Reveal } from "@/components/layout/Reveal";
 import { SplitHeading } from "@/components/layout/Editorial";
 import EnquiryForm from "@/components/EnquiryForm";
-
-const PHONE_DISPLAY = "+91 97735 52334";
-const PHONE_TEL = "+919773552334";
-const WHATSAPP = "919773552334";
-const EMAIL = "sales@lionvestrealty.com";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 type ContactType = "phone" | "email" | "whatsapp";
 
 const SimpleContact = () => {
+  const { content } = useSiteContent();
+  const contact = content.contact;
+  const PHONE_DISPLAY = contact.phoneDisplay;
+  const PHONE_TEL = contact.phoneTel;
+  const WHATSAPP = contact.whatsapp;
+  const EMAIL = contact.email;
+
   const handleContactAction = (type: ContactType) => {
     if (type === "phone") {
       window.location.href = `tel:${PHONE_TEL}`;
+
       return;
     }
 
@@ -53,18 +57,18 @@ const SimpleContact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           <div className="lg:col-span-6">
             <Reveal>
-              <span className="eyebrow mb-8">Get in touch</span>
+              <span className="eyebrow mb-8">{contact.eyebrow}</span>
             </Reveal>
             <SplitHeading
-              text="Let's talk property."
+              text={contact.heading}
               className="font-display text-display-lg text-white leading-[0.95]"
             />
             <Reveal delay={0.1}>
               <p className="text-white/55 text-lg mt-8 max-w-md leading-relaxed">
-                Tell us what you're looking for and we'll come back with a shortlist worth
-                your time — usually within a day.
+                {contact.intro}
               </p>
             </Reveal>
+
 
             <Reveal delay={0.15} className="border-t border-white/15 mt-12">
               <button

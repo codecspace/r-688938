@@ -1,19 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useInView, useMotionValue, useSpring } from "framer-motion";
 import { Reveal } from "@/components/layout/Reveal";
+import { useSiteContent } from "@/context/SiteContentContext";
 
-interface StatItem {
-  value: number;
-  suffix: string;
-  label: string;
-}
-
-const stats: StatItem[] = [
-  { value: 12, suffix: "+", label: "Years in Delhi NCR real estate" },
-  { value: 3, suffix: "", label: "Cities — Delhi, Noida, Gurugram" },
-  { value: 5, suffix: "+", label: "Premium developer partnerships" },
-  { value: 100, suffix: "%", label: "Focus on informed decisions" },
-];
 
 const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
   const spanRef = useRef<HTMLSpanElement>(null);
@@ -38,7 +27,11 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
 
 /** Numeric register closing the noir chapter — oversized serif figures on hairlines. */
 const Stats = () => {
+  const { content } = useSiteContent();
+  const stats = content.stats;
+
   return (
+
     <section className="relative bg-lion-obsidian pb-24 md:pb-32 overflow-hidden">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">

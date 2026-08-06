@@ -15,7 +15,7 @@ import RouteHead from "@/components/RouteHead";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import PageTransition from "@/components/layout/PageTransition";
 import { Reveal, RevealMask, StaggerGroup, StaggerItem } from "@/components/layout/Reveal";
-import { projectsData } from "@/data/projectsData";
+import { useSiteContent } from "@/context/SiteContentContext";
 import { toast } from "@/hooks/use-toast";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
 import EnquiryForm from "@/components/EnquiryForm";
@@ -37,9 +37,12 @@ const SectionHeading = ({ eyebrow, children }: { eyebrow: string; children: Reac
 
 const ProjectDetails = () => {
   const { id } = useParams();
+  const { content } = useSiteContent();
+  const projectsData = content.projects;
   const [visitRequested, setVisitRequested] = useState(false);
 
-  const project = useMemo(() => projectsData.find((p) => p.id === id) ?? null, [id]);
+  const project = useMemo(() => projectsData.find((p) => p.id === id) ?? null, [id, projectsData]);
+
 
   const createFormattedEmail = () => {
     if (!project) return "";

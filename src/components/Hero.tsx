@@ -2,9 +2,8 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { ArrowDown } from "lucide-react";
 import { SplitHeading, EASE } from "@/components/layout/Editorial";
+import { useSiteContent } from "@/context/SiteContentContext";
 
-/** Self-hosted so the largest element on the page never depends on a third-party CDN. */
-const HERO_IMAGE = "/hero-villa.webp";
 
 
 const scrollToSection = (sectionId: string) => {
@@ -17,9 +16,12 @@ const scrollToSection = (sectionId: string) => {
  * base instead of a card. One idea, executed cleanly.
  */
 const Hero = () => {
+  const { content } = useSiteContent();
+  const hero = content.hero;
   const heroRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1.06, 1.18]);
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
@@ -39,7 +41,7 @@ const Hero = () => {
         style={reduced ? undefined : { scale: imageScale, y: imageY }}
       >
         <img
-          src={HERO_IMAGE}
+          src={hero.image || "/hero-villa.webp"}
           alt="Contemporary luxury villa with landscaped frontage, representative of Lionvest Realty's Delhi NCR portfolio"
           width={1600}
           height={1067}
@@ -65,14 +67,14 @@ const Hero = () => {
           transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
           className="eyebrow text-lion-lightgold mb-8"
         >
-          Delhi &middot; Noida &middot; Gurugram
+          {hero.eyebrow}
         </motion.span>
 
         <h1 className="font-display text-white text-display-lg max-w-[16ch] mt-6">
-          <SplitHeading as="p" text="The right home for" delay={0.25} />
+          <SplitHeading as="p" text={hero.headlineLine1} delay={0.25} />
           <SplitHeading
             as="p"
-            text="every ambition"
+            text={hero.headlineLine2}
             delay={0.45}
             className="italic text-lion-lightgold"
           />
@@ -85,20 +87,20 @@ const Hero = () => {
           className="mt-12 grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-12 items-end border-t border-white/15 pt-8"
         >
           <p className="md:col-span-5 text-white/65 text-base md:text-lg leading-relaxed max-w-md">
-            A boutique advisory for residential and commercial property across Delhi NCR —
-            from the first viewing to the day the keys change hands.
+            {hero.intro}
           </p>
 
           <div className="md:col-span-4 md:col-start-9 flex flex-wrap gap-4 md:justify-end">
             <button onClick={() => scrollToSection("properties")} className="btn-editorial btn-gold">
-              <span>Explore Properties</span>
+              <span>{hero.primaryCta}</span>
             </button>
             <button onClick={() => scrollToSection("contact")} className="btn-editorial btn-outline-light">
-              <span>Speak to us</span>
+              <span>{hero.secondaryCta}</span>
             </button>
           </div>
         </motion.div>
       </motion.div>
+
 
       {/* Scroll cue */}
       <motion.button
