@@ -1,20 +1,19 @@
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/layout/Reveal";
 import { SplitHeading, Parallax } from "@/components/layout/Editorial";
-
-const traits = [
-  { n: "01", label: "Strength and power", desc: "Leadership and conviction in every Delhi NCR market we operate in." },
-  { n: "02", label: "Courage and belief", desc: "Bold, well-informed investment options — never guesswork." },
-  { n: "03", label: "Authority and reputation", desc: "Faith built through reliability, expertise, and excellence." },
-  { n: "04", label: "Protection and reliability", desc: "Safe, transparent property transactions, start to finish." },
-];
+import { useSiteContent } from "@/context/SiteContentContext";
 
 /**
  * Asymmetric editorial chapter: a 7/5 split with a manifesto column and a
  * tall parallaxed portrait plate. Hairlines instead of cards.
  */
 const AboutUs = () => {
+  const { content } = useSiteContent();
+  const about = content.about;
+  const traits = about.traits;
+
   return (
     <section id="about" className="relative bg-lion-paper py-24 md:py-36 overflow-hidden">
+
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
           {/* Manifesto */}
