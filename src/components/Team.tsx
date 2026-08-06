@@ -19,8 +19,12 @@ const initials = (name: string) =>
     .join("");
 
 const Team = () => {
+  const { content } = useSiteContent();
+  const teamData = content.team;
+  const teamSection = content.teamSection;
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [open, setOpen] = useState(false);
+
 
   const openProfile = (member: Member) => {
     setSelectedMember(member);
