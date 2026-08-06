@@ -15,7 +15,7 @@ import RouteHead from "@/components/RouteHead";
 import ScrollProgress from "@/components/layout/ScrollProgress";
 import PageTransition from "@/components/layout/PageTransition";
 import { Reveal, RevealMask, StaggerGroup, StaggerItem } from "@/components/layout/Reveal";
-import { projectsData } from "@/data/projectsData";
+import { useSiteContent } from "@/context/SiteContentContext";
 import { toast } from "@/hooks/use-toast";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
 import EnquiryForm from "@/components/EnquiryForm";
