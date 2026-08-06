@@ -52,9 +52,7 @@ const AboutUs = () => {
 
             <Reveal delay={0.15}>
               <p className="text-lion-ink/70 text-lg leading-relaxed pt-10 max-w-2xl">
-                With a client-first approach, we back every recommendation with deep market
-                insight and unwavering integrity — whether you are searching for a home or a
-                strategic commercial investment.
+                {about.closing}
               </p>
             </Reveal>
           </div>
@@ -64,7 +62,7 @@ const AboutUs = () => {
             <div className="lg:sticky lg:top-32">
               <Parallax distance={40} className="media-frame h-[460px] md:h-[620px]">
                 <img
-                  src="/about-advisory.webp"
+                  src={about.image || "/about-advisory.webp"}
                   alt="Advisor and client reviewing a property shortlist"
                   loading="lazy"
                   decoding="async"
@@ -74,6 +72,7 @@ const AboutUs = () => {
                 />
 
               </Parallax>
+
 
               <Reveal delay={0.1} className="border-t border-black/15 mt-6 pt-5 flex items-baseline justify-between gap-6">
                 <div>
