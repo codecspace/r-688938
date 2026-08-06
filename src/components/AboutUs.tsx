@@ -19,25 +19,20 @@ const AboutUs = () => {
           {/* Manifesto */}
           <div className="lg:col-span-7">
             <Reveal>
-              <span className="eyebrow mb-8">About the firm</span>
+              <span className="eyebrow mb-8">{about.eyebrow}</span>
             </Reveal>
 
             <SplitHeading
-              text="A property advisory built on judgement, not volume."
+              text={about.heading}
               className="font-display text-display-md text-lion-black max-w-[18ch] mb-10"
             />
 
             <Reveal delay={0.1} className="space-y-6 text-lion-ink/70 text-lg leading-relaxed max-w-2xl">
-              <p>
-                Lionvest Realty Pvt. Ltd. provides seamless, expert guidance for residential and
-                commercial buyers across Delhi, Noida, and Gurugram — simplifying transactions
-                with strategic advice and support at every step.
-              </p>
-              <p>
-                Our name is more than a brand. <span className="serif-accent">Lionvest</span> stands for
-                the strength, confidence, and reliability we bring to the market.
-              </p>
+              {about.paragraphs.map((para, i) => (
+                <p key={i}>{para}</p>
+              ))}
             </Reveal>
+
 
             <StaggerGroup className="grid grid-cols-1 sm:grid-cols-2 gap-x-10 mt-14 border-t border-black/10" stagger={0.09}>
               {traits.map((item) => (
