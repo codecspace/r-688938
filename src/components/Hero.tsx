@@ -16,9 +16,12 @@ const scrollToSection = (sectionId: string) => {
  * base instead of a card. One idea, executed cleanly.
  */
 const Hero = () => {
+  const { content } = useSiteContent();
+  const hero = content.hero;
   const heroRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1.06, 1.18]);
   const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "14%"]);
