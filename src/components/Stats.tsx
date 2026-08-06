@@ -1,19 +1,8 @@
 import { useEffect, useRef } from "react";
 import { useInView, useMotionValue, useSpring } from "framer-motion";
 import { Reveal } from "@/components/layout/Reveal";
+import { useSiteContent } from "@/context/SiteContentContext";
 
-interface StatItem {
-  value: number;
-  suffix: string;
-  label: string;
-}
-
-const stats: StatItem[] = [
-  { value: 12, suffix: "+", label: "Years in Delhi NCR real estate" },
-  { value: 3, suffix: "", label: "Cities — Delhi, Noida, Gurugram" },
-  { value: 5, suffix: "+", label: "Premium developer partnerships" },
-  { value: 100, suffix: "%", label: "Focus on informed decisions" },
-];
 
 const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
   const spanRef = useRef<HTMLSpanElement>(null);
