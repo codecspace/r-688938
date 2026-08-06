@@ -5,38 +5,11 @@ import { toast } from "@/hooks/use-toast";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
 import { Reveal, StaggerGroup, StaggerItem } from "@/components/layout/Reveal";
 import { SplitHeading } from "@/components/layout/Editorial";
+import { useSiteContent } from "@/context/SiteContentContext";
+import type { TeamMember } from "@/lib/siteContent";
 
-interface Member {
-  name: string;
-  role: string;
-  image: string | null;
-  phoneNumber?: string;
-  email?: string;
-  bio: string;
-}
+type Member = TeamMember;
 
-const teamData: Member[] = [
-  {
-    name: "Prem Mohan Singh",
-    role: "Director",
-    image: "/team/prem.webp",
-    phoneNumber: "+91 9773552334",
-    email: "sales@lionvestrealty.com",
-    bio: "After working at the Pan-India level as the director of sales and strategy, Prem Mohan Singh has played an important role in the trade expansion and investment plan. He is a graduate from Delhi university and MBA from NIRM in retail and marketing. Furthermore, he has a diploma in computer science and fashion designing. His immense and diversified experience with international firms in establishing strategic trade operations in India has further strengthened their ability to navigate complex markets and run high-value real estate investments.\n\nCurrently, he specializes in managing the investment portfolio for established entrepreneurs, offering real estate solutions that align with prolonged growth and money-making strategies. Under his leadership, Lionvest Realty Pvt. Ltd. continues to set new benchmarks in the success of trust, excellence, and investment in the Indian real estate sector.",
-  },
-  {
-    name: "Vaibhav Gupta",
-    role: "Director",
-    image: null,
-    bio: "With more than 12 years of experience in B2B and B2C sales, Vaibhav Gupta brings a strong strategic and out-operated approach to Lionvest Realty Private. An MBA graduate in Limited Sales and Marketing, he has created an impressive career in real estate and allied industries, holding major sales positions in famous multinational corporations such as Berger Paints, UltraTech Cement, and AkzoNobel India.\n\nHis expertise lies in sales strategy, market expansion, and business growth, making him a valuable leader in driving high-impact real estate transactions. With a deep understanding of consumer behavior, market trends, and investment dynamics, Vaibhav plays a crucial role in delivering tailored property solutions that align with client aspirations and long-term investment goals.",
-  },
-  {
-    name: "Jazbi Fatema",
-    role: "Marketing Head",
-    image: null,
-    bio: "Expert Senior Digital marketing Management Professional with 12+ years of insightful & broad experience in; Marketing Strategy, Branding, Digital Marketing, Ecommerce end to end Marketing, Marketing Communications, Google Analytics, Retail, Corporate Communication, Media Planning, Budgeting, Advertising, Social Media Marketing, Channel Marketing, Campaigns, Strategic Marketing, liaising with external and internal stakeholders to promote business product. Passionate about nurturing talent and building high performance teams that are built on a culture of trust and transparency, respect for individual.",
-  },
-];
 
 const initials = (name: string) =>
   name
