@@ -27,7 +27,11 @@ const Counter = ({ value, suffix }: { value: number; suffix: string }) => {
 
 /** Numeric register closing the noir chapter — oversized serif figures on hairlines. */
 const Stats = () => {
+  const { content } = useSiteContent();
+  const stats = content.stats;
+
   return (
+
     <section className="relative bg-lion-obsidian pb-24 md:pb-32 overflow-hidden">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/10">
