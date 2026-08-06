@@ -2,9 +2,8 @@ import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion
 import { useRef } from "react";
 import { ArrowDown } from "lucide-react";
 import { SplitHeading, EASE } from "@/components/layout/Editorial";
+import { useSiteContent } from "@/context/SiteContentContext";
 
-/** Self-hosted so the largest element on the page never depends on a third-party CDN. */
-const HERO_IMAGE = "/hero-villa.webp";
 
 
 const scrollToSection = (sectionId: string) => {
