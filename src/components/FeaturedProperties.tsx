@@ -1,11 +1,12 @@
 import { useMemo, useState } from "react";
 import { Link } from "react-router-dom";
-import { projectsData } from "@/data/projectsData";
-import { highlightedProjects } from "@/components/Projects";
+import { highlightedFrom } from "@/components/Projects";
 import { ArrowUpRight } from "lucide-react";
 import { StaggerGroup, StaggerItem, Reveal } from "@/components/layout/Reveal";
 import { SplitHeading } from "@/components/layout/Editorial";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
+import { useSiteContent } from "@/context/SiteContentContext";
+
 
 const CITIES = ["Gurugram", "Noida", "Delhi"] as const;
 
@@ -27,6 +28,9 @@ const inCity = (location: string | undefined, city: string) =>
  * A single row of city chips does the filtering; no competing controls.
  */
 const FeaturedProperties = () => {
+  const { content } = useSiteContent();
+  const projectsData = content.projects;
+  const portfolioSection = content.portfolioSection;
   const [city, setCity] = useState<string>("All");
 
   /**
@@ -35,10 +39,11 @@ const FeaturedProperties = () => {
    * the "Explore Properties" CTA always lands on a browsable grid.
    */
   const remaining = useMemo(() => {
-    const shownAbove = new Set(highlightedProjects.map((p) => p.id));
+    const shownAbove = new Set(highlightedFrom(projectsData).map((p) => p.id));
     const rest = projectsData.filter((p) => !shownAbove.has(p.id));
     return rest.length > 0 ? rest : projectsData;
-  }, []);
+  }, [projectsData]);
+
 
   /** Only offer a city chip when there is inventory behind it. */
   const availableCities = useMemo(
