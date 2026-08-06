@@ -37,9 +37,12 @@ const SectionHeading = ({ eyebrow, children }: { eyebrow: string; children: Reac
 
 const ProjectDetails = () => {
   const { id } = useParams();
+  const { content } = useSiteContent();
+  const projectsData = content.projects;
   const [visitRequested, setVisitRequested] = useState(false);
 
-  const project = useMemo(() => projectsData.find((p) => p.id === id) ?? null, [id]);
+  const project = useMemo(() => projectsData.find((p) => p.id === id) ?? null, [id, projectsData]);
+
 
   const createFormattedEmail = () => {
     if (!project) return "";
