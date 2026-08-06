@@ -80,18 +80,19 @@ const Footer = () => {
             <ul className="space-y-4 text-white/50 text-sm leading-relaxed">
               <li className="flex gap-3">
                 <MapPin className="text-lion-gold h-4 w-4 flex-shrink-0 mt-0.5" strokeWidth={1.5} />
-                <span>Plus Offices, 1st Floor, Landmark Cyber Park, Sector 67, Gurugram, HR 122101</span>
+                <span>{contact.address}</span>
               </li>
               <li className="flex gap-3">
                 <Phone className="text-lion-gold h-4 w-4 flex-shrink-0" strokeWidth={1.5} />
-                <a href="tel:+919773552334" className="hover:text-lion-gold transition-colors">+91 97735 52334</a>
+                <a href={`tel:${contact.phoneTel}`} className="hover:text-lion-gold transition-colors">{contact.phoneDisplay}</a>
               </li>
               <li className="flex gap-3">
                 <Mail className="text-lion-gold h-4 w-4 flex-shrink-0" strokeWidth={1.5} />
-                <a href="mailto:sales@lionvestrealty.com" className="hover:text-lion-gold transition-colors break-all">
-                  sales@lionvestrealty.com
+                <a href={`mailto:${contact.email}`} className="hover:text-lion-gold transition-colors break-all">
+                  {contact.email}
                 </a>
               </li>
+
             </ul>
           </StaggerItem>
 
