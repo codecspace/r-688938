@@ -70,17 +70,18 @@ const FeaturedProperties = () => {
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-10 md:mb-14">
           <div>
             <Reveal>
-              <span className="eyebrow mb-6">More listings</span>
+              <span className="eyebrow mb-6">{portfolioSection.eyebrow}</span>
             </Reveal>
             <SplitHeading
-              text="Browse the full portfolio."
+              text={portfolioSection.heading}
               className="font-display text-display-sm text-lion-black max-w-[14ch]"
             />
           </div>
           <Reveal delay={0.1}>
             <p className="text-lion-stone text-sm max-w-xs leading-relaxed md:text-right">
-              Every address we currently represent across Delhi NCR — open for enquiry.
+              {portfolioSection.intro}
             </p>
+
           </Reveal>
         </div>
 
