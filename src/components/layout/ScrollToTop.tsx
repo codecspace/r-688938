@@ -4,7 +4,6 @@ import { ArrowUp } from "lucide-react";
 
 const SIZE = 52;
 const RADIUS = (SIZE - 3) / 2;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
 
 /**
  * Restrained scroll-to-top: an obsidian disc with a gold hairline progress
@@ -56,10 +55,9 @@ const ScrollToTop = () => {
               cy={SIZE / 2}
               r={RADIUS}
               fill="none"
-              stroke="hsl(var(--lion-gold, 43 62% 52%))"
+              stroke="#D4AF37"
               strokeWidth="1.25"
               strokeLinecap="round"
-              strokeDasharray={CIRCUMFERENCE}
               style={{ pathLength: progress }}
               className="text-lion-gold"
             />
