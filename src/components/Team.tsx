@@ -55,13 +55,14 @@ const Team = () => {
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 mb-16 md:mb-20">
           <Reveal className="lg:col-span-4">
-            <span className="eyebrow">Leadership</span>
+            <span className="eyebrow">{teamSection.eyebrow}</span>
           </Reveal>
           <div className="lg:col-span-8">
             <SplitHeading
-              text="The people you'll actually be working with."
+              text={teamSection.heading}
               className="font-display text-display-sm text-lion-black max-w-[18ch]"
             />
+
           </div>
         </div>
 
