@@ -57,18 +57,18 @@ const SimpleContact = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-start">
           <div className="lg:col-span-6">
             <Reveal>
-              <span className="eyebrow mb-8">Get in touch</span>
+              <span className="eyebrow mb-8">{contact.eyebrow}</span>
             </Reveal>
             <SplitHeading
-              text="Let's talk property."
+              text={contact.heading}
               className="font-display text-display-lg text-white leading-[0.95]"
             />
             <Reveal delay={0.1}>
               <p className="text-white/55 text-lg mt-8 max-w-md leading-relaxed">
-                Tell us what you're looking for and we'll come back with a shortlist worth
-                your time — usually within a day.
+                {contact.intro}
               </p>
             </Reveal>
+
 
             <Reveal delay={0.15} className="border-t border-white/15 mt-12">
               <button
