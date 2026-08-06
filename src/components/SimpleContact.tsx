@@ -3,18 +3,22 @@ import { toast } from "@/hooks/use-toast";
 import { Reveal } from "@/components/layout/Reveal";
 import { SplitHeading } from "@/components/layout/Editorial";
 import EnquiryForm from "@/components/EnquiryForm";
-
-const PHONE_DISPLAY = "+91 97735 52334";
-const PHONE_TEL = "+919773552334";
-const WHATSAPP = "919773552334";
-const EMAIL = "sales@lionvestrealty.com";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 type ContactType = "phone" | "email" | "whatsapp";
 
 const SimpleContact = () => {
+  const { content } = useSiteContent();
+  const contact = content.contact;
+  const PHONE_DISPLAY = contact.phoneDisplay;
+  const PHONE_TEL = contact.phoneTel;
+  const WHATSAPP = contact.whatsapp;
+  const EMAIL = contact.email;
+
   const handleContactAction = (type: ContactType) => {
     if (type === "phone") {
       window.location.href = `tel:${PHONE_TEL}`;
+
       return;
     }
 
