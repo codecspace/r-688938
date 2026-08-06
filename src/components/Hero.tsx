@@ -41,7 +41,7 @@ const Hero = () => {
         style={reduced ? undefined : { scale: imageScale, y: imageY }}
       >
         <img
-          src={HERO_IMAGE}
+          src={hero.image || "/hero-villa.webp"}
           alt="Contemporary luxury villa with landscaped frontage, representative of Lionvest Realty's Delhi NCR portfolio"
           width={1600}
           height={1067}
