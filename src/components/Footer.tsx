@@ -5,12 +5,16 @@ import { z } from "zod";
 import { toast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { StaggerGroup, StaggerItem } from "@/components/layout/Reveal";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 const emailSchema = z.string().trim().email().max(255);
 
 const Footer = () => {
+  const { content } = useSiteContent();
+  const contact = content.contact;
   const [email, setEmail] = useState("");
   const [sending, setSending] = useState(false);
+
 
   const handleSubscribe = async (e: FormEvent) => {
     e.preventDefault();
