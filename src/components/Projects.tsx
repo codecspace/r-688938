@@ -1,38 +1,45 @@
 import { Link } from "react-router-dom";
 import { ArrowUpRight } from "lucide-react";
-import { projectsData } from "@/data/projectsData";
+import type { ProjectDataType } from "@/data/projectsData";
 import { Reveal } from "@/components/layout/Reveal";
 import { SplitHeading, MediaReveal, Parallax } from "@/components/layout/Editorial";
 import ImageWithFallback from "@/components/layout/ImageWithFallback";
+import { useSiteContent } from "@/context/SiteContentContext";
 
 /** Projects flagged as new or featured. The remaining catalogue lives in FeaturedProperties. */
-export const highlightedProjects = projectsData.filter((p) => p.isNew || p.isFeatured);
+export const highlightedFrom = (projects: ProjectDataType[]) =>
+  projects.filter((p) => p.isNew || p.isFeatured);
 
 /** Editorial index of developer partnerships — alternating full-width plates. */
 const Projects = () => {
+  const { content } = useSiteContent();
+  const projects = content.projects;
+  const section = content.projectsSection;
+
   // Fall back to the full list if nothing is flagged, so the section is never empty.
-  const items = highlightedProjects.length > 0 ? highlightedProjects : projectsData;
+  const highlighted = highlightedFrom(projects);
+  const items = highlighted.length > 0 ? highlighted : projects;
 
   return (
     <section id="projects" className="bg-lion-paper py-24 md:py-36">
       <div className="container mx-auto px-6 md:px-8 max-w-7xl">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-20 mb-16 md:mb-24">
           <Reveal className="lg:col-span-4">
-            <span className="eyebrow">Developer partners</span>
+            <span className="eyebrow">{section.eyebrow}</span>
           </Reveal>
           <div className="lg:col-span-8">
             <SplitHeading
-              text="Projects we know inside out."
+              text={section.heading}
               className="font-display text-display-md text-lion-black max-w-[16ch]"
             />
             <Reveal delay={0.1}>
               <p className="text-lion-stone text-base md:text-lg mt-6 max-w-xl leading-relaxed">
-                A curated shortlist across Gurugram, Noida and Delhi — every address vetted for
-                build quality, location, and long-term value.
+                {section.intro}
               </p>
             </Reveal>
           </div>
         </div>
+
 
         <div className="border-t border-black/12">
           {items.map((project, index) => {
