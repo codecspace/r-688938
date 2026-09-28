@@ -58,6 +58,7 @@ const EnquiryForm = ({
   const [submitting, setSubmitting] = useState(false);
   const [done, setDone] = useState(false);
   const [visitInternal, setVisitInternal] = useState(false);
+  const [honeypot, setHoneypot] = useState("");
 
   const visit = visitRequested ?? visitInternal;
   const setVisit = (value: boolean) => {
@@ -98,24 +99,31 @@ const EnquiryForm = ({
       .join(" ")
       .slice(0, 1000);
 
-    const { error } = await supabase.from("enquiries").insert({
-      name: parsed.data.name,
-      phone: parsed.data.phone,
-      email: parsed.data.email || null,
-      message: composedMessage || null,
-      project_id: projectId ?? null,
-      project_name: projectName ?? null,
-      source_path: typeof window !== "undefined" ? window.location.pathname : null,
+    const { data, error } = await supabase.functions.invoke("submit-enquiry", {
+      body: {
+        name: parsed.data.name,
+        phone: parsed.data.phone,
+        email: parsed.data.email || null,
+        message: composedMessage || null,
+        project_id: projectId ?? null,
+        project_name: projectName ?? null,
+        source_path: typeof window !== "undefined" ? window.location.pathname : null,
+        website: honeypot,
+      },
     });
 
     setSubmitting(false);
 
-    if (error) {
-      toast({
-        title: "Couldn't send that",
-        description: "Something went wrong. Please call us on +91 97735 52334 instead.",
-        variant: "destructive",
-      });
+    if (error || data?.error) {
+      let description = "Something went wrong. Please call us on +91 97735 52334 instead.";
+      const ctx = (error as { context?: Response } | null)?.context;
+      if (ctx && typeof ctx.json === "function") {
+        try {
+          const body = await ctx.json();
+          if (body?.error) description = body.error;
+        } catch { /* keep default */ }
+      } else if (data?.error) description = data.error;
+      toast({ title: "Couldn't send that", description, variant: "destructive" });
       return;
     }
 
@@ -150,6 +158,12 @@ const EnquiryForm = ({
 
   return (
     <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+      <div aria-hidden="true" className="absolute -left-[9999px] h-0 w-0 overflow-hidden">
+        <label>
+          Website
+          <input tabIndex={-1} autoComplete="off" value={honeypot} onChange={(e) => setHoneypot(e.target.value)} />
+        </label>
+      </div>
       <div>
         <label className={labelClass} htmlFor="enq-name">
           Name
