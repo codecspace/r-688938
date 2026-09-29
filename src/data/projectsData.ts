@@ -12,7 +12,7 @@ export interface ProjectDataType {
   heroImage?: string;
   images?: string[];
   amenities?: string[];
-  specifications?: Record<string, any>;
+  specifications?: Record<string, string | number | undefined>;
 }
 
 export const projectsData: ProjectDataType[] = [
