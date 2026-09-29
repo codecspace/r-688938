@@ -12,6 +12,7 @@ export interface ProjectDataType {
   heroImage?: string;
   images?: string[];
   amenities?: string[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   specifications?: Record<string, any>;
 }
 
