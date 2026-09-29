@@ -12,7 +12,8 @@ export interface ProjectDataType {
   heroImage?: string;
   images?: string[];
   amenities?: string[];
-  specifications?: Record<string, string | number | undefined>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  specifications?: Record<string, any>;
 }
 
 export const projectsData: ProjectDataType[] = [
