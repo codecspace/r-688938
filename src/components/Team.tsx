@@ -20,7 +20,10 @@ const initials = (name: string) =>
 
 const Team = () => {
   const { content } = useSiteContent();
-  const teamData = content.team;
+  // Temporary public-only removal; keep saved content intact so undo restores the profile.
+  const teamData = content.team.filter(
+    (member) => !/^prem\s+mohan\s+singh$/i.test(member.name.trim()),
+  );
   const teamSection = content.teamSection;
   const [selectedMember, setSelectedMember] = useState<Member | null>(null);
   const [open, setOpen] = useState(false);
