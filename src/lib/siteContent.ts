@@ -110,14 +110,6 @@ export const defaultContent: SiteContent = {
   },
   team: [
     {
-      name: "Prem Mohan Singh",
-      role: "Director",
-      image: "/team/prem.webp",
-      phoneNumber: "+91 9773552334",
-      email: "sales@lionvestrealty.com",
-      bio: "After working at the Pan-India level as the director of sales and strategy, Prem Mohan Singh has played an important role in the trade expansion and investment plan. He is a graduate from Delhi university and MBA from NIRM in retail and marketing. Furthermore, he has a diploma in computer science and fashion designing. His immense and diversified experience with international firms in establishing strategic trade operations in India has further strengthened their ability to navigate complex markets and run high-value real estate investments.\n\nCurrently, he specializes in managing the investment portfolio for established entrepreneurs, offering real estate solutions that align with prolonged growth and money-making strategies. Under his leadership, Lionvest Realty Pvt. Ltd. continues to set new benchmarks in the success of trust, excellence, and investment in the Indian real estate sector.",
-    },
-    {
       name: "Vaibhav Gupta",
       role: "Director",
       image: null,
