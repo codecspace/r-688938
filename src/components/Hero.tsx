@@ -1,8 +1,9 @@
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowDown } from "lucide-react";
 import { SplitHeading, EASE } from "@/components/layout/Editorial";
 import { useSiteContent } from "@/context/SiteContentContext";
+import heroVideo from "@/assets/hero-video.mp4.asset.json";
 
 
 
@@ -11,16 +12,35 @@ const scrollToSection = (sectionId: string) => {
 };
 
 /**
- * Cinematic editorial opener: full-bleed ink-washed photography, an oversized
+ * Cinematic editorial opener: full-bleed looping film over an ink-washed still
+ * (the still stays as the poster, first paint and fallback), an oversized
  * serif headline that reveals word by word, and a hairline meta rail at the
  * base instead of a card. One idea, executed cleanly.
  */
 const Hero = () => {
   const { content } = useSiteContent();
   const hero = content.hero;
+  const videoSrc = hero.video?.trim() || heroVideo.url;
   const heroRef = useRef<HTMLDivElement>(null);
   const reduced = useReducedMotion();
+
+  // The film loads only once the page is idle, after first paint — the still
+  // photo remains what the browser paints and measures first.
+  const [allowVideo, setAllowVideo] = useState(false);
+  const [videoReady, setVideoReady] = useState(false);
+  useEffect(() => {
+    if (reduced) return;
+    const start = () => setAllowVideo(true);
+    if (typeof window.requestIdleCallback === "function") {
+      const id = window.requestIdleCallback(start, { timeout: 2500 });
+      return () => window.cancelIdleCallback(id);
+    }
+    const t = window.setTimeout(start, 1500);
+    return () => window.clearTimeout(t);
+  }, [reduced]);
+
   const { scrollYProgress } = useScroll({ target: heroRef, offset: ["start start", "end start"] });
+
 
 
   const imageScale = useTransform(scrollYProgress, [0, 1], [1.06, 1.18]);
@@ -35,7 +55,7 @@ const Hero = () => {
       tabIndex={-1}
       className="relative min-h-[92vh] md:min-h-screen flex flex-col justify-end overflow-hidden bg-lion-obsidian focus:outline-none"
     >
-      {/* Full-bleed imagery */}
+      {/* Full-bleed imagery: still poster first, looping film fading in over it */}
       <motion.div
         className="absolute inset-0"
         style={reduced ? undefined : { scale: imageScale, y: imageY }}
@@ -50,9 +70,29 @@ const Hero = () => {
           className="w-full h-full object-cover"
         />
 
+        {allowVideo && (
+          <video
+            src={videoSrc}
+            poster={hero.image || "/hero-villa.webp"}
+            muted
+            loop
+            playsInline
+            autoPlay
+            preload="auto"
+            aria-hidden="true"
+            tabIndex={-1}
+            onCanPlay={() => setVideoReady(true)}
+            onError={() => setAllowVideo(false)}
+            className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-[1400ms] ease-out ${
+              videoReady ? "opacity-100" : "opacity-0"
+            }`}
+          />
+        )}
+
         <div className="absolute inset-0 bg-gradient-to-t from-lion-obsidian via-lion-obsidian/70 to-lion-obsidian/40" />
         <div className="absolute inset-0 bg-lion-obsidian/25" />
       </motion.div>
+
 
       <div className="grain absolute inset-0 z-[1]" />
 
