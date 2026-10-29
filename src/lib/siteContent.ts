@@ -30,6 +30,8 @@ export interface SiteContent {
     primaryCta: string;
     secondaryCta: string;
     image: string;
+    /** Optional looping background video; empty = the built-in cinematic clip. */
+    video?: string;
   };
   about: {
     eyebrow: string;
@@ -69,6 +71,7 @@ export const defaultContent: SiteContent = {
     primaryCta: "Explore Properties",
     secondaryCta: "Speak to us",
     image: "/hero-villa.webp",
+    video: "",
   },
   about: {
     eyebrow: "About the firm",
