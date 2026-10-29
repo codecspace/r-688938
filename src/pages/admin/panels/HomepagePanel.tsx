@@ -1,5 +1,6 @@
 import { Panel, TextField, TextArea, StringList } from "@/components/admin/Fields";
 import ImageField from "@/components/admin/ImageField";
+import VideoField from "@/components/admin/VideoField";
 import type { SiteContent } from "@/lib/siteContent";
 
 interface Props {
@@ -24,6 +25,11 @@ const HomepagePanel = ({ content, patch }: Props) => {
           <TextField label="Second button text" value={hero.secondaryCta} onChange={(v) => patch({ hero: { ...hero, secondaryCta: v } })} />
         </div>
         <ImageField label="Background photo" value={hero.image} clearable={false} onChange={(url) => patch({ hero: { ...hero, image: url ?? hero.image } })} />
+        <VideoField
+          label="Background video (optional — replaces the photo; MP4/WebM/MOV up to 40 MB)"
+          value={hero.video ?? ""}
+          onChange={(url) => patch({ hero: { ...hero, video: url ?? "" } })}
+        />
       </Panel>
 
       <Panel title="About the firm">
